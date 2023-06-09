@@ -1,0 +1,11 @@
+.full-w {
+    width: 100%;
+}
+
+.full-h {
+    height: 100%;
+}
+
+*[data-avoid-click="true"] {
+    pointer-events: none;
+}

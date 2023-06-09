@@ -1,0 +1,8 @@
+<div class="setting-user-container">
+    <mat-icon class="setting-user-avatar">account_circle</mat-icon>
+    <div class="setting-user-name">{{appState.me.name}}</div>
+    <div class="setting-user-email"><mat-icon>mail</mat-icon>{{appState.me.email}}</div>
+    <div class="setting-user-phone-number"><mat-icon>smartphone</mat-icon>{{appState.me.phoneNumber}}</div>
+    <div class="setting-user-role"><mat-icon>security</mat-icon>{{appState.me.role | userRoleDetails | async |
+        objectProperty: 'displayName'}}</div>
+</div>

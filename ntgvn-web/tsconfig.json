@@ -1,0 +1,114 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "noImplicitThis": false,
+    "useUnknownInCatchVariables": false,
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@environment": [
+        "src/environments/environment"
+      ],
+      "@global-settings": [
+        "src/app/global-settings.ts"
+      ],
+      "@app-state": [
+        "src/app/app.state.ts"
+      ],
+      "@utils/base/*": [
+        "src/app/utils/base/*"
+      ],
+      "@utils/components/*": [
+        "src/app/utils/components/*"
+      ],
+      "@utils/directives": [
+        "src/app/utils/directives/index.ts"
+      ],
+      "@utils/pipes": [
+        "src/app/utils/pipes/index.ts"
+      ],
+      "@utils/functions": [
+        "src/app/utils/functions/index.ts"
+      ],
+      "@utils/schemas": [
+        "src/app/utils/schemas/index.ts"
+      ],
+      "@utils/http": [
+        "src/app/utils/http/index.ts"
+      ],
+      "@utils/state": [
+        "src/app/utils/state/index.ts"
+      ],
+      "@utils/services": [
+        "src/app/utils/services/index.ts"
+      ],
+      "@utils/validation": [
+        "src/app/utils/validation/index.ts"
+      ],
+      "@assets/json": [
+        "src/assets/json/index.ts"
+      ],
+      "@widgets/*": [
+        "src/app/widgets/*"
+      ],
+      "@common/guards": [
+        "src/app/common/guards/index.ts"
+      ],
+      "@common/base/*": [
+        "src/app/common/base/*"
+      ],
+      "@common/components/*": [
+        "src/app/common/components/*"
+      ],
+      "@common/directives": [
+        "src/app/common/directives/index.ts"
+      ],
+      "@common/pipes": [
+        "src/app/common/pipes/index.ts"
+      ],
+      "@common/functions": [
+        "src/app/common/functions/index.ts"
+      ],
+      "@common/schemas": [
+        "src/app/common/schemas/index.ts"
+      ],
+      "@common/services": [
+        "src/app/common/services/index.ts"
+      ],
+      "@common/validation": [
+        "src/app/common/validation/index.ts"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

@@ -1,0 +1,44 @@
+<div class="lazy-dropdown-container" (click)="isOpenDropdown = !isOpenDropdown" clickOutside
+    (onClickOutside)="isOpenDropdown = false" cdkOverlayOrigin #origin="cdkOverlayOrigin">
+    <div class="flexbox row space_between-center">
+        <input class="flexbox-item-auto" type="text" readonly fxFlex="auto" [formControl]="overlayOriginControl">
+        <div>
+            <div class="flexbox column center-center">
+                <mat-icon>arrow_drop_down</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayOrigin]="origin" [cdkConnectedOverlayOpen]="isOpenDropdown"
+    [cdkConnectedOverlayDisableClose]="true" [cdkConnectedOverlayWidth]="overlayPanelWidth"
+    [cdkConnectedOverlayPanelClass]="DROPDOWN_OVERLAY_PANEL_CLASS">
+    <div (click)="$event.stopPropagation()">
+        <div class="lazy-dropdown__overlay__search">
+            <div class="flexbox row space_between-center">
+                <input class="flexbox-item-auto" type="text" [formControl]="overlaySearchControl">
+                <div>
+                    <div class="flexbox column center-stretch">
+                        <mat-icon>search</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="height: 8px;"></div>
+        <cdk-virtual-scroll-viewport #virtualScroll itemSize="44" class="lazy-dropdown__items"
+            (scrolledIndexChange)="scrollEnd()" [minBufferPx]="0" [maxBufferPx]="0">
+            <div *cdkVirtualFor="let item of allItems">
+                <div class="flexbox column center-stretch">
+                    <div class="flexbox-item lazy-dropdown__item" (click)="selectDropdownItem(item)">
+                        <div class="flexbox row space_between-center">
+                            <div>{{item.display}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </cdk-virtual-scroll-viewport>
+        <ng-container *ngIf="isLoadingMore">
+            <mat-progress-bar mode="indeterminate" />
+        </ng-container>
+    </div>
+</ng-template>

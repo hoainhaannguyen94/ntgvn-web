@@ -1,0 +1,60 @@
+@import './styles/variables';
+@import './styles/common';
+@import './styles/core/widget';
+@import './styles/core/box-status';
+@import './styles/elements/input';
+@import './styles/elements/b';
+@import './styles/elements/p';
+@import './styles/elements/h';
+@import './styles/base/base-grid';
+@import './styles/base/base-page';
+@import './styles/pages/audit-log';
+@import './styles/material/mat-theme';
+@import './styles/material/mat-drawer';
+@import './styles/material/mat-form-field';
+@import './styles/material/mat-error';
+@import './styles/material/mat-icon';
+@import './styles/material/mat-selection-list';
+@import './styles/material/mat-menu';
+@import './styles/material/mat-table';
+@import './styles/material/mat-paginator';
+@import './styles/material/mat-spinner';
+@import './styles/material/mat-button';
+@import './styles/hightcharts/hightcharts';
+@import './styles/ckeditor/ckeditor';
+@import './styles/full-calendar/full-calendar';
+@import '../node_modules/animate.css/animate.min.css';
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    letter-spacing: normal;
+}
+
+html,
+body {
+    margin: 0;
+}
+
+html {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    background-color: var(--background-color);
+}
+
+// APP ROOT
+#app-container {
+    height: calc(100vh - 56px);
+    width: 100%;
+
+    #app-left-sidenav-content {
+        max-width: 50vw;
+        width: 320px;
+    }
+
+    #app-content {
+        height: 100%;
+        width: 100%;
+    }
+}

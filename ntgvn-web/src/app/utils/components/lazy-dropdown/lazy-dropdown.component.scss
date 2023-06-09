@@ -1,0 +1,60 @@
+.lazy-dropdown-container {
+    height: 100%;
+    width: 100%;
+    background-color: #efefef;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+
+    input {
+        background-color: inherit;
+        cursor: inherit;
+        outline: none;
+        border: none;
+        padding: 0 8px;
+    }
+}
+
+::ng-deep {
+    .lazy-dropdown__overlay-panel {
+        padding: 8px;
+        max-height: 300px;
+        width: 100%;
+        outline: none;
+        box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+
+        >div {
+            width: 100%;
+
+            .lazy-dropdown__overlay__search {
+                background-color: #efefef;
+                border-radius: var(--border-radius);
+                height: 36px;
+
+                input {
+                    background-color: #efefef;
+                    width: 100%;
+                    outline: none;
+                    border: none;
+                    padding: 0 8px;
+                }
+            }
+
+            .lazy-dropdown__items {
+                height: 200px;
+
+                .cdk-virtual-scroll-content-wrapper {
+
+                    .lazy-dropdown__item {
+                        height: 44px;
+                        padding: 0 8px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: #efefef;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

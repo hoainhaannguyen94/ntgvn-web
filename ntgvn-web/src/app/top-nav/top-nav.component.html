@@ -1,0 +1,29 @@
+<div class="top-nav-container">
+    <div class="top-nav-left">
+        <mat-icon (click)="showSideNav()" matTooltip="Menu">menu</mat-icon>
+        <div class="top-nav-name">{{appState.domain | uppercase}} PROJECT</div>
+    </div>
+    <div class="top-nav-right">
+        <mat-icon matTooltip="Language" [matMenuTriggerFor]="menu">language</mat-icon>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="changeLanguage('vi')">
+                <span>Tiếng Việt</span>
+            </button>
+            <button mat-menu-item (click)="changeLanguage('en')">
+                <span>English</span>
+            </button>
+        </mat-menu>
+        <mat-icon matTooltip="Account" [matMenuTriggerFor]="accountMenu">account_circle</mat-icon>
+    </div>
+</div>
+
+<mat-menu #accountMenu="matMenu">
+    <button mat-menu-item (click)="navigateToSetting()">
+        <mat-icon class="menu-icon">account_circle</mat-icon>
+        <span>{{appState.me.name}}</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+        <mat-icon class="menu-icon">logout</mat-icon>
+        <span>Logout</span>
+    </button>
+</mat-menu>

@@ -1,0 +1,11 @@
+.map-element {
+    width: 100%;
+    height: calc(100vh - 56px - 2rem);
+}
+
+search-location {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 9999;
+}

@@ -1,0 +1,20 @@
+<ng-container *ngIf="appState.ready; else unauthorized">
+    <ng-container *ngTemplateOutlet="authorized" />
+</ng-container>
+
+<ng-template #authorized>
+    <top-nav (showLeftSideNav)="drawer.toggle()" />
+    <mat-drawer-container id="app-container" [hasBackdrop]="sidenavHasBackdrop">
+        <mat-drawer #drawer [mode]="sidenavMode" [opened]="sidenavOpened" (openedChange)="onSidenavOpenedChange($event)"
+            id="app-left-sidenav-content">
+            <left-sidebar />
+        </mat-drawer>
+        <mat-drawer-content id="app-content">
+            <router-outlet />
+        </mat-drawer-content>
+    </mat-drawer-container>
+</ng-template>
+
+<ng-template #unauthorized>
+    <router-outlet />
+</ng-template>

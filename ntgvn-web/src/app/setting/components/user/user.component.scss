@@ -1,0 +1,24 @@
+.setting-user-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.setting-user-avatar {
+    width: 4rem;
+    height: 4rem;
+    font-size: 4rem;
+}
+
+.setting-user-name {
+    font-size: 2rem;
+    font-weight: var(--font-wight-bold);
+}
+
+.setting-user-email,
+.setting-user-phone-number,
+.setting-user-role {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+}

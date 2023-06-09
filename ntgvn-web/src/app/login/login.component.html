@@ -1,0 +1,40 @@
+<div class="login-container" *ngIf="formGroup" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+    <mat-card class="login-content">
+        <mat-card-content>
+            <mat-progress-bar *ngIf="isLoading" mode="indeterminate" class="login-progress-bar" />
+            <div class="login-header">User Login</div>
+            <div class="login-form" [formGroup]="formGroup">
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Phone Number</mat-label>
+                        <input #inputPhoneNumber matInput type="tel" autocomplete="off" required
+                            formControlName="phoneNumber" cdkFocusInitial>
+                        <mat-error>
+                            <error-message [errors]="formGroup.get('phoneNumber')?.errors" [target]="'Phone Number'" />
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input #inputPassword matInput type="password" autocomplete="off" required
+                            formControlName="password">
+                        <mat-icon *ngIf="!isShowPassword" matSuffix (click)="showPassword($event)"
+                            matTooltip="Show Password">visibility</mat-icon>
+                        <mat-icon *ngIf="isShowPassword" matSuffix (click)="hidePassword($event)"
+                            matTooltip="Hide Password">visibility_off</mat-icon>
+                        <mat-error>
+                            <error-message [errors]="formGroup.get('password')?.errors" [target]="'Password'" />
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="login-actions">
+                <button mat-flat-button color="primary" (click)="login()"
+                    [disabled]="!formHasChanged || !formValid || isLoading">LOGIN</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div class="copyright">Copyright © 2017-2023 NTG. All rights reserved.</div>

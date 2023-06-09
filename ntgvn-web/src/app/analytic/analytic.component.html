@@ -1,0 +1,18 @@
+<div class="base-container">
+    <div class="analytic-filters">
+        <mat-form-field appearance="outline">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate placeholder="Start date">
+                <input matEndDate placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </div>
+    <div class="analytic-charts">
+        <div style="height: calc(100vh - 56px - 3rem - 78px); padding: 1rem; width: 100%;" class="mat-elevation-z4">
+            <highcharts-chart [Highcharts]="highcharts" [options]="chartOptions" class="base-hightcharts" />
+        </div>
+    </div>

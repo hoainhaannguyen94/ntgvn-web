@@ -1,0 +1,9 @@
+<h1 mat-dialog-title class="confirm-dialog-title">{{data.title}}</h1>
+<div mat-dialog-content class="confirm-dialog-content">
+    <div [innerHTML]="data.content"></div>
+</div>
+<div mat-dialog-actions class="confirm-dialog-actions">
+    <ng-container *ngFor="let action of data.actions; trackBy:trackByFn;">
+        <button mat-flat-button [color]="action.backgroundColor" (click)="action.action()">{{action.text}}</button>
+    </ng-container>
+</div>

@@ -1,0 +1,11 @@
+.base-details-body {
+    align-items: flex-start;
+
+    div {
+        word-break: break-all;
+    }
+
+    span {
+        font-weight: var(--font-weight-bold);
+    }
+}

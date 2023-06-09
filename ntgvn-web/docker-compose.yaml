@@ -1,0 +1,12 @@
+version: "3"
+services:
+    ntgvn-web:
+        image: ntgvn-web:latest
+        ports:
+            - "80:80"
+        networks:
+            - ntgvn-network
+        restart: always
+networks:
+    ntgvn-network:
+        external: true

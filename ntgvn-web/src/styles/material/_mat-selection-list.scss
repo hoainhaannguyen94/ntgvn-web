@@ -1,0 +1,16 @@
+mat-selection-list {
+    padding-top: 0 !important;
+
+    mat-list-option {
+        height: 48px !important;
+    }
+
+    .mat-list-item-content {
+        padding: 0 1rem !important;
+    }
+
+    .mat-list-text>div>div {
+        font-size: var(--font-size) !important;
+        font-weight: 500 !important;
+    }
+}

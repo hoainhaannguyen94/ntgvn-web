@@ -1,0 +1,32 @@
+<div class="base-container">
+    <div class="announcement-toolbar">
+        <button mat-flat-button color="primary" (click)="newAnnouncementHandler()">ADD</button>
+    </div>
+    <div class="announcement-posts">
+        <ng-container *ngFor="let item of items">
+            <div class="announcement-post mat-elevation-z4">
+                <div class="announcement-post-header">
+                    <div class="--title">{{item.title}}</div>
+                    <button mat-icon-button [matMenuTriggerFor]="menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="detailsAnnouncementHandler(item)">
+                            <mat-icon>visibility</mat-icon>
+                            <span>Details</span>
+                        </button>
+                        <button mat-menu-item (click)="deleteAnnouncementHandler(item)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Delete</span>
+                        </button>
+                    </mat-menu>
+                </div>
+                <div class="announcement-post-body">
+                    <div class="ck-content" [innerHTML]="item.body | safe: 'html'"></div>
+                </div>
+                <div class="announcement-post-footer">by {{item.createdBy | userDetails | async | objectProperty:
+                    'name'}} - {{item.createdAt | date: 'MMM d, y'}}</div>
+            </div>
+        </ng-container>
+    </div>
+</div>

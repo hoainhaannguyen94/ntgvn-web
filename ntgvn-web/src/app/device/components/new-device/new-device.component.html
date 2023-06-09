@@ -1,0 +1,40 @@
+<div class="base-container base-details-container">
+    <mat-icon class="base-details-avatar">smartphone</mat-icon>
+    <div class="base-details-body" [formGroup]="formGroup">
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" formControlName="name" required autocomplete="off" />
+            <mat-error>
+                <error-message [errors]="formGroup.get('name')?.errors" [target]="'Name'" />
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Type</mat-label>
+            <input matInput placeholder="Type" formControlName="type" required autocomplete="off" />
+            <mat-error>
+                <error-message [errors]="formGroup.get('type')?.errors" [target]="'Type'" />
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Latitude</mat-label>
+            <input type="number" matInput placeholder="Latitude" formControlName="lat" required autocomplete="off" />
+            <mat-error>
+                <error-message [errors]="formGroup.get('lat')?.errors" [target]="'Latitude'" />
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Longtitude</mat-label>
+            <input type="number" matInput placeholder="Longtitude" formControlName="lng" required autocomplete="off" />
+            <mat-error>
+                <error-message [errors]="formGroup.get('lng')?.errors" [target]="'Longtitude'" />
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="base-details-actions">
+        <button mat-flat-button (click)="cancelHandler()">Cancel</button>
+        <button mat-flat-button color="primary" (click)="submitHandler()" [disabled]="isLoading || formGroup.invalid">
+            <mat-spinner strokeWidth="4" diameter="24" class="--button --submit" *ngIf="isLoading" />
+            <span>Submit</span>
+        </button>
+    </div>
+</div>

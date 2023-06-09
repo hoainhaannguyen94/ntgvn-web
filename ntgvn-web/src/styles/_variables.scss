@@ -1,0 +1,36 @@
+:root {
+    // Font
+    --font-size: 16px;
+    --font-family: Roboto, sans-serif;
+    --font-weight: 400;
+    --font-weight-bold: 500;
+    --box-shadow: 0px 0.3px 0.9px rgba(0, 0, 0, 0.07), 0px 1.6px 3.6px rgba(0, 0, 0, 0.11);
+    // Border
+    --border: solid 1px rgba(0, 0, 0, 0.12);
+    --border-radius: 4px;
+    // Colors
+    --primary: #4caf50;
+    --accent: #ffc107;
+    --warn: #f44336;
+    --background-color: #fff;
+    --text-color: #000;
+    --icon-color: #546e7a;
+    // Order status
+    --order-status-637342a9f218cd107a5784f4-bg: #9c27b0;
+    --order-status-637342a9f218cd107a5784f4-text: #fff;
+    --order-status-637342a9f218cd107a5784f5-bg: #0069c0;
+    --order-status-637342a9f218cd107a5784f5-text: #fff;
+    --order-status-637342a9f218cd107a5784f6-bg: #087f23;
+    --order-status-637342a9f218cd107a5784f6-text: #fff;
+    --order-status-637342a9f218cd107a5784f7-bg: #ba000d;
+    --order-status-637342a9f218cd107a5784f7-text: #fff;
+    --order-status-637342a9f218cd107a5784f8-bg: #c8b900;
+    --order-status-637342a9f218cd107a5784f8-text: #fff;
+    // User role
+    --user-role-6373295af218cd107a5784f2-bg: #ba000d;
+    --user-role-6373295af218cd107a5784f2-text: #fff;
+    --user-role-6373295af218cd107a5784f3-bg: #0069c0;
+    --user-role-6373295af218cd107a5784f3-text: #fff;
+    --user-role-6472f25a4458e2cdb33eeda2-bg: #546e7a;
+    --user-role-6472f25a4458e2cdb33eeda2-text: #fff;
+}

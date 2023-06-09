@@ -1,0 +1,32 @@
+.top-nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 56px;
+    background-color: var(--primary);
+    color: #fff;
+    padding: 1rem;
+
+    mat-icon {
+        color: #fff;
+    }
+
+    .top-nav-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .top-nav-name {
+            font-weight: var(--font-weight-bold);
+            font-size: 1.2rem;
+            line-height: 24px;
+            height: 24px;
+        }
+    }
+
+    .top-nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+}

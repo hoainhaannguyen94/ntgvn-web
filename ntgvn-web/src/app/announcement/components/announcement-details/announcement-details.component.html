@@ -1,0 +1,15 @@
+<div class="base-container">
+    <div class="new-announcement-actions">
+        <button mat-flat-button (click)="cancelHandler()">Cancel</button>
+        <button mat-flat-button color="primary" [disabled]="!titleFormControl.valid || editorData.length === 0"
+            (click)="updateHandler()">Update</button>
+    </div>
+    <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Title" required autocomplete="off" [formControl]="titleFormControl" />
+        <mat-error>
+            <error-message [errors]="titleFormControl?.errors" [target]="'Title'" />
+        </mat-error>
+    </mat-form-field>
+    <div #editor></div>
+</div>

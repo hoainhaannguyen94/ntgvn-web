@@ -1,0 +1,17 @@
+.mdc-button[color="primary"],
+.mdc-button[color="accent"],
+.mdc-button[color="warn"],
+.mdc-button.mat-primary,
+.mdc-button.mat-accent,
+.mdc-button.mat-warn {
+    color: #fff !important;
+}
+
+.mdc-button[color="primary"][ng-reflect-disabled="true"],
+.mdc-button[color="accent"][ng-reflect-disabled="true"],
+.mdc-button[color="warn"][ng-reflect-disabled="true"],
+.mdc-button.mat-primary[ng-reflect-disabled="true"],
+.mdc-button.mat-accent[ng-reflect-disabled="true"],
+.mdc-button.mat-warn[ng-reflect-disabled="true"] {
+    color: rgba($color: #000, $alpha: .38) !important;
+}

@@ -1,0 +1,3 @@
+<div class="windy-container" *ngIf="ready">
+    <iframe [width]="width" [height]="height" [src]="src | safe: 'resourceUrl'" frameborder="0"></iframe>
+</div>

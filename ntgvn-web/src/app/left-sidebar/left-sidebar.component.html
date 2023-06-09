@@ -1,0 +1,12 @@
+<mat-selection-list #shoes [multiple]="false">
+    <ng-container *ngFor="let link of navLinks; trackBy: trackByFn">
+        <ng-container *ngIf="link.activated">
+            <mat-list-item [activated]="link.url === selectedLink" (click)="navigateTo(link)">
+                <div class="left-sidebar-item">
+                    <mat-icon [color]="link.url === selectedLink ? 'primary' : ''">{{link.icon}}</mat-icon>
+                    <div>{{link.displayName | transloco}}</div>
+                </div>
+            </mat-list-item>
+        </ng-container>
+    </ng-container>
+</mat-selection-list>

@@ -1,0 +1,10 @@
+mat-spinner {
+    &.--button {
+        position: absolute;
+        top: 6px;
+
+        &.--submit {
+            left: calc(50% - 12px);
+        }
+    }
+}

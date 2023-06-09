@@ -1,0 +1,15 @@
+:root {
+    --fc-button-bg-color: var(--primary);
+    --fc-button-border-color: var(--primary);
+    --fc-button-active-bg-color: var(--accent);
+    --fc-button-active-border-color: var(--accent);
+    --fc-button-hover-bg-color: var(--accent);
+    --fc-button-hover-border-color: var(--accent);
+}
+
+.fc .fc-button-primary:focus,
+.fc .fc-button:focus,
+.fc .fc-button-primary:not(:disabled):active:focus,
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
+    box-shadow: none;
+}
