@@ -7,7 +7,7 @@ import { ICountAnnouncement, IAnnouncement } from '@common/schemas';
     providedIn: 'root'
 })
 export class AnnouncementService extends OdataService {
-    readonly API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/announcement`;
+    readonly API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/announcement`;
 
     countAnnouncements$(params?: OdataParams) {
         return this.getItem<ICountAnnouncement>(`${this.API_URL}/count`, null, params);

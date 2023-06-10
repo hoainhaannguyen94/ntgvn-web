@@ -1,10 +1,11 @@
 export const environment = {
     production: true,
     version: '0.0.1',
-    domain: 'now',
-    server: 'http://10.8.30.123',
+    domain: 'ntgvn',
+    restURL: 'http://localhost:8080',
+    websocketURL: 'http://localhost:8081',
     apiVersion: 'v1',
-    socket: false,
+    enableWebsocket: false,
     root: '/announcement',
     language: 'en'
 }

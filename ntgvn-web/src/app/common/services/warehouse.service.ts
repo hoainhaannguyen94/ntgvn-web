@@ -7,7 +7,7 @@ import { ICountWarehouse, IWarehouse } from '@common/schemas';
     providedIn: 'root'
 })
 export class WarehouseService extends OdataService {
-    readonly API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/warehouse`;
+    readonly API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/warehouse`;
 
     countWarehouses$(params?: OdataParams) {
         return this.getItem<ICountWarehouse>(`${this.API_URL}/count`, null, params);

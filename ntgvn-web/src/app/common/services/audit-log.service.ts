@@ -7,7 +7,7 @@ import { ICountAuditLog, IAuditLog } from '@common/schemas';
     providedIn: 'root'
 })
 export class AuditLogService extends OdataService {
-    readonly API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/audit-log`;
+    readonly API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/audit-log`;
 
     countAuditLogs$(params?: OdataParams) {
         return this.getItem<ICountAuditLog>(`${this.API_URL}/count`, null, params);

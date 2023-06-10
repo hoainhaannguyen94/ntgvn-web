@@ -134,8 +134,8 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
     }
 
     override registerSignal() {
-        if (this.appState.socket) {
-            this.socket = io(this.appState.server, {
+        if (this.appState.enableWebsocket) {
+            this.socket = io(this.appState.websocketURL, {
                 transports: ['websocket'],
                 autoConnect: false
             });

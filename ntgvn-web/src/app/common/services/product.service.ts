@@ -7,7 +7,7 @@ import { ICountProduct, IProduct, IProductCategory } from '@common/schemas';
     providedIn: 'root'
 })
 export class ProductService extends OdataService {
-    readonly API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/product`;
+    readonly API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/product`;
 
     countProducts$(params?: OdataParams) {
         return this.getItem<ICountProduct>(`${this.API_URL}/count`, null, params);

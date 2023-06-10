@@ -7,7 +7,7 @@ import { ICountCustomer, ICustomer } from '@common/schemas';
     providedIn: 'root'
 })
 export class CustomerService extends OdataService {
-    readonly API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/customer`;
+    readonly API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/customer`;
 
     countCustomers$(params?: OdataParams) {
         return this.getItem<ICountCustomer>(`${this.API_URL}/count`, null, params);

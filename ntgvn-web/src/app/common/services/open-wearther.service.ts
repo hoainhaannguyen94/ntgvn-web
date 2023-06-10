@@ -6,7 +6,7 @@ import { OdataParams, OdataService } from '@utils/http';
     providedIn: 'root'
 })
 export class OpenWeartherService extends OdataService {
-    readonly API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/open-weather`;
+    readonly API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/open-weather`;
 
     getCurrentWeather$(params?: OdataParams) {
         return this.getItem<any>(`${this.API_URL}/current-weather`, null, params);

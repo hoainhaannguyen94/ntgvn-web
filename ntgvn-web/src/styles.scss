@@ -1,14 +1,10 @@
+@import '../node_modules/animate.css/animate.min.css';
 @import './styles/variables';
 @import './styles/common';
-@import './styles/core/widget';
-@import './styles/core/box-status';
 @import './styles/elements/input';
 @import './styles/elements/b';
 @import './styles/elements/p';
 @import './styles/elements/h';
-@import './styles/base/base-grid';
-@import './styles/base/base-page';
-@import './styles/pages/audit-log';
 @import './styles/material/mat-theme';
 @import './styles/material/mat-drawer';
 @import './styles/material/mat-form-field';
@@ -23,7 +19,11 @@
 @import './styles/hightcharts/hightcharts';
 @import './styles/ckeditor/ckeditor';
 @import './styles/full-calendar/full-calendar';
-@import '../node_modules/animate.css/animate.min.css';
+@import './styles/utils/widget';
+@import './styles/utils/box-status';
+@import './styles/utils/base-grid';
+@import './styles/utils/base-page';
+@import './styles/pages/audit-log';
 
 *,
 *::before,

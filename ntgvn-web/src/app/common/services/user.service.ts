@@ -7,7 +7,7 @@ import { ICountUser, IUser, IUserRole } from '@common/schemas';
     providedIn: 'root'
 })
 export class UserService extends OdataService {
-    readonly API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/user`;
+    readonly API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/user`;
 
     countUsers$(params?: OdataParams) {
         return this.getItem<ICountUser>(`${this.API_URL}/count`, null, params);

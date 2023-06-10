@@ -4,9 +4,10 @@ export const GLOBAL_SETTINGS = {
     production: environment.production,
     version: environment.version,
     domain: environment.domain,
-    server: environment.server,
+    restURL: environment.restURL,
+    websocketURL: environment.websocketURL,
     apiVersion: environment.apiVersion,
-    socket: environment.socket,
+    enableWebsocket: environment.enableWebsocket,
     root: environment.root,
     language: environment.language
 }

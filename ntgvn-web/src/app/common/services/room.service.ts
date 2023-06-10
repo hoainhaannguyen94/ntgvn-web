@@ -7,7 +7,7 @@ import { ICountRoom, IRoom } from '@common/schemas';
     providedIn: 'root'
 })
 export class RoomService extends OdataService {
-    readonly API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/room`;
+    readonly API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/room`;
 
     countRooms$(params?: OdataParams) {
         return this.getItem<ICountRoom>(`${this.API_URL}/count`, null, params);

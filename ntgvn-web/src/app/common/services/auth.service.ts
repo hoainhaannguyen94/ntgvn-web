@@ -8,7 +8,7 @@ import { IAuthVerifyToken } from '@common/schemas';
     providedIn: 'root'
 })
 export class AuthService {
-    readonly URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/auth`;
+    readonly URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/auth`;
 
     http = inject(HttpClient);
 

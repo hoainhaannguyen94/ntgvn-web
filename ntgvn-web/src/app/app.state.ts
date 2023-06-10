@@ -14,9 +14,10 @@ export interface IAppState {
     production: boolean;
     version: string;
     domain: string;
-    server: string;
+    restURL: string;
+    websocketURL: string;
     root: string;
-    socket: boolean;
+    enableWebsocket: boolean;
     apiVersion: string;
     ready: boolean;
     token: string;
@@ -29,10 +30,11 @@ export const INITIAL_STATE = {
     production: GLOBAL_SETTINGS.production,
     version: GLOBAL_SETTINGS.version,
     domain: GLOBAL_SETTINGS.domain,
-    server: GLOBAL_SETTINGS.server,
+    restURL: GLOBAL_SETTINGS.restURL,
+    websocketURL: GLOBAL_SETTINGS.websocketURL,
     root: GLOBAL_SETTINGS.root,
     apiVersion: GLOBAL_SETTINGS.apiVersion,
-    socket: GLOBAL_SETTINGS.socket,
+    enableWebsocket: GLOBAL_SETTINGS.enableWebsocket,
     language: GLOBAL_SETTINGS.language,
     token: '',
     ready: false,

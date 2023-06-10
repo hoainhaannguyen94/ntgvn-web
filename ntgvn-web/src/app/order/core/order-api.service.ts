@@ -8,8 +8,8 @@ import { ICustomer, IProduct } from '@common/schemas';
     providedIn: 'root'
 })
 export class OrderApiService extends OrderService {
-    readonly PRODUCT_API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/product`;
-    readonly CUSTOMER_API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/customer`;
+    readonly PRODUCT_API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/product`;
+    readonly CUSTOMER_API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/customer`;
 
     getProductList$(params?: OdataParams) {
         return this.getItems<IProduct>(`${this.PRODUCT_API_URL}/list`, null, params);

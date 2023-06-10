@@ -8,7 +8,7 @@ import { IWarehouse } from '@common/schemas';
     providedIn: 'root'
 })
 export class ProductApiService extends ProductService {
-    readonly WAREHOUSE_API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/warehouse`;
+    readonly WAREHOUSE_API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/warehouse`;
 
     getWarehouseList$(params?: OdataParams) {
         return this.getItems<IWarehouse>(`${this.WAREHOUSE_API_URL}/list`, null, params);

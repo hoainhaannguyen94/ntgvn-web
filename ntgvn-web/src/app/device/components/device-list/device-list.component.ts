@@ -130,8 +130,8 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
     }
 
     override registerSignal() {
-        if (this.appState.socket) {
-            this.socket = io(this.appState.server, {
+        if (this.appState.enableWebsocket) {
+            this.socket = io(this.appState.websocketURL, {
                 transports: ['websocket'],
                 autoConnect: false
             });

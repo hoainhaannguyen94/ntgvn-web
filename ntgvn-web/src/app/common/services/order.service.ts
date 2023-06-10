@@ -7,7 +7,7 @@ import { ICountOrder, IOrder, IOrderStatus } from '@common/schemas';
     providedIn: 'root'
 })
 export class OrderService extends OdataService {
-    readonly API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/order`;
+    readonly API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/order`;
 
     countOrders$(params?: OdataParams) {
         return this.getItem<ICountOrder>(`${this.API_URL}/count`, null, params);

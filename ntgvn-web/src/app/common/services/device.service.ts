@@ -7,7 +7,7 @@ import { ICountDevice, IDevice } from '@common/schemas';
     providedIn: 'root'
 })
 export class DeviceService extends OdataService {
-    readonly API_URL = `${GLOBAL_SETTINGS.server}/${GLOBAL_SETTINGS.apiVersion}/api/device`;
+    readonly API_URL = `${GLOBAL_SETTINGS.restURL}/rest/api/${GLOBAL_SETTINGS.apiVersion}/device`;
 
     countDevices$(params?: OdataParams) {
         return this.getItem<ICountDevice>(`${this.API_URL}/count`, null, params);
