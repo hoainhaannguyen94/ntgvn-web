@@ -13,8 +13,9 @@
     "build_dev": "node --max_old_space_size=10240 ./node_modules/@angular/cli/bin/ng build --base-href / --configuration development",
     "build_prod": "node --max_old_space_size=10240 ./node_modules/@angular/cli/bin/ng build --base-href / --configuration production",
     "docker_network": "docker network create ntgvn-network",
-    "docker_build": "docker build . -t ntgvn-web:latest",
-    "docker_run": "docker run -d -p 80:80 --network ntgvn-network --name ntgvn-web ntgvn-web:latest",
+    "docker_ubuntu": "docker run --network ntgvn-network --name ntgvn-ubuntu -p 80:8080 -p 443:8443 -p 22:22 -itd ubuntu:latest",
+    "docker_ntgvn-web-build": "docker build . -t ntgvn-web:latest",
+    "docker_ntgvn-web-run": "docker run -d -p 80:80 --network ntgvn-network --name ntgvn-web ntgvn-web:latest",
     "docker_compose": "docker-compose up"
   },
   "private": true,
