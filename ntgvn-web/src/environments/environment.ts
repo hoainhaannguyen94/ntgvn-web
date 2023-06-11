@@ -5,7 +5,7 @@ export const environment = {
     restURL: 'http://localhost:8080',
     websocketURL: 'http://localhost:8081',
     apiVersion: 'v1',
-    enableWebsocket: false,
+    enableWebsocket: true,
     root: '/announcement',
     language: 'en'
 }
