@@ -63,143 +63,77 @@ export class LeftSidebarComponent extends BaseComponent implements OnInit {
         })();
     }
 
+    navigateToRoute(url: string) {
+        this.router.navigate([url]);
+    }
+
     navigateTo(link: INavLink) {
         switch (link.url) {
             case ENavLinkUrl.dashboard:
-                this.navigateToDashboard();
+                this.navigateToRoute(ENavLinkUrl.dashboard);
                 break;
             case ENavLinkUrl.announcement:
-                this.navigateToAnnouncement();
+                this.navigateToRoute(ENavLinkUrl.announcement);
                 break;
             case ENavLinkUrl.auditLog:
-                this.navigateToAuditLog();
+                this.navigateToRoute(ENavLinkUrl.auditLog);
                 break;
             case ENavLinkUrl.analytic:
-                this.navigateToAnalytic();
+                this.navigateToRoute(ENavLinkUrl.analytic);
                 break;
             case ENavLinkUrl.map:
-                this.navigateToMap();
+                this.navigateToRoute(ENavLinkUrl.map);
                 break;
             case ENavLinkUrl.simulator:
-                this.navigateToSimulator();
+                this.navigateToRoute(ENavLinkUrl.simulator);
                 break;
             case ENavLinkUrl.device:
-                this.navigateToDevice();
+                this.navigateToRoute(ENavLinkUrl.device);
                 break;
             case ENavLinkUrl.room:
-                this.navigateToRoom();
+                this.navigateToRoute(ENavLinkUrl.room);
                 break;
             case ENavLinkUrl.event:
-                this.navigateToEvent();
+                this.navigateToRoute(ENavLinkUrl.event);
                 break;
             case ENavLinkUrl.scheduler:
-                this.navigateToScheduler();
+                this.navigateToRoute(ENavLinkUrl.scheduler);
                 break;
             case ENavLinkUrl.warehouse:
-                this.navigateToWarehouse();
+                this.navigateToRoute(ENavLinkUrl.warehouse);
                 break;
             case ENavLinkUrl.product:
-                this.navigateToProduct();
+                this.navigateToRoute(ENavLinkUrl.product);
                 break;
             case ENavLinkUrl.order:
-                this.navigateToOrder();
+                this.navigateToRoute(ENavLinkUrl.order);
                 break;
             case ENavLinkUrl.user:
-                this.navigateToUser();
+                this.navigateToRoute(ENavLinkUrl.user);
+                break;
+            case ENavLinkUrl.group:
+                this.navigateToRoute(ENavLinkUrl.group);
                 break;
             case ENavLinkUrl.customer:
-                this.navigateToCustomer();
+                this.navigateToRoute(ENavLinkUrl.customer);
+                break;
+            case ENavLinkUrl.tag:
+                this.navigateToRoute(ENavLinkUrl.tag);
                 break;
             case ENavLinkUrl.policy:
-                this.navigateToPolicy();
+                this.navigateToRoute(ENavLinkUrl.policy);
                 break;
             case ENavLinkUrl.license:
-                this.navigateToLicense();
+                this.navigateToRoute(ENavLinkUrl.license);
                 break;
             case ENavLinkUrl.aboutUs:
-                this.navigateToAboutUs();
+                this.navigateToRoute(ENavLinkUrl.aboutUs);
                 break;
             case ENavLinkUrl.setting:
-                this.navigateToSetting();
+                this.navigateToRoute(ENavLinkUrl.setting);
                 break;
             default:
                 break;
         }
-    }
-
-    navigateToDashboard() {
-        this.router.navigate(['/dashboard']);
-    }
-
-    navigateToAnnouncement() {
-        this.router.navigate(['/announcement']);
-    }
-
-    navigateToAuditLog() {
-        this.router.navigate(['/audit-log']);
-    }
-
-    navigateToAnalytic() {
-        this.router.navigate(['/analytic']);
-    }
-
-    navigateToMap() {
-        this.router.navigate(['/map']);
-    }
-
-    navigateToSimulator() {
-        this.router.navigate(['/simulator']);
-    }
-
-    navigateToDevice() {
-        this.router.navigate(['/device']);
-    }
-
-    navigateToRoom() {
-        this.router.navigate(['/room']);
-    }
-
-    navigateToEvent() {
-        this.router.navigate(['/event']);
-    }
-
-    navigateToScheduler() {
-        this.router.navigate(['/scheduler']);
-    }
-
-    navigateToWarehouse() {
-        this.router.navigate(['/warehouse']);
-    }
-
-    navigateToProduct() {
-        this.router.navigate(['/product']);
-    }
-
-    navigateToOrder() {
-        this.router.navigate(['/order']);
-    }
-
-    navigateToUser() {
-        this.router.navigate(['/user']);
-    }
-
-    navigateToCustomer() {
-        this.router.navigate(['/customer']);
-    }
-
-    navigateToPolicy() {
-        this.router.navigate(['/policy']);
-    }
-
-    navigateToLicense() {
-        this.router.navigate(['/license']);
-    }
-
-    navigateToAboutUs() {
-        this.router.navigate(['/about-us']);
-    }
-
-    navigateToSetting() {
-        this.router.navigate(['/setting']);
     }
 }

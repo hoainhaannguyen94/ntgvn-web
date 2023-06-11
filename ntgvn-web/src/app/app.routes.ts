@@ -22,12 +22,20 @@ export const routes: Routes = [
         loadChildren: () => import('./policy/policy.routes').then((m) => m.routes)
     },
     {
+        path: 'tag',
+        loadChildren: () => import('./tag/tag.routes').then((m) => m.routes)
+    },
+    {
         path: 'customer',
         loadChildren: () => import('./customer/customer.routes').then((m) => m.routes)
     },
     {
         path: 'user',
         loadChildren: () => import('./user/user.routes').then((m) => m.routes)
+    },
+    {
+        path: 'group',
+        loadChildren: () => import('./group/group.routes').then((m) => m.routes)
     },
     {
         path: 'order',

@@ -11,7 +11,7 @@ export class LeftSidebarFacadeService {
                 displayName: 'Dashboard',
                 url: '/dashboard',
                 icon: 'dashboard',
-                activated: false
+                activated: true
             },
             {
                 displayName: 'Announcements',
@@ -29,7 +29,7 @@ export class LeftSidebarFacadeService {
                 displayName: 'Analytics',
                 url: '/analytic',
                 icon: 'analytics',
-                activated: false
+                activated: true
             },
             {
                 displayName: 'Map',
@@ -92,9 +92,21 @@ export class LeftSidebarFacadeService {
                 activated: true
             },
             {
+                displayName: 'Groups',
+                url: '/group',
+                icon: 'group',
+                activated: true
+            },
+            {
                 displayName: 'Customers',
                 url: '/customer',
                 icon: 'groups',
+                activated: false
+            },
+            {
+                displayName: 'Tags',
+                url: '/tag',
+                icon: 'label',
                 activated: false
             },
             {
