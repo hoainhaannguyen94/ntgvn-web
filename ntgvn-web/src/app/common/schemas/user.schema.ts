@@ -5,6 +5,7 @@ export interface IUser {
     phoneNumber: string;
     email: string;
     role: string;
+    group: string;
 }
 
 export interface ICountUser {
@@ -12,6 +13,7 @@ export interface ICountUser {
 }
 
 export interface IUserRole {
+    _id: string;
     name: string;
     displayName: string;
 }
@@ -22,5 +24,6 @@ export const BLANK_USER: IUser = {
     address: '',
     phoneNumber: '',
     email: '',
-    role: ''
+    role: '',
+    group: ''
 }

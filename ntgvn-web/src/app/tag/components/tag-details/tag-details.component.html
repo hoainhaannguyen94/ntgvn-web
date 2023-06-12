@@ -10,7 +10,11 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
-            <input matInput placeholder="Description" formControlName="description" autocomplete="off" />
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5" cdkAutosizeMaxRows="10"
+                matInput placeholder="Description" formControlName="description" autocomplete="off"></textarea>
+            <mat-error>
+                <error-message [errors]="formGroup.get('description')?.errors" [target]="'Description'" />
+            </mat-error>
         </mat-form-field>
     </div>
     <div class="base-details-actions">

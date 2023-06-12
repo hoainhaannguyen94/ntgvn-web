@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { UserRoleDetailsPipe } from '@common/pipes';
+import { GroupDetailsPipe, UserRoleDetailsPipe } from '@common/pipes';
 import { ObjectPropertyPipe } from '@utils/pipes';
 import { io } from 'socket.io-client';
 
@@ -45,7 +45,8 @@ import { io } from 'socket.io-client';
         MatSnackBarModule,
         ConfirmDialogComponent,
         UserRoleDetailsPipe,
-        ObjectPropertyPipe
+        ObjectPropertyPipe,
+        GroupDetailsPipe
     ],
     templateUrl: './user-list.component.html',
     styleUrls: ['./user-list.component.scss']
@@ -190,12 +191,13 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
             'address': 'Address',
             'phoneNumber': 'Phone Number',
             'email': 'Email',
-            'role': 'Role'
+            'role': 'Role',
+            'group': 'Group'
         }
     }
 
     initDisplayColumns() {
-        this.columns = ['name', 'address', 'phoneNumber', 'email', 'role', 'actions'];
+        this.columns = ['name', 'address', 'phoneNumber', 'email', 'role', 'group', 'actions'];
     }
 
     initActions() {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,9 +12,10 @@ import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/components/error-message';
 import { BLANK_TAG } from '@common/schemas';
-import { debounceTime, takeUntil } from 'rxjs';
+import { debounceTime, take, takeUntil } from 'rxjs';
 import { TagFacadeService } from '../../facade/tag-facade.service';
 import { LogService } from '@utils/services';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
     selector: 'new-tag',
@@ -41,11 +42,21 @@ export class NewTagComponent extends BaseFormSingleComponent implements OnInit {
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
     formBuilder = inject(FormBuilder);
+    ngZone = inject(NgZone);
+
+    @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
     override formGroup = this.formBuilder.group({
         name: [BLANK_TAG.name, [Validators.required]],
         description: [BLANK_TAG.description]
     });
+
+    triggerResize() {
+        // Wait for changes to be applied, then trigger textarea resize.
+        this.ngZone.onStable.pipe(take(1)).subscribe({
+            next: () => this.autosize.resizeToFitContent(true)
+        });
+    }
 
     ngOnInit() {
         this.registerCoreLayer();

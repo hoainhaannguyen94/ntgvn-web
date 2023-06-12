@@ -107,7 +107,7 @@ export class LeftSidebarFacadeService {
                 displayName: 'Tags',
                 url: '/tag',
                 icon: 'label',
-                activated: false
+                activated: true
             },
             {
                 displayName: 'Policy',

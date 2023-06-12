@@ -27,22 +27,11 @@
                                     (click)="detailsGroupHandler(element)">{{element[column]}}</td>
                             </ng-container>
                         </ng-container>
-                        <ng-container *ngSwitchCase="'type'">
+                        <ng-container *ngSwitchCase="'description'">
                             <ng-container [matColumnDef]="column">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
-                                <td mat-cell *matCellDef="let element">{{element[column]}}</td>
-                            </ng-container>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'lat'">
-                            <ng-container [matColumnDef]="column">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
-                                <td mat-cell *matCellDef="let element">{{element[column]}}</td>
-                            </ng-container>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'lng'">
-                            <ng-container [matColumnDef]="column">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
-                                <td mat-cell *matCellDef="let element">{{element[column]}}</td>
+                                <td mat-cell *matCellDef="let element" class="base-grid-table-main-column"
+                                    (click)="detailsGroupHandler(element)">{{element[column]}}</td>
                             </ng-container>
                         </ng-container>
                         <ng-container *ngSwitchCase="'actions'">

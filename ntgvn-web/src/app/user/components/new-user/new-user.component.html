@@ -32,12 +32,23 @@
         <mat-form-field appearance="outline">
             <mat-label>Role</mat-label>
             <mat-select required formControlName="role">
-                <mat-option *ngFor="let role of userRoleList; trackBy:trackByFn;" [value]="role.name">
+                <mat-option *ngFor="let role of userRoleList; trackBy:trackByFn;" [value]="role._id">
                     {{role.displayName}}
                 </mat-option>
             </mat-select>
             <mat-error>
                 <error-message [errors]="formGroup.get('role')?.errors" [target]="'Role'" />
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Group</mat-label>
+            <mat-select formControlName="group">
+                <mat-option *ngFor="let group of groupList; trackBy:trackByFn;" [value]="group._id">
+                    {{group.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error>
+                <error-message [errors]="formGroup.get('group')?.errors" [target]="'Group'" />
             </mat-error>
         </mat-form-field>
     </div>

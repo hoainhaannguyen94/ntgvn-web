@@ -11,7 +11,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/components/error-message';
-import { BLANK_USER, IUserRole } from '@common/schemas';
+import { BLANK_USER, IGroup, IUserRole } from '@common/schemas';
 import { debounceTime, takeUntil } from 'rxjs';
 import { UserFacadeService } from '../../facade/user-facade.service';
 import { LogService } from '@utils/services';
@@ -47,10 +47,13 @@ export class NewUserComponent extends BaseFormSingleComponent implements OnInit 
         address: [BLANK_USER.address, [Validators.required]],
         phoneNumber: [BLANK_USER.phoneNumber, [Validators.required]],
         email: [BLANK_USER.email, [Validators.required]],
-        role: [BLANK_USER.role, [Validators.required]]
+        role: [BLANK_USER.role, [Validators.required]],
+        group: [BLANK_USER.group]
     });
 
     userRoleList: IUserRole[] = [];
+
+    groupList: IGroup[] = [];
 
     ngOnInit() {
         this.registerCoreLayer();
@@ -68,12 +71,22 @@ export class NewUserComponent extends BaseFormSingleComponent implements OnInit 
                 throw err;
             }
         });
+
         this.userFacade.getUserRoleList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.userRoleList = value;
             }
         });
         this.userFacade.loadUserRoleList();
+
+        this.userFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
+            next: value => {
+                this.groupList = value;
+            }
+        });
+        this.userFacade.loadGroupList({
+            $orderby: '_id desc'
+        });
     }
 
     cancelHandler() {

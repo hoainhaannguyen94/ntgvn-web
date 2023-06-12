@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser, IUserRole } from '@common/schemas';
+import { IGroup, IUser, IUserRole } from '@common/schemas';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -11,6 +11,7 @@ export class UserStateService {
     countUsers$ = new Subject<number>();
     user$ = new Subject<IUser>();
     userRoleList$ = new Subject<IUserRole[]>();
+    groupList$ = new Subject<IGroup[]>();
 
     isLoading$() {
         return this.loading$.asObservable();
@@ -50,5 +51,13 @@ export class UserStateService {
 
     setUserRoleList(roles: IUserRole[]) {
         this.userRoleList$.next(roles);
+    }
+
+    getGroupList$() {
+        return this.groupList$.asObservable();
+    }
+
+    setGroupList(groups: IGroup[]) {
+        this.groupList$.next(groups);
     }
 }

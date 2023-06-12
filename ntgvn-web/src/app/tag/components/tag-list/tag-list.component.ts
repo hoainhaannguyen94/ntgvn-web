@@ -183,14 +183,12 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
     initColumns() {
         this.headers = {
             'name': 'Name',
-            'type': 'Type',
-            'lat': 'Latitude',
-            'lng': 'Longtitude'
+            'description': 'Description'
         }
     }
 
     initDisplayColumns() {
-        this.columns = ['name', 'type', 'lat', 'lng', 'actions'];
+        this.columns = ['name', 'description', 'actions'];
     }
 
     initActions() {

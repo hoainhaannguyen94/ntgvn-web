@@ -4,6 +4,7 @@ import { UserStateService } from '../core/user-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IUser } from '@common/schemas';
+import { GroupService } from '@common/services';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,7 @@ import { IUser } from '@common/schemas';
 export class UserFacadeService {
     userAPI = inject(UserApiService);
     userState = inject(UserStateService);
+    groupService = inject(GroupService);
 
     isLoading$() {
         return this.userState.isLoading$();
@@ -151,5 +153,25 @@ export class UserFacadeService {
 
     getUserRoleList$() {
         return this.userState.getUserRoleList$();
+    }
+
+    loadGroupList(params?: OdataParams) {
+        this.userState.setLoading(true);
+        this.groupService.getGroupList$(params).pipe(
+            finalize(() => {
+                this.userState.setLoading(false);
+            })
+        ).subscribe({
+            next: res => {
+                this.userState.setGroupList(res.value);
+            },
+            error: err => {
+                throw err;
+            }
+        });
+    }
+
+    getGroupList$() {
+        return this.userState.getGroupList$();
     }
 }

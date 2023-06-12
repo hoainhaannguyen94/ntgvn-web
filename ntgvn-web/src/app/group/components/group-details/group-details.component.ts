@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,6 +15,7 @@ import { BLANK_GROUP, IGroup } from '@common/schemas';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { GroupFacadeService } from '../../facade/group-facade.service';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
     selector: 'group-details',
@@ -41,6 +42,9 @@ export class GroupDetailsComponent extends BaseFormSingleDetailsComponent<IGroup
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
     formBuilder = inject(FormBuilder);
+    ngZone = inject(NgZone);
+
+    @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
     groupId = '';
     group = BLANK_GROUP;
@@ -50,6 +54,13 @@ export class GroupDetailsComponent extends BaseFormSingleDetailsComponent<IGroup
         name: [BLANK_GROUP.name, [Validators.required]],
         description: [BLANK_GROUP.description]
     });
+
+    triggerResize() {
+        // Wait for changes to be applied, then trigger textarea resize.
+        this.ngZone.onStable.pipe(take(1)).subscribe({
+            next: () => this.autosize.resizeToFitContent(true)
+        });
+    }
 
     ngOnInit() {
         this.registerCoreLayer();

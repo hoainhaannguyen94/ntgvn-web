@@ -7,7 +7,8 @@ export const AnonymousUser: IUser = {
     address: '',
     email: '',
     phoneNumber: '',
-    role: ''
+    role: '',
+    group: ''
 }
 
 export interface IAppState {
