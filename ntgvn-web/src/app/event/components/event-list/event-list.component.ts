@@ -188,12 +188,13 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
             'start': 'Start',
             'end': 'End',
             'backgroundColor': 'Status',
-            '_groupId': 'Group'
+            '_groupId': 'Group',
+            'priority': 'Priority'
         }
     }
 
     initDisplayColumns() {
-        this.columns = ['title', 'start', 'end', 'backgroundColor', '_groupId', 'actions'];
+        this.columns = ['title', 'start', 'end', 'backgroundColor', '_groupId', 'priority', 'actions'];
     }
 
     initActions() {

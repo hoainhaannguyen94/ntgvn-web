@@ -58,7 +58,8 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
         backgroundColor: [BLANK_EVENT.backgroundColor],
         borderColor: [BLANK_EVENT.borderColor],
         textColor: [BLANK_EVENT.textColor],
-        _groupId: [BLANK_EVENT.extendedProps._groupId]
+        _groupId: [BLANK_EVENT.extendedProps._groupId],
+        priority: [BLANK_EVENT.extendedProps.priority]
     });
 
     groupList: IGroup[] = [];

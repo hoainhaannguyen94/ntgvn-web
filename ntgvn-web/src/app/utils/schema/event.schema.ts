@@ -43,6 +43,7 @@ export const BLANK_EVENT: IEvent = {
     borderColor: '#3788d8',
     textColor: '#ffffff',
     extendedProps: {
-        _groupId: ''
+        _groupId: '',
+        priority: 0
     }
 }
