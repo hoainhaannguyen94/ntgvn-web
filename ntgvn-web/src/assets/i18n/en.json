@@ -1,10 +1,13 @@
 {
     "Announcements": "Announcements",
     "Audit Logs": "Audit Logs",
+    "Analytics": "Analytics",
     "Rooms": "Rooms",
     "Events": "Events",
     "Scheduler": "Scheduler",
     "Users": "Users",
+    "Groups": "Groups",
+    "Tags": "Tags",
     "Policy": "Policy",
     "License": "License",
     "About Us": "About Us",

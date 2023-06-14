@@ -10,13 +10,14 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseFormSingleDetailsComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/component/error-message';
-import { BLANK_EVENT, IEvent } from '@utils/schema';
+import { BLANK_EVENT, IEvent, IGroup } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { EventFacadeService } from '../../facade/event-facade.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DateTime } from 'luxon';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
     selector: 'event-details',
@@ -33,6 +34,7 @@ import { DateTime } from 'luxon';
         MatSnackBarModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatSelectModule,
         ErrorMessageComponent
     ],
     templateUrl: './event-details.component.html',
@@ -55,9 +57,11 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
         end: [BLANK_EVENT.end, [Validators.required]],
         backgroundColor: [BLANK_EVENT.backgroundColor],
         borderColor: [BLANK_EVENT.borderColor],
-        textColor: [BLANK_EVENT.textColor]
+        textColor: [BLANK_EVENT.textColor],
+        _groupId: [BLANK_EVENT.extendedProps._groupId]
     });
 
+    groupList: IGroup[] = [];
 
     ngOnInit() {
         this.registerCoreLayer();
@@ -92,6 +96,15 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 throw err;
             }
         });
+        this.eventFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
+            next: value => {
+                this.groupList = value;
+            },
+            error: err => {
+                throw err;
+            }
+        });
+        this.eventFacade.loadGroupList();
     }
 
     cancelHandler() {

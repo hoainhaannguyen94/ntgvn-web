@@ -11,7 +11,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/component/error-message';
-import { BLANK_EVENT } from '@utils/schema';
+import { BLANK_EVENT, IGroup } from '@utils/schema';
 import { debounceTime, takeUntil } from 'rxjs';
 import { EventFacadeService } from '../../facade/event-facade.service';
 import { LogService } from '@utils/service';
@@ -35,6 +35,7 @@ import { DateTime } from 'luxon';
         MatSnackBarModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatSelectModule,
         ErrorMessageComponent
     ],
     templateUrl: './new-event.component.html',
@@ -54,7 +55,10 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
         backgroundColor: [BLANK_EVENT.backgroundColor],
         borderColor: [BLANK_EVENT.borderColor],
         textColor: [BLANK_EVENT.textColor],
+        _groupId: [BLANK_EVENT.extendedProps._groupId]
     });
+
+    groupList: IGroup[] = [];
 
     ngOnInit() {
         this.registerCoreLayer();
@@ -72,6 +76,15 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 throw err;
             }
         });
+        this.eventFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
+            next: value => {
+                this.groupList = value;
+            },
+            error: err => {
+                throw err;
+            }
+        });
+        this.eventFacade.loadGroupList();
     }
 
     cancelHandler() {

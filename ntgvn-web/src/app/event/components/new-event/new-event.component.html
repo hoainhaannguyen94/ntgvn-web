@@ -3,7 +3,7 @@
     <div class="base-details-body" [formGroup]="formGroup">
         <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
-            <input matInput placeholder="Title" formControlName="title" required autocomplete="off" />
+            <input matInput type="text" placeholder="Title" formControlName="title" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('title')?.errors" [target]="'Title'" />
             </mat-error>
@@ -33,12 +33,19 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Border Color</mat-label>
-            <input matInput type="color" placeholder="Border Color" formControlName="borderColor"
-                autocomplete="off" />
+            <input matInput type="color" placeholder="Border Color" formControlName="borderColor" autocomplete="off" />
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Text Color</mat-label>
             <input matInput type="color" placeholder="Text Color" formControlName="textColor" autocomplete="off" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Group</mat-label>
+            <mat-option [value]="''">None</mat-option>
+            <mat-select formControlName="_groupId">
+                <mat-option *ngFor="let group of groupList; trackBy:trackByFn;" [value]="group._id">
+                    {{group.name}}</mat-option>
+            </mat-select>
         </mat-form-field>
     </div>
     <div class="base-details-actions">

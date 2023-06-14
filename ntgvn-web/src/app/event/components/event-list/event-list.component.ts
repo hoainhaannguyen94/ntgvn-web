@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { UserDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
+import { UserDetailsPipe, ObjectPropertyPipe, GroupDetailsPipe } from '@utils/pipe';
 import { io } from 'socket.io-client';
 
 @Component({
@@ -44,7 +44,8 @@ import { io } from 'socket.io-client';
         MatSnackBarModule,
         ConfirmDialogComponent,
         UserDetailsPipe,
-        ObjectPropertyPipe
+        ObjectPropertyPipe,
+        GroupDetailsPipe
     ],
     templateUrl: './event-list.component.html',
     styleUrls: ['./event-list.component.scss']
@@ -186,12 +187,13 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
             'title': 'Title',
             'start': 'Start',
             'end': 'End',
-            'backgroundColor': 'Status'
+            'backgroundColor': 'Status',
+            '_groupId': 'Group'
         }
     }
 
     initDisplayColumns() {
-        this.columns = ['title', 'start', 'end', 'backgroundColor', 'actions'];
+        this.columns = ['title', 'start', 'end', 'backgroundColor', '_groupId', 'actions'];
     }
 
     initActions() {
@@ -223,7 +225,8 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
         this.eventFacade.loadCountEvents();
         this.eventFacade.loadEventList({
             $skip: 0,
-            $top: this.pageSize
+            $top: this.pageSize,
+            $orderby: '_id desc'
         });
     }
 

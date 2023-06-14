@@ -80,15 +80,6 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
             this.formValid = this.formGroup.valid;
             this.updateFormHasChanged(values);
         });
-        this.roomFacade.getManagerList$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.managerList = value;
-            },
-            error: err => {
-                throw err;
-            }
-        });
-        this.roomFacade.loadManagerList({ $filter: `role eq '${EUserRole.manager}' or role eq '${EUserRole.owner}'` });
     }
 
     override registerCoreLayer() {
@@ -110,6 +101,15 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
                 throw err;
             }
         });
+        this.roomFacade.getManagerList$().pipe(takeUntil(this.destroy$)).subscribe({
+            next: value => {
+                this.managerList = value;
+            },
+            error: err => {
+                throw err;
+            }
+        });
+        this.roomFacade.loadManagerList({ $filter: `role eq '${EUserRole.manager}' or role eq '${EUserRole.owner}'` });
     }
 
     cancelHandler() {
