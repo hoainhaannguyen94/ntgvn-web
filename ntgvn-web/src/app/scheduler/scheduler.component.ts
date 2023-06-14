@@ -49,13 +49,7 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
         },
         editable: true,
         businessHours: true,
-        events: [
-            {
-                title: 'All Day Event',
-                start: '2023-05-01',
-                description: 'AAA'
-            }
-        ],
+        events: [],
         locale: this.initialLocale
     }
 

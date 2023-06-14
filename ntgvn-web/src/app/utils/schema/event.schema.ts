@@ -40,5 +40,6 @@ export const BLANK_EVENT: IEvent = {
     start: '',
     end: '',
     backgroundColor: '#3788d8',
+    borderColor: '#3788d8',
     textColor: '#ffffff'
 }

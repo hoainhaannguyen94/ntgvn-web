@@ -54,6 +54,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
         start: [BLANK_EVENT.start, [Validators.required]],
         end: [BLANK_EVENT.end, [Validators.required]],
         backgroundColor: [BLANK_EVENT.backgroundColor],
+        borderColor: [BLANK_EVENT.borderColor],
         textColor: [BLANK_EVENT.textColor]
     });
 
@@ -106,7 +107,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
             event.end = event.end.toISOString();
         }
         event.start = DateTime.fromISO(event.start).set({ hour: 0, minute: 0, second: 0 }).toJSDate().toISOString();
-        event.end = DateTime.fromISO(event.start).set({ hour: 23, minute: 59, second: 59 }).toJSDate().toISOString();
+        event.end = DateTime.fromISO(event.end).set({ hour: 23, minute: 59, second: 59 }).toJSDate().toISOString();
         delete event._id;
         this.eventFacade.updateEvent$(this.eventId, event).subscribe({
             next: () => {

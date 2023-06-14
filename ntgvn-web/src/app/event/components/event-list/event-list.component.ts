@@ -126,7 +126,8 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
         this.eventFacade.loadCountEvents();
         this.eventFacade.loadEventList({
             $skip: 0,
-            $top: this.pageSize
+            $top: this.pageSize,
+            $orderby: '_id desc'
         });
     }
 

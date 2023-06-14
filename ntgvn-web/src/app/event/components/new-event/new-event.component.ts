@@ -52,6 +52,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
         start: [BLANK_EVENT.start, [Validators.required]],
         end: [BLANK_EVENT.end, [Validators.required]],
         backgroundColor: [BLANK_EVENT.backgroundColor],
+        borderColor: [BLANK_EVENT.borderColor],
         textColor: [BLANK_EVENT.textColor],
     });
 
@@ -86,7 +87,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
             event.end = event.end.toISOString();
         }
         event.start = DateTime.fromISO(event.start).set({ hour: 0, minute: 0, second: 0 }).toJSDate().toISOString();
-        event.end = DateTime.fromISO(event.start).set({ hour: 23, minute: 59, second: 59 }).toJSDate().toISOString();
+        event.end = DateTime.fromISO(event.end).set({ hour: 23, minute: 59, second: 59 }).toJSDate().toISOString();
         this.eventFacade.submitEvent$(event).subscribe({
             next: () => {
                 this.matSnackbar.open(`Event ${event.title} have been created.`, 'CREATE', {
