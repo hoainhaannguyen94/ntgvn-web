@@ -74,7 +74,7 @@ export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IW
                 throw err;
             }
         });
-        this.warehouseFacade.loadManagerList({ $filter: `role eq '${EUserRole.owner}'` });
+        this.warehouseFacade.loadManagerList({ $filter: `role eq '${EUserRole.manager}' or role eq '${EUserRole.owner}'` });
     }
 
     override registerCoreLayer() {

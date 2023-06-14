@@ -73,7 +73,7 @@ export class NewWarehouseComponent extends BaseFormSingleComponent implements On
                 throw err;
             }
         });
-        this.warehouseFacade.loadManagerList({ $filter: `role eq '${EUserRole.owner}'` });
+        this.warehouseFacade.loadManagerList({ $filter: `role eq '${EUserRole.manager}' or role eq '${EUserRole.owner}'` });
     }
 
     cancelHandler() {

@@ -88,7 +88,7 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
                 throw err;
             }
         });
-        this.roomFacade.loadManagerList({ $filter: `role eq '${EUserRole.owner}'` });
+        this.roomFacade.loadManagerList({ $filter: `role eq '${EUserRole.manager}' or role eq '${EUserRole.owner}'` });
     }
 
     override registerCoreLayer() {
