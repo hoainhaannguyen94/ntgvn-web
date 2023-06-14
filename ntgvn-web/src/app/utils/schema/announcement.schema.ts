@@ -4,6 +4,7 @@ export interface IAnnouncement {
     body: string;
     createdBy: string;
     createdAt: string;
+    lastUpdatedBy: string;
     lastUpdatedAt: string;
 }
 
@@ -17,5 +18,6 @@ export const BLANK_ANNOUNCEMENT: IAnnouncement = {
     body: '',
     createdBy: '',
     createdAt: '',
+    lastUpdatedBy: '',
     lastUpdatedAt: ''
 }

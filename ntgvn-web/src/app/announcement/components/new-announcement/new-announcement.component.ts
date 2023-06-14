@@ -215,6 +215,7 @@ export class NewAnnouncementComponent extends BaseComponent implements OnInit {
             body: this.editorData,
             createdBy: this.appState.me._id,
             createdAt: new Date().toISOString(),
+            lastUpdatedBy: this.appState.me._id,
             lastUpdatedAt: new Date().toISOString()
         }).subscribe({
             next: () => {

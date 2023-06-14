@@ -11,7 +11,7 @@ export class LeftSidebarFacadeService {
                 displayName: 'Dashboard',
                 url: '/dashboard',
                 icon: 'dashboard',
-                activated: true
+                activated: false
             },
             {
                 displayName: 'Announcements',

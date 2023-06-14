@@ -12,7 +12,7 @@
                     </button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item (click)="detailsAnnouncementHandler(item)">
-                            <mat-icon>visibility</mat-icon>
+                            <mat-icon>edit</mat-icon>
                             <span>Details</span>
                         </button>
                         <button mat-menu-item (click)="deleteAnnouncementHandler(item)">
@@ -25,7 +25,7 @@
                     <div class="ck-content" [innerHTML]="item.body | safe: 'html'"></div>
                 </div>
                 <div class="announcement-post-footer">by {{item.createdBy | userDetails | async | objectProperty:
-                    'name'}} - {{item.createdAt | date: 'MMM d, y'}}</div>
+                    'name'}} - {{item.lastUpdatedAt | date: 'MMM d, y'}}</div>
             </div>
         </ng-container>
     </div>

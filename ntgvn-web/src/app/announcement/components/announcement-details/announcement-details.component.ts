@@ -247,8 +247,9 @@ export class AnnouncementDetailsComponent extends BaseComponent implements OnIni
         this.announcementFacade.updateAnnouncement$(this.announcementId, {
             title: this.titleFormControl.value,
             body: this.editorData,
-            createdBy: this.appState.me._id,
-            createdAt: new Date().toISOString(),
+            createdBy: this.announcement.createdBy,
+            createdAt: this.announcement.createdAt,
+            lastUpdatedBy: this.appState.me._id,
             lastUpdatedAt: new Date().toISOString()
         }).subscribe({
             next: () => {
