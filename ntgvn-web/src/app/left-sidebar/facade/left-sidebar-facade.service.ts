@@ -88,7 +88,7 @@ export class LeftSidebarFacadeService {
             {
                 displayName: 'Users',
                 url: '/user',
-                icon: 'supervised_user_circle',
+                icon: 'account_circle',
                 activated: true
             },
             {
