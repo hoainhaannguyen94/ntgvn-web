@@ -7,11 +7,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { ErrorMessageComponent } from '@utils/components/error-message';
+import { ErrorMessageComponent } from '@utils/component/error-message';
 import { BaseComponent } from '@utils/base/base.component';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { take, takeUntil, timer } from 'rxjs'
-import { IAnnouncement } from '@common/schemas';
+import { IAnnouncement } from '@utils/schema';
 declare const CKEDITOR;
 
 @Component({

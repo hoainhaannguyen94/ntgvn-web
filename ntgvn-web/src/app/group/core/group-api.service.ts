@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GroupService } from '@common/services';
+import { GroupService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'

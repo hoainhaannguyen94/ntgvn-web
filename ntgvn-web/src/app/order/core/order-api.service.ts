@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { GLOBAL_SETTINGS } from '@global-settings';
-import { OrderService } from '@common/services';
+import { OrderService } from '@utils/service';
 import { OdataParams } from '@utils/http';
-import { ICustomer, IProduct } from '@common/schemas';
+import { ICustomer, IProduct } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

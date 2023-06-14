@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { OdataService, OdataParams } from '@utils/http';
-import { CustomerService, OrderService, ProductService, UserService } from '@common/services';
+import { CustomerService, OrderService, ProductService, UserService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'

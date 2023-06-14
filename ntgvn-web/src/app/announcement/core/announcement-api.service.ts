@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AnnouncementService } from '@common/services';
+import { AnnouncementService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'

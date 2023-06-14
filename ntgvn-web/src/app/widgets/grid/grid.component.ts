@@ -5,13 +5,12 @@ import { take, takeUntil, timer } from 'rxjs';
 import { BaseComponent } from '@utils/base/base.component';
 import { GridFacadeService } from './facade/grid-facade.service';
 import { CommonModule } from '@angular/common';
-import { ContentLoaderComponent } from '@utils/components/content-loader';
+import { ContentLoaderComponent } from '@utils/component/content-loader';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { IMatGridHeaders, IMatGridConfig } from '@common/schemas';
-import { CustomerDetailsPipe, OrderStatusDetailsPipe, OrderStatusUppercasePipe, ProductDetailsPipe, UserDetailsPipe } from '@common/pipes';
-import { ObjectPropertyPipe } from '@utils/pipes';
+import { IMatGridHeaders, IMatGridConfig } from '@utils/schema';
+import { CustomerDetailsPipe, OrderStatusDetailsPipe, OrderStatusUppercasePipe, ProductDetailsPipe, UserDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
 
 @Component({
     selector: 'grid-widget',

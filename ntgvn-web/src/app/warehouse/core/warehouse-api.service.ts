@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { WarehouseService } from '@common/services';
+import { WarehouseService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'

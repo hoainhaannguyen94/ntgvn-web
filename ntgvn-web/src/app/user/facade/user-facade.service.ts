@@ -3,8 +3,8 @@ import { UserApiService } from '../core/user-api.service';
 import { UserStateService } from '../core/user-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IUser } from '@common/schemas';
-import { GroupService } from '@common/services';
+import { IUser } from '@utils/schema';
+import { GroupService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'

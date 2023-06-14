@@ -3,12 +3,11 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BLANK_AUDIT_LOG } from '@common/schemas';
+import { BLANK_AUDIT_LOG } from '@utils/schema';
 import { take, takeUntil } from 'rxjs'
 import { AuditLogFacadeService } from '../../facade/audit-log-facade.service';
 import { BaseComponent } from '@utils/base/base.component';
-import { UserDetailsPipe } from '@common/pipes';
-import { ObjectPropertyPipe } from '@utils/pipes';
+import { UserDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
 
 @Component({
     selector: 'audit-log-details',

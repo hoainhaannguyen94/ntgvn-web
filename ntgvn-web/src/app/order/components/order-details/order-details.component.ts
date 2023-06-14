@@ -10,8 +10,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseFormSingleDetailsComponent } from '@utils/base/form';
-import { ErrorMessageComponent } from '@utils/components/error-message';
-import { BLANK_ORDER, BLANK_PRODUT_IN_ORDER, IOrder } from '@common/schemas';
+import { ErrorMessageComponent } from '@utils/component/error-message';
+import { BLANK_ORDER, BLANK_PRODUT_IN_ORDER, IOrder } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime, startWith, map, timer } from 'rxjs'
 import { OrderFacadeService } from '../../facade/order-facade.service';

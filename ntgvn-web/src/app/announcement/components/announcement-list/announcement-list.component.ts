@@ -4,14 +4,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
-import { IAnnouncement } from '@common/schemas';
+import { IAnnouncement } from '@utils/schema';
 import { BaseComponent } from '@utils/base/base.component';
 import { AnnouncementFacadeService } from '../../facade/announcement-facade.service';
 import { takeUntil } from 'rxjs';
-import { UserDetailsPipe } from '@common/pipes';
-import { ObjectPropertyPipe, SafePipe } from '@utils/pipes';
+import { UserDetailsPipe, ObjectPropertyPipe, SafePipe } from '@utils/pipe';
 import { MatMenuModule } from '@angular/material/menu';
-import { ConfirmDialogComponent } from '@utils/components/confirm-dialog';
+import { ConfirmDialogComponent } from '@utils/component/confirm-dialog';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { io } from 'socket.io-client';
 

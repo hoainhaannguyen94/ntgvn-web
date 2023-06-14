@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { IOrder } from '@common/schemas';
+import { IOrder } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

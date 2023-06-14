@@ -5,7 +5,7 @@ import { Socket } from 'socket.io-client';
 import { IAppState } from '@app-state';
 import { StateService } from '../state/state.service';
 import { Effect } from '../state/state.schema';
-import { ResizeObserverService } from '../services/resize-observer.service';
+import { ResizeObserverService } from '../service/resize-observer.service';
 
 @Component({
     selector: 'base',

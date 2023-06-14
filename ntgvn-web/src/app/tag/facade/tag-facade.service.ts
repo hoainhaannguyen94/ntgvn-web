@@ -3,7 +3,7 @@ import { TagApiService } from '../core/tag-api.service';
 import { TagStateService } from '../core/tag-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { ITag } from '@common/schemas';
+import { ITag } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

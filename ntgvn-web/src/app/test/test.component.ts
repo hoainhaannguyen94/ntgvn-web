@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TestJSON } from '@assets/json';
-import { TooltipDirective } from '@utils/components/tooltip';
-import { LogService } from '@utils/services';
+import { TooltipDirective } from '@utils/component/tooltip';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'test',

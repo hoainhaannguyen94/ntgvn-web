@@ -3,7 +3,7 @@ import { CustomerApiService } from '../core/customer-api.service';
 import { CustomerStateService } from '../core/customer-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { ICustomer } from '@common/schemas';
+import { ICustomer } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

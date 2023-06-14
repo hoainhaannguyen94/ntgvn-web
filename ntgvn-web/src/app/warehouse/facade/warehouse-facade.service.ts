@@ -3,8 +3,8 @@ import { WarehouseApiService } from '../core/warehouse-api.service';
 import { WarehouseStateService } from '../core/warehouse-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IWarehouse } from '@common/schemas';
-import { UserService } from '@common/services';
+import { IWarehouse } from '@utils/schema';
+import { UserService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'

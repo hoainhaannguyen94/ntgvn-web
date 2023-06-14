@@ -6,7 +6,7 @@ import { AnnouncementFacadeService } from '../../facade/announcement-facade.serv
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ErrorMessageComponent } from '@utils/components/error-message';
+import { ErrorMessageComponent } from '@utils/component/error-message';
 import { BaseComponent } from '@utils/base/base.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';

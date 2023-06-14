@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authCanActiveGuard } from '@common/guards';
+import { authCanActiveGuard } from '@utils/guard';
 import { AboutUsComponent } from './about-us.component';
 
 export const routes: Routes = [

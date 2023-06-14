@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser, IWarehouse } from '@common/schemas';
+import { IUser, IWarehouse } from '@utils/schema';
 import { Subject } from 'rxjs';
 
 @Injectable({

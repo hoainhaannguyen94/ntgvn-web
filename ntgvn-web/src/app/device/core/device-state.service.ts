@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IDevice } from '@common/schemas';
+import { IDevice } from '@utils/schema';
 import { Subject } from 'rxjs';
 
 @Injectable({

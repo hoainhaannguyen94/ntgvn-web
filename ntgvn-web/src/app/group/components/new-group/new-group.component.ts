@@ -10,11 +10,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
-import { ErrorMessageComponent } from '@utils/components/error-message';
-import { BLANK_GROUP } from '@common/schemas';
+import { ErrorMessageComponent } from '@utils/component/error-message';
+import { BLANK_GROUP } from '@utils/schema';
 import { debounceTime, take, takeUntil } from 'rxjs';
 import { GroupFacadeService } from '../../facade/group-facade.service';
-import { LogService } from '@utils/services';
+import { LogService } from '@utils/service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({

@@ -2,13 +2,13 @@ import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/co
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged, takeUntil, tap, timer } from 'rxjs';
-import { BaseMatGridComponent } from '@common/base/grid';
-import { IEvent } from '@common/schemas';
+import { BaseMatGridComponent } from '@utils/base/mat-grid';
+import { IEvent } from '@utils/schema';
 import { EventFacadeService } from '../../facade/event-facade.service';
 import { OdataParams } from '@utils/http';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '@utils/components/confirm-dialog';
+import { ConfirmDialogComponent } from '@utils/component/confirm-dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -20,8 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ObjectPropertyPipe } from '@utils/pipes';
-import { UserDetailsPipe } from '@common/pipes';
+import { UserDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
 import { io } from 'socket.io-client';
 
 @Component({

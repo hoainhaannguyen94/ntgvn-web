@@ -2,13 +2,13 @@ import { AfterViewInit, Component, OnInit, ViewChild, inject } from '@angular/co
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged, takeUntil, tap, timer } from 'rxjs';
-import { BaseMatGridComponent } from '@common/base/grid';
-import { ICustomer } from '@common/schemas';
+import { BaseMatGridComponent } from '@utils/base/mat-grid';
+import { ICustomer } from '@utils/schema';
 import { CustomerFacadeService } from '../../facade/customer-facade.service';
 import { OdataParams } from '@utils/http';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '@utils/components/confirm-dialog';
+import { ConfirmDialogComponent } from '@utils/component/confirm-dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';

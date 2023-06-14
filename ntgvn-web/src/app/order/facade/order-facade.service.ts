@@ -3,7 +3,7 @@ import { OrderApiService } from '../core/order-api.service';
 import { OrderStateService } from '../core/order-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IOrder } from '@common/schemas';
+import { IOrder } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

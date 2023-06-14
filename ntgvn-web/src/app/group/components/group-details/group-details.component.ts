@@ -10,8 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseFormSingleDetailsComponent } from '@utils/base/form';
-import { ErrorMessageComponent } from '@utils/components/error-message';
-import { BLANK_GROUP, IGroup } from '@common/schemas';
+import { ErrorMessageComponent } from '@utils/component/error-message';
+import { BLANK_GROUP, IGroup } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { GroupFacadeService } from '../../facade/group-facade.service';

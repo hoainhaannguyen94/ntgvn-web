@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuditLogService } from '@common/services';
+import { AuditLogService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'

@@ -3,7 +3,7 @@ import { DeviceApiService } from '../core/device-api.service';
 import { DeviceStateService } from '../core/device-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IDevice } from '@common/schemas';
+import { IDevice } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

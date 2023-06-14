@@ -6,7 +6,7 @@ import { IKPIConfig } from './schemas/kpi.schema';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { ContentLoaderComponent } from '@utils/components/content-loader';
+import { ContentLoaderComponent } from '@utils/component/content-loader';
 
 @Component({
     selector: 'kpi-widget',

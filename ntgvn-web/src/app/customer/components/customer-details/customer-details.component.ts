@@ -9,8 +9,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseFormSingleDetailsComponent } from '@utils/base/form';
-import { ErrorMessageComponent } from '@utils/components/error-message';
-import { BLANK_CUSTOMER, ICustomer } from '@common/schemas';
+import { ErrorMessageComponent } from '@utils/component/error-message';
+import { BLANK_CUSTOMER, ICustomer } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { CustomerFacadeService } from '../../facade/customer-facade.service';

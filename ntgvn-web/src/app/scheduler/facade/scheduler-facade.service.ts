@@ -3,7 +3,7 @@ import { SchedulerApiService } from '../core/scheduler-api.service';
 import { SchedulerStateService } from '../core/scheduler-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IEvent } from '@common/schemas';
+import { IEvent } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

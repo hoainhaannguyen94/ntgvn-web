@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { TagService } from '@common/services';
+import { TagService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'

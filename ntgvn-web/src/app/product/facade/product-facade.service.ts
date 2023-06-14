@@ -3,7 +3,7 @@ import { ProductApiService } from '../core/product-api.service';
 import { ProductStateService } from '../core/product-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IProduct } from '@common/schemas';
+import { IProduct } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

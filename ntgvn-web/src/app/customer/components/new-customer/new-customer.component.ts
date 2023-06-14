@@ -9,12 +9,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
-import { ErrorMessageComponent } from '@utils/components/error-message';
-import { InputWhitelistDirective } from '@utils/directives';
-import { BLANK_CUSTOMER } from '@common/schemas';
+import { ErrorMessageComponent } from '@utils/component/error-message';
+import { InputWhitelistDirective } from '@utils/directive';
+import { BLANK_CUSTOMER } from '@utils/schema';
 import { debounceTime, takeUntil } from 'rxjs';
 import { CustomerFacadeService } from '../../facade/customer-facade.service';
-import { LogService } from '@utils/services';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'new-customer',

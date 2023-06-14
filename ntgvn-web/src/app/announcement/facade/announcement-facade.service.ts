@@ -3,7 +3,7 @@ import { AnnouncementApiService } from '../core/announcement-api.service';
 import { AnnouncementStateService } from '../core/announcement-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IAnnouncement } from '@common/schemas';
+import { IAnnouncement } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

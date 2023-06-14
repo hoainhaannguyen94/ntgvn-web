@@ -3,8 +3,8 @@ import { RoomApiService } from '../core/room-api.service';
 import { RoomStateService } from '../core/room-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IRoom } from '@common/schemas';
-import { UserService } from '@common/services';
+import { IRoom } from '@utils/schema';
+import { UserService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'

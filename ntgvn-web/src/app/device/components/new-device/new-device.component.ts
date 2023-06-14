@@ -10,11 +10,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
-import { ErrorMessageComponent } from '@utils/components/error-message';
-import { BLANK_DEVICE } from '@common/schemas';
+import { ErrorMessageComponent } from '@utils/component/error-message';
+import { BLANK_DEVICE } from '@utils/schema';
 import { debounceTime, takeUntil } from 'rxjs';
 import { DeviceFacadeService } from '../../facade/device-facade.service';
-import { LogService } from '@utils/services';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'new-device',

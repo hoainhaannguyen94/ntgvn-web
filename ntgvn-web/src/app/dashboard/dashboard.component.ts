@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BaseComponent } from '@utils/base/base.component';
 import { takeUntil } from 'rxjs';
-import { IMatGridConfig } from '@common/schemas';
+import { IMatGridConfig } from '@utils/schema';
 import { DashboardFacadeService } from './facade/dashboard-facade.service';
 import { KpiComponent, IKPIConfig } from '@widgets/kpi';
 import { GridComponent } from '@widgets/grid';

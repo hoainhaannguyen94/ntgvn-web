@@ -1,5 +1,5 @@
 import { GLOBAL_SETTINGS } from '@global-settings';
-import { IUser } from '@common/schemas';
+import { IUser } from '@utils/schema';
 
 export const AnonymousUser: IUser = {
     _id: '',

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IGroup, IUser, IUserRole } from '@common/schemas';
+import { IGroup, IUser, IUserRole } from '@utils/schema';
 import { Subject } from 'rxjs';
 
 @Injectable({

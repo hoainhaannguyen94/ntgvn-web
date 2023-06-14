@@ -3,7 +3,7 @@ import { GroupApiService } from '../core/group-api.service';
 import { GroupStateService } from '../core/group-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IGroup } from '@common/schemas';
+import { IGroup } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

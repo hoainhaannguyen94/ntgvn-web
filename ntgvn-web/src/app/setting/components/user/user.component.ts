@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseComponent } from '@utils/base/base.component';
 import { MatIconModule } from '@angular/material/icon';
-import { UserRoleDetailsPipe } from '@common/pipes';
-import { ObjectPropertyPipe } from '@utils/pipes';
+import { UserRoleDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
 
 @Component({
     selector: 'user',

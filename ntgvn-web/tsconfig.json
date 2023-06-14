@@ -43,20 +43,20 @@
       "@utils/base/*": [
         "src/app/utils/base/*"
       ],
-      "@utils/components/*": [
-        "src/app/utils/components/*"
+      "@utils/component/*": [
+        "src/app/utils/component/*"
       ],
-      "@utils/directives": [
-        "src/app/utils/directives/index.ts"
+      "@utils/directive": [
+        "src/app/utils/directive/index.ts"
       ],
-      "@utils/pipes": [
-        "src/app/utils/pipes/index.ts"
+      "@utils/pipe": [
+        "src/app/utils/pipe/index.ts"
       ],
-      "@utils/functions": [
-        "src/app/utils/functions/index.ts"
+      "@utils/function": [
+        "src/app/utils/function/index.ts"
       ],
-      "@utils/schemas": [
-        "src/app/utils/schemas/index.ts"
+      "@utils/schema": [
+        "src/app/utils/schema/index.ts"
       ],
       "@utils/http": [
         "src/app/utils/http/index.ts"
@@ -64,8 +64,11 @@
       "@utils/state": [
         "src/app/utils/state/index.ts"
       ],
-      "@utils/services": [
-        "src/app/utils/services/index.ts"
+      "@utils/service": [
+        "src/app/utils/service/index.ts"
+      ],
+      "@utils/guard": [
+        "src/app/utils/guard/index.ts"
       ],
       "@utils/validation": [
         "src/app/utils/validation/index.ts"
@@ -75,33 +78,6 @@
       ],
       "@widgets/*": [
         "src/app/widgets/*"
-      ],
-      "@common/guards": [
-        "src/app/common/guards/index.ts"
-      ],
-      "@common/base/*": [
-        "src/app/common/base/*"
-      ],
-      "@common/components/*": [
-        "src/app/common/components/*"
-      ],
-      "@common/directives": [
-        "src/app/common/directives/index.ts"
-      ],
-      "@common/pipes": [
-        "src/app/common/pipes/index.ts"
-      ],
-      "@common/functions": [
-        "src/app/common/functions/index.ts"
-      ],
-      "@common/schemas": [
-        "src/app/common/schemas/index.ts"
-      ],
-      "@common/services": [
-        "src/app/common/services/index.ts"
-      ],
-      "@common/validation": [
-        "src/app/common/validation/index.ts"
       ]
     }
   },

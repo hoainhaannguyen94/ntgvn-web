@@ -1,9 +1,9 @@
 import { Component, Input, Output, inject, HostListener, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OpenWeartherService } from '@common/services';
+import { OpenWeartherService } from '@utils/service';
 import { MatIconModule } from '@angular/material/icon';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LogService } from '@utils/services';
+import { LogService } from '@utils/service';
 import L, { Map } from 'leaflet';
 import { map } from 'rxjs';
 

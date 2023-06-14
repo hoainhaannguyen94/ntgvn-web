@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IGroup } from '@common/schemas';
+import { IGroup } from '@utils/schema';
 import { Subject } from 'rxjs';
 
 @Injectable({

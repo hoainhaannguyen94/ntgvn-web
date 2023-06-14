@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { SafePipe } from '@utils/pipes';
+import { SafePipe } from '@utils/pipe';
 
 @Component({
     selector: 'windy',

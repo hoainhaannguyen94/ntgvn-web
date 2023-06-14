@@ -10,8 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
-import { ErrorMessageComponent } from '@utils/components/error-message';
-import { BLANK_WAREHOUSE, IUser, EUserRole } from '@common/schemas';
+import { ErrorMessageComponent } from '@utils/component/error-message';
+import { BLANK_WAREHOUSE, IUser, EUserRole } from '@utils/schema';
 import { takeUntil, debounceTime } from 'rxjs';
 import { WarehouseFacadeService } from '../../facade/warehouse-facade.service';
 

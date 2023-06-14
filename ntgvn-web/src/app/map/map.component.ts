@@ -3,13 +3,13 @@ import { Component, AfterViewInit, ViewChild, inject, OnDestroy } from '@angular
 import { BaseComponent } from '@utils/base/base.component';
 import L, { Map as LeafletMap } from 'leaflet';
 import { Subject, takeUntil, timer } from 'rxjs';
-import { CommonService } from '@utils/services';
+import { CommonService } from '@utils/service';
 import { SearchLocationComponent } from './widgets/search-location/search-location.component';
 import { WindyComponent } from './widgets/windy/windy.component';
 import { DEFAULT_MAKER_ICON, SMARTPHONE_MAKER_ICON } from './utils/marker';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DeviceService } from '@common/services';
-import { IDevice } from '@common/schemas';
+import { DeviceService } from '@utils/service';
+import { IDevice } from '@utils/schema';
 import { Router } from '@angular/router';
 
 @Component({

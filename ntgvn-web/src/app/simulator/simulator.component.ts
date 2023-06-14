@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, ViewChild, inject } from '@angular/core';
-import { CommonService } from '@utils/services';
 import L, { Map as LeafletMap } from 'leaflet';
 import { Subject, takeUntil, timer } from 'rxjs';
-import { DeviceService } from '@common/services';
-import { IDevice } from '@common/schemas';
+import { CommonService, DeviceService } from '@utils/service';
+import { IDevice } from '@utils/schema';
 import { BaseComponent } from '@utils/base/base.component';
 import { SMARTPHONE_MAKER_ICON } from '../map/utils/marker';
 

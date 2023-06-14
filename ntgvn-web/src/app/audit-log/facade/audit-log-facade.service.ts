@@ -3,7 +3,7 @@ import { AuditLogApiService } from '../core/audit-log-api.service';
 import { AuditLogStateService } from '../core/audit-log-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IAuditLog } from '@common/schemas';
+import { IAuditLog } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'

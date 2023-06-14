@@ -3,7 +3,7 @@ import { EventApiService } from '../core/event-api.service';
 import { EventStateService } from '../core/event-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
-import { IEvent } from '@common/schemas';
+import { IEvent } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'
