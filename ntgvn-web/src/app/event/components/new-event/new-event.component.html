@@ -9,6 +9,14 @@
             </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5" cdkAutosizeMaxRows="10"
+                matInput placeholder="Description" formControlName="description" autocomplete="off"></textarea>
+            <mat-error>
+                <error-message [errors]="formGroup.get('description')?.errors" [target]="'Description'" />
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Start</mat-label>
             <input matInput [matDatepicker]="startPicker" formControlName="start" required autocomplete="off" />
             <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
@@ -41,8 +49,8 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Group</mat-label>
-            <mat-option [value]="''">None</mat-option>
             <mat-select formControlName="_groupId">
+                <mat-option [value]="''">None</mat-option>
                 <mat-option *ngFor="let group of groupList; trackBy:trackByFn;" [value]="group._id">
                     {{group.name}}</mat-option>
             </mat-select>
@@ -50,6 +58,12 @@
         <mat-form-field appearance="outline">
             <mat-label>Priority</mat-label>
             <input matInput type="number" placeholder="Priority" formControlName="priority" autocomplete="off" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Tag(s)</mat-label>
+            <mat-select formControlName="_tagIds" multiple>
+                <mat-option *ngFor="let tag of tagList; trackBy:trackByFn;" [value]="tag._id">{{tag.name}}</mat-option>
+            </mat-select>
         </mat-form-field>
     </div>
     <div class="base-details-actions">

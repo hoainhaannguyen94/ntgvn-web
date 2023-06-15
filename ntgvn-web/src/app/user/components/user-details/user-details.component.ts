@@ -46,7 +46,6 @@ export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> 
     user = BLANK_USER;
 
     override formGroup = this.formBuilder.group({
-        _id: [BLANK_USER._id],
         name: [BLANK_USER.name, [Validators.required]],
         address: [BLANK_USER.address, [Validators.required]],
         phoneNumber: [BLANK_USER.phoneNumber, [Validators.required]],
@@ -117,7 +116,6 @@ export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> 
 
     updateHandler() {
         const user = this.formGroup.value as any;
-        delete user._id;
         this.userFacade.updateUser$(this.userId, user).subscribe({
             next: () => {
                 this.matSnackbar.open(`User ${user.name} have been updated.`, 'UPDATE', {

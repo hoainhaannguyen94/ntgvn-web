@@ -50,7 +50,6 @@ export class GroupDetailsComponent extends BaseFormSingleDetailsComponent<IGroup
     group = BLANK_GROUP;
 
     override formGroup = this.formBuilder.group({
-        _id: [BLANK_GROUP._id],
         name: [BLANK_GROUP.name, [Validators.required]],
         description: [BLANK_GROUP.description]
     });
@@ -103,7 +102,6 @@ export class GroupDetailsComponent extends BaseFormSingleDetailsComponent<IGroup
 
     updateHandler() {
         const group = this.formGroup.value as any;
-        delete group._id;
         this.groupFacade.updateGroup$(this.groupId, group).subscribe({
             next: () => {
                 this.matSnackbar.open(`Group ${group.name} have been updated.`, 'UPDATE', {

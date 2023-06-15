@@ -50,7 +50,6 @@ export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IPro
     product = BLANK_PRODUCT;
 
     override formGroup = this.formBuilder.group({
-        _id: [BLANK_PRODUCT._id],
         name: [BLANK_PRODUCT.name, [Validators.required]],
         _categoryId: [BLANK_PRODUCT._categoryId, [Validators.required]],
         type: [BLANK_PRODUCT.type, [Validators.required]],
@@ -121,7 +120,6 @@ export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IPro
 
     updateHandler() {
         const product = this.formGroup.value as any;
-        delete product._id;
         this.productFacade.updateProduct$(this.productId, product).subscribe({
             next: () => {
                 this.matSnackbar.open(`Product ${product.name} have been updated.`, 'UPDATE', {

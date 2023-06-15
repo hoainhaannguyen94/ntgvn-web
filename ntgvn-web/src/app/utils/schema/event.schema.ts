@@ -44,6 +44,8 @@ export const BLANK_EVENT: IEvent = {
     textColor: '#ffffff',
     extendedProps: {
         _groupId: '',
-        priority: 0
+        priority: 0,
+        description: '',
+        _tagIds: []
     }
 }

@@ -46,7 +46,6 @@ export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IW
     warehouse = BLANK_WAREHOUSE;
 
     override formGroup = this.formBuilder.group({
-        _id: [BLANK_WAREHOUSE._id],
         name: [BLANK_WAREHOUSE.name, [Validators.required]],
         address: [BLANK_WAREHOUSE.address, [Validators.required]],
         _managerId: [BLANK_WAREHOUSE._managerId, [Validators.required]]
@@ -104,7 +103,6 @@ export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IW
 
     updateHandler() {
         const warehouse = this.formGroup.value as any;
-        delete warehouse._id;
         this.warehouseFacade.updateWarehouse$(this.warehouseId, warehouse).subscribe({
             next: () => {
                 this.matSnackbar.open(`Warehouse ${warehouse.name} have been updated.`, 'UPDATE', {

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,13 +11,14 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/component/error-message';
-import { BLANK_EVENT, IGroup } from '@utils/schema';
-import { debounceTime, takeUntil } from 'rxjs';
+import { BLANK_EVENT, IGroup, ITag } from '@utils/schema';
+import { debounceTime, take, takeUntil } from 'rxjs';
 import { EventFacadeService } from '../../facade/event-facade.service';
 import { LogService } from '@utils/service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DateTime } from 'luxon';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
     selector: 'new-event',
@@ -47,19 +48,32 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
     formBuilder = inject(FormBuilder);
+    ngZone = inject(NgZone);
+
+    @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
     override formGroup = this.formBuilder.group({
         title: [BLANK_EVENT.title, [Validators.required]],
+        description: [BLANK_EVENT.extendedProps.description],
         start: [BLANK_EVENT.start, [Validators.required]],
         end: [BLANK_EVENT.end, [Validators.required]],
         backgroundColor: [BLANK_EVENT.backgroundColor],
         borderColor: [BLANK_EVENT.borderColor],
         textColor: [BLANK_EVENT.textColor],
         _groupId: [BLANK_EVENT.extendedProps._groupId],
-        priority: [BLANK_EVENT.extendedProps.priority]
+        priority: [BLANK_EVENT.extendedProps.priority],
+        _tagIds: [BLANK_EVENT.extendedProps._tagIds]
     });
 
     groupList: IGroup[] = [];
+    tagList: ITag[] = [];
+
+    triggerResize() {
+        // Wait for changes to be applied, then trigger textarea resize.
+        this.ngZone.onStable.pipe(take(1)).subscribe({
+            next: () => this.autosize.resizeToFitContent(true)
+        });
+    }
 
     ngOnInit() {
         this.registerCoreLayer();
@@ -85,7 +99,16 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 throw err;
             }
         });
+        this.eventFacade.getTagList$().pipe(takeUntil(this.destroy$)).subscribe({
+            next: value => {
+                this.tagList = value;
+            },
+            error: err => {
+                throw err;
+            }
+        });
         this.eventFacade.loadGroupList();
+        this.eventFacade.loadTagList();
     }
 
     cancelHandler() {

@@ -50,7 +50,6 @@ export class TagDetailsComponent extends BaseFormSingleDetailsComponent<ITag> im
     tag = BLANK_TAG;
 
     override formGroup = this.formBuilder.group({
-        _id: [BLANK_TAG._id],
         name: [BLANK_TAG.name, [Validators.required]],
         description: [BLANK_TAG.description]
     });
@@ -103,7 +102,6 @@ export class TagDetailsComponent extends BaseFormSingleDetailsComponent<ITag> im
 
     updateHandler() {
         const tag = this.formGroup.value as any;
-        delete tag._id;
         this.tagFacade.updateTag$(this.tagId, tag).subscribe({
             next: () => {
                 this.matSnackbar.open(`Tag ${tag.name} have been updated.`, 'UPDATE', {

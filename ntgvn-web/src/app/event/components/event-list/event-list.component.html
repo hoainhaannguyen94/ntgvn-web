@@ -26,6 +26,13 @@
                                     (click)="detailsEventHandler(element)">{{element[column]}}</td>
                             </ng-container>
                         </ng-container>
+                        <ng-container *ngSwitchCase="'description'">
+                            <ng-container [matColumnDef]="column">
+                                <th mat-header-cell *matHeaderCellDef>{{headers[column]}}</th>
+                                <td mat-cell *matCellDef="let element" class="base-grid-table-main-column"
+                                    (click)="detailsEventHandler(element)">{{element[column]}}</td>
+                            </ng-container>
+                        </ng-container>
                         <ng-container *ngSwitchCase="'start'">
                             <ng-container [matColumnDef]="column">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
@@ -42,14 +49,22 @@
                             <ng-container [matColumnDef]="column">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
                                 <td mat-cell *matCellDef="let element">
-                                    <div [style.backgroundColor]="element[column]" style="width: 24px; height: 24px; border-radius: 50%;"></div>
+                                    <div [style.backgroundColor]="element[column]"
+                                        style="width: 24px; height: 24px; border-radius: 50%;"></div>
                                 </td>
                             </ng-container>
                         </ng-container>
                         <ng-container *ngSwitchCase="'_groupId'">
                             <ng-container [matColumnDef]="column">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
-                                <td mat-cell *matCellDef="let element">{{element[column] | groupDetails | async | objectProperty: 'name'}}</td>
+                                <td mat-cell *matCellDef="let element">{{element[column] | groupDetails | async |
+                                    objectProperty: 'name'}}</td>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngSwitchCase="'_tagIds'">
+                            <ng-container [matColumnDef]="column">
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
+                                <td mat-cell *matCellDef="let element">{{element[column] | tagsDetails | async}}</td>
                             </ng-container>
                         </ng-container>
                         <ng-container *ngSwitchCase="'actions'">

@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { UserDetailsPipe, ObjectPropertyPipe, GroupDetailsPipe } from '@utils/pipe';
 import { io } from 'socket.io-client';
+import { TagsDetailsPipe } from 'src/app/utils/pipe/tags-details.pipe';
 
 @Component({
     selector: 'event-list',
@@ -45,7 +46,8 @@ import { io } from 'socket.io-client';
         ConfirmDialogComponent,
         UserDetailsPipe,
         ObjectPropertyPipe,
-        GroupDetailsPipe
+        GroupDetailsPipe,
+        TagsDetailsPipe
     ],
     templateUrl: './event-list.component.html',
     styleUrls: ['./event-list.component.scss']
@@ -185,16 +187,18 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
     initColumns() {
         this.headers = {
             'title': 'Title',
+            'description': 'Description',
             'start': 'Start',
             'end': 'End',
             'backgroundColor': 'Status',
             '_groupId': 'Group',
-            'priority': 'Priority'
+            'priority': 'Priority',
+            '_tagIds': 'Tags'
         }
     }
 
     initDisplayColumns() {
-        this.columns = ['title', 'start', 'end', 'backgroundColor', '_groupId', 'priority', 'actions'];
+        this.columns = ['title', 'description', 'start', 'end', 'backgroundColor', '_groupId', 'priority', '_tagIds', 'actions'];
     }
 
     initActions() {

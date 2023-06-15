@@ -44,7 +44,6 @@ export class CustomerDetailsComponent extends BaseFormSingleDetailsComponent<ICu
     customer = BLANK_CUSTOMER;
 
     override formGroup = this.formBuilder.group({
-        _id: [BLANK_CUSTOMER._id],
         name: [BLANK_CUSTOMER.name, [Validators.required]],
         address: [BLANK_CUSTOMER.address, [Validators.required]],
         phoneNumber: [BLANK_CUSTOMER.phoneNumber, [Validators.required]]
@@ -92,7 +91,6 @@ export class CustomerDetailsComponent extends BaseFormSingleDetailsComponent<ICu
 
     updateHandler() {
         const customer = this.formGroup.value as any;
-        delete customer._id;
         this.customerFacade.updateCustomer$(this.customerId, customer).subscribe({
             next: () => {
                 this.matSnackbar.open(`Customer ${customer.name} have been updated.`, 'UPDATE', {

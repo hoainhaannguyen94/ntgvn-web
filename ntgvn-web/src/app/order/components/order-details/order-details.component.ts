@@ -59,7 +59,6 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
     productsAvailableQuantily = new Map();
 
     override formGroup = this.formBuilder.group({
-        _id: [BLANK_ORDER._id],
         _customerId: [BLANK_ORDER._customerId, [Validators.required]],
         _createdBy: [BLANK_ORDER._createdBy, [Validators.required]],
         createdAt: [BLANK_ORDER.createdAt, [Validators.required]],
@@ -223,7 +222,6 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
     updateHandler() {
         const products = this.products.value as any;
         const order = this.formGroup.value as any;
-        delete order._id;
         order['products'] = products;
         this.orderFacade.updateOrder$(this.orderId, order).subscribe({
             next: () => {

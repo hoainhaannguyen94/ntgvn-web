@@ -50,7 +50,6 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
     room = BLANK_ROOM;
 
     override formGroup = this.formBuilder.group({
-        _id: [BLANK_ROOM._id],
         name: [BLANK_ROOM.name, [Validators.required]],
         description: [BLANK_ROOM.description],
         address: [BLANK_ROOM.address, [Validators.required]],
@@ -118,7 +117,6 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
 
     updateHandler() {
         const room = this.formGroup.value as any;
-        delete room._id;
         this.roomFacade.updateRoom$(this.roomId, room).subscribe({
             next: () => {
                 this.matSnackbar.open(`Room ${room.name} have been updated.`, 'UPDATE', {

@@ -4,7 +4,7 @@ import { EventStateService } from '../core/event-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IEvent } from '@utils/schema';
-import { GroupService } from '@utils/service';
+import { GroupService, TagService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,6 +13,7 @@ export class EventFacadeService {
     eventAPI = inject(EventApiService);
     eventState = inject(EventStateService);
     groupService = inject(GroupService);
+    tagService = inject(TagService);
 
     isLoading$() {
         return this.eventState.isLoading$();
@@ -153,5 +154,25 @@ export class EventFacadeService {
 
     getGroupList$() {
         return this.eventState.getGroupList$();
+    }
+
+    loadTagList(params?: OdataParams) {
+        this.eventState.setLoading(true);
+        this.tagService.getTagList$(params).pipe(
+            finalize(() => {
+                this.eventState.setLoading(false);
+            })
+        ).subscribe({
+            next: res => {
+                this.eventState.setTagList(res.value);
+            },
+            error: err => {
+                throw err;
+            }
+        });
+    }
+
+    getTagList$() {
+        return this.eventState.getTagList$();
     }
 }

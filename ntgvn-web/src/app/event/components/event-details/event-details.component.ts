@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, NgZone, OnInit, ViewChild, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +10,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseFormSingleDetailsComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/component/error-message';
-import { BLANK_EVENT, IEvent, IGroup } from '@utils/schema';
+import { BLANK_EVENT, IEvent, IGroup, ITag } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { EventFacadeService } from '../../facade/event-facade.service';
@@ -18,6 +18,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { DateTime } from 'luxon';
 import { MatSelectModule } from '@angular/material/select';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
     selector: 'event-details',
@@ -46,23 +47,35 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
     formBuilder = inject(FormBuilder);
+    ngZone = inject(NgZone);
+
+    @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
     eventId = '';
     event = BLANK_EVENT;
 
     override formGroup = this.formBuilder.group({
-        _id: [BLANK_EVENT._id],
         title: [BLANK_EVENT.title, [Validators.required]],
+        description: [BLANK_EVENT.extendedProps.description],
         start: [BLANK_EVENT.start, [Validators.required]],
         end: [BLANK_EVENT.end, [Validators.required]],
         backgroundColor: [BLANK_EVENT.backgroundColor],
         borderColor: [BLANK_EVENT.borderColor],
         textColor: [BLANK_EVENT.textColor],
         _groupId: [BLANK_EVENT.extendedProps._groupId],
-        priority: [BLANK_EVENT.extendedProps.priority]
+        priority: [BLANK_EVENT.extendedProps.priority],
+        _tagIds: [BLANK_EVENT.extendedProps._tagIds]
     });
 
     groupList: IGroup[] = [];
+    tagList: ITag[] = [];
+
+    triggerResize() {
+        // Wait for changes to be applied, then trigger textarea resize.
+        this.ngZone.onStable.pipe(take(1)).subscribe({
+            next: () => this.autosize.resizeToFitContent(true)
+        });
+    }
 
     ngOnInit() {
         this.registerCoreLayer();
@@ -105,7 +118,16 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 throw err;
             }
         });
+        this.eventFacade.getTagList$().pipe(takeUntil(this.destroy$)).subscribe({
+            next: value => {
+                this.tagList = value;
+            },
+            error: err => {
+                throw err;
+            }
+        });
         this.eventFacade.loadGroupList();
+        this.eventFacade.loadTagList();
     }
 
     cancelHandler() {
@@ -122,7 +144,6 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
         }
         event.start = DateTime.fromISO(event.start).set({ hour: 0, minute: 0, second: 0 }).toJSDate().toISOString();
         event.end = DateTime.fromISO(event.end).set({ hour: 23, minute: 59, second: 59 }).toJSDate().toISOString();
-        delete event._id;
         this.eventFacade.updateEvent$(this.eventId, event).subscribe({
             next: () => {
                 this.matSnackbar.open(`Event ${event.title} have been updated.`, 'UPDATE', {
