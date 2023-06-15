@@ -119,7 +119,21 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
         });
         this.eventFacade.getEventList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
-                this.items = value;
+                this.items = value.reduce((acc, cur) => {
+                    const event = {
+                        _id: cur._id,
+                        title: cur.title,
+                        description: cur.extendedProps.description,
+                        start: cur.start,
+                        end: cur.end,
+                        backgroundColor: cur.backgroundColor,
+                        _groupId: cur.extendedProps._groupId,
+                        priority: cur.extendedProps.priority,
+                        _tagIds: cur.extendedProps._tagIds
+                    }
+                    acc.push(event);
+                    return acc;
+                }, []);
                 this.updateDataSource();
             },
             error: err => {

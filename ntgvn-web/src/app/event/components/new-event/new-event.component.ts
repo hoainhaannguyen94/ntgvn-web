@@ -116,15 +116,30 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
     }
 
     submitHandler() {
-        const event = this.formGroup.value as any;
-        if (typeof event.start !== 'string') {
-            event.start = event.start.toISOString();
+        const formData = this.formGroup.value as any;
+        if (typeof formData.start !== 'string') {
+            formData.start = formData.start.toISOString();
         }
-        if (typeof event.end !== 'string') {
-            event.end = event.end.toISOString();
+        if (typeof formData.end !== 'string') {
+            formData.end = formData.end.toISOString();
         }
-        event.start = DateTime.fromISO(event.start).set({ hour: 0, minute: 0, second: 0 }).toJSDate().toISOString();
-        event.end = DateTime.fromISO(event.end).set({ hour: 23, minute: 59, second: 59 }).toJSDate().toISOString();
+        formData.start = DateTime.fromISO(formData.start).set({ hour: 0, minute: 0, second: 0 }).toJSDate().toISOString();
+        formData.end = DateTime.fromISO(formData.end).set({ hour: 23, minute: 59, second: 59 }).toJSDate().toISOString();
+        const event = {
+            title: formData.title,
+            start: formData.start,
+            end: formData.end,
+            backgroundColor: formData.backgroundColor,
+            borderColor: formData.borderColor,
+            textColor: formData.textColor,
+            extendedProps: {
+                _groupId: formData._groupId,
+                priority: formData.priority,
+                description: formData.description,
+                _tagIds: formData._tagIds,
+                completedAt: BLANK_EVENT.extendedProps.completedAt
+            }
+        }
         this.eventFacade.submitEvent$(event).subscribe({
             next: () => {
                 this.matSnackbar.open(`Event ${event.title} have been created.`, 'CREATE', {

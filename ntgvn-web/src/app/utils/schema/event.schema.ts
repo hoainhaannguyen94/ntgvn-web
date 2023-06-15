@@ -46,6 +46,7 @@ export const BLANK_EVENT: IEvent = {
         _groupId: '',
         priority: 0,
         description: '',
-        _tagIds: []
+        _tagIds: [],
+        completedAt: ''
     }
 }
