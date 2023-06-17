@@ -126,10 +126,10 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                         description: cur.extendedProps.description,
                         start: cur.start,
                         end: cur.end,
-                        backgroundColor: cur.backgroundColor,
                         _groupId: cur.extendedProps._groupId,
                         priority: cur.extendedProps.priority,
-                        _tagIds: cur.extendedProps._tagIds
+                        _tagIds: cur.extendedProps._tagIds,
+                        status: cur.extendedProps.status
                     }
                     acc.push(event);
                     return acc;
@@ -204,7 +204,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
             'description': 'Description',
             'start': 'Start',
             'end': 'End',
-            'backgroundColor': 'Status',
+            'status': 'Status',
             '_groupId': 'Group',
             'priority': 'Priority',
             '_tagIds': 'Tags'
@@ -212,7 +212,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
     }
 
     initDisplayColumns() {
-        this.columns = ['title', 'description', 'start', 'end', 'backgroundColor', '_groupId', 'priority', '_tagIds', 'actions'];
+        this.columns = ['title', 'description', 'start', 'end', 'status', '_groupId', 'priority', '_tagIds', 'actions'];
     }
 
     initActions() {

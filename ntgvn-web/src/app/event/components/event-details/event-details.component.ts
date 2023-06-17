@@ -168,7 +168,8 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 priority: formData.priority,
                 description: formData.description,
                 _tagIds: formData._tagIds,
-                completedAt: this.event.extendedProps.completedAt
+                completedAt: this.event.extendedProps.completedAt,
+                status: this.event.extendedProps.status
             }
         }
         this.eventFacade.updateEvent$(this.eventId, event).subscribe({

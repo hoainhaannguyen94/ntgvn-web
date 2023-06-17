@@ -137,7 +137,8 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 priority: formData.priority,
                 description: formData.description,
                 _tagIds: formData._tagIds,
-                completedAt: BLANK_EVENT.extendedProps.completedAt
+                completedAt: BLANK_EVENT.extendedProps.completedAt,
+                status: 'active'
             }
         }
         this.eventFacade.submitEvent$(event).subscribe({

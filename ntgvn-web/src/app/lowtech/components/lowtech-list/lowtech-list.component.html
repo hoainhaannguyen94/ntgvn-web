@@ -1,0 +1,42 @@
+<div class="lowtech-container">
+    <mat-form-field appearance="outline">
+        <mat-label>Search Task(s) by Title</mat-label>
+        <input matInput>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>From</mat-label>
+        <input matInput [matDatepicker]="fromPicker" autocomplete="off" />
+        <mat-datepicker-toggle matIconSuffix [for]="fromPicker"></mat-datepicker-toggle>
+        <mat-datepicker #fromPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>To</mat-label>
+        <input matInput [matDatepicker]="toPicker" autocomplete="off" />
+        <mat-datepicker-toggle matIconSuffix [for]="toPicker"></mat-datepicker-toggle>
+        <mat-datepicker #toPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select multiple>
+          <mat-option [value]="'active'">Active</mat-option>
+          <mat-option [value]="'completed'">Completed</mat-option>
+        </mat-select>
+      </mat-form-field>
+    <mat-card class="events-container">
+        <ng-container *ngFor="let event of eventList; trackBy:trackByFn; last as isLast;">
+            <div class="event-block">
+                <div class="event-header">
+                    {{event.title}}
+                </div>
+                <div class="event-content">
+                    {{event.extendedProps.description}}
+                </div>
+                <div class="event-actions">
+                    <button mat-flat-button>Contact</button>
+                    <button mat-flat-button color="primary">Complete</button>
+                </div>
+            </div>
+            <mat-divider *ngIf="!isLast" />
+        </ng-container>
+    </mat-card>
+</div>

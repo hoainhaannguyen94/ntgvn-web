@@ -1,0 +1,29 @@
+.lowtech-container {
+    padding: 1rem;
+}
+
+.events-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.event-block {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.event-header {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+}
+
+.event-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}

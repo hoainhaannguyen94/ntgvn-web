@@ -9,19 +9,17 @@ import { StateService } from '@utils/state';
 export const authCanActiveGuard = () => {
     const router = inject(Router);
     const state = inject(StateService<IAppState>);
-    const authApi = inject(AuthService);
+    const authService = inject(AuthService);
     const appState = state.currentState;
     const token = localStorage.getItem('token') ?? '';
     const verifyAccessTokenHanlder = (res: OdataResponse<any>) => {
         if (res.value.valid) {
-            appState.loggedIn = true;
             appState.token = token;
             appState.me = res.value.user;
             appState.ready = true;
             state.commit(appState);
         } else {
             localStorage.clear();
-            appState.loggedIn = false;
             appState.token = '';
             appState.me = AnonymousUser;
             appState.ready = false;
@@ -29,7 +27,7 @@ export const authCanActiveGuard = () => {
             router.navigate(['/login']);
         }
     }
-    return authApi.verifyAccessToken$().pipe(
+    return authService.verifyAccessToken$().pipe(
         tap(res => { verifyAccessTokenHanlder(res); }),
         map(res => res.value.valid),
         catchError(err => {

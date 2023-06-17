@@ -22,6 +22,10 @@ export const routes: Routes = [
         loadChildren: () => import('./policy/policy.routes').then((m) => m.routes)
     },
     {
+        path: 'lowtech',
+        loadChildren: () => import('./lowtech/lowtech.routes').then((m) => m.routes)
+    },
+    {
         path: 'tag',
         loadChildren: () => import('./tag/tag.routes').then((m) => m.routes)
     },

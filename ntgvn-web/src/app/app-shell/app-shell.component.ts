@@ -4,6 +4,7 @@ import { BaseComponent } from '@utils/base/base.component';
 import { AnonymousUser } from '@app-state';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AuthService } from '../utils/service/auth.service';
 
 @Component({
     selector: 'app-shell',
@@ -16,9 +17,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     styleUrls: ['./app-shell.component.scss']
 })
 export class AppShellComponent extends BaseComponent implements OnInit {
-    token = localStorage.getItem('token');
-
     router = inject(Router);
+    authService = inject(AuthService);
+
+    token = localStorage.getItem('token');
 
     ngOnInit() {
         this.verifyAccessToken();
@@ -26,14 +28,36 @@ export class AppShellComponent extends BaseComponent implements OnInit {
 
     verifyAccessToken() {
         if (this.token) {
-            this.navToRoot();
-        } else {
-            this.restartApp();
+            if (this.appState.me._id) {
+                this.navToRoot();
+            } else {
+                this.authService.verifyAccessToken$().subscribe({
+                    next: res => {
+                        if (res.value.valid) {
+                            this.appState.me = res.value.user;
+                            this.appState.ready = true;
+                            this.state.commit(this.appState);
+                            this.navToRoot();
+                        } else {
+                            this.restartApp();
+                        }
+                    },
+                    error: () => {
+                        this.restartApp();
+                    }
+                });
+            }
+            return;
         }
+        this.restartApp();
     }
 
     navToRoot() {
-        this.router.navigate([this.appState.root]);
+        if (this.appState.me.role !== '6486e54057e051f88186a7e4') {
+            this.router.navigate([this.appState.root]);
+        } else {
+            this.router.navigate(['/lowtech']);
+        }
     }
 
     clearAppStorage() {
