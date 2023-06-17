@@ -1,4 +1,5 @@
 export interface IDevice {
+    [key: string]: any;
     _id: string;
     type: string;
     name: string;

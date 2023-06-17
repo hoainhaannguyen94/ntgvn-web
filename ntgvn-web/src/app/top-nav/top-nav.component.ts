@@ -43,8 +43,13 @@ export class TopNavComponent extends BaseComponent {
         this.router.navigate(['/shell']);
     }
 
-    navigateToSetting() {
-        this.router.navigate(['/setting']);
+    navigateToSetting(event) {
+        if (this.appState.me['roleName'] === 'member') {
+            event.stopPropagation();
+            event.preventDefault();
+        } else {
+            this.router.navigate(['/setting']);
+        }
     }
 
     changeLanguage(key = 'en') {

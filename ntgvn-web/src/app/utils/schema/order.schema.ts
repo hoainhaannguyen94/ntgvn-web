@@ -1,4 +1,5 @@
 export interface IProductInOrder {
+    [key: string]: any;
     _productId: string;
     quantity: number;
     price: number;

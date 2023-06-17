@@ -11,7 +11,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/component/error-message';
-import { BLANK_ROOM, IUser, EUserRole } from '@utils/schema';
+import { BLANK_ROOM, IUser } from '@utils/schema';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take, takeUntil, debounceTime } from 'rxjs';
 import { RoomFacadeService } from '../../facade/room-facade.service';
@@ -87,7 +87,13 @@ export class NewRoomComponent extends BaseFormSingleComponent implements OnInit 
                 throw err;
             }
         });
-        this.roomFacade.loadManagerList({ $filter: `role eq '${EUserRole.manager}' or role eq '${EUserRole.owner}'` });
+        const managerIdsFilter = this.appState.userRoles.reduce((acc, cur) => {
+            if (['manager', 'owner'].includes(cur.name)) {
+                acc.push(`role eq '${cur._id}'`);
+            }
+            return acc;
+        }, []).join(' or ');
+        this.roomFacade.loadManagerList({ $filter: managerIdsFilter });
     }
 
     cancelHandler() {

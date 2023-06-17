@@ -1,4 +1,5 @@
 export interface IAuditLog {
+    [key: string]: any;
     _id: string;
     user: string;
     event: string;

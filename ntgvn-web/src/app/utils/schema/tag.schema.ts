@@ -1,4 +1,5 @@
 export interface ITag {
+    [key: string]: any;
     _id: string;
     name: string;
     description: string;

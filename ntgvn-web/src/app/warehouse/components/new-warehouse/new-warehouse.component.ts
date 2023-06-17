@@ -11,7 +11,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/component/error-message';
-import { BLANK_WAREHOUSE, IUser, EUserRole } from '@utils/schema';
+import { BLANK_WAREHOUSE, IUser } from '@utils/schema';
 import { takeUntil, debounceTime } from 'rxjs';
 import { WarehouseFacadeService } from '../../facade/warehouse-facade.service';
 
@@ -73,7 +73,13 @@ export class NewWarehouseComponent extends BaseFormSingleComponent implements On
                 throw err;
             }
         });
-        this.warehouseFacade.loadManagerList({ $filter: `role eq '${EUserRole.manager}' or role eq '${EUserRole.owner}'` });
+        const managerIdsFilter = this.appState.userRoles.reduce((acc, cur) => {
+            if (['manager', 'owner'].includes(cur.name)) {
+                acc.push(`role eq '${cur._id}'`);
+            }
+            return acc;
+        }, []).join(' or ');
+        this.warehouseFacade.loadManagerList({ $filter: managerIdsFilter });
     }
 
     cancelHandler() {

@@ -4,6 +4,7 @@ export type EventDisplay = 'auto' | 'block' | 'list-item' | 'background' | 'inve
  * @see https://fullcalendar.io/docs/event-object
  */
 export interface IEvent {
+    [key: string]: any;
     _id: string;
     id?: string;
     groupId?: string;

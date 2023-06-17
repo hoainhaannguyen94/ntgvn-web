@@ -1,4 +1,5 @@
 export interface ICustomer {
+    [key: string]: any;
     _id: string;
     name: string;
     phoneNumber: string;

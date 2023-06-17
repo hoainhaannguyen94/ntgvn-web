@@ -1,4 +1,5 @@
 export interface IUser {
+    [k: string]: any;
     _id: string;
     name: string;
     address: string;

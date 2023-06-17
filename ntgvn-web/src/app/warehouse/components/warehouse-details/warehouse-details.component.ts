@@ -11,7 +11,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseFormSingleDetailsComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/component/error-message';
-import { BLANK_WAREHOUSE, IUser, EUserRole, IWarehouse } from '@utils/schema';
+import { BLANK_WAREHOUSE, IUser, IWarehouse } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { WarehouseFacadeService } from '../../facade/warehouse-facade.service';
@@ -73,7 +73,14 @@ export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IW
                 throw err;
             }
         });
-        this.warehouseFacade.loadManagerList({ $filter: `role eq '${EUserRole.manager}' or role eq '${EUserRole.owner}'` });
+
+        const managerIdsFilter = this.appState.userRoles.reduce((acc, cur) => {
+            if (['manager', 'owner'].includes(cur.name)) {
+                acc.push(`role eq '${cur._id}'`);
+            }
+            return acc;
+        }, []).join(' or ');
+        this.warehouseFacade.loadManagerList({ $filter: managerIdsFilter });
     }
 
     override registerCoreLayer() {

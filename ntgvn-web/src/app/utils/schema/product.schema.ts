@@ -1,4 +1,5 @@
 export interface IProduct {
+    [key: string]: any;
     _id: string;
     name: string;
     _categoryId: string;

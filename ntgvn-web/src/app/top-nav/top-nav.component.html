@@ -1,6 +1,8 @@
 <div class="top-nav-container">
     <div class="top-nav-left">
-        <mat-icon (click)="showSideNav()" matTooltip="Menu">menu</mat-icon>
+        <ng-container *ngIf="appState.me['roleName'] !== 'member'">
+            <mat-icon (click)="showSideNav()" matTooltip="Menu">menu</mat-icon>
+        </ng-container>
         <div class="top-nav-name">{{appState.domain | uppercase}} PROJECT</div>
     </div>
     <div class="top-nav-right">
@@ -18,9 +20,13 @@
 </div>
 
 <mat-menu #accountMenu="matMenu">
-    <button mat-menu-item (click)="navigateToSetting()">
+    <button mat-menu-item (click)="navigateToSetting($event)">
         <mat-icon class="menu-icon">account_circle</mat-icon>
         <span>{{appState.me.name}}</span>
+    </button>
+    <button mat-menu-item (click)="$event.stopPropagation();$event.preventDefault();">
+        <mat-icon class="menu-icon">info</mat-icon>
+        <span>Version {{appState.version}}</span>
     </button>
     <button mat-menu-item (click)="logout()">
         <mat-icon class="menu-icon">logout</mat-icon>

@@ -1,4 +1,5 @@
 export interface IAnnouncement {
+    [key: string]: any;
     _id: string;
     title: string;
     body: string;

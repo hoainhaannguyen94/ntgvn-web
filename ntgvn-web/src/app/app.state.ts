@@ -1,5 +1,5 @@
 import { GLOBAL_SETTINGS } from '@global-settings';
-import { IUser } from '@utils/schema';
+import { IUser, IUserRole } from '@utils/schema';
 
 export const AnonymousUser: IUser = {
     _id: '',
@@ -23,6 +23,7 @@ export interface IAppState {
     ready: boolean;
     token: string;
     me: IUser;
+    userRoles: IUserRole[];
     timezone: string;
     language: string;
 }
@@ -40,5 +41,6 @@ export const INITIAL_STATE = {
     token: '',
     ready: false,
     me: AnonymousUser,
+    userRoles: null,
     timezone: ''
 }

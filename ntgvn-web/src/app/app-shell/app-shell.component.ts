@@ -5,6 +5,7 @@ import { AnonymousUser } from '@app-state';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AuthService } from '../utils/service/auth.service';
+import { UserService } from '../utils/service/user.service';
 
 @Component({
     selector: 'app-shell',
@@ -19,6 +20,7 @@ import { AuthService } from '../utils/service/auth.service';
 export class AppShellComponent extends BaseComponent implements OnInit {
     router = inject(Router);
     authService = inject(AuthService);
+    userService = inject(UserService);
 
     token = localStorage.getItem('token');
 
@@ -53,7 +55,8 @@ export class AppShellComponent extends BaseComponent implements OnInit {
     }
 
     navToRoot() {
-        if (this.appState.me.role !== '6486e54057e051f88186a7e4') {
+        this.loadUserRoleList();
+        if (this.appState.me['roleName'] !== 'member') {
             this.router.navigate([this.appState.root]);
         } else {
             this.router.navigate(['/lowtech']);
@@ -79,5 +82,16 @@ export class AppShellComponent extends BaseComponent implements OnInit {
         this.clearAppStorage();
         this.syncAppState();
         this.navToLogin();
+    }
+
+    loadUserRoleList() {
+        if (!this.appState.userRoles) {
+            this.userService.getUserRoleList$().subscribe({
+                next: res => {
+                    this.appState.userRoles = res.value;
+                    this.state.commit(this.appState);
+                }
+            });
+        }
     }
 }
