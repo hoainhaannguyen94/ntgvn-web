@@ -65,7 +65,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
         this.initDisplayColumns();
         this.initActions();
         this.registerResizeObserver();
-        this.listeningSearchControlForValueChanges();
+        this.registerSearchControlValueChanges();
     }
 
     ngAfterViewInit() {
@@ -85,7 +85,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                             const options: OdataParams = {
                                 $skip: event.pageIndex * event.pageSize,
                                 $top: event.pageSize,
-                                $filter: this.filter,
+                                $filter: this.filterString,
                                 $orderby: '_id desc'
                             }
                             this.roomFacade.loadRoomList(options);
@@ -151,17 +151,17 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
         }
     }
 
-    listeningSearchControlForValueChanges() {
+    registerSearchControlValueChanges() {
         this.searchControl.valueChanges.pipe(takeUntil(this.destroy$), distinctUntilChanged(), debounceTime(300)).subscribe({
             next: value => {
                 let valid = false;
                 this.isSearching = false;
                 if (typeof value === 'string' && value.length === 0) {
-                    this.filter = '';
+                    this.filterString = '';
                     valid = true;
                 }
                 if (typeof value === 'string' && value.length > 0) {
-                    this.filter = `contains(name, '${value}')`;
+                    this.filterString = `contains(name, '${value}')`;
                     valid = true;
                     this.isSearching = true;
                 }
@@ -169,7 +169,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                     const options: OdataParams = {
                         $skip: 0,
                         $top: this.pageSize,
-                        $filter: this.filter,
+                        $filter: this.filterString,
                         $orderby: '_id desc'
                     }
                     this.roomFacade.loadCountRooms(options);

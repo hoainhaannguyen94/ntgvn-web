@@ -61,7 +61,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
         this.initDisplayColumns();
         this.initActions();
         this.registerResizeObserver();
-        this.listeningSearchControlForValueChanges();
+        this.registerSearchControlValueChanges();
     }
 
     ngAfterViewInit() {
@@ -81,7 +81,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
                             const options: OdataParams = {
                                 $skip: event.pageIndex * event.pageSize,
                                 $top: event.pageSize,
-                                $filter: this.filter,
+                                $filter: this.filterString,
                                 $orderby: '_id desc'
                             }
                             this.auditLogFacade.loadAuditLogList(options);
@@ -128,17 +128,17 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
         });
     }
 
-    listeningSearchControlForValueChanges() {
+    registerSearchControlValueChanges() {
         this.searchControl.valueChanges.pipe(takeUntil(this.destroy$), distinctUntilChanged(), debounceTime(300)).subscribe({
             next: value => {
                 let valid = false;
                 this.isSearching = false;
                 if (typeof value === 'string' && value.length === 0) {
-                    this.filter = '';
+                    this.filterString = '';
                     valid = true;
                 }
                 if (typeof value === 'string' && value.length > 0) {
-                    this.filter = `contains(event, '${value}')`;
+                    this.filterString = `contains(event, '${value}')`;
                     valid = true;
                     this.isSearching = true;
                 }
@@ -146,7 +146,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
                     const options: OdataParams = {
                         $skip: 0,
                         $top: this.pageSize,
-                        $filter: this.filter,
+                        $filter: this.filterString,
                         $orderby: '_id desc'
                     }
                     this.auditLogFacade.loadCountAuditLogs();

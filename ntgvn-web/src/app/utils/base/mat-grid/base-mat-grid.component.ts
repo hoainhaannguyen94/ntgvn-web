@@ -22,7 +22,7 @@ export abstract class BaseMatGridComponent<T> extends BaseComponent {
     paginatorShowFirstLastButtons = true;
     items: T[] = [];
     totalItems = 0;
-    filter = '';
+    filterString = '';
     searchControl = new FormControl('');
     isSearching = false;
 

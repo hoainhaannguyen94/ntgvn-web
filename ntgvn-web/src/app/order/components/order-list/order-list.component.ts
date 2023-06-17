@@ -68,7 +68,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
         this.initDisplayColumns();
         this.initActions();
         this.registerResizeObserver();
-        this.listeningSearchControlForValueChanges();
+        this.registerSearchControlValueChanges();
     }
 
     ngAfterViewInit() {
@@ -153,17 +153,17 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
         }
     }
 
-    listeningSearchControlForValueChanges() {
+    registerSearchControlValueChanges() {
         this.searchControl.valueChanges.pipe(takeUntil(this.destroy$), distinctUntilChanged(), debounceTime(300)).subscribe({
             next: value => {
                 let valid = false;
                 this.isSearching = false;
                 if (typeof value === 'string' && value.length === 0) {
-                    this.filter = '';
+                    this.filterString = '';
                     valid = true;
                 }
                 if (typeof value === 'string' && value.length > 0) {
-                    this.filter = `contains(_customerName, '${value}')`;
+                    this.filterString = `contains(_customerName, '${value}')`;
                     valid = true;
                     this.isSearching = true;
                 }
@@ -171,7 +171,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                     const options: OdataParams = {
                         $skip: 0,
                         $top: this.pageSize,
-                        $filter: this.filter,
+                        $filter: this.filterString,
                         $orderby: '_id desc'
                     }
                     this.orderFacade.loadCountOrders(options);

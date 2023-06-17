@@ -1,35 +1,38 @@
 <div class="lowtech-container">
-    <mat-form-field appearance="outline">
-        <mat-label>{{'Search Task(s) by Title' | transloco}}</mat-label>
-        <input matInput type="text" autocomplete="off" placeholder="" [formControl]="searchControl">
-        <button *ngIf="searchControl.value" matSuffix mat-icon-button (click)="clearSeach()">
-            <mat-icon>close</mat-icon>
-        </button>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>{{'From Date' | transloco}}</mat-label>
-        <input matInput [matDatepicker]="fromPicker" autocomplete="off" />
-        <mat-datepicker-toggle matIconSuffix [for]="fromPicker"></mat-datepicker-toggle>
-        <mat-datepicker #fromPicker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>{{'To Date' | transloco}}</mat-label>
-        <input matInput [matDatepicker]="toPicker" autocomplete="off" />
-        <mat-datepicker-toggle matIconSuffix [for]="toPicker"></mat-datepicker-toggle>
-        <mat-datepicker #toPicker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-        <mat-label>{{'Status' | transloco}}</mat-label>
-        <mat-select multiple>
-            <mat-option [value]="'active'">Active</mat-option>
-            <mat-option [value]="'completed'">Completed</mat-option>
-        </mat-select>
-    </mat-form-field>
+    <form [formGroup]="formGroup">
+        <mat-form-field appearance="outline">
+            <mat-label>{{'Search Task(s) by Title' | transloco}}</mat-label>
+            <input matInput type="text" autocomplete="off" placeholder="" formControlName="search">
+            <button *ngIf="formGroup.get('search').value" matSuffix mat-icon-button (click)="clearSeach()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>{{'From Date' | transloco}}</mat-label>
+            <input matInput [matDatepicker]="fromPicker" autocomplete="off" formControlName="from" />
+            <mat-datepicker-toggle matIconSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>{{'To Date' | transloco}}</mat-label>
+            <input matInput [matDatepicker]="toPicker" autocomplete="off" formControlName="to" />
+            <mat-datepicker-toggle matIconSuffix [for]="toPicker"></mat-datepicker-toggle>
+            <mat-datepicker #toPicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>{{'Status' | transloco}}</mat-label>
+            <mat-select multiple formControlName="status">
+                <mat-option [value]="'active'">Active</mat-option>
+                <mat-option [value]="'completed'">Completed</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
     <mat-card class="events-container">
         <ng-container *ngFor="let event of eventList; trackBy:trackByFn; last as isLast;">
             <div class="event-block">
                 <div class="event-header">
-                    {{event.title}}
+                    <div class="event-title">{{event.title}}</div>
+                    <div class="event-status">{{event.extendedProps.status | uppercase}}</div>
                 </div>
                 <div class="event-content">
                     {{event.extendedProps.description}}

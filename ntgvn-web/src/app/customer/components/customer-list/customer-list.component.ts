@@ -62,7 +62,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
         this.initDisplayColumns();
         this.initActions();
         this.registerResizeObserver();
-        this.listeningSearchControlForValueChanges();
+        this.registerSearchControlValueChanges();
     }
 
     ngAfterViewInit() {
@@ -82,7 +82,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                             const options: OdataParams = {
                                 $skip: event.pageIndex * event.pageSize,
                                 $top: event.pageSize,
-                                $filter: this.filter,
+                                $filter: this.filterString,
                                 $orderby: '_id desc'
                             }
                             this.customerFacade.loadCustomerList(options);
@@ -148,17 +148,17 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
         }
     }
 
-    listeningSearchControlForValueChanges() {
+    registerSearchControlValueChanges() {
         this.searchControl.valueChanges.pipe(takeUntil(this.destroy$), distinctUntilChanged(), debounceTime(300)).subscribe({
             next: value => {
                 let valid = false;
                 this.isSearching = false;
                 if (typeof value === 'string' && value.length === 0) {
-                    this.filter = '';
+                    this.filterString = '';
                     valid = true;
                 }
                 if (typeof value === 'string' && value.length > 0) {
-                    this.filter = `contains(name, '${value}')`;
+                    this.filterString = `contains(name, '${value}')`;
                     valid = true;
                     this.isSearching = true;
                 }
@@ -166,7 +166,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                     const options: OdataParams = {
                         $skip: 0,
                         $top: this.pageSize,
-                        $filter: this.filter,
+                        $filter: this.filterString,
                         $orderby: '_id desc'
                     }
                     this.customerFacade.loadCountCustomers(options);

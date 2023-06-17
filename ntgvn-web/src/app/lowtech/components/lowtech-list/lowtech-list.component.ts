@@ -12,13 +12,14 @@ import { LowtechFacadeService } from '../../facade/lowtech-facade.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BaseComponent } from '@utils/base/base.component';
 import { io } from 'socket.io-client';
-import { takeUntil } from 'rxjs';
+import { takeUntil, distinctUntilChanged, debounceTime } from 'rxjs';
 import { IEvent } from '@utils/schema';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
+import { OdataParams } from '@utils/http';
 
 @Component({
     selector: 'lowtech-list',
@@ -45,23 +46,31 @@ import { TranslocoModule } from '@ngneat/transloco';
     styleUrls: ['./lowtech-list.component.scss']
 })
 export class LowtechListComponent extends BaseComponent implements OnInit {
-    eventFacade = inject(LowtechFacadeService);
+    lowtechFacade = inject(LowtechFacadeService);
     dialog = inject(MatDialog);
     matSnackbar = inject(MatSnackBar);
+    formBuilder = inject(FormBuilder);
 
     eventList: IEvent[] = [];
     totalEvent = 0;
-    
-    searchControl = new FormControl('');
-    isSearching = false;
+
+    filterString = '';
+
+    formGroup = this.formBuilder.group({
+        search: [],
+        from: [],
+        to: [],
+        status: []
+    });
 
     ngOnInit() {
         this.registerCoreLayer();
         this.registerSignal();
+        this.registerSearchControlValueChanges();
     }
 
     override registerCoreLayer() {
-        this.eventFacade.isLoading$().pipe(takeUntil(this.destroy$)).subscribe({
+        this.lowtechFacade.isLoading$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.isLoading = value;
             },
@@ -69,7 +78,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 throw err;
             }
         });
-        this.eventFacade.getCountEvents$().pipe(takeUntil(this.destroy$)).subscribe({
+        this.lowtechFacade.getCountEvents$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalEvent = value;
             },
@@ -77,7 +86,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 throw err;
             }
         });
-        this.eventFacade.getEventList$().pipe(takeUntil(this.destroy$)).subscribe({
+        this.lowtechFacade.getEventList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.eventList = value;
             },
@@ -85,8 +94,8 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 throw err;
             }
         });
-        this.eventFacade.loadCountEvents();
-        this.eventFacade.loadEventList({
+        this.lowtechFacade.loadCountEvents();
+        this.lowtechFacade.loadEventList({
             $orderby: '_id desc'
         });
     }
@@ -110,8 +119,52 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
         }
     }
 
+    registerSearchControlValueChanges() {
+        this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), distinctUntilChanged(), debounceTime(300)).subscribe({
+            next: values => {
+                let searchString = `contains(title, '')`;
+                let fromString = '';
+                let toString = '';
+                let statusString = '';
+                this.filterString = '';
+                if (values.search) {
+                    searchString = `contains(title, '${values.search}')`;
+                }
+                if (values.from) {
+                    fromString = `start ge '${values.from.toISOString()}'`;
+                }
+                if (values.to) {
+                    toString = `start le '${values.to.toISOString()}'`;
+                }
+                statusString = values.status?.reduce((acc, cur) => {
+                    if (!acc) {
+                        acc += `extendedProps/status eq '${cur}'`;
+                    } else {
+                        acc += ` or extendedProps/status eq '${cur}'`;
+                    }
+                    return acc;
+                }, '');
+                this.filterString += searchString;
+                if (fromString) {
+                    this.filterString += ` and ${fromString}`;
+                }
+                if (toString) {
+                    this.filterString += ` and ${toString}`;
+                }
+                if (statusString) {
+                    this.filterString += ` and ${statusString}`;
+                }
+                const options: OdataParams = {
+                    $filter: this.filterString,
+                    $orderby: '_id desc'
+                }
+                this.lowtechFacade.loadEventList(options);
+            }
+        });
+    }
+
     clearSeach() {
-        this.searchControl.setValue('');
+        this.formGroup.get('search').setValue('');
     }
 
     reload() {
