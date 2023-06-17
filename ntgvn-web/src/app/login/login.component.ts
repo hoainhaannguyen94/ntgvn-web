@@ -99,7 +99,7 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
                     verticalPosition: 'bottom',
                     horizontalPosition: 'center'
                 });
-                this.navigateToRoot();
+                this.navigateToAppShell();
             },
             error: () => {
                 this.matSnackbar.open(`Check your account info and try again.`, 'LOGIN', {
@@ -111,8 +111,8 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
         });
     }
 
-    navigateToRoot() {
-        this.router.navigate([this.appState.root]);
+    navigateToAppShell() {
+        this.router.navigate(['/shell']);
     }
 
     @HostListener('window:keydown.enter', ['$event']) handleEnterKeyDown() {
