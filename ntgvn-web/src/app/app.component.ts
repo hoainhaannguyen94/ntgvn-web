@@ -9,6 +9,7 @@ import { SwUpdate } from '@angular/service-worker';
 import { takeUntil, timer } from 'rxjs';
 import { DateTime } from 'luxon';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
+import { environment } from '@environment';
 
 @Component({
     selector: 'app-root',
@@ -87,7 +88,7 @@ export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
     }
 
     detectLocalLanguage() {
-        const language = localStorage.getItem('language') ?? 'en';
+        const language = localStorage.getItem('language') ?? environment.language;
         this.appState.language = language;
         this.state.commit(this.appState);
         this.translocoService.setActiveLang(language);

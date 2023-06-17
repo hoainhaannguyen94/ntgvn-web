@@ -11,5 +11,9 @@
     "Policy": "Policy",
     "License": "License",
     "About Us": "About Us",
-    "Settings": "Settings"
+    "Settings": "Settings",
+    "From Date": "From",
+    "To Date":"To",
+    "Search Task(s) by Title": "Search Task(s) by Title",
+    "Status": "Status"
 }

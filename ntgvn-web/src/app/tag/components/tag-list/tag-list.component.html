@@ -3,7 +3,7 @@
         <div class="base-grid-toolbar">
             <div class="base-grid-toolbar-search">
                 <mat-icon>search</mat-icon>
-                <input autocomplete="off" placeholder="Search tag(s) by name" [formControl]="searchControl">
+                <input type="text" autocomplete="off" placeholder="Search tag(s) by name" [formControl]="searchControl">
                 <mat-icon matTooltip="Clear" (click)="searchControl.setValue('')" *ngIf="isSearching">clear
                 </mat-icon>
             </div>
@@ -60,6 +60,6 @@
             </table>
         </div>
         <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-            [showFirstLastButtons]="paginatorShowFirstLastButtons" [hidePageSize]="paginatorHidePageSize"/>
+            [showFirstLastButtons]="paginatorShowFirstLastButtons" [hidePageSize]="paginatorHidePageSize" />
     </div>
 </div>

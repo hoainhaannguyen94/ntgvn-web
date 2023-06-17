@@ -11,5 +11,9 @@
     "Policy": "Chính Sách",
     "License": "Bản Quyền",
     "About Us": "Giới Thiệu",
-    "Settings": "Cài Đặt"
+    "Settings": "Cài Đặt",
+    "From Date": "Từ Ngày",
+    "To Date":"Đến Ngày",
+    "Search Task(s) by Title": "Tìm công việc dựa vào Tiêu Đề",
+    "Status": "Trạng Thái"
 }

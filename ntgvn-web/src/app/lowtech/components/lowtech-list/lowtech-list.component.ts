@@ -17,12 +17,16 @@ import { IEvent } from '@utils/schema';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @Component({
     selector: 'lowtech-list',
     standalone: true,
     imports: [
         CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
         RouterModule,
         MatIconModule,
         MatButtonModule,
@@ -34,7 +38,8 @@ import { MatSelectModule } from '@angular/material/select';
         MatDialogModule,
         MatCardModule,
         MatDividerModule,
-        MatSelectModule
+        MatSelectModule,
+        TranslocoModule
     ],
     templateUrl: './lowtech-list.component.html',
     styleUrls: ['./lowtech-list.component.scss']
@@ -46,6 +51,9 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
 
     eventList: IEvent[] = [];
     totalEvent = 0;
+    
+    searchControl = new FormControl('');
+    isSearching = false;
 
     ngOnInit() {
         this.registerCoreLayer();
@@ -100,6 +108,10 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 this.reload();
             });
         }
+    }
+
+    clearSeach() {
+        this.searchControl.setValue('');
     }
 
     reload() {
