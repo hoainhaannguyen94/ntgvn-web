@@ -173,7 +173,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                         $filter: this.filterString,
                         $orderby: '_id desc'
                     }
-                    this.userFacade.loadCountUsers(options);
+                    this.userFacade.loadCountUsers();
                     if (this.paginator.pageIndex > 0) {
                         this.paginator.firstPage();
                     } else {

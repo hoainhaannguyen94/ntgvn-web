@@ -172,7 +172,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                         $filter: this.filterString,
                         $orderby: '_id desc'
                     }
-                    this.roomFacade.loadCountRooms(options);
+                    this.roomFacade.loadCountRooms();
                     if (this.paginator.pageIndex > 0) {
                         this.paginator.firstPage();
                     } else {

@@ -172,7 +172,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                         $filter: this.filterString,
                         $orderby: '_id desc'
                     }
-                    this.warehouseFacade.loadCountWarehouses(options);
+                    this.warehouseFacade.loadCountWarehouses();
                     if (this.paginator.pageIndex > 0) {
                         this.paginator.firstPage();
                     } else {

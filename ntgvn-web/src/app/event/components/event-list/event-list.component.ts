@@ -200,7 +200,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                         $top: this.pageSize,
                         $filter: this.filterString
                     }
-                    this.eventFacade.loadCountEvents(options);
+                    this.eventFacade.loadCountEvents();
                     if (this.paginator.pageIndex > 0) {
                         this.paginator.firstPage();
                     } else {

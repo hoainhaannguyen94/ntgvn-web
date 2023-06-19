@@ -174,7 +174,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                         $filter: this.filterString,
                         $orderby: '_id desc'
                     }
-                    this.orderFacade.loadCountOrders(options);
+                    this.orderFacade.loadCountOrders();
                     if (this.paginator.pageIndex > 0) {
                         this.paginator.firstPage();
                     } else {

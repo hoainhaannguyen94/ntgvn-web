@@ -169,7 +169,7 @@ export class GroupListComponent extends BaseMatGridComponent<IGroup> implements 
                         $filter: this.filterString,
                         $orderby: '_id desc'
                     }
-                    this.groupFacade.loadCountGroups(options);
+                    this.groupFacade.loadCountGroups();
                     if (this.paginator.pageIndex > 0) {
                         this.paginator.firstPage();
                     } else {

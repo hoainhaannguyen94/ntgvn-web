@@ -173,7 +173,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                         $filter: this.filterString,
                         $orderby: '_id desc'
                     }
-                    this.productFacade.loadCountProducts(options);
+                    this.productFacade.loadCountProducts();
                     if (this.paginator.pageIndex > 0) {
                         this.paginator.firstPage();
                     } else {

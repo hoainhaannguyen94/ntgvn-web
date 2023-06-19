@@ -169,7 +169,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                         $filter: this.filterString,
                         $orderby: '_id desc'
                     }
-                    this.tagFacade.loadCountTags(options);
+                    this.tagFacade.loadCountTags();
                     if (this.paginator.pageIndex > 0) {
                         this.paginator.firstPage();
                     } else {

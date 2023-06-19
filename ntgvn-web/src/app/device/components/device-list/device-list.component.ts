@@ -169,7 +169,7 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                         $filter: this.filterString,
                         $orderby: '_id desc'
                     }
-                    this.deviceFacade.loadCountDevices(options);
+                    this.deviceFacade.loadCountDevices();
                     if (this.paginator.pageIndex > 0) {
                         this.paginator.firstPage();
                     } else {

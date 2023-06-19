@@ -169,7 +169,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                         $filter: this.filterString,
                         $orderby: '_id desc'
                     }
-                    this.customerFacade.loadCountCustomers(options);
+                    this.customerFacade.loadCountCustomers();
                     if (this.paginator.pageIndex > 0) {
                         this.paginator.firstPage();
                     } else {

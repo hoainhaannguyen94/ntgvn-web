@@ -36,11 +36,7 @@ export class TopNavComponent extends BaseComponent {
 
     logout() {
         localStorage.clear();
-        this.appState.ready = false;
-        this.appState.token = '';
-        this.appState.me = AnonymousUser;
-        this.state.commit(this.appState);
-        this.router.navigate(['/shell']);
+        window.location.reload();
     }
 
     navigateToSetting(event) {
