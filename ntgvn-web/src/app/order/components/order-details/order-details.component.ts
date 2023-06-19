@@ -176,10 +176,6 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
                 throw err;
             }
         });
-        this.orderFacade.loadOrderStatusList({
-            $skip: 0,
-            $top: 20
-        });
         this.orderFacade.getProductList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.productList = value;
@@ -189,10 +185,6 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
                 throw err;
             }
         });
-        this.orderFacade.loadProductList({
-            $skip: 0,
-            $top: 20
-        });
         this.orderFacade.getCustomerList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.customerList = value;
@@ -201,9 +193,14 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
                 throw err;
             }
         });
+        this.orderFacade.loadOrderStatusList({
+            $orderby: 'name asc'
+        });
+        this.orderFacade.loadProductList({
+            $orderby: 'name asc'
+        });
         this.orderFacade.loadCustomerList({
-            $skip: 0,
-            $top: 20
+            $orderby: 'name asc'
         });
     }
 

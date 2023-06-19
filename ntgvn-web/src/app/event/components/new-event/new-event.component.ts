@@ -107,8 +107,12 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 throw err;
             }
         });
-        this.eventFacade.loadGroupList();
-        this.eventFacade.loadTagList();
+        this.eventFacade.loadGroupList({
+            $orderby: 'name asc'
+        });
+        this.eventFacade.loadTagList({
+            $orderby: 'name asc'
+        });
     }
 
     cancelHandler() {

@@ -81,23 +81,16 @@ export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> 
                 throw err;
             }
         });
-
         this.userFacade.getUserRoleList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.userRoleList = value;
             }
         });
-        this.userFacade.loadUserRoleList();
-
         this.userFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.groupList = value;
             }
         });
-        this.userFacade.loadGroupList({
-            $orderby: '_id desc'
-        });
-
         this.userFacade.getUser$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.user = value;
@@ -108,6 +101,13 @@ export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> 
                 throw err;
             }
         });
+        this.userFacade.loadUserRoleList({
+            $orderby: 'name asc'
+        });
+        this.userFacade.loadGroupList({
+            $orderby: '_id desc'
+        });
+
     }
 
     cancelHandler() {

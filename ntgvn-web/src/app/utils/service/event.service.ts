@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GLOBAL_SETTINGS } from '@global-settings';
 import { OdataService, OdataParams } from '@utils/http';
-import { ICountEvent, IEvent } from '@utils/schema';
+import { ICountEvent, IEvent, IEventStatus } from '@utils/schema';
 
 @Injectable({
     providedIn: 'root'
@@ -31,5 +31,13 @@ export class EventService extends OdataService {
 
     deleteEvent$(eventId: string) {
         return this.deleteItem(`${this.API_URL}/${eventId}`);
+    }
+
+    getEventStatusList$(params?: OdataParams) {
+        return this.getItems<IEventStatus>(`${this.API_URL}/status/list`, null, params);
+    }
+
+    getEventStatus$(eventStatusId: string, params?: OdataParams) {
+        return this.getItem<IEventStatus>(`${this.API_URL}/status/${eventStatusId}`, null, params);
     }
 }

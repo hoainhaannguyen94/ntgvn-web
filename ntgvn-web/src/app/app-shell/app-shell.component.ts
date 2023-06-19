@@ -86,7 +86,9 @@ export class AppShellComponent extends BaseComponent implements OnInit {
 
     loadUserRoleList() {
         if (!this.appState.userRoles) {
-            this.userService.getUserRoleList$().subscribe({
+            this.userService.getUserRoleList$({
+                $orderby: 'name asc'
+            }).subscribe({
                 next: res => {
                     this.appState.userRoles = res.value;
                     this.state.commit(this.appState);

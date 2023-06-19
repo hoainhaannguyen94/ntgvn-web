@@ -94,14 +94,11 @@ export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IPro
                 this.productCategoryList = value;
             }
         });
-
         this.productFacade.getWarehouseList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.warehouseList = value;
             }
         });
-        this.productFacade.loadProductCategoryList();
-        this.productFacade.loadWarehouseList();
         this.productFacade.getProduct$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.product = value;
@@ -111,6 +108,12 @@ export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IPro
             error: err => {
                 throw err;
             }
+        });
+        this.productFacade.loadProductCategoryList({
+            $orderby: 'name asc'
+        });
+        this.productFacade.loadWarehouseList({
+            $orderby: 'name asc'
         });
     }
 

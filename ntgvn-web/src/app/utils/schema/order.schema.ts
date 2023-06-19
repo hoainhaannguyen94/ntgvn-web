@@ -28,6 +28,8 @@ export interface IOrderStatus {
     _id: string;
     name: string;
     displayName: string;
+    backgroundColor: string;
+    textColor: string;
 }
 
 export const BLANK_ORDER: IOrder = {

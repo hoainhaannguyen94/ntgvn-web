@@ -89,8 +89,12 @@ export class NewProductComponent extends BaseFormSingleComponent implements OnIn
                 this.warehouseList = value;
             }
         });
-        this.productFacade.loadProductCategoryList();
-        this.productFacade.loadWarehouseList();
+        this.productFacade.loadProductCategoryList({
+            $orderby: 'name asc'
+        });
+        this.productFacade.loadWarehouseList({
+            $orderby: 'name asc'
+        });
     }
 
     cancelHandler() {

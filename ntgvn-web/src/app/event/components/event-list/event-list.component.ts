@@ -3,7 +3,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged, takeUntil, tap, timer } from 'rxjs';
 import { BaseMatGridComponent } from '@utils/base/mat-grid';
-import { IEvent } from '@utils/schema';
+import { IEvent, IEventStatus } from '@utils/schema';
 import { EventFacadeService } from '../../facade/event-facade.service';
 import { OdataParams } from '@utils/http';
 import { Router } from '@angular/router';
@@ -60,6 +60,8 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
     router = inject(Router);
     dialog = inject(MatDialog);
     matSnackbar = inject(MatSnackBar);
+
+    eventStatusList: IEventStatus[] = [];
 
     ngOnInit() {
         this.registerCoreLayer();
@@ -140,11 +142,22 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 throw err;
             }
         });
+        this.eventFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
+            next: value => {
+                this.eventStatusList = value;
+            },
+            error: err => {
+                throw err;
+            }
+        });
         this.eventFacade.loadCountEvents();
         this.eventFacade.loadEventList({
             $skip: 0,
             $top: this.pageSize,
             $orderby: '_id desc'
+        });
+        this.eventFacade.loadEventStatusList({
+            $orderby: 'name asc'
         });
     }
 

@@ -35,6 +35,13 @@ export interface ICountEvent {
     count: number;
 }
 
+export interface IEventStatus {
+    _id: string;
+    name: string;
+    displayName: string;
+    color: string;
+}
+
 export const BLANK_EVENT: IEvent = {
     _id: '',
     title: '',
@@ -48,6 +55,7 @@ export const BLANK_EVENT: IEvent = {
         priority: 0,
         description: '',
         _tagIds: [],
-        completedAt: ''
+        completedAt: '',
+        status: ''
     }
 }

@@ -14,7 +14,9 @@ export const authCanActiveGuard = () => {
     const appState = state.currentState;
     const token = localStorage.getItem('token') ?? '';
     const loadUserRoleList = () => {
-        userService.getUserRoleList$().subscribe({
+        userService.getUserRoleList$({
+            $orderby: 'name asc'
+        }).subscribe({
             next: res => {
                 appState.userRoles = res.value;
                 state.commit(appState);

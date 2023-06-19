@@ -136,6 +136,26 @@ export class EventFacadeService {
         });
     }
 
+    loadEventStatusList(params?: OdataParams) {
+        this.eventState.setLoading(true);
+        this.eventAPI.getEventStatusList$(params).pipe(
+            finalize(() => {
+                this.eventState.setLoading(false);
+            })
+        ).subscribe({
+            next: res => {
+                this.eventState.setEventStatusList(res.value);
+            },
+            error: err => {
+                throw err;
+            }
+        });
+    }
+
+    getEventStatusList$() {
+        return this.eventState.getEventStatusList$();
+    }
+
     loadGroupList(params?: OdataParams) {
         this.eventState.setLoading(true);
         this.groupService.getGroupList$(params).pipe(

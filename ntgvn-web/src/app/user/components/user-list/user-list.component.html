@@ -50,9 +50,8 @@
                             <ng-container [matColumnDef]="column">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
                                 <td mat-cell *matCellDef="let element">
-                                    <div class="box-status --user-role-{{element.role}}">{{element[column]
-                                        | userRoleDetails | async | objectProperty: 'displayName' | uppercase}}
-                                    </div>
+                                    <b>{{element[column]| userRoleDetails | async | objectProperty: 'displayName' |
+                                        uppercase}}</b>
                                 </td>
                             </ng-container>
                         </ng-container>
@@ -60,7 +59,7 @@
                             <ng-container [matColumnDef]="column">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
                                 <td mat-cell *matCellDef="let element">
-                                    <b>{{element[column] | groupDetails |async | objectProperty: 'name' |
+                                    <b>{{element[column] | groupDetails | async | objectProperty: 'name' |
                                         uppercase}}</b>
                                 </td>
                             </ng-container>

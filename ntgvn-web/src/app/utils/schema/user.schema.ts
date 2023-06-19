@@ -17,6 +17,8 @@ export interface IUserRole {
     _id: string;
     name: string;
     displayName: string;
+    backgroundColor: string;
+    textColor: string;
 }
 
 export const BLANK_USER: IUser = {

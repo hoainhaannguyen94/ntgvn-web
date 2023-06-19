@@ -138,8 +138,12 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 throw err;
             }
         });
-        this.eventFacade.loadGroupList();
-        this.eventFacade.loadTagList();
+        this.eventFacade.loadGroupList({
+            $orderby: 'name asc'
+        });
+        this.eventFacade.loadTagList({
+            $orderby: 'name asc'
+        });
     }
 
     cancelHandler() {

@@ -38,10 +38,8 @@
                             <ng-container [matColumnDef]="column">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
                                 <td mat-cell *matCellDef="let element">
-                                    <div class="box-status --order-status-{{element.status}}">{{element[column] |
-                                        orderStatusDetails | async | objectProperty: 'displayName' |
-                                        orderStatusUppercase}}
-                                    </div>
+                                    <b>{{element[column] | orderStatusDetails | async | objectProperty: 'displayName' |
+                                        orderStatusUppercase}}</b>
                                 </td>
                             </ng-container>
                         </ng-container>

@@ -37,7 +37,7 @@ export class UserService extends OdataService {
         return this.getItems<IUserRole>(`${this.API_URL}/role/list`, null, params);
     }
 
-    getUserRole$(orderStatusId: string, params?: OdataParams) {
-        return this.getItem<IUserRole>(`${this.API_URL}/role/${orderStatusId}`, null, params);
+    getUserRole$(userRoleId: string, params?: OdataParams) {
+        return this.getItem<IUserRole>(`${this.API_URL}/role/${userRoleId}`, null, params);
     }
 }
