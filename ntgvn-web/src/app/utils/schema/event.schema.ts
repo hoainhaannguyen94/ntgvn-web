@@ -39,7 +39,8 @@ export interface IEventStatus {
     _id: string;
     name: string;
     displayName: string;
-    color: string;
+    backgroundColor: string;
+    textColor: string;
 }
 
 export const BLANK_EVENT: IEvent = {

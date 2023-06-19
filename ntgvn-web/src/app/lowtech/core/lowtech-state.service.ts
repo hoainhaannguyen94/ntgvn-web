@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IEvent, IGroup, ITag } from '@utils/schema';
+import { IEvent, IEventStatus, IGroup, ITag } from '@utils/schema';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -10,6 +10,7 @@ export class LowtechStateService {
     eventList$ = new Subject<IEvent[]>();
     countEvents$ = new Subject<number>();
     event$ = new Subject<IEvent>();
+    eventStatusList$ = new Subject<IEventStatus[]>();
     groupList$ = new Subject<IGroup[]>();
     tagList$ = new Subject<ITag[]>();
 
@@ -43,6 +44,14 @@ export class LowtechStateService {
 
     setEvent(event: IEvent) {
         this.event$.next(event);
+    }
+
+    getEventStatusList$() {
+        return this.eventStatusList$.asObservable();
+    }
+
+    setEventStatusList(roles: IEventStatus[]) {
+        this.eventStatusList$.next(roles);
     }
 
     getGroupList$() {

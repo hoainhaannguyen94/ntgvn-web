@@ -136,6 +136,26 @@ export class LowtechFacadeService {
         });
     }
 
+    loadEventStatusList(params?: OdataParams) {
+        this.lowtechState.setLoading(true);
+        this.lowtechAPI.getEventStatusList$(params).pipe(
+            finalize(() => {
+                this.lowtechState.setLoading(false);
+            })
+        ).subscribe({
+            next: res => {
+                this.lowtechState.setEventStatusList(res.value);
+            },
+            error: err => {
+                throw err;
+            }
+        });
+    }
+
+    getEventStatusList$() {
+        return this.lowtechState.getEventStatusList$();
+    }
+
     loadGroupList(params?: OdataParams) {
         this.lowtechState.setLoading(true);
         this.groupService.getGroupList$(params).pipe(

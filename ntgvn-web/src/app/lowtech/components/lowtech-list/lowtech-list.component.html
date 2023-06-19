@@ -30,16 +30,28 @@
     <mat-card class="events-container">
         <ng-container *ngFor="let event of eventList; trackBy:trackByFn; last as isLast;">
             <div class="event-block">
-                <div class="event-header">
-                    <div class="event-title">{{event.title}}</div>
-                    <div class="event-status">{{event.extendedProps.status | uppercase}}</div>
-                </div>
-                <div class="event-content">
-                    {{event.extendedProps.description}}
-                </div>
-                <div class="event-actions">
-                    <button mat-flat-button>Contact</button>
-                    <button mat-flat-button color="primary">Complete</button>
+                <div class="event-mark --{{event.extendedProps.status}}"></div>
+                <div class="event-content full-w">
+                    <div class="event-header">
+                        <div class="event-title">{{event.title}}</div>
+                        <div class="event-status --{{event.extendedProps.status}}">{{event.extendedProps.status |
+                            uppercase}}</div>
+                    </div>
+                    <div class="event-details">
+                        <div class="event-date-range">
+                            <mat-icon>date_range</mat-icon> {{event.start | date: 'MMM d, y'}} - {{event.end | date:
+                            'MMM d, y'}}
+                        </div>
+                        <div class="event-group">
+                            <mat-icon>groups</mat-icon> {{event.extendedProps._groupId | groupDetails | async |
+                            objectProperty: 'name'}}
+                        </div>
+                        <div class="event-description">{{event.extendedProps.description}}</div>
+                    </div>
+                    <div class="event-actions">
+                        <button mat-flat-button>Contact</button>
+                        <button mat-flat-button color="primary">Complete</button>
+                    </div>
                 </div>
             </div>
             <mat-divider *ngIf="!isLast" />

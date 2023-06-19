@@ -13,13 +13,14 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { BaseComponent } from '@utils/base/base.component';
 import { io } from 'socket.io-client';
 import { takeUntil, distinctUntilChanged, debounceTime } from 'rxjs';
-import { IEvent } from '@utils/schema';
+import { IEvent, IEventStatus } from '@utils/schema';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
 import { OdataParams } from '@utils/http';
+import { GroupDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
 
 @Component({
     selector: 'lowtech-list',
@@ -40,7 +41,9 @@ import { OdataParams } from '@utils/http';
         MatCardModule,
         MatDividerModule,
         MatSelectModule,
-        TranslocoModule
+        TranslocoModule,
+        GroupDetailsPipe,
+        ObjectPropertyPipe
     ],
     templateUrl: './lowtech-list.component.html',
     styleUrls: ['./lowtech-list.component.scss']
@@ -62,6 +65,8 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
         to: [],
         status: []
     });
+
+    eventStatusList: IEventStatus[] = [];
 
     ngOnInit() {
         this.registerCoreLayer();
@@ -94,9 +99,24 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 throw err;
             }
         });
+        this.lowtechFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
+            next: value => {
+                this.eventStatusList = value;
+                value.forEach(event => {
+                    document.documentElement.style.setProperty(`--${event.name}-background-color`, event.backgroundColor);
+                    document.documentElement.style.setProperty(`--${event.name}-text-color`, event.textColor);
+                });
+            },
+            error: err => {
+                throw err;
+            }
+        });
         this.lowtechFacade.loadCountEvents();
         this.lowtechFacade.loadEventList({
             $orderby: '_id desc'
+        });
+        this.lowtechFacade.loadEventStatusList({
+            $orderby: 'name asc'
         });
     }
 

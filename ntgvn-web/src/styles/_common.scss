@@ -6,6 +6,14 @@
     height: 100%;
 }
 
+.p-0 {
+    padding: 0;
+}
+
+.m-0 {
+    margin: 0;
+}
+
 *[data-avoid-click="true"] {
     pointer-events: none;
 }
