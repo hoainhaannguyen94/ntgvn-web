@@ -14,13 +14,11 @@ import { BaseComponent } from '@utils/base/base.component';
 import { io } from 'socket.io-client';
 import { takeUntil, distinctUntilChanged, debounceTime } from 'rxjs';
 import { IEvent, IEventStatus } from '@utils/schema';
-import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
 import { OdataParams } from '@utils/http';
-import { GroupDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
 
 @Component({
     selector: 'lowtech-list',
@@ -38,12 +36,9 @@ import { GroupDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
         MatDatepickerModule,
         MatNativeDateModule,
         MatDialogModule,
-        MatCardModule,
         MatDividerModule,
         MatSelectModule,
-        TranslocoModule,
-        GroupDetailsPipe,
-        ObjectPropertyPipe
+        TranslocoModule
     ],
     templateUrl: './lowtech-list.component.html',
     styleUrls: ['./lowtech-list.component.scss']
@@ -62,8 +57,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
     formGroup = this.formBuilder.group({
         search: [],
         from: [],
-        to: [],
-        status: []
+        to: []
     });
 
     eventStatusList: IEventStatus[] = [];
@@ -145,7 +139,6 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 let searchString = `contains(title, '')`;
                 let fromString = '';
                 let toString = '';
-                let statusString = '';
                 this.filterString = '';
                 if (values.search) {
                     searchString = `contains(title, '${values.search}')`;
@@ -156,23 +149,12 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 if (values.to) {
                     toString = `start le '${values.to.toISOString()}'`;
                 }
-                statusString = values.status?.reduce((acc, cur) => {
-                    if (!acc) {
-                        acc += `extendedProps/status eq '${cur}'`;
-                    } else {
-                        acc += ` or extendedProps/status eq '${cur}'`;
-                    }
-                    return acc;
-                }, '');
                 this.filterString += searchString;
                 if (fromString) {
                     this.filterString += ` and ${fromString}`;
                 }
                 if (toString) {
                     this.filterString += ` and ${toString}`;
-                }
-                if (statusString) {
-                    this.filterString += ` and ${statusString}`;
                 }
                 const options: OdataParams = {
                     $filter: this.filterString,

@@ -1,5 +1,5 @@
 <div class="lowtech-container">
-    <form [formGroup]="formGroup">
+    <div [formGroup]="formGroup" class="event-filters">
         <mat-form-field appearance="outline">
             <mat-label>{{'Search Task(s) by Title' | transloco}}</mat-label>
             <input matInput type="text" autocomplete="off" placeholder="" formControlName="search">
@@ -7,54 +7,43 @@
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>{{'From Date' | transloco}}</mat-label>
-            <input matInput [matDatepicker]="fromPicker" autocomplete="off" formControlName="from" />
-            <mat-datepicker-toggle matIconSuffix [for]="fromPicker"></mat-datepicker-toggle>
-            <mat-datepicker #fromPicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>{{'To Date' | transloco}}</mat-label>
-            <input matInput [matDatepicker]="toPicker" autocomplete="off" formControlName="to" />
-            <mat-datepicker-toggle matIconSuffix [for]="toPicker"></mat-datepicker-toggle>
-            <mat-datepicker #toPicker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>{{'Status' | transloco}}</mat-label>
-            <mat-select multiple formControlName="status">
-                <mat-option [value]="'active'">Active</mat-option>
-                <mat-option [value]="'completed'">Completed</mat-option>
-            </mat-select>
-        </mat-form-field>
-    </form>
-    <mat-card class="events-container">
+        <div class="event-date-pickers">
+            <mat-form-field appearance="outline">
+                <mat-label>{{'From Date' | transloco}}</mat-label>
+                <input matInput [matDatepicker]="fromPicker" autocomplete="off" formControlName="from" />
+                <mat-datepicker-toggle matIconSuffix [for]="fromPicker"></mat-datepicker-toggle>
+                <mat-datepicker #fromPicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>{{'To Date' | transloco}}</mat-label>
+                <input matInput [matDatepicker]="toPicker" autocomplete="off" formControlName="to" />
+                <mat-datepicker-toggle matIconSuffix [for]="toPicker"></mat-datepicker-toggle>
+                <mat-datepicker #toPicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="events-container mat-elevation-z4">
         <ng-container *ngFor="let event of eventList; trackBy:trackByFn; last as isLast;">
             <div class="event-block">
                 <div class="event-mark --{{event.extendedProps.status}}"></div>
                 <div class="event-content full-w">
                     <div class="event-header">
                         <div class="event-title">{{event.title}}</div>
-                        <div class="event-status --{{event.extendedProps.status}}">{{event.extendedProps.status |
-                            uppercase}}</div>
+                        <div class="event-date-range">
+                            <span>{{event.start | date: 'MMM d, y'}}</span>
+                            <mat-icon>arrow_forward</mat-icon>
+                            <span>{{event.end | date:'MMM d, y'}}</span>
+                        </div>
                     </div>
                     <div class="event-details">
-                        <div class="event-date-range">
-                            <mat-icon>date_range</mat-icon> {{event.start | date: 'MMM d, y'}} - {{event.end | date:
-                            'MMM d, y'}}
-                        </div>
-                        <div class="event-group">
-                            <mat-icon>groups</mat-icon> {{event.extendedProps._groupId | groupDetails | async |
-                            objectProperty: 'name'}}
-                        </div>
                         <div class="event-description">{{event.extendedProps.description}}</div>
                     </div>
                     <div class="event-actions">
-                        <button mat-flat-button>Contact</button>
                         <button mat-flat-button color="primary">Complete</button>
                     </div>
                 </div>
             </div>
             <mat-divider *ngIf="!isLast" />
         </ng-container>
-    </mat-card>
+    </div>
 </div>
