@@ -257,7 +257,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }

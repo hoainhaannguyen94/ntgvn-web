@@ -7,7 +7,7 @@
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
-        <div class="event-date-pickers">
+        <div class="event-filters-group">
             <mat-form-field appearance="outline">
                 <mat-label>{{'From Date' | transloco}}</mat-label>
                 <input matInput [matDatepicker]="fromPicker" autocomplete="off" formControlName="from" />
@@ -25,7 +25,7 @@
     <div class="events-container mat-elevation-z4">
         <ng-container *ngFor="let event of eventList; trackBy:trackByFn; last as isLast;">
             <div class="event-block">
-                <div class="event-mark --{{event.extendedProps.status}}"></div>
+                <div class="event-mark --{{event.extendedProps._statusName}}"></div>
                 <div class="event-content full-w">
                     <div class="event-header">
                         <div class="event-title">{{event.title}}</div>
@@ -39,7 +39,7 @@
                         <div class="event-description">{{event.extendedProps.description}}</div>
                     </div>
                     <div class="event-actions">
-                        <button mat-flat-button color="primary">Complete</button>
+                        <button mat-flat-button color="primary" (click)="completeEvent(event)">Complete</button>
                     </div>
                 </div>
             </div>

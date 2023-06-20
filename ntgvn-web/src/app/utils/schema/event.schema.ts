@@ -37,10 +37,12 @@ export interface ICountEvent {
 
 export interface IEventStatus {
     _id: string;
+    index: number;
     name: string;
     displayName: string;
     backgroundColor: string;
     textColor: string;
+    priority: number;
 }
 
 export const BLANK_EVENT: IEvent = {
@@ -57,6 +59,6 @@ export const BLANK_EVENT: IEvent = {
         description: '',
         _tagIds: [],
         completedAt: '',
-        status: ''
+        _statusId: ''
     }
 }

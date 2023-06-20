@@ -249,7 +249,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }

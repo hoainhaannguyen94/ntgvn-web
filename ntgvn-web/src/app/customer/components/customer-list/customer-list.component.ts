@@ -246,7 +246,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }

@@ -19,7 +19,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ConfirmDialogComponent } from '@utils/component/confirm-dialog';
 import { ObjectPropertyPipe, UserDetailsPipe } from '@utils/pipe';
 
 @Component({
@@ -41,7 +40,6 @@ import { ObjectPropertyPipe, UserDetailsPipe } from '@utils/pipe';
         MatDialogModule,
         MatTooltipModule,
         MatSnackBarModule,
-        ConfirmDialogComponent,
         ObjectPropertyPipe,
         UserDetailsPipe
     ],

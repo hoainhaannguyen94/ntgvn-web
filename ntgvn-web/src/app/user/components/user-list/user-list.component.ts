@@ -253,7 +253,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }

@@ -245,7 +245,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }

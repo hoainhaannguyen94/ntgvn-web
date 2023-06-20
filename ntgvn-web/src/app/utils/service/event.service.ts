@@ -33,6 +33,10 @@ export class EventService extends OdataService {
         return this.deleteItem(`${this.API_URL}/${eventId}`);
     }
 
+    completeEvent$(eventId: string) {
+        return this.updateItem(`${this.API_URL}/${eventId}/status/completed`, null);
+    }
+
     getEventStatusList$(params?: OdataParams) {
         return this.getItems<IEventStatus>(`${this.API_URL}/status/list`, null, params);
     }

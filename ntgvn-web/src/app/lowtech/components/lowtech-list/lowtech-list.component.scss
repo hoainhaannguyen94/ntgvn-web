@@ -5,9 +5,10 @@
 .event-filters {
     height: 156px;
 
-    .event-date-pickers {
+    .event-filters-group {
         display: flex;
         flex-direction: row;
+        align-items: flex-start;
         justify-content: space-between;
         gap: 1rem;
     }

@@ -1,0 +1,17 @@
+.event-mark {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+
+    &.--new {
+        background-color: var(--new-background-color);
+    }
+
+    &.--active {
+        background-color: var(--active-background-color);
+    }
+
+    &.--completed {
+        background-color: var(--completed-background-color);
+    }
+}

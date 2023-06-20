@@ -11,7 +11,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BaseFormSingleComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/component/error-message';
-import { BLANK_EVENT, IGroup, ITag } from '@utils/schema';
+import { BLANK_EVENT, IEventStatus, IGroup, ITag } from '@utils/schema';
 import { debounceTime, take, takeUntil } from 'rxjs';
 import { EventFacadeService } from '../../facade/event-facade.service';
 import { LogService } from '@utils/service';
@@ -68,6 +68,8 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
     groupList: IGroup[] = [];
     tagList: ITag[] = [];
 
+    eventStatusList: IEventStatus[] = [];
+
     triggerResize() {
         // Wait for changes to be applied, then trigger textarea resize.
         this.ngZone.onStable.pipe(take(1)).subscribe({
@@ -91,6 +93,14 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 throw err;
             }
         });
+        this.eventFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
+            next: value => {
+                this.eventStatusList = value;
+            },
+            error: err => {
+                throw err;
+            }
+        });
         this.eventFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.groupList = value;
@@ -106,6 +116,9 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
             error: err => {
                 throw err;
             }
+        });
+        this.eventFacade.loadEventStatusList({
+            $orderby: 'index asc'
         });
         this.eventFacade.loadGroupList({
             $orderby: 'name asc'
@@ -142,7 +155,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 description: formData.description,
                 _tagIds: formData._tagIds,
                 completedAt: BLANK_EVENT.extendedProps.completedAt,
-                status: 'active'
+                _statusId: this.eventStatusList.find(eventStatus => eventStatus.name === 'active')._id
             }
         }
         this.eventFacade.submitEvent$(event).subscribe({

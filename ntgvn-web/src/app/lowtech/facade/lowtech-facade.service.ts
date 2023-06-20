@@ -59,9 +59,9 @@ export class LowtechFacadeService {
         return this.lowtechState.getEventList$();
     }
 
-    loadEvent(lowtechId: string, params?: OdataParams) {
+    loadEvent(eventId: string, params?: OdataParams) {
         this.lowtechState.setLoading(true);
-        this.lowtechAPI.getEvent$(lowtechId, params).pipe(
+        this.lowtechAPI.getEvent$(eventId, params).pipe(
             finalize(() => {
                 this.lowtechState.setLoading(false);
             })
@@ -98,10 +98,10 @@ export class LowtechFacadeService {
         });
     }
 
-    updateEvent$(lowtechId: string, lowtech: Omit<IEvent, '_id'>) {
+    updateEvent$(eventId: string, lowtech: Omit<IEvent, '_id'>) {
         return new Observable((observer) => {
             this.lowtechState.setLoading(true);
-            this.lowtechAPI.updateEvent$(lowtechId, lowtech).pipe(
+            this.lowtechAPI.updateEvent$(eventId, lowtech).pipe(
                 finalize(() => {
                     this.lowtechState.setLoading(false);
                 })
@@ -117,10 +117,29 @@ export class LowtechFacadeService {
         });
     }
 
-    deleteEvent$(lowtechId: string) {
+    deleteEvent$(eventId: string) {
         return new Observable((observer) => {
             this.lowtechState.setLoading(true);
-            this.lowtechAPI.deleteEvent$(lowtechId).pipe(
+            this.lowtechAPI.deleteEvent$(eventId).pipe(
+                finalize(() => {
+                    this.lowtechState.setLoading(false);
+                })
+            ).subscribe({
+                next: res => {
+                    observer.next(res);
+                    observer.complete();
+                },
+                error: err => {
+                    observer.error(err);
+                }
+            });
+        });
+    }
+
+    completeEvent$(eventId: string) {
+        return new Observable((observer) => {
+            this.lowtechState.setLoading(true);
+            this.lowtechAPI.completeEvent$(eventId).pipe(
                 finalize(() => {
                     this.lowtechState.setLoading(false);
                 })

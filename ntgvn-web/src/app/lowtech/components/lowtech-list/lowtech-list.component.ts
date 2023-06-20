@@ -19,6 +19,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoModule } from '@ngneat/transloco';
 import { OdataParams } from '@utils/http';
+import { groupBy } from 'lodash';
+import { ConfirmDialogComponent } from '@utils/component/confirm-dialog';
 
 @Component({
     selector: 'lowtech-list',
@@ -38,7 +40,8 @@ import { OdataParams } from '@utils/http';
         MatDialogModule,
         MatDividerModule,
         MatSelectModule,
-        TranslocoModule
+        TranslocoModule,
+        ConfirmDialogComponent
     ],
     templateUrl: './lowtech-list.component.html',
     styleUrls: ['./lowtech-list.component.scss']
@@ -87,7 +90,19 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
         });
         this.lowtechFacade.getEventList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
-                this.eventList = value;
+                const eventGroups = groupBy(value, event => event.extendedProps._statusId);
+                this.eventList = this.eventStatusList
+                    .reduce((acc, cur) => {
+                        if (eventGroups[cur._id]) {
+                            acc = [...acc, ...eventGroups[cur._id]];
+                        }
+                        return acc;
+                    }, [])
+                    .reduce((acc, cur) => {
+                        cur.extendedProps['_statusName'] = this.eventStatusList.find(eventStatus => eventStatus._id === cur.extendedProps._statusId).name;
+                        acc.push(cur);
+                        return acc;
+                    }, []);
             },
             error: err => {
                 throw err;
@@ -96,9 +111,13 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
         this.lowtechFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.eventStatusList = value;
-                value.forEach(event => {
-                    document.documentElement.style.setProperty(`--${event.name}-background-color`, event.backgroundColor);
-                    document.documentElement.style.setProperty(`--${event.name}-text-color`, event.textColor);
+                value.forEach(eventStatus => {
+                    document.documentElement.style.setProperty(`--${eventStatus.name}-background-color`, eventStatus.backgroundColor);
+                    document.documentElement.style.setProperty(`--${eventStatus.name}-text-color`, eventStatus.textColor);
+                });
+                this.lowtechFacade.loadEventList({
+                    $filter: `extendedProps/_groupId eq '${this.appState.me.group}'`,
+                    $orderby: '_id asc'
                 });
             },
             error: err => {
@@ -106,11 +125,8 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
             }
         });
         this.lowtechFacade.loadCountEvents();
-        this.lowtechFacade.loadEventList({
-            $orderby: '_id desc'
-        });
         this.lowtechFacade.loadEventStatusList({
-            $orderby: 'name asc'
+            $orderby: 'index asc'
         });
     }
 
@@ -170,6 +186,55 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
     }
 
     reload() {
-        // TODO
+        this.lowtechFacade.loadCountEvents();
+        this.lowtechFacade.loadEventStatusList({
+            $orderby: 'index asc'
+        });
+    }
+
+    completeEvent(event: IEvent) {
+        const confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
+            minWidth: '350px',
+            maxWidth: '80%',
+            disableClose: true,
+            autoFocus: false,
+            data: {
+                title: `Task`,
+                content: `<span>Are you sure to complete this task: <b>${event.title}</b></span>`,
+                actions: [
+                    {
+                        text: 'Cancel',
+                        backgroundColor: '',
+                        action: () => {
+                            confirmDialogRef.close()
+                        }
+                    },
+                    {
+                        text: 'Complete',
+                        backgroundColor: 'primary',
+                        action: () => {
+                            this.lowtechFacade.completeEvent$(event._id).subscribe({
+                                next: () => {
+                                    this.matSnackbar.open(`Task ${event.title} have been completed.`, 'TASK', {
+                                        duration: 3000,
+                                        verticalPosition: 'bottom',
+                                        horizontalPosition: 'center'
+                                    });
+                                    confirmDialogRef.close(true);
+                                },
+                                error: err => {
+                                    throw err;
+                                }
+                            });
+                        }
+                    }
+                ]
+            }
+        });
+        confirmDialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe({
+            next: () => {
+                this.reload();
+            }
+        });
     }
 }

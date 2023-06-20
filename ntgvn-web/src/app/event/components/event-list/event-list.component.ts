@@ -131,7 +131,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                         _groupId: cur.extendedProps._groupId,
                         priority: cur.extendedProps.priority,
                         _tagIds: cur.extendedProps._tagIds,
-                        status: cur.extendedProps.status
+                        status: this.eventStatusList.find(eventStatus => eventStatus._id === cur.extendedProps._statusId).name
                     }
                     acc.push(event);
                     return acc;
@@ -145,19 +145,23 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
         this.eventFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.eventStatusList = value;
+                value.forEach(eventStatus => {
+                    document.documentElement.style.setProperty(`--${eventStatus.name}-background-color`, eventStatus.backgroundColor);
+                    document.documentElement.style.setProperty(`--${eventStatus.name}-text-color`, eventStatus.textColor);
+                });
+                this.eventFacade.loadEventList({
+                    $skip: 0,
+                    $top: this.pageSize,
+                    $orderby: '_id desc'
+                });
             },
             error: err => {
                 throw err;
             }
         });
         this.eventFacade.loadCountEvents();
-        this.eventFacade.loadEventList({
-            $skip: 0,
-            $top: this.pageSize,
-            $orderby: '_id desc'
-        });
         this.eventFacade.loadEventStatusList({
-            $orderby: 'name asc'
+            $orderby: 'index asc'
         });
     }
 
@@ -255,10 +259,8 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
 
     override reloadGrid() {
         this.eventFacade.loadCountEvents();
-        this.eventFacade.loadEventList({
-            $skip: 0,
-            $top: this.pageSize,
-            $orderby: '_id desc'
+        this.eventFacade.loadEventStatusList({
+            $orderby: 'index asc'
         });
     }
 
@@ -282,7 +284,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }

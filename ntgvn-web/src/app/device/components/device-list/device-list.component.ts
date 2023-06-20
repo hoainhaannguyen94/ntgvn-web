@@ -247,7 +247,7 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }

@@ -258,7 +258,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }

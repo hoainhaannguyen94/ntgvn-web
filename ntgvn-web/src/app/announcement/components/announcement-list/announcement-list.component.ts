@@ -124,7 +124,7 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }

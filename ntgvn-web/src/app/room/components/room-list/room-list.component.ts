@@ -249,7 +249,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }

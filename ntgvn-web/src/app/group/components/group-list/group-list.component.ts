@@ -245,7 +245,7 @@ export class GroupListComponent extends BaseMatGridComponent<IGroup> implements 
                 actions: [
                     {
                         text: 'Cancel',
-                        backgroundColor: 'accent',
+                        backgroundColor: '',
                         action: () => {
                             confirmDialogRef.close()
                         }
