@@ -48,7 +48,7 @@ export class NewUserComponent extends BaseFormSingleComponent implements OnInit 
         phoneNumber: [BLANK_USER.phoneNumber, [Validators.required]],
         email: [BLANK_USER.email, [Validators.required]],
         role: [BLANK_USER.role, [Validators.required]],
-        group: [BLANK_USER.group]
+        _groupId: [BLANK_USER._groupId]
     });
 
     userRoleList: IUserRole[] = [];

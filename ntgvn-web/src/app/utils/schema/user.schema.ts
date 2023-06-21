@@ -6,7 +6,7 @@ export interface IUser {
     phoneNumber: string;
     email: string;
     role: string;
-    group: string;
+    _groupId: string;
 }
 
 export interface ICountUser {
@@ -28,5 +28,5 @@ export const BLANK_USER: IUser = {
     phoneNumber: '',
     email: '',
     role: '',
-    group: ''
+    _groupId: ''
 }

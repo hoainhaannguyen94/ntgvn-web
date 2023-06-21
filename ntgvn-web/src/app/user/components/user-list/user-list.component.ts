@@ -191,12 +191,12 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
             'phoneNumber': 'Phone Number',
             'email': 'Email',
             'role': 'Role',
-            'group': 'Group'
+            '_groupId': 'Group'
         }
     }
 
     initDisplayColumns() {
-        this.columns = ['name', 'address', 'phoneNumber', 'email', 'role', 'group', 'actions'];
+        this.columns = ['name', 'address', 'phoneNumber', 'email', 'role', '_groupId', 'actions'];
     }
 
     initActions() {

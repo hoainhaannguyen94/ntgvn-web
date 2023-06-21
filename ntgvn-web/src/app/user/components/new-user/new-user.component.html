@@ -42,13 +42,13 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Group</mat-label>
-            <mat-select formControlName="group">
+            <mat-select formControlName="_groupId">
                 <mat-option *ngFor="let group of groupList; trackBy:trackByFn;" [value]="group._id">
                     {{group.name}}
                 </mat-option>
             </mat-select>
             <mat-error>
-                <error-message [errors]="formGroup.get('group')?.errors" [target]="'Group'" />
+                <error-message [errors]="formGroup.get('_groupId')?.errors" [target]="'Group'" />
             </mat-error>
         </mat-form-field>
     </div>
