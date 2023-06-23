@@ -3,7 +3,7 @@
         <ng-container *ngIf="appState.me['roleName'] !== 'member'">
             <mat-icon (click)="showSideNav()" matTooltip="Menu">menu</mat-icon>
         </ng-container>
-        <div class="top-nav-name">{{appState.domain | uppercase}} PROJECT</div>
+        <div class="top-nav-name">{{appState.domain | uppercase}}</div>
     </div>
     <div class="top-nav-right">
         <mat-icon matTooltip="Language" [matMenuTriggerFor]="menu">language</mat-icon>

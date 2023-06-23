@@ -17,19 +17,13 @@ export class LeftSidebarFacadeService {
                 displayName: 'Announcements',
                 url: '/announcement',
                 icon: 'campaign',
-                activated: true
-            },
-            {
-                displayName: 'Audit Logs',
-                url: '/audit-log',
-                icon: 'verified_user',
-                activated: true
+                activated: false
             },
             {
                 displayName: 'Analytics',
                 url: '/analytic',
                 icon: 'analytics',
-                activated: true
+                activated: false
             },
             {
                 displayName: 'Map',
@@ -50,21 +44,15 @@ export class LeftSidebarFacadeService {
                 activated: false
             },
             {
-                displayName: 'Rooms',
-                url: '/room',
-                icon: 'home',
+                displayName: 'Scheduler',
+                url: '/scheduler',
+                icon: 'pending_actions',
                 activated: true
             },
             {
                 displayName: 'Events',
                 url: '/event',
                 icon: 'event',
-                activated: true
-            },
-            {
-                displayName: 'Scheduler',
-                url: '/scheduler',
-                icon: 'pending_actions',
                 activated: true
             },
             {
@@ -84,6 +72,12 @@ export class LeftSidebarFacadeService {
                 url: '/order',
                 icon: 'receipt',
                 activated: false
+            },
+            {
+                displayName: 'Rooms',
+                url: '/room',
+                icon: 'home',
+                activated: true
             },
             {
                 displayName: 'Users',
@@ -107,6 +101,12 @@ export class LeftSidebarFacadeService {
                 displayName: 'Tags',
                 url: '/tag',
                 icon: 'label',
+                activated: true
+            },
+            {
+                displayName: 'Audit Logs',
+                url: '/audit-log',
+                icon: 'verified_user',
                 activated: true
             },
             {

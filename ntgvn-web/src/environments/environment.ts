@@ -6,6 +6,6 @@ export const environment = {
     websocketURL: 'http://localhost:8081',
     apiVersion: 'v1',
     enableWebsocket: false,
-    root: '/announcement',
+    root: '/scheduler',
     language: 'en'
 }
