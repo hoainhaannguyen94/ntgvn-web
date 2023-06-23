@@ -116,7 +116,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                     document.documentElement.style.setProperty(`--${eventStatus.name}-text-color`, eventStatus.textColor);
                 });
                 this.lowtechFacade.loadEventList({
-                    $filter: `extendedProps/_groupId eq '${this.appState.me.group}'`,
+                    $filter: `extendedProps/_groupId eq '${this.appState.me._groupId}'`,
                     $orderby: '_id asc'
                 });
             },
