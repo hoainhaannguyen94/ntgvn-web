@@ -10,7 +10,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseFormSingleDetailsComponent } from '@utils/base/form';
 import { ErrorMessageComponent } from '@utils/component/error-message';
-import { BLANK_EVENT, IEvent, IGroup, ITag } from '@utils/schema';
+import { BLANK_EVENT, IEvent, IEventStatus, IGroup, ITag } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { EventFacadeService } from '../../facade/event-facade.service';
@@ -53,6 +53,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
 
     eventId = '';
     event = BLANK_EVENT;
+    eventStatus: IEventStatus;
 
     override formGroup = this.formBuilder.group({
         title: [BLANK_EVENT.title, [Validators.required]],
@@ -117,6 +118,12 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 }
                 this.originalData = cloneDeep(formData);
                 this.formGroup.patchValue(formData);
+                this.eventFacade.getEventStatus$(value.extendedProps._statusId).subscribe({
+                    next: res => {
+                        this.eventStatus = res.value;
+                        console.log(this.eventStatus);
+                    }
+                });
             },
             error: err => {
                 throw err;

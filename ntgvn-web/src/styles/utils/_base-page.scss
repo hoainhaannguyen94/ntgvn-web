@@ -30,6 +30,10 @@
         font-size: 56px;
         width: 56px;
         height: 56px;
+
+        &:hover {
+            cursor: default;
+        }
     }
 
     .base-details-body {

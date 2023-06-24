@@ -113,7 +113,7 @@ export class LeftSidebarFacadeService {
                 displayName: 'Policy',
                 url: '/policy',
                 icon: 'policy',
-                activated: true
+                activated: false
             },
             {
                 displayName: 'License',
@@ -125,7 +125,7 @@ export class LeftSidebarFacadeService {
                 displayName: 'About Us',
                 url: '/about-us',
                 icon: 'info',
-                activated: true
+                activated: false
             },
             {
                 displayName: 'Settings',

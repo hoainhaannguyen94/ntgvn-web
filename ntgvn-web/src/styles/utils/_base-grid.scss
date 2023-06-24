@@ -61,6 +61,8 @@
         }
 
         .base-grid-table-main-column {
+            font-weight: var(--font-weight-bold);
+
             &:hover {
                 cursor: pointer;
             }

@@ -1,7 +1,8 @@
 .event-mark {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    color: #ffffff;
+    font-weight: var(--font-weight-bold);
 
     &.--new {
         background-color: var(--new-background-color);

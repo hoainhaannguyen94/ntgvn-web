@@ -156,6 +156,10 @@ export class EventFacadeService {
         return this.eventState.getEventStatusList$();
     }
 
+    getEventStatus$(eventStatusId: string, params?: OdataParams) {
+        return this.eventAPI.getEventStatus$(eventStatusId, params);
+    }
+
     loadGroupList(params?: OdataParams) {
         this.eventState.setLoading(true);
         this.groupService.getGroupList$(params).pipe(
