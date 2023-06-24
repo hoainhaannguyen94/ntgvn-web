@@ -74,7 +74,7 @@ export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
 
     onSidenavOpenedChange(event) {
         if (this.sidenavMode === 'side' && event === true) {
-            document.getElementById('app-content').style.width = 'calc(100% - 320px)';
+            document.getElementById('app-content').style.width = 'calc(100% - 250px)';
         } else {
             document.getElementById('app-content').style.width = '100%';
         }

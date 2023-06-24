@@ -1,0 +1,30 @@
+.base-dialog-container {
+    padding: var(--dialog-padding);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .base-dialog-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .base-dialog-title {
+            font-size: 1.4rem;
+            font-weight: var(--font-weight-bold);
+        }
+    }
+
+    .base-dialog-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .base-dialog-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+    }
+}

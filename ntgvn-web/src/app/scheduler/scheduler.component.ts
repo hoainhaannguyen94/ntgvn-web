@@ -127,7 +127,7 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
         this.dialog.open(EventDetailsDialogComponent, {
             minWidth: '350px',
             maxWidth: '50vw',
-            disableClose: false,
+            disableClose: true,
             autoFocus: false,
             data: event
         });

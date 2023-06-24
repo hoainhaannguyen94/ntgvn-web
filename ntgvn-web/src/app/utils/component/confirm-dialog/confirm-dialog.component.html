@@ -1,9 +1,13 @@
-<h1 mat-dialog-title class="confirm-dialog-title">{{dialogData.title}}</h1>
-<div mat-dialog-content class="confirm-dialog-content">
-    <div [innerHTML]="dialogData.content"></div>
-</div>
-<div mat-dialog-actions class="confirm-dialog-actions">
-    <ng-container *ngFor="let action of dialogData.actions; trackBy:trackByFn;">
-        <button mat-flat-button [color]="action.backgroundColor" (click)="action.action()">{{action.text}}</button>
-    </ng-container>
+<div class="base-dialog-container">
+    <div class="base-dialog-header">
+        <div class="base-dialog-title">{{dialogData.title}}</div>
+    </div>
+    <div class="base-dialog-content">
+        <div [innerHTML]="dialogData.content"></div>
+    </div>
+    <div class="base-dialog-actions">
+        <ng-container *ngFor="let action of dialogData.actions; trackBy:trackByFn;">
+            <button mat-flat-button [color]="action.backgroundColor" (click)="action.action()">{{action.text}}</button>
+        </ng-container>
+    </div>
 </div>

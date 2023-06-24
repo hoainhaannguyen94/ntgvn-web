@@ -22,6 +22,7 @@
 @import './styles/utils/widget';
 @import './styles/utils/base-grid';
 @import './styles/utils/base-page';
+@import './styles/utils/base-dialog';
 @import './styles/pages/audit-log';
 @import './styles/pages/event-list';
 
@@ -50,7 +51,7 @@ html {
 
     #app-left-sidenav-content {
         max-width: 50vw;
-        width: 320px;
+        width: 250px;
     }
 
     #app-content {
