@@ -206,7 +206,7 @@ export class NewAnnouncementComponent extends BaseComponent implements OnInit {
     }
 
     cancelHandler() {
-        this.router.navigate(['/announcement/list']);
+        this.back();
     }
 
     submitHandler() {

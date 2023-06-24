@@ -90,7 +90,7 @@ export class NewUserComponent extends BaseFormSingleComponent implements OnInit 
     }
 
     cancelHandler() {
-        this.router.navigate(['/user/list']);
+        this.back();
     }
 
     submitHandler() {

@@ -237,7 +237,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
     deleteCustomerHandler(item: ICustomer) {
         const confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
             minWidth: '350px',
-            maxWidth: '80%',
+            maxWidth: '80vw',
             disableClose: true,
             autoFocus: false,
             data: {

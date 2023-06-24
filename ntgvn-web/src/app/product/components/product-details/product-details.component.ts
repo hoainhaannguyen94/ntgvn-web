@@ -118,7 +118,7 @@ export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IPro
     }
 
     cancelHandler() {
-        this.router.navigate(['/product/list']);
+        this.back();
     }
 
     updateHandler() {

@@ -121,7 +121,6 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 this.eventFacade.getEventStatus$(value.extendedProps._statusId).subscribe({
                     next: res => {
                         this.eventStatus = res.value;
-                        console.log(this.eventStatus);
                     }
                 });
             },
@@ -154,7 +153,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
     }
 
     cancelHandler() {
-        this.router.navigate(['/event/list']);
+       this.back();
     }
 
     updateHandler() {

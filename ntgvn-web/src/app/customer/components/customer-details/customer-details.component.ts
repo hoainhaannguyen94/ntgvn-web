@@ -86,7 +86,7 @@ export class CustomerDetailsComponent extends BaseFormSingleDetailsComponent<ICu
     }
 
     cancelHandler() {
-        this.router.navigate(['/customer/list']);
+        this.back();
     }
 
     updateHandler() {

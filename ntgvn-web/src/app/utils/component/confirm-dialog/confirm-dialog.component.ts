@@ -20,7 +20,7 @@ import { IConfirmDialogData } from './schemas/confirm-dialog.config';
     styleUrls: ['./confirm-dialog.component.scss']
 })
 export class ConfirmDialogComponent {
-    data = inject(MAT_DIALOG_DATA) as IConfirmDialogData;
+    dialogData = inject(MAT_DIALOG_DATA) as IConfirmDialogData;
 
     trackByFn(index: number) {
         return index;

@@ -97,7 +97,7 @@ export class TagDetailsComponent extends BaseFormSingleDetailsComponent<ITag> im
     }
 
     cancelHandler() {
-        this.router.navigate(['/tag/list']);
+        this.back();
     }
 
     updateHandler() {

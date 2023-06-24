@@ -111,7 +111,7 @@ export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> 
     }
 
     cancelHandler() {
-        this.router.navigate(['/user/list']);
+        this.back();
     }
 
     updateHandler() {

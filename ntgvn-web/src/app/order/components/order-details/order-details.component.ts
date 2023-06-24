@@ -213,7 +213,7 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
     }
 
     cancelHandler() {
-        this.router.navigate(['/order/list']);
+        this.back();
     }
 
     updateHandler() {

@@ -12,3 +12,4 @@ export * from './user-details.pipe';
 export * from './user-role-details.pipe';
 export * from './group-details.pipe';
 export * from './warehouse-details.pipe';
+export * from './event-status-details.pipe';

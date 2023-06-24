@@ -97,7 +97,7 @@ export class NewRoomComponent extends BaseFormSingleComponent implements OnInit 
     }
 
     cancelHandler() {
-        this.router.navigate(['/room/list']);
+        this.back();
     }
 
     submitHandler() {

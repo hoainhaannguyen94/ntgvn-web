@@ -240,8 +240,8 @@ export class AnnouncementDetailsComponent extends BaseComponent implements OnIni
     }
 
     cancelHandler() {
-        this.router.navigate(['/announcement/list']);
-    }
+        this.back();
+     }
 
     updateHandler() {
         this.announcementFacade.updateAnnouncement$(this.announcementId, {

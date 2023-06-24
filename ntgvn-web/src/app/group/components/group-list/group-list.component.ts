@@ -236,7 +236,7 @@ export class GroupListComponent extends BaseMatGridComponent<IGroup> implements 
     deleteGroupHandler(item: IGroup) {
         const confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
             minWidth: '350px',
-            maxWidth: '80%',
+            maxWidth: '80vw',
             disableClose: true,
             autoFocus: false,
             data: {

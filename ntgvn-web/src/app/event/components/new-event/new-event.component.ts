@@ -129,7 +129,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
     }
 
     cancelHandler() {
-        this.router.navigate(['/event/list']);
+        this.back();
     }
 
     submitHandler() {

@@ -115,7 +115,7 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
     deleteAnnouncementHandler(item: IAnnouncement) {
         const confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
             minWidth: '350px',
-            maxWidth: '80%',
+            maxWidth: '80vw',
             disableClose: true,
             autoFocus: false,
             data: {

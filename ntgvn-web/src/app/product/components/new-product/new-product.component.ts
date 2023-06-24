@@ -98,7 +98,7 @@ export class NewProductComponent extends BaseFormSingleComponent implements OnIn
     }
 
     cancelHandler() {
-        this.router.navigate(['/product/list']);
+        this.back();
     }
 
     submitHandler() {

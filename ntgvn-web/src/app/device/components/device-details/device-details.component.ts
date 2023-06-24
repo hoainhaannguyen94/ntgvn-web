@@ -89,7 +89,7 @@ export class DeviceDetailsComponent extends BaseFormSingleDetailsComponent<IDevi
     }
 
     cancelHandler() {
-        this.router.navigate(['/device/list']);
+        this.back();
     }
 
     updateHandler() {

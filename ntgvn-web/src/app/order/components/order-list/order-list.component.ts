@@ -248,7 +248,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
     deleteOrderHandler(item: IOrder) {
         const confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
             minWidth: '350px',
-            maxWidth: '80%',
+            maxWidth: '80vw',
             disableClose: true,
             autoFocus: false,
             data: {

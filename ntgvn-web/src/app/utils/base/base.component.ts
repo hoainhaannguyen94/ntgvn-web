@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -16,6 +17,7 @@ export abstract class BaseComponent implements OnDestroy {
     state = inject(StateService<IAppState>);
     resizeObserver = inject(ResizeObserverService);
     cdr = inject(ChangeDetectorRef);
+    location = inject(Location);
 
     destroy$ = new Subject<void>();
     subscriptions = new Map<string, Subscription>();
@@ -54,5 +56,9 @@ export abstract class BaseComponent implements OnDestroy {
         if (this.socket) {
             this.socket.disconnect();
         }
+    }
+
+    back() {
+        this.location.back();
     }
 }

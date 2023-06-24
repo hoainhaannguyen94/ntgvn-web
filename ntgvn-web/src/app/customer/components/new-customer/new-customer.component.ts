@@ -67,7 +67,7 @@ export class NewCustomerComponent extends BaseFormSingleComponent implements OnI
     }
 
     cancelHandler() {
-        this.router.navigate(['/customer/list']);
+        this.back();
     }
 
     submitHandler() {

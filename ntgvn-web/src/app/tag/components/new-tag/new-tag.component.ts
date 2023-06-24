@@ -77,7 +77,7 @@ export class NewTagComponent extends BaseFormSingleComponent implements OnInit {
     }
 
     cancelHandler() {
-        this.router.navigate(['/tag/list']);
+        this.back();
     }
 
     submitHandler() {

@@ -118,7 +118,7 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
     }
 
     cancelHandler() {
-        this.router.navigate(['/room/list']);
+        this.back();
     }
 
     updateHandler() {

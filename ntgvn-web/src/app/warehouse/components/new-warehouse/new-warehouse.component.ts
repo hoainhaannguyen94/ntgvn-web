@@ -83,7 +83,7 @@ export class NewWarehouseComponent extends BaseFormSingleComponent implements On
     }
 
     cancelHandler() {
-        this.router.navigate(['/warehouse/list']);
+        this.back();
     }
 
     submitHandler() {

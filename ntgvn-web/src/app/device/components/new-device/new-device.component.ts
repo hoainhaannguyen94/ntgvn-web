@@ -68,7 +68,7 @@ export class NewDeviceComponent extends BaseFormSingleComponent implements OnIni
     }
 
     cancelHandler() {
-        this.router.navigate(['/device/list']);
+        this.back();
     }
 
     submitHandler() {

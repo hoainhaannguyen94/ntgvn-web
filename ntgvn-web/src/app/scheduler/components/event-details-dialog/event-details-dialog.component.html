@@ -1,0 +1,34 @@
+<div class="event-details-dialog-container">
+    <div class="event-header">
+        <div class="event-title">
+            {{event.title}}
+        </div>
+        <div class="event-status" [style.backgroundColor]="eventStatus.backgroundColor"
+            [style.color]="eventStatus.textColor" *ngIf="eventStatus">
+            {{eventStatus.name | uppercase}}
+        </div>
+    </div>
+
+    <div class="event-content">
+        <div class="event-group">
+            <b>Group:</b> {{event.extendedProps._groupId | groupDetails | async | objectProperty: 'name' | uppercase}}
+        </div>
+
+        <div class="event-date-range">
+            <div><b>Start Date:</b> {{event.start | date: 'MMM d, y'}}</div>
+            <mat-icon>arrow_forward</mat-icon>
+            <div><b>End Date:</b> {{event.end | date:'MMM d, y'}}</div>
+        </div>
+
+        <div class="event-completed-at" *ngIf="event.extendedProps.completedAt">
+            <b>Completed At:</b> {{event.extendedProps.completedAt | date: 'MMM d, y'}}
+        </div>
+
+        <div class="event-description">{{event.extendedProps.description}}</div>
+    </div>
+
+    <div class="event-actions">
+        <button mat-flat-button (click)="cancelHandler()">Cancel</button>
+        <button mat-flat-button color="primary" (click)="navigateToEventDetails()">Edit</button>
+    </div>
+</div>

@@ -78,7 +78,7 @@ export class NewGroupComponent extends BaseFormSingleComponent implements OnInit
     }
 
     cancelHandler() {
-        this.router.navigate(['/group/list']);
+        this.back();
     }
 
     submitHandler() {

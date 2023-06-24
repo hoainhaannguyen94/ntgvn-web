@@ -105,7 +105,7 @@ export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IW
     }
 
     cancelHandler() {
-        this.router.navigate(['/warehouse/list']);
+        this.back();
     }
 
     updateHandler() {

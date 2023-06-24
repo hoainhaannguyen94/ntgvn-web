@@ -195,7 +195,7 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
     }
 
     cancelHandler() {
-        this.router.navigate(['/order/list']);
+        this.back();
     }
 
     submitHandler() {

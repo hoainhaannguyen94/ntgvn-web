@@ -4,6 +4,7 @@ import { SchedulerStateService } from '../core/scheduler-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IEvent } from '@utils/schema';
+import { EventService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,7 @@ import { IEvent } from '@utils/schema';
 export class SchedulerFacadeService {
     schedulerAPI = inject(SchedulerApiService);
     schedulerState = inject(SchedulerStateService);
+    eventAPI = inject(EventService);
 
     isLoading$() {
         return this.schedulerState.isLoading$();
@@ -131,5 +133,9 @@ export class SchedulerFacadeService {
                 }
             });
         });
+    }
+
+    getEventStatus$(eventStatusId: string) {
+        return this.eventAPI.getEventStatus$(eventStatusId);
     }
 }

@@ -236,7 +236,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
     deleteTagHandler(item: ITag) {
         const confirmDialogRef = this.dialog.open(ConfirmDialogComponent, {
             minWidth: '350px',
-            maxWidth: '80%',
+            maxWidth: '80vw',
             disableClose: true,
             autoFocus: false,
             data: {

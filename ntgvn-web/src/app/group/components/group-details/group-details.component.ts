@@ -97,7 +97,7 @@ export class GroupDetailsComponent extends BaseFormSingleDetailsComponent<IGroup
     }
 
     cancelHandler() {
-        this.router.navigate(['/group/list']);
+        this.back();
     }
 
     updateHandler() {

@@ -11,12 +11,15 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { EventDetailsDialogComponent } from './components/event-details-dialog/event-details-dialog.component';
 
 @Component({
     selector: 'scheduler',
     standalone: true,
     imports: [
-        CommonModule
+        CommonModule,
+        MatDialogModule
     ],
     templateUrl: './scheduler.component.html',
     styleUrls: ['./scheduler.component.scss']
@@ -24,6 +27,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 export class SchedulerComponent extends BaseComponent implements OnInit {
     commonService = inject(CommonService);
     schedulerFacade = inject(SchedulerFacadeService);
+    dialog = inject(MatDialog);
 
     @ViewChild('calendarElement') calendarElement: ElementRef<HTMLElement>;
 
@@ -47,10 +51,13 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
             center: 'title',
             right: 'multiMonthYear,dayGridMonth,timeGridWeek,listWeek'
         },
-        editable: true,
+        editable: false,
         businessHours: true,
         events: [],
-        locale: this.initialLocale
+        locale: this.initialLocale,
+        eventClick: event => {
+            this.openEventDetailsDialog(event);
+        }
     }
 
     ngOnInit() {
@@ -113,6 +120,16 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
                     this.calendar.setOption('locale', this.appState.language);
                 }
             }
+        });
+    }
+
+    openEventDetailsDialog(event) {
+        this.dialog.open(EventDetailsDialogComponent, {
+            minWidth: '350px',
+            maxWidth: '50vw',
+            disableClose: false,
+            autoFocus: false,
+            data: event
         });
     }
 }
