@@ -3,7 +3,7 @@
         <div class="base-grid-toolbar">
             <div class="base-grid-toolbar-search">
                 <mat-icon>search</mat-icon>
-                <input type="text" autocomplete="off" placeholder="Search product(s) by name"
+                <input type="text" autocomplete="off" placeholder="Search product(s) by Name"
                     [formControl]="searchControl">
                 <mat-icon matTooltip="Clear" (click)="searchControl.setValue('')" *ngIf="isSearching">clear</mat-icon>
             </div>
