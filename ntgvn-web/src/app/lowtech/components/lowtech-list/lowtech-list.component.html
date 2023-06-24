@@ -39,7 +39,8 @@
                         <div class="event-description">{{event.extendedProps.description}}</div>
                     </div>
                     <div class="event-actions">
-                        <button mat-flat-button color="primary" (click)="completeEvent(event)">Complete</button>
+                        <button mat-flat-button color="primary" (click)="completeEvent(event)"
+                            *ngIf="event.extendedProps._statusName !== 'completed'">Complete</button>
                     </div>
                 </div>
             </div>
