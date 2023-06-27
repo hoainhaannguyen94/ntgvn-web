@@ -116,12 +116,6 @@ export class LeftSidebarFacadeService {
                 activated: false
             },
             {
-                displayName: 'License',
-                url: '/license',
-                icon: 'security',
-                activated: true
-            },
-            {
                 displayName: 'About Us',
                 url: '/about-us',
                 icon: 'info',

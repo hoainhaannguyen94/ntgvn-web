@@ -3,10 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: 'list',
-        loadChildren: () => import('./components/warehouse-list/warehouse-list.routes').then((m) => m.routes),
-        data: {
-            preload: true
-        }
+        loadChildren: () => import('./components/warehouse-list/warehouse-list.routes').then((m) => m.routes)
     },
     {
         path: ':id/details',

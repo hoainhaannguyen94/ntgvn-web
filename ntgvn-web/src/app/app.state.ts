@@ -26,6 +26,7 @@ export interface IAppState {
     userRoles: IUserRole[];
     timezone: string;
     language: string;
+    license: string;
 }
 
 export const INITIAL_STATE = {
@@ -38,6 +39,7 @@ export const INITIAL_STATE = {
     apiVersion: GLOBAL_SETTINGS.apiVersion,
     enableWebsocket: GLOBAL_SETTINGS.enableWebsocket,
     language: GLOBAL_SETTINGS.language,
+    license: GLOBAL_SETTINGS.license,
     token: '',
     ready: false,
     me: AnonymousUser,

@@ -6,6 +6,7 @@ import { BaseComponent } from '@utils/base/base.component';
 import { TimezoneComponent } from './components/timezone/timezone.component';
 import { LanguageComponent } from './components/language/language.component';
 import { UserComponent } from './components/user/user.component';
+import { LicenseComponent } from './components/license/license.component';
 
 @Component({
     selector: 'setting',
@@ -16,7 +17,8 @@ import { UserComponent } from './components/user/user.component';
         MatIconModule,
         TimezoneComponent,
         LanguageComponent,
-        UserComponent
+        UserComponent,
+        LicenseComponent
     ],
     templateUrl: './setting.component.html',
     styleUrls: ['./setting.component.scss']

@@ -9,5 +9,6 @@ export const GLOBAL_SETTINGS = {
     apiVersion: environment.apiVersion,
     enableWebsocket: environment.enableWebsocket,
     root: environment.root,
-    language: environment.language
+    language: environment.language,
+    license: environment.license
 }

@@ -7,5 +7,6 @@ export const environment = {
     apiVersion: 'v1',
     enableWebsocket: false,
     root: '/scheduler',
-    language: 'en'
+    language: 'en',
+    license: 'Basic'
 }

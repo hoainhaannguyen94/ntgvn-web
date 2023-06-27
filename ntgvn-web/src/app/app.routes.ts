@@ -14,10 +14,6 @@ export const routes: Routes = [
         loadChildren: () => import('./about-us/about-us.routes').then((m) => m.routes)
     },
     {
-        path: 'license',
-        loadChildren: () => import('./license/license.routes').then((m) => m.routes)
-    },
-    {
         path: 'policy',
         loadChildren: () => import('./policy/policy.routes').then((m) => m.routes)
     },
