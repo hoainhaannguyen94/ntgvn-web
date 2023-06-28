@@ -71,7 +71,14 @@ export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IPro
         this.activatedRoute.params.pipe(take(1)).subscribe(value => {
             if (value['id']) {
                 this.productId = value['id']
-                this.productFacade.loadProduct(this.productId);
+                this.productFacade.getProduct$(this.productId).subscribe({
+                    next: res => {
+                        const product = res.value;
+                        this.product = product;
+                        this.originalData = cloneDeep(product);
+                        this.formGroup.patchValue(product);
+                    }
+                });
             }
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
@@ -97,16 +104,6 @@ export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IPro
         this.productFacade.getWarehouseList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.warehouseList = value;
-            }
-        });
-        this.productFacade.getProduct$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.product = value;
-                this.originalData = cloneDeep(value);
-                this.formGroup.patchValue(this.product);
-            },
-            error: err => {
-                throw err;
             }
         });
         this.productFacade.loadProductCategoryList({

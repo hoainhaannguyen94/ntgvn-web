@@ -58,24 +58,8 @@ export class WarehouseFacadeService {
         return this.warehouseState.getWarehouseList$();
     }
 
-    loadWarehouse(warehouseId: string, params?: OdataParams) {
-        this.warehouseState.setLoading(true);
-        this.warehouseAPI.getWarehouse$(warehouseId, params).pipe(
-            finalize(() => {
-                this.warehouseState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.warehouseState.setWarehouse(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getWarehouse$() {
-        return this.warehouseState.getWarehouse$();
+    getWarehouse$(warehouseId: string, params?: OdataParams) {
+        return this.warehouseAPI.getWarehouse$(warehouseId, params);
     }
 
     submitWarehouse$(warehouse: Omit<IWarehouse, '_id'>) {

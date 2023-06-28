@@ -59,26 +59,6 @@ export class LowtechFacadeService {
         return this.lowtechState.getEventList$();
     }
 
-    loadEvent(eventId: string, params?: OdataParams) {
-        this.lowtechState.setLoading(true);
-        this.lowtechAPI.getEvent$(eventId, params).pipe(
-            finalize(() => {
-                this.lowtechState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.lowtechState.setEvent(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getEvent$() {
-        return this.lowtechState.getEvent$();
-    }
-
     submitEvent$(lowtech: Omit<IEvent, '_id'>) {
         return new Observable((observer) => {
             this.lowtechState.setLoading(true);

@@ -9,7 +9,6 @@ export class DeviceStateService {
     loading$ = new Subject<boolean>();
     deviceList$ = new Subject<IDevice[]>();
     countdevices$ = new Subject<number>();
-    device$ = new Subject<IDevice>();
 
     isLoading$() {
         return this.loading$.asObservable();
@@ -33,13 +32,5 @@ export class DeviceStateService {
 
     setDeviceList(devices: IDevice[]) {
         this.deviceList$.next(devices);
-    }
-
-    getDevice$() {
-        return this.device$.asObservable();
-    }
-
-    setDevice(device: IDevice) {
-        this.device$.next(device);
     }
 }

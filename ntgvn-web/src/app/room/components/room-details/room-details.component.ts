@@ -72,7 +72,14 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
         this.activatedRoute.params.pipe(take(1)).subscribe(value => {
             if (value['id']) {
                 this.roomId = value['id']
-                this.roomFacade.loadRoom(this.roomId);
+                this.roomFacade.getRoom$(this.roomId).subscribe({
+                    next: res => {
+                        const room = res.value;
+                        this.room = room;
+                        this.originalData = cloneDeep(room);
+                        this.formGroup.patchValue(room);
+                    }
+                });
             }
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
@@ -85,16 +92,6 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
         this.roomFacade.isLoading$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.isLoading = value;
-            },
-            error: err => {
-                throw err;
-            }
-        });
-        this.roomFacade.getRoom$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.room = value;
-                this.originalData = cloneDeep(value);
-                this.formGroup.patchValue(this.room);
             },
             error: err => {
                 throw err;

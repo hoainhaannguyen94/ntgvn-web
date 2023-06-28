@@ -56,24 +56,8 @@ export class AnnouncementFacadeService {
         return this.announcementState.getAnnouncementList$();
     }
 
-    loadAnnouncement(announcementId: string, params?: OdataParams) {
-        this.announcementState.setLoading(true);
-        this.announcementAPI.getAnnouncement$(announcementId, params).pipe(
-            finalize(() => {
-                this.announcementState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.announcementState.setAnnouncement(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getAnnouncement$() {
-        return this.announcementState.getAnnouncement$();
+    getAnnouncement$(announcementId: string, params?: OdataParams) {
+        return this.announcementAPI.getAnnouncement$(announcementId, params);
     }
 
     submitAnnouncement$(announcement: Omit<IAnnouncement, '_id'>) {

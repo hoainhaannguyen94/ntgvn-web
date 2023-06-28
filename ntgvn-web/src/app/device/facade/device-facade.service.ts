@@ -56,24 +56,8 @@ export class DeviceFacadeService {
         return this.deviceState.getDeviceList$();
     }
 
-    loadDevice(deviceId: string, params?: OdataParams) {
-        this.deviceState.setLoading(true);
-        this.deviceAPI.getDevice$(deviceId, params).pipe(
-            finalize(() => {
-                this.deviceState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.deviceState.setDevice(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getDevice$() {
-        return this.deviceState.getDevice$();
+    getDevice$(deviceId: string, params?: OdataParams) {
+        return this.deviceAPI.getDevice$(deviceId, params);
     }
 
     submitDevice$(device: Omit<IDevice, '_id'>) {

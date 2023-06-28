@@ -4,6 +4,7 @@ import { ProductStateService } from '../core/product-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IProduct } from '@utils/schema';
+import { WarehouseService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,7 @@ import { IProduct } from '@utils/schema';
 export class ProductFacadeService {
     productAPI = inject(ProductApiService);
     productState = inject(ProductStateService);
+    warehouseService = inject(WarehouseService);
 
     isLoading$() {
         return this.productState.isLoading$();
@@ -56,24 +58,8 @@ export class ProductFacadeService {
         return this.productState.getProductList$();
     }
 
-    loadProduct(productId: string, params?: OdataParams) {
-        this.productState.setLoading(true);
-        this.productAPI.getProduct$(productId, params).pipe(
-            finalize(() => {
-                this.productState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.productState.setProduct(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getProduct$() {
-        return this.productState.getProduct$();
+    getProduct$(productId: string, params?: OdataParams) {
+        return this.productAPI.getProduct$(productId, params);
     }
 
     submitProduct$(product: Omit<IProduct, '_id'>) {
@@ -155,7 +141,7 @@ export class ProductFacadeService {
 
     loadWarehouseList(params?: OdataParams) {
         this.productState.setLoading(true);
-        this.productAPI.getWarehouseList$(params).pipe(
+        this.warehouseService.getWarehouseList$(params).pipe(
             finalize(() => {
                 this.productState.setLoading(false);
             })

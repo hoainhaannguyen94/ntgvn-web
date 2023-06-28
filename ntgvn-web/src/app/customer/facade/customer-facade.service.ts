@@ -56,24 +56,8 @@ export class CustomerFacadeService {
         return this.customerState.getCustomerList$();
     }
 
-    loadCustomer(customerId: string, params?: OdataParams) {
-        this.customerState.setLoading(true);
-        this.customerAPI.getCustomer$(customerId, params).pipe(
-            finalize(() => {
-                this.customerState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.customerState.setCustomer(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getCustomer$() {
-        return this.customerState.getCustomer$();
+    getCustomer$(customerId: string, params?: OdataParams) {
+        return this.customerAPI.getCustomer$(customerId, params);
     }
 
     submitCustomer$(customer: Omit<ICustomer, '_id'>) {

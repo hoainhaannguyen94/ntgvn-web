@@ -58,24 +58,8 @@ export class UserFacadeService {
         return this.userState.getUserList$();
     }
 
-    loadUser(userId: string, params?: OdataParams) {
-        this.userState.setLoading(true);
-        this.userAPI.getUser$(userId, params).pipe(
-            finalize(() => {
-                this.userState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.userState.setUser(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getUser$() {
-        return this.userState.getUser$();
+    getUser$(userId: string, params?: OdataParams) {
+        return this.userAPI.getUser$(userId, params);
     }
 
     submitUser$(user: Omit<IUser, '_id'>) {

@@ -59,24 +59,8 @@ export class EventFacadeService {
         return this.eventState.getEventList$();
     }
 
-    loadEvent(eventId: string, params?: OdataParams) {
-        this.eventState.setLoading(true);
-        this.eventAPI.getEvent$(eventId, params).pipe(
-            finalize(() => {
-                this.eventState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.eventState.setEvent(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getEvent$() {
-        return this.eventState.getEvent$();
+    getEvent$(eventId: string, params?: OdataParams) {
+        return this.eventAPI.getEvent$(eventId, params);
     }
 
     submitEvent$(event: Omit<IEvent, '_id'>) {

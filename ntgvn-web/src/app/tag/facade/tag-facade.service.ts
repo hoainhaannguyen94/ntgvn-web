@@ -56,24 +56,8 @@ export class TagFacadeService {
         return this.tagState.getTagList$();
     }
 
-    loadTag(tagId: string, params?: OdataParams) {
-        this.tagState.setLoading(true);
-        this.tagAPI.getTag$(tagId, params).pipe(
-            finalize(() => {
-                this.tagState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.tagState.setTag(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getTag$() {
-        return this.tagState.getTag$();
+    getTag$(tagId: string, params?: OdataParams) {
+        return this.tagAPI.getTag$(tagId, params);
     }
 
     submitTag$(tag: Omit<ITag, '_id'>) {

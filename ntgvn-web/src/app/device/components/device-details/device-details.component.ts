@@ -58,7 +58,14 @@ export class DeviceDetailsComponent extends BaseFormSingleDetailsComponent<IDevi
         this.activatedRoute.params.pipe(take(1)).subscribe(value => {
             if (value['id']) {
                 this.deviceId = value['id']
-                this.deviceFacade.loadDevice(this.deviceId);
+                this.deviceFacade.getDevice$(this.deviceId).subscribe({
+                    next: res => {
+                        const device = res.value;
+                        this.device = device;
+                        this.originalData = cloneDeep(device);
+                        this.formGroup.patchValue(device);
+                    }
+                });
             }
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
@@ -71,16 +78,6 @@ export class DeviceDetailsComponent extends BaseFormSingleDetailsComponent<IDevi
         this.deviceFacade.isLoading$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.isLoading = value;
-            },
-            error: err => {
-                throw err;
-            }
-        });
-        this.deviceFacade.getDevice$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.device = value;
-                this.originalData = cloneDeep(value);
-                this.formGroup.patchValue(this.device);
             },
             error: err => {
                 throw err;

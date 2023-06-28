@@ -66,7 +66,14 @@ export class TagDetailsComponent extends BaseFormSingleDetailsComponent<ITag> im
         this.activatedRoute.params.pipe(take(1)).subscribe(value => {
             if (value['id']) {
                 this.tagId = value['id']
-                this.tagFacade.loadTag(this.tagId);
+                this.tagFacade.getTag$(this.tagId).subscribe({
+                    next: res => {
+                        const tag = res.value;
+                        this.tag = tag;
+                        this.originalData = cloneDeep(tag);
+                        this.formGroup.patchValue(tag);
+                    }
+                });
             }
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
@@ -79,16 +86,6 @@ export class TagDetailsComponent extends BaseFormSingleDetailsComponent<ITag> im
         this.tagFacade.isLoading$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.isLoading = value;
-            },
-            error: err => {
-                throw err;
-            }
-        });
-        this.tagFacade.getTag$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.tag = value;
-                this.originalData = cloneDeep(value);
-                this.formGroup.patchValue(this.tag);
             },
             error: err => {
                 throw err;

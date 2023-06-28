@@ -58,24 +58,8 @@ export class RoomFacadeService {
         return this.roomState.getRoomList$();
     }
 
-    loadRoom(roomId: string, params?: OdataParams) {
-        this.roomState.setLoading(true);
-        this.roomAPI.getRoom$(roomId, params).pipe(
-            finalize(() => {
-                this.roomState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.roomState.setRoom(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getRoom$() {
-        return this.roomState.getRoom$();
+    getRoom$(roomId: string, params?: OdataParams) {
+        return this.roomAPI.getRoom$(roomId, params);
     }
 
     submitRoom$(room: Omit<IRoom, '_id'>) {

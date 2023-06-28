@@ -56,24 +56,8 @@ export class GroupFacadeService {
         return this.groupState.getGroupList$();
     }
 
-    loadGroup(groupId: string, params?: OdataParams) {
-        this.groupState.setLoading(true);
-        this.groupAPI.getGroup$(groupId, params).pipe(
-            finalize(() => {
-                this.groupState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.groupState.setGroup(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getGroup$() {
-        return this.groupState.getGroup$();
+    getGroup$(groupId: string, params?: OdataParams) {
+        return this.groupAPI.getGroup$(groupId, params);
     }
 
     submitGroup$(group: Omit<IGroup, '_id'>) {

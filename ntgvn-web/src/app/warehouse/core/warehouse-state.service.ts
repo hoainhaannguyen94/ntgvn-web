@@ -9,7 +9,6 @@ export class WarehouseStateService {
     loading$ = new Subject<boolean>();
     warehouseList$ = new Subject<IWarehouse[]>();
     countWarehouses$ = new Subject<number>();
-    warehouse$ = new Subject<IWarehouse>();
     managerList$ = new Subject<IUser[]>();
 
     isLoading$() {
@@ -34,14 +33,6 @@ export class WarehouseStateService {
 
     setWarehouseList(warehouses: IWarehouse[]) {
         this.warehouseList$.next(warehouses);
-    }
-
-    getWarehouse$() {
-        return this.warehouse$.asObservable();
-    }
-
-    setWarehouse(warehouse: IWarehouse) {
-        this.warehouse$.next(warehouse);
     }
 
     getManagerList$() {

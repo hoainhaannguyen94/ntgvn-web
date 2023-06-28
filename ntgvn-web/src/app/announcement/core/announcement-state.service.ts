@@ -9,7 +9,6 @@ export class AnnouncementStateService {
     loading$ = new Subject<boolean>();
     announcementList$ = new Subject<IAnnouncement[]>();
     countAnnouncements$ = new Subject<number>();
-    announcement$ = new Subject<IAnnouncement>();
 
     isLoading$() {
         return this.loading$.asObservable();
@@ -33,13 +32,5 @@ export class AnnouncementStateService {
 
     setAnnouncementList(announcements: IAnnouncement[]) {
         this.announcementList$.next(announcements);
-    }
-
-    getAnnouncement$() {
-        return this.announcement$.asObservable();
-    }
-
-    setAnnouncement(announcement: IAnnouncement) {
-        this.announcement$.next(announcement);
     }
 }

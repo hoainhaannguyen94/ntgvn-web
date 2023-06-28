@@ -10,7 +10,6 @@ export class OrderStateService {
     orderList$ = new Subject<IOrder[]>();
     orderStatusList$ = new Subject<IOrderStatus[]>();
     countOrders$ = new Subject<number>();
-    order$ = new Subject<IOrder>();
     productList$ = new Subject<IProduct[]>();
     customerList$ = new Subject<ICustomer[]>();
 
@@ -44,14 +43,6 @@ export class OrderStateService {
 
     setOrderStatusList(orderStatus: IOrderStatus[]) {
         this.orderStatusList$.next(orderStatus);
-    }
-
-    getOrder$() {
-        return this.order$.asObservable();
-    }
-
-    setOrder(order: IOrder) {
-        this.order$.next(order);
     }
 
     getProductList$() {

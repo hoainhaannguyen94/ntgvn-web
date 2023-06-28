@@ -58,7 +58,14 @@ export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IW
         this.activatedRoute.params.pipe(take(1)).subscribe(value => {
             if (value['id']) {
                 this.warehouseId = value['id']
-                this.warehouseFacade.loadWarehouse(this.warehouseId);
+                this.warehouseFacade.getWarehouse$(this.warehouseId).subscribe({
+                    next: res => {
+                        const warehouse = res.value;
+                        this.warehouse = warehouse;
+                        this.originalData = cloneDeep(warehouse);
+                        this.formGroup.patchValue(warehouse);
+                    }
+                });
             }
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
@@ -87,16 +94,6 @@ export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IW
         this.warehouseFacade.isLoading$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.isLoading = value;
-            },
-            error: err => {
-                throw err;
-            }
-        });
-        this.warehouseFacade.getWarehouse$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.warehouse = value;
-                this.originalData = cloneDeep(value);
-                this.formGroup.patchValue(this.warehouse);
             },
             error: err => {
                 throw err;

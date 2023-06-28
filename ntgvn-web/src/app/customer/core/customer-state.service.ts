@@ -9,7 +9,6 @@ export class CustomerStateService {
     loading$ = new Subject<boolean>();
     customerList$ = new Subject<ICustomer[]>();
     countCustomers$ = new Subject<number>();
-    customer$ = new Subject<ICustomer>();
 
     isLoading$() {
         return this.loading$.asObservable();
@@ -33,13 +32,5 @@ export class CustomerStateService {
 
     setCustomerList(customers: ICustomer[]) {
         this.customerList$.next(customers);
-    }
-
-    getCustomer$() {
-        return this.customer$.asObservable();
-    }
-
-    setCustomer(customer: ICustomer) {
-        this.customer$.next(customer);
     }
 }

@@ -63,7 +63,14 @@ export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> 
         this.activatedRoute.params.pipe(take(1)).subscribe(value => {
             if (value['id']) {
                 this.userId = value['id']
-                this.userFacade.loadUser(this.userId);
+                this.userFacade.getUser$(this.userId).subscribe({
+                    next: res => {
+                        const user = res.value;
+                        this.user = user;
+                        this.originalData = cloneDeep(user);
+                        this.formGroup.patchValue(user);
+                    }
+                });
             }
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
@@ -89,16 +96,6 @@ export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> 
         this.userFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.groupList = value;
-            }
-        });
-        this.userFacade.getUser$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.user = value;
-                this.originalData = cloneDeep(value);
-                this.formGroup.patchValue(this.user);
-            },
-            error: err => {
-                throw err;
             }
         });
         this.userFacade.loadUserRoleList({

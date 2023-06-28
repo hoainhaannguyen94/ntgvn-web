@@ -9,7 +9,6 @@ export class ProductStateService {
     loading$ = new Subject<boolean>();
     productList$ = new Subject<IProduct[]>();
     countProducts$ = new Subject<number>();
-    product$ = new Subject<IProduct>();
     productCategoryList$ = new Subject<IProductCategory[]>();
     warehouseList$ = new Subject<IWarehouse[]>();
 
@@ -35,14 +34,6 @@ export class ProductStateService {
 
     setProductList(products: IProduct[]) {
         this.productList$.next(products);
-    }
-
-    getProduct$() {
-        return this.product$.asObservable();
-    }
-
-    setProduct(product: IProduct) {
-        this.product$.next(product);
     }
 
     getProductCategoryList$() {

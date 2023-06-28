@@ -9,7 +9,6 @@ export class EventStateService {
     loading$ = new Subject<boolean>();
     eventList$ = new Subject<IEvent[]>();
     countEvents$ = new Subject<number>();
-    event$ = new Subject<IEvent>();
     eventStatusList$ = new Subject<IEventStatus[]>();
     groupList$ = new Subject<IGroup[]>();
     tagList$ = new Subject<ITag[]>();
@@ -36,14 +35,6 @@ export class EventStateService {
 
     setEventList(events: IEvent[]) {
         this.eventList$.next(events);
-    }
-
-    getEvent$() {
-        return this.event$.asObservable();
-    }
-
-    setEvent(event: IEvent) {
-        this.event$.next(event);
     }
 
     getEventStatusList$() {

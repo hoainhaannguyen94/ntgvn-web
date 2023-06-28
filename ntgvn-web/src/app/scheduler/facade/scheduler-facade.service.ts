@@ -12,8 +12,8 @@ import { EventService, TagService } from '@utils/service';
 export class SchedulerFacadeService {
     schedulerAPI = inject(SchedulerApiService);
     schedulerState = inject(SchedulerStateService);
-    eventAPI = inject(EventService);
-    tagAPI = inject(TagService);
+    eventService = inject(EventService);
+    tagService = inject(TagService);
 
     isLoading$() {
         return this.schedulerState.isLoading$();
@@ -57,26 +57,6 @@ export class SchedulerFacadeService {
 
     getEventList$() {
         return this.schedulerState.getEventList$();
-    }
-
-    loadEvent(eventId: string, params?: OdataParams) {
-        this.schedulerState.setLoading(true);
-        this.schedulerAPI.getEvent$(eventId, params).pipe(
-            finalize(() => {
-                this.schedulerState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.schedulerState.setEvent(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getEvent$() {
-        return this.schedulerState.getEvent$();
     }
 
     submitEvent$(event: Omit<IEvent, '_id'>) {
@@ -137,10 +117,10 @@ export class SchedulerFacadeService {
     }
 
     getEventStatus$(eventStatusId: string) {
-        return this.eventAPI.getEventStatus$(eventStatusId);
+        return this.eventService.getEventStatus$(eventStatusId);
     }
 
     getTagList$(params: OdataParams) {
-        return this.tagAPI.getTagList$(params);
+        return this.tagService.getTagList$(params);
     }
 }

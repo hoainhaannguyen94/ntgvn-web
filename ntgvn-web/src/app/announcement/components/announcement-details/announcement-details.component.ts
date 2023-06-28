@@ -53,7 +53,15 @@ export class AnnouncementDetailsComponent extends BaseComponent implements OnIni
         this.activatedRoute.params.pipe(take(1)).subscribe(value => {
             if (value['id']) {
                 this.announcementId = value['id']
-                this.announcementFacade.loadAnnouncement(this.announcementId);
+                this.announcementFacade.getAnnouncement$(this.announcementId).subscribe({
+                    next: res => {
+                        const announcement = res.value;
+                        this.announcement = announcement;
+                        this.titleFormControl.setValue(announcement.title);
+                        this.editorData = announcement.body;
+                        this.renderEditor();
+                    }
+                });
             }
         });
     }
@@ -226,22 +234,11 @@ export class AnnouncementDetailsComponent extends BaseComponent implements OnIni
                 throw err;
             }
         });
-        this.announcementFacade.getAnnouncement$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.announcement = value;
-                this.titleFormControl.setValue(this.announcement.title);
-                this.editorData = this.announcement.body;
-                this.renderEditor();
-            },
-            error: err => {
-                throw err;
-            }
-        });
     }
 
     cancelHandler() {
         this.back();
-     }
+    }
 
     updateHandler() {
         this.announcementFacade.updateAnnouncement$(this.announcementId, {

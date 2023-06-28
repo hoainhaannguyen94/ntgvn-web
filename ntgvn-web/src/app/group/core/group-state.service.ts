@@ -9,7 +9,6 @@ export class GroupStateService {
     loading$ = new Subject<boolean>();
     groupList$ = new Subject<IGroup[]>();
     countgroups$ = new Subject<number>();
-    group$ = new Subject<IGroup>();
 
     isLoading$() {
         return this.loading$.asObservable();
@@ -33,13 +32,5 @@ export class GroupStateService {
 
     setGroupList(groups: IGroup[]) {
         this.groupList$.next(groups);
-    }
-
-    getGroup$() {
-        return this.group$.asObservable();
-    }
-
-    setGroup(group: IGroup) {
-        this.group$.next(group);
     }
 }

@@ -9,7 +9,6 @@ export class UserStateService {
     loading$ = new Subject<boolean>();
     userList$ = new Subject<IUser[]>();
     countUsers$ = new Subject<number>();
-    user$ = new Subject<IUser>();
     userRoleList$ = new Subject<IUserRole[]>();
     groupList$ = new Subject<IGroup[]>();
 
@@ -35,14 +34,6 @@ export class UserStateService {
 
     setUserList(users: IUser[]) {
         this.userList$.next(users);
-    }
-
-    getUser$() {
-        return this.user$.asObservable();
-    }
-
-    setUser(user: IUser) {
-        this.user$.next(user);
     }
 
     getUserRoleList$() {

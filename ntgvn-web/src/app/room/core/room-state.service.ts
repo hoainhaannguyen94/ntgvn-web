@@ -9,7 +9,6 @@ export class RoomStateService {
     loading$ = new Subject<boolean>();
     roomList$ = new Subject<IRoom[]>();
     countRooms$ = new Subject<number>();
-    room$ = new Subject<IRoom>();
     managerList$ = new Subject<IUser[]>();
 
     isLoading$() {
@@ -34,14 +33,6 @@ export class RoomStateService {
 
     setRoomList(rooms: IRoom[]) {
         this.roomList$.next(rooms);
-    }
-
-    getRoom$() {
-        return this.room$.asObservable();
-    }
-
-    setRoom(room: IRoom) {
-        this.room$.next(room);
     }
 
     getManagerList$() {

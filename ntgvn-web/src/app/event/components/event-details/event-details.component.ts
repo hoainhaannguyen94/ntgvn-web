@@ -83,7 +83,31 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
         this.activatedRoute.params.pipe(take(1)).subscribe(value => {
             if (value['id']) {
                 this.eventId = value['id']
-                this.eventFacade.loadEvent(this.eventId);
+                this.eventFacade.getEvent$(this.eventId).subscribe({
+                    next: res => {
+                        const event = res.value;
+                        this.event = event;
+                        const formData = {
+                            title: event.title,
+                            description: event.extendedProps.description,
+                            start: event.start,
+                            end: event.end,
+                            backgroundColor: event.backgroundColor,
+                            borderColor: event.borderColor,
+                            textColor: event.textColor,
+                            _groupId: event.extendedProps._groupId,
+                            priority: event.extendedProps.priority,
+                            _tagIds: event.extendedProps._tagIds
+                        }
+                        this.originalData = cloneDeep(formData);
+                        this.formGroup.patchValue(formData);
+                        this.eventFacade.getEventStatus$(event.extendedProps._statusId).subscribe({
+                            next: res => {
+                                this.eventStatus = res.value;
+                            }
+                        });
+                    }
+                });
             }
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
@@ -96,33 +120,6 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
         this.eventFacade.isLoading$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.isLoading = value;
-            },
-            error: err => {
-                throw err;
-            }
-        });
-        this.eventFacade.getEvent$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.event = value;
-                const formData = {
-                    title: value.title,
-                    description: value.extendedProps.description,
-                    start: value.start,
-                    end: value.end,
-                    backgroundColor: value.backgroundColor,
-                    borderColor: value.borderColor,
-                    textColor: value.textColor,
-                    _groupId: value.extendedProps._groupId,
-                    priority: value.extendedProps.priority,
-                    _tagIds: value.extendedProps._tagIds
-                }
-                this.originalData = cloneDeep(formData);
-                this.formGroup.patchValue(formData);
-                this.eventFacade.getEventStatus$(value.extendedProps._statusId).subscribe({
-                    next: res => {
-                        this.eventStatus = res.value;
-                    }
-                });
             },
             error: err => {
                 throw err;
@@ -153,7 +150,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
     }
 
     cancelHandler() {
-       this.back();
+        this.back();
     }
 
     updateHandler() {

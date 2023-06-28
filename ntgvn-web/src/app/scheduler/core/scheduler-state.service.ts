@@ -9,7 +9,6 @@ export class SchedulerStateService {
     loading$ = new Subject<boolean>();
     eventList$ = new Subject<IEvent[]>();
     countEvents$ = new Subject<number>();
-    event$ = new Subject<IEvent>();
 
     isLoading$() {
         return this.loading$.asObservable();
@@ -33,13 +32,5 @@ export class SchedulerStateService {
 
     setEventList(events: IEvent[]) {
         this.eventList$.next(events);
-    }
-
-    getEvent$() {
-        return this.event$.asObservable();
-    }
-
-    setEvent(event: IEvent) {
-        this.event$.next(event);
     }
 }

@@ -9,7 +9,6 @@ export class TagStateService {
     loading$ = new Subject<boolean>();
     tagList$ = new Subject<ITag[]>();
     counttags$ = new Subject<number>();
-    tag$ = new Subject<ITag>();
 
     isLoading$() {
         return this.loading$.asObservable();
@@ -33,13 +32,5 @@ export class TagStateService {
 
     setTagList(tags: ITag[]) {
         this.tagList$.next(tags);
-    }
-
-    getTag$() {
-        return this.tag$.asObservable();
-    }
-
-    setTag(tag: ITag) {
-        this.tag$.next(tag);
     }
 }

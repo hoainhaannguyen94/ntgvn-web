@@ -74,24 +74,8 @@ export class OrderFacadeService {
         return this.orderState.getOrderList$();
     }
 
-    loadOrder(orderId: string, params?: OdataParams) {
-        this.orderState.setLoading(true);
-        this.orderAPI.getOrder$(orderId, params).pipe(
-            finalize(() => {
-                this.orderState.setLoading(false);
-            })
-        ).subscribe({
-            next: res => {
-                this.orderState.setOrder(res.value);
-            },
-            error: err => {
-                throw err;
-            }
-        });
-    }
-
-    getOrder$() {
-        return this.orderState.getOrder$();
+    getOrder$(orderId: string, params?: OdataParams) {
+        return this.orderAPI.getOrder$(orderId, params);
     }
 
     submitOrder$(order: Omit<IOrder, '_id'>) {

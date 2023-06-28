@@ -55,7 +55,14 @@ export class CustomerDetailsComponent extends BaseFormSingleDetailsComponent<ICu
         this.activatedRoute.params.pipe(take(1)).subscribe(value => {
             if (value['id']) {
                 this.customerId = value['id']
-                this.customerFacade.loadCustomer(this.customerId);
+                this.customerFacade.getCustomer$(this.customerId).subscribe({
+                    next: res => {
+                        const customer = res.value;
+                        this.customer = customer;
+                        this.originalData = cloneDeep(customer);
+                        this.formGroup.patchValue(customer);
+                    }
+                });
             }
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
@@ -68,16 +75,6 @@ export class CustomerDetailsComponent extends BaseFormSingleDetailsComponent<ICu
         this.customerFacade.isLoading$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.isLoading = value;
-            },
-            error: err => {
-                throw err;
-            }
-        });
-        this.customerFacade.getCustomer$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.customer = value;
-                this.originalData = cloneDeep(value);
-                this.formGroup.patchValue(this.customer);
             },
             error: err => {
                 throw err;

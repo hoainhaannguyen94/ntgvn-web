@@ -89,7 +89,18 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
         this.activatedRoute.params.pipe(take(1)).subscribe(value => {
             if (value['id']) {
                 this.orderId = value['id']
-                this.orderFacade.loadOrder(this.orderId);
+                this.orderFacade.getOrder$(this.orderId).subscribe({
+                    next: res => {
+                        const order = res.value;
+                        this.order = order;
+                        this.originalData = cloneDeep(order);
+                        this.formGroup.patchValue(order);
+                        order.products.forEach(_ => {
+                            this.addProduct();
+                        });
+                        this.products.patchValue(order.products);
+                    }
+                });
             }
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
@@ -149,20 +160,6 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
         this.orderFacade.isLoading$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.isLoading = value;
-            },
-            error: err => {
-                throw err;
-            }
-        });
-        this.orderFacade.getOrder$().pipe(takeUntil(this.destroy$)).subscribe({
-            next: value => {
-                this.order = value;
-                this.originalData = cloneDeep(value);
-                this.formGroup.patchValue(this.order);
-                this.order.products.forEach(_ => {
-                    this.addProduct();
-                });
-                this.products.patchValue(this.order.products);
             },
             error: err => {
                 throw err;
