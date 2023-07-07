@@ -52,7 +52,7 @@ export class NewDeviceComponent extends BaseFormSingleComponent implements OnIni
     ngOnInit() {
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
-            this.log.log('NewDeviceComponent', 'valueChanges', values);
+            this.log.info('NewDeviceComponent', 'valueChanges', values);
         });
     }
 

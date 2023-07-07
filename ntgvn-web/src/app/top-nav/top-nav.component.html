@@ -1,12 +1,12 @@
 <div class="top-nav-container">
     <div class="top-nav-left">
         <ng-container *ngIf="appState.me['roleName'] !== 'member'">
-            <mat-icon (click)="showSideNav()" matTooltip="Menu">menu</mat-icon>
+            <mat-icon (click)="showSideNav()" [matTooltip]="'TopNav.Menu' | transloco">menu</mat-icon>
         </ng-container>
         <div class="top-nav-name">{{appState.domain | uppercase}}</div>
     </div>
     <div class="top-nav-right">
-        <mat-icon matTooltip="Language" [matMenuTriggerFor]="menu">language</mat-icon>
+        <mat-icon [matTooltip]="'TopNav.Language' | transloco" [matMenuTriggerFor]="menu">language</mat-icon>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="changeLanguage('vi')">
                 <span>Tiếng Việt</span>
@@ -15,7 +15,7 @@
                 <span>English</span>
             </button>
         </mat-menu>
-        <mat-icon matTooltip="Account" [matMenuTriggerFor]="accountMenu">account_circle</mat-icon>
+        <mat-icon [matTooltip]="'TopNav.Account' | transloco" [matMenuTriggerFor]="accountMenu">account_circle</mat-icon>
     </div>
 </div>
 
@@ -26,10 +26,10 @@
     </button>
     <button mat-menu-item (click)="$event.stopPropagation();$event.preventDefault();">
         <mat-icon class="menu-icon">info</mat-icon>
-        <span>Version {{appState.version}}</span>
+        <span>{{'TopNav.Version' | transloco}} {{appState.version}}</span>
     </button>
     <button mat-menu-item (click)="logout()">
         <mat-icon class="menu-icon">logout</mat-icon>
-        <span>Logout</span>
+        <span>{{'TopNav.Logout' | transloco}}</span>
     </button>
 </mat-menu>

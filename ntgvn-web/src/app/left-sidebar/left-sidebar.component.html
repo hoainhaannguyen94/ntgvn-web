@@ -4,7 +4,7 @@
             <mat-list-item [activated]="link.url === selectedLink" (click)="navigateTo(link)">
                 <div class="left-sidebar-item">
                     <mat-icon [color]="link.url === selectedLink ? 'primary' : ''">{{link.icon}}</mat-icon>
-                    <div>{{link.displayName | transloco}}</div>
+                    <div>{{'LeftSidebar.'+link.displayName | transloco}}</div>
                 </div>
             </mat-list-item>
         </ng-container>

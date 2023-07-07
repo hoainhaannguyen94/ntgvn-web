@@ -20,12 +20,6 @@ export class LeftSidebarFacadeService {
                 activated: false
             },
             {
-                displayName: 'Analytics',
-                url: '/analytic',
-                icon: 'analytics',
-                activated: false
-            },
-            {
                 displayName: 'Map',
                 url: '/map',
                 icon: 'map',
@@ -107,6 +101,12 @@ export class LeftSidebarFacadeService {
                 displayName: 'Audit Logs',
                 url: '/audit-log',
                 icon: 'verified_user',
+                activated: true
+            },
+            {
+                displayName: 'Analytics',
+                url: '/analytic',
+                icon: 'analytics',
                 activated: true
             },
             {

@@ -20,6 +20,6 @@ export class TestComponent implements OnInit {
     log = inject(LogService);
 
     ngOnInit() {
-        this.log.log('TestComponent', TestJSON.data);
+        this.log.info('TestComponent', TestJSON.data);
     }
 }

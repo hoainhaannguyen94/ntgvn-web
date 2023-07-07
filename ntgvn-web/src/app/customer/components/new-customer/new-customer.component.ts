@@ -51,7 +51,7 @@ export class NewCustomerComponent extends BaseFormSingleComponent implements OnI
     ngOnInit() {
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
-            this.log.log('NewCustomerComponent', 'valueChanges', values);
+            this.log.info('NewCustomerComponent', 'valueChanges', values);
         });
     }
 

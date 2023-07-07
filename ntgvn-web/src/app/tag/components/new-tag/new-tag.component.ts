@@ -61,7 +61,7 @@ export class NewTagComponent extends BaseFormSingleComponent implements OnInit {
     ngOnInit() {
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
-            this.log.log('NewTagComponent', 'valueChanges', values);
+            this.log.info('NewTagComponent', 'valueChanges', values);
         });
     }
 

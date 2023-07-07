@@ -1,19 +1,20 @@
 {
-    "Announcements": "Announcements",
-    "Audit Logs": "Audit Logs",
-    "Analytics": "Analytics",
-    "Rooms": "Rooms",
-    "Events": "Events",
-    "Scheduler": "Scheduler",
-    "Users": "Users",
-    "Groups": "Groups",
-    "Tags": "Tags",
-    "Policy": "Policy",
-    "License": "License",
-    "About Us": "About Us",
-    "Settings": "Settings",
-    "From Date": "From",
-    "To Date":"To",
-    "Search Task(s) by Title": "Search Task(s) by Title",
-    "Status": "Status"
+    "LeftSidebar": {
+        "Scheduler": "Scheduler",
+        "Events": "Tasks",
+        "Rooms": "Rooms",
+        "Users": "Users",
+        "Groups": "Groups",
+        "Tags": "Tags",
+        "Audit Logs": "Audit Logs",
+        "Analytics": "Analytics",
+        "Settings": "Settings"
+    },
+    "TopNav": {
+        "Menu": "Menu",
+        "Language": "Language",
+        "Account": "Account",
+        "Version": "Version",
+        "Logout": "Logout"
+    }
 }

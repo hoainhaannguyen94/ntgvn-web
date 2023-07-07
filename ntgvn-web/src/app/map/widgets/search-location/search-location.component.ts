@@ -35,7 +35,7 @@ export class SearchLocationComponent {
     searchLocation() {
         this.geocoding.directGeocoding$({ location: this.searchControl.value }).pipe(map(res => res.value)).subscribe({
             next: res => {
-                this.log.log('MapSearchLocationComponent', res);
+                this.log.info('MapSearchLocationComponent', res);
                 this.searchCompleted.emit(res);
             }
         });

@@ -53,7 +53,6 @@ export class EventDetailsDialogComponent extends BaseComponent implements OnInit
             }).subscribe({
                 next: res => {
                     this.tags = res.value;
-                    console.log(this.tags)
                 }
             });
         }

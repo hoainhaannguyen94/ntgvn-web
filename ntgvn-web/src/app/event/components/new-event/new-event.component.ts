@@ -80,7 +80,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
     ngOnInit() {
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
-            this.log.log('NewEventComponent', 'valueChanges', values);
+            this.log.info('NewEventComponent', 'valueChanges', values);
         });
     }
 

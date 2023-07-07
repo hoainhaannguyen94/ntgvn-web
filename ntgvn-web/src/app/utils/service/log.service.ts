@@ -5,7 +5,7 @@ import { environment } from '@environment';
     providedIn: 'root'
 })
 export class LogService {
-    log(target = 'LogService', ...agrs: any) {
+    info(target = 'LogService', ...agrs: any) {
         if (!environment.production) {
             console.log(`********** ${target} **********`);
             console.log(...agrs);

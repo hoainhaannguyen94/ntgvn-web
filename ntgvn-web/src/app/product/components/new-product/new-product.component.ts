@@ -66,7 +66,7 @@ export class NewProductComponent extends BaseFormSingleComponent implements OnIn
     ngOnInit() {
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
-            this.log.log('NewProductComponent', 'valueChanges', values);
+            this.log.info('NewProductComponent', 'valueChanges', values);
         });
     }
 

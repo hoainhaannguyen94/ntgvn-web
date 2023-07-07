@@ -86,10 +86,10 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
         this.addProduct();
         this.formGroup.get('_createdBy').setValue(this.appState.me._id, { onlySelf: true });
         this.products.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
-            this.log.log('NewOrderComponent', 'products', values);
+            this.log.info('NewOrderComponent', 'products', values);
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
-            this.log.log('NewOrderComponent', 'details', values);
+            this.log.info('NewOrderComponent', 'details', values);
         });
         timer(0, 500).pipe(takeUntil(this.destroy$)).subscribe({
             next: () => {
