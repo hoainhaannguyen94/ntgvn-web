@@ -86,10 +86,6 @@ export const routes: Routes = [
         loadChildren: () => import('./announcement/announcement.routes').then((m) => m.routes)
     },
     {
-        path: 'dashboard',
-        loadChildren: () => import('./dashboard/dashboard.routes').then((m) => m.routes)
-    },
-    {
         path: 'shell',
         loadChildren: () => import('./app-shell/app-shell.routes').then((m) => m.routes)
     },

@@ -23,6 +23,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { UserDetailsPipe, ObjectPropertyPipe, GroupDetailsPipe } from '@utils/pipe';
 import { io } from 'socket.io-client';
 import { TagsDetailsPipe } from 'src/app/utils/pipe/tags-details.pipe';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { EventFilterComponent } from '../event-filter/event-filter.component';
 
 @Component({
     selector: 'event-list',
@@ -43,6 +45,8 @@ import { TagsDetailsPipe } from 'src/app/utils/pipe/tags-details.pipe';
         MatTooltipModule,
         MatDialogModule,
         MatSnackBarModule,
+        MatSidenavModule,
+        EventFilterComponent,
         ConfirmDialogComponent,
         UserDetailsPipe,
         ObjectPropertyPipe,
@@ -262,6 +266,10 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
         this.eventFacade.loadEventStatusList({
             $orderby: 'index asc'
         });
+    }
+
+    exportEventHandler() {
+        // TODO
     }
 
     newEventHandler() {

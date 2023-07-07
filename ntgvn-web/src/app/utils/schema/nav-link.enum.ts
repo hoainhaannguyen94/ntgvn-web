@@ -1,5 +1,4 @@
 export enum ENavLinkUrl {
-    'dashboard' = '/dashboard',
     'announcement' = '/announcement',
     'auditLog' = '/audit-log',
     'analytic' = '/analytic',

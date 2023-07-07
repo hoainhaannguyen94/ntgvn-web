@@ -45,7 +45,7 @@
     mat-progress-bar {
         position: absolute;
         top: 1rem;
-        width: calc(100% - (2rem + 2px));
+        width: calc(100% - 112px);
         border-top-left-radius: var(--border-radius);
         border-top-right-radius: var(--border-radius);
         z-index: 9999;
@@ -53,7 +53,7 @@
 
     .base-grid-table {
         width: 100%;
-        height: calc(100% - (2rem + 100px));
+        height: calc(100% - 112px);
         overflow: scroll;
 
         table {
@@ -70,9 +70,94 @@
     }
 
     mat-paginator {
-        position: absolute;
-        bottom: calc(1rem + 2px);
-        width: calc(100% - (2rem + 2px));
-        z-index: 9999;
+        height: 56px;
+        width: 100%;
+    }
+}
+
+.base-grid-plus-container {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    border: var(--border);
+    border-radius: var(--border-radius);
+
+    .base-grid-plus-content {
+        height: 100%;
+
+        .base-grid-plus-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+            width: 100%;
+            border-bottom: var(--border);
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            padding: 0 1rem;
+            gap: 1rem;
+
+            .base-grid-plus-toolbar-search {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                flex-grow: 1;
+
+                input {
+                    width: 100%;
+                    font-size: 1rem;
+                    border: none;
+                    outline: none;
+                }
+            }
+
+            .base-grid-plus-toolbar-actions {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                mat-icon {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        mat-progress-bar {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            z-index: 9999;
+        }
+
+        .base-grid-plus-table {
+            width: 100%;
+            height: calc(100% - 112px);
+            overflow: scroll;
+
+            table {
+                width: 100%;
+            }
+
+            .base-grid-plus-table-main-column {
+                font-weight: var(--font-weight-bold);
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        mat-paginator {
+            height: 56px;
+            width: 100%;
+        }
+
+    }
+
+    .base-grid-plus-filter {
+        width: 350px;
+        padding: 1rem;
     }
 }

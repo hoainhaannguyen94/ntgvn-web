@@ -8,12 +8,6 @@ export class LeftSidebarFacadeService {
     getNavLinks(): INavLink[] {
         return [
             {
-                displayName: 'Dashboard',
-                url: '/dashboard',
-                icon: 'dashboard',
-                activated: false
-            },
-            {
                 displayName: 'Announcements',
                 url: '/announcement',
                 icon: 'campaign',
@@ -107,7 +101,7 @@ export class LeftSidebarFacadeService {
                 displayName: 'Analytics',
                 url: '/analytic',
                 icon: 'analytics',
-                activated: true
+                activated: false
             },
             {
                 displayName: 'Policy',

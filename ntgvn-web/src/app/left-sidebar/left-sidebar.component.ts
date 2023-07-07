@@ -68,9 +68,6 @@ export class LeftSidebarComponent extends BaseComponent implements OnInit {
 
     navigateTo(link: INavLink) {
         switch (link.url) {
-            case ENavLinkUrl.dashboard:
-                this.navigateToRoute(ENavLinkUrl.dashboard);
-                break;
             case ENavLinkUrl.announcement:
                 this.navigateToRoute(ENavLinkUrl.announcement);
                 break;
