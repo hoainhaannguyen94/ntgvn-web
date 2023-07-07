@@ -13,7 +13,7 @@ export class StateService<T> implements OnDestroy {
     dataSource: Subject<Effect<T> | T> = new Subject<Effect<T> | T>();
     stateChanges$: Observable<Effect<T> | T> = this.dataSource.asObservable();
 
-    get currentState() {
+    get currentState(): T {
         return cloneDeep(this.state);
     }
 

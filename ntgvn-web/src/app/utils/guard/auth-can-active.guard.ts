@@ -29,7 +29,8 @@ export const authCanActiveGuard = () => {
             appState.me = res.value.user;
             appState.ready = true;
             state.commit(appState);
-            loadUserRoleList();
+            if (!appState.userRoles)
+                loadUserRoleList();
         } else {
             localStorage.clear();
             appState.token = '';
