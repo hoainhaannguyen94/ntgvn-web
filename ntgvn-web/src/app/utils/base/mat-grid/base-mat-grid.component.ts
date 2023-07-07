@@ -15,8 +15,8 @@ export abstract class BaseMatGridComponent<T> extends BaseComponent {
     columns: string[] = [];
     actions: IMatGridAction[] = [];
     paginator: MatPaginator;
-    pageSize = 5;
-    pageSizeOptions: number[] = [5, 10, 20];
+    pageSize = 10;
+    pageSizeOptions: number[] = [10, 20, 50, 100];
     paginatorBreakPointSize = 599;
     paginatorHidePageSize = false;
     paginatorShowFirstLastButtons = true;

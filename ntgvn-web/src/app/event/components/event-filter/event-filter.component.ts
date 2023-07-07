@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { BaseComponent } from '@utils/base/base.component';
 
 @Component({
     selector: 'event-filter',
@@ -7,11 +8,4 @@ import { Component, OnInit } from '@angular/core';
     templateUrl: './event-filter.component.html',
     styleUrls: ['./event-filter.component.scss']
 })
-export class EventFilterComponent implements OnInit {
-
-    constructor() { }
-
-    ngOnInit() {
-    }
-
-}
+export class EventFilterComponent extends BaseComponent { }
