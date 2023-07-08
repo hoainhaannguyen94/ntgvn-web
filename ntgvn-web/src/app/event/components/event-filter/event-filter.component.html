@@ -29,7 +29,7 @@
         <mat-form-field appearance="outline">
             <mat-label>Status</mat-label>
             <mat-select formControlName="_statusIds" multiple>
-                <mat-option [value]="''">All</mat-option>
+                <mat-option [value]="'all'">All</mat-option>
                 <mat-option *ngFor="let status of eventStatusList; trackBy:trackByFn;" [value]="status._id">
                     {{status.displayName}}</mat-option>
             </mat-select>
@@ -38,7 +38,7 @@
         <mat-form-field appearance="outline">
             <mat-label>Groups</mat-label>
             <mat-select formControlName="_groupIds" multiple>
-                <mat-option [value]="''">All</mat-option>
+                <mat-option [value]="'all'">All</mat-option>
                 <mat-option *ngFor="let group of groupList; trackBy:trackByFn;" [value]="group._id">
                     {{group.name}}</mat-option>
             </mat-select>
@@ -46,13 +46,13 @@
 
         <mat-form-field appearance="outline">
             <mat-label>Priorities</mat-label>
-            <input matInput type="text" placeholder="0, 1, 2, ..." formControlName="priority" autocomplete="off" />
+            <input matInput type="text" placeholder="0,1,2,..." formControlName="priorities" autocomplete="off" />
         </mat-form-field>
 
         <mat-form-field appearance="outline">
             <mat-label>Tags</mat-label>
             <mat-select formControlName="_tagIds" multiple>
-                <mat-option [value]="''">All</mat-option>
+                <mat-option [value]="'all'">All</mat-option>
                 <mat-option *ngFor="let tag of tagList; trackBy:trackByFn;" [value]="tag._id">{{tag.name}}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -62,5 +62,5 @@
 <ng-template #FilterActionsTemplate>
     <button mat-flat-button (click)="cancelHandler()">Cancel</button>
 
-    <button mat-flat-button color="primary" (click)="applyFilterHandler()">Apply</button>
+    <button mat-flat-button color="primary" (click)="applyFilterHandler()" [disabled]="!formHasChanged || !formGroup.dirty">Apply</button>
 </ng-template>

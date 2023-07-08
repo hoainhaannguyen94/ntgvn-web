@@ -334,5 +334,90 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
 
     onFilterChangesHandler(filter: IEventFilter) {
         console.log(filter);
+
+        const filters = [];
+
+        let filterStart = '';
+        let filterEnd = '';
+        let filterStatus = '';
+        let filterGroups = '';
+        let filterPriorities = '';
+        let filterTags = '';
+
+        if (filter.start) {
+            filterStart = `start ge '${filter.start}'`;
+            filterStart && filters.push(`(${filterStart})`);
+        }
+
+        if (filter.end) {
+            filterEnd = `end le '${filter.end}'`;
+            filterEnd && filters.push(`(${filterEnd})`);
+        }
+
+        if (filter._statusIds && !filter._statusIds.includes('all')) {
+            filterStatus = filter._statusIds.reduce((acc, cur) => {
+                if (acc)
+                    acc += ` or extendedProps/_statusId eq '${cur}'`;
+                else
+                    acc = `extendedProps/_statusId eq '${cur}'`;
+                return acc;
+            }, '');
+            filterStatus && filters.push(`(${filterStatus})`);
+        }
+
+        if (filter.priorities) {
+            const priorities = filter.priorities.split(',');
+            if (priorities.length > 0) {
+                filterPriorities = priorities.reduce((acc, cur) => {
+                    if (cur) {
+                        if (acc)
+                            acc += ` or extendedProps/priority eq ${cur}`;
+                        else
+                            acc = `extendedProps/priority eq ${cur}`;
+                    }
+                    return acc;
+                }, '');
+                filterPriorities && filters.push(`(${filterPriorities})`);
+            }
+        }
+
+        if (filter._groupIds && !filter._groupIds.includes('all')) {
+            filterGroups = filter._groupIds.reduce((acc, cur) => {
+                if (cur) {
+                    if (acc)
+                        acc += ` or extendedProps/_groupId eq '${cur}'`;
+                    else
+                        acc = `extendedProps/_groupId eq '${cur}'`;
+                }
+                return acc;
+            }, '');
+            filterGroups && filters.push(`(${filterGroups})`);
+        }
+
+        if (filter._tagIds && !filter._tagIds.includes('all')) {
+            filterTags = filter._tagIds.reduce((acc, cur) => {
+                if (cur) {
+                    if (acc)
+                        acc += ` or contains(extendedProps/_tagIds, '${cur}')`;
+                    else
+                        acc = `contains(extendedProps/_tagIds, '${cur}')`;
+                }
+                return acc;
+            }, '');
+            filterTags && filters.push(`(${filterTags})`);
+        }
+
+        const filterString = filters.reduce((acc, cur) => {
+            if (acc)
+                acc += ` and ${cur}`;
+            else
+                acc = cur;
+            return acc;
+        }, '');
+
+        this.eventFacade.loadEventList({
+            $filter: filterString,
+            $orderby: '_id asc'
+        })
     }
 }

@@ -11,8 +11,10 @@ import { BaseComponent } from '@utils/base/base.component';
 import { LogService } from '@utils/service';
 import { EventFacadeService } from '../../facade/event-facade.service';
 import { BLANK_EVENT_FILTER, IEventFilter, IEventStatus, IGroup, ITag } from '@utils/schema';
-import { takeUntil } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
+import { DateTime } from 'luxon';
+import { isEqual } from 'lodash';
 
 @Component({
     selector: 'event-filter',
@@ -40,14 +42,17 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
     eventFacade = inject(EventFacadeService);
     formBuilder = inject(FormBuilder);
 
+    originalData = BLANK_EVENT_FILTER;
+
     formGroup = this.formBuilder.group({
         start: [BLANK_EVENT_FILTER.start],
         end: [BLANK_EVENT_FILTER.end],
         _statusIds: [BLANK_EVENT_FILTER._statusIds],
         _groupIds: [BLANK_EVENT_FILTER._groupIds],
-        priority: [BLANK_EVENT_FILTER.priority],
+        priorities: [BLANK_EVENT_FILTER.priorities],
         _tagIds: [BLANK_EVENT_FILTER._tagIds]
     });
+    formHasChanged = false;
 
     groupList: IGroup[] = [];
     tagList: ITag[] = [];
@@ -56,6 +61,19 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
 
     ngOnInit() {
         this.registerCoreLayer();
+        this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(300)).subscribe({
+            next: value => {
+                this.updateFormHasChanged(value);
+            }
+        });
+    }
+
+    updateFormHasChanged(value) {
+        if (!isEqual(this.originalData, value)) {
+            this.formHasChanged = true;
+        } else {
+            this.formHasChanged = false;
+        }
     }
 
     override registerCoreLayer() {
@@ -108,6 +126,21 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
 
     applyFilterHandler() {
         const filter = this.formGroup.value as IEventFilter;
+
+        if (filter.start) {
+            if (typeof filter.start === 'object')
+                filter.start = DateTime.fromISO(filter.start.toISOString()).set({ hour: 0, minute: 0, second: 0 }).toJSDate().toISOString();
+            else
+                filter.start = DateTime.fromISO(filter.start).set({ hour: 0, minute: 0, second: 0 }).toJSDate().toISOString();
+        }
+
+        if (filter.end) {
+            if (typeof filter.end === 'object')
+                filter.end = DateTime.fromISO(filter.end.toISOString()).set({ hour: 23, minute: 59, second: 59 }).toJSDate().toISOString();
+            else
+                filter.end = DateTime.fromISO(filter.end).set({ hour: 23, minute: 59, second: 59 }).toJSDate().toISOString();
+        }
+
         this.filterChanges.emit(filter);
     }
 }

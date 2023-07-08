@@ -110,9 +110,11 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 });
             }
         });
-        this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
-            this.formValid = this.formGroup.valid;
-            this.updateFormHasChanged(values);
+        this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
+            next: value => {
+                this.formValid = this.formGroup.valid;
+                this.updateFormHasChanged(value);
+            }
         });
     }
 

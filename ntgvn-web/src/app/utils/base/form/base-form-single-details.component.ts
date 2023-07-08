@@ -10,8 +10,8 @@ import { isEqual } from 'lodash';
 export abstract class BaseFormSingleDetailsComponent<T> extends BaseFormSingleComponent {
     originalData: Partial<T>;
 
-    updateFormHasChanged(values: any) {
-        if (!isEqual(this.originalData, values)) {
+    updateFormHasChanged(value: any) {
+        if (!isEqual(this.originalData, value)) {
             this.formHasChanged = true;
         } else {
             this.formHasChanged = false;

@@ -57,8 +57,10 @@ export class NewUserComponent extends BaseFormSingleComponent implements OnInit 
 
     ngOnInit() {
         this.registerCoreLayer();
-        this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
-            this.log.info('NewUserComponent', 'valueChanges', values);
+        this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
+            next: value => {
+                this.log.info('NewUserComponent', 'valueChanges', value);
+            }
         });
     }
 

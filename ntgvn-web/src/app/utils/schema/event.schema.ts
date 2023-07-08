@@ -46,11 +46,11 @@ export interface IEventStatus {
 }
 
 export interface IEventFilter {
-    start: string;
-    end: string;
+    start: any;
+    end: any;
     _statusIds: string[];
     _groupIds: string[];
-    priority: string;
+    priorities: string;
     _tagIds: string[];
 }
 
@@ -73,10 +73,10 @@ export const BLANK_EVENT: IEvent = {
 }
 
 export const BLANK_EVENT_FILTER = {
-    start: '',
-    end: '',
-    _statusIds: [''],
-    _groupIds: [''],
-    priority: '',
-    _tagIds: ['']
+    start: null,
+    end: null,
+    _statusIds: [],
+    _groupIds: [],
+    priorities: '',
+    _tagIds: []
 }

@@ -151,19 +151,19 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
 
     registerSearchControlValueChanges() {
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), distinctUntilChanged(), debounceTime(300)).subscribe({
-            next: values => {
+            next: value => {
                 let searchString = `contains(title, '')`;
                 let fromString = '';
                 let toString = '';
                 this.filterString = '';
-                if (values.search) {
-                    searchString = `contains(title, '${values.search}')`;
+                if (value.search) {
+                    searchString = `contains(title, '${value.search}')`;
                 }
-                if (values.from) {
-                    fromString = `start ge '${values.from.toISOString()}'`;
+                if (value.from) {
+                    fromString = `start ge '${value.from.toISOString()}'`;
                 }
-                if (values.to) {
-                    toString = `start le '${values.to.toISOString()}'`;
+                if (value.to) {
+                    toString = `start le '${value.to.toISOString()}'`;
                 }
                 this.filterString += searchString;
                 if (fromString) {

@@ -50,9 +50,11 @@ export class NewWarehouseComponent extends BaseFormSingleComponent implements On
 
     ngOnInit() {
         this.registerCoreLayer();
-        this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe(values => {
-            this.formHasChanged = this.formGroup.dirty;
-            this.formValid = this.formGroup.valid;
+        this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
+            next: () => {
+                this.formHasChanged = this.formGroup.dirty;
+                this.formValid = this.formGroup.valid;
+            }
         });
     }
 
