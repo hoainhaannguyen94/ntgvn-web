@@ -15,10 +15,10 @@
                         <error-message [errors]="products.controls[i].get('_productId')?.errors" [target]="'Product'" />
                     </mat-error>
                 </mat-form-field>
+
                 <mat-form-field appearance="outline">
                     <mat-label>Quantity</mat-label>
-                    <input matInput type="number" min="0" placeholder="Quantity" formControlName="quantity" required
-                        autocomplete="off" />
+                    <input matInput type="number" min="0" formControlName="quantity" required autocomplete="off" />
                     <mat-hint>Available:
                         {{this.productsAvailableQuantily.get(products.controls[i].get('_productId').value)}}
                         item(s).</mat-hint>
@@ -26,24 +26,27 @@
                         <error-message [errors]="products.controls[i].get('quantity')?.errors" [target]="'Quantity'" />
                     </mat-error>
                 </mat-form-field>
+
                 <mat-form-field appearance="outline">
                     <mat-label>Price</mat-label>
-                    <input matInput type="number" min="0" placeholder="Price" formControlName="price" required
-                        autocomplete="off" />
+                    <input matInput type="number" min="0" formControlName="price" required autocomplete="off" />
                     <mat-error>
                         <error-message [errors]="products.controls[i].get('price')?.errors" [target]="'Price'" />
                     </mat-error>
                 </mat-form-field>
             </ng-container>
+
             <div class="base-details-actions">
                 <button mat-flat-button color="primary" (click)="addProduct(i)">Add</button>
+
                 <button mat-flat-button color="warn" (click)="removeProduct(i)">Remove</button>
             </div>
         </div>
+
         <ng-container [formGroup]="formGroup">
             <mat-form-field appearance="outline">
                 <mat-label>Customer</mat-label>
-                <input type="text" placeholder="Customer" aria-label="Customer" matInput formControlName="_customerId"
+                <input type="text" aria-label="Customer" matInput formControlName="_customerId"
                     [matAutocomplete]="customerMatAutocomplete">
                 <mat-autocomplete autoActiveFirstOption #customerMatAutocomplete="matAutocomplete"
                     [displayWith]="customerDisplayWithFn.bind(this)">
@@ -55,14 +58,15 @@
                     <error-message [errors]="formGroup.get('_customerId')?.errors" [target]="'Customer'" />
                 </mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline">
                 <mat-label>Created By</mat-label>
-                <input matInput placeholder="Created By" formControlName="_createdBy" readonly required
-                    autocomplete="off" />
+                <input matInput formControlName="_createdBy" readonly required autocomplete="off" />
                 <mat-error>
                     <error-message [errors]="formGroup.get('_createdBy')?.errors" [target]="'Created By'" />
                 </mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline">
                 <mat-label>Created At</mat-label>
                 <input matInput [matDatepicker]="createdAtPicker" formControlName="createdAt" required
@@ -73,6 +77,7 @@
                     <error-message [errors]="formGroup.get('createdAt')?.errors" [target]="'Created At'" />
                 </mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline">
                 <mat-label>Delivery At</mat-label>
                 <input matInput [matDatepicker]="deliveryAtPicker" formControlName="deliveryAt" required
@@ -83,13 +88,15 @@
                     <error-message [errors]="formGroup.get('deliveryAt')?.errors" [target]="'Delivery At'" />
                 </mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline">
                 <mat-label>Delivery By</mat-label>
-                <input matInput placeholder="Delivery By" formControlName="deliveryBy" required autocomplete="off" />
+                <input matInput formControlName="deliveryBy" required autocomplete="off" />
                 <mat-error>
                     <error-message [errors]="formGroup.get('deliveryBy')?.errors" [target]="'Delivery By'" />
                 </mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline">
                 <mat-label>Status</mat-label>
                 <mat-select required formControlName="status">
@@ -101,34 +108,37 @@
                     <error-message [errors]="formGroup.get('status')?.errors" [target]="'Status'" />
                 </mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline">
                 <mat-label>Discount</mat-label>
-                <input matInput type="number" placeholder="Discount" formControlName="discount" required
-                    autocomplete="off" min="0" />
+                <input matInput type="number" formControlName="discount" required autocomplete="off" min="0" />
                 <mat-error>
                     <error-message [errors]="formGroup.get('discount')?.errors" [target]="'Discount'" />
                 </mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline">
                 <mat-label>Notes</mat-label>
                 <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5"
-                    cdkAutosizeMaxRows="10" placeholder="Notes" formControlName="notes" autocomplete="off"></textarea>
+                    cdkAutosizeMaxRows="10" formControlName="notes" autocomplete="off"></textarea>
                 <mat-error>
                     <error-message [errors]="formGroup.get('notes')?.errors" [target]="'Notes'" />
                 </mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="outline">
                 <mat-label>Total</mat-label>
-                <input matInput type="number" placeholder="Total" formControlName="total" required autocomplete="off"
-                    min="0" />
+                <input matInput type="number" formControlName="total" required autocomplete="off" min="0" />
                 <mat-error>
                     <error-message [errors]="formGroup.get('total')?.errors" [target]="'Total'" />
                 </mat-error>
             </mat-form-field>
         </ng-container>
     </div>
+
     <div class="base-details-actions">
         <button mat-flat-button (click)="cancelHandler()">Cancel</button>
+
         <button mat-flat-button color="primary" (click)="updateHandler()"
             [disabled]="isLoading || formGroup.invalid || !formHasChanged">
             <mat-spinner strokeWidth="4" diameter="24" class="--button --submit" *ngIf="isLoading" />

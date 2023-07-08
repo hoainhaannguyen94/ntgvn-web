@@ -2,7 +2,9 @@
     <mat-card class="login-content">
         <mat-card-content>
             <mat-progress-bar *ngIf="isLoading" mode="indeterminate" class="login-progress-bar" />
+
             <div class="login-header">User Login</div>
+
             <div class="login-form" [formGroup]="formGroup">
                 <div>
                     <mat-form-field appearance="outline">
@@ -14,6 +16,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
+
                 <div>
                     <mat-form-field appearance="outline">
                         <mat-label>Password</mat-label>
@@ -29,6 +32,7 @@
                     </mat-form-field>
                 </div>
             </div>
+
             <div class="login-actions">
                 <button mat-flat-button color="primary" (click)="login()"
                     [disabled]="!formHasChanged || !formValid || isLoading">LOGIN</button>

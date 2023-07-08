@@ -3,11 +3,12 @@
     <div class="base-details-body" [formGroup]="formGroup">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name" required autocomplete="off" />
+            <input matInput formControlName="name" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('name')?.errors" [target]="'Name'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Category</mat-label>
             <mat-select required formControlName="_categoryId">
@@ -19,6 +20,7 @@
                 <error-message [errors]="formGroup.get('category')?.errors" [target]="'Category'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Warehouse</mat-label>
             <mat-select required formControlName="_warehouseId">
@@ -30,52 +32,55 @@
                 <error-message [errors]="formGroup.get('_warehouseId')?.errors" [target]="'Warehouse'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Type</mat-label>
-            <input matInput placeholder="Type" formControlName="type" required autocomplete="off" />
+            <input matInput formControlName="type" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('type')?.errors" [target]="'Type'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Unit</mat-label>
-            <input matInput placeholder="Unit" formControlName="unit" required autocomplete="off" />
+            <input matInput formControlName="unit" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('unit')?.errors" [target]="'Unit'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Quantity</mat-label>
-            <input matInput type="number" placeholder="Quantity" formControlName="quantity" required autocomplete="off"
-                min="0" />
+            <input matInput type="number" formControlName="quantity" required autocomplete="off" min="0" />
             <mat-error>
                 <error-message [errors]="formGroup.get('quantity')?.errors" [target]="'Quantity'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Retail Price</mat-label>
-            <input matInput type="number" placeholder="Retail Price" formControlName="retailPrice" required
-                autocomplete="off" min="0" />
+            <input matInput type="number" formControlName="retailPrice" required autocomplete="off" min="0" />
             <mat-error>
                 <error-message [errors]="formGroup.get('retailPrice')?.errors" [target]="'Retail Price'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Wholesale Price</mat-label>
-            <input matInput type="number" placeholder="Wholesale Price" formControlName="wholesalePrice" required
-                autocomplete="off" min="0" />
+            <input matInput type="number" formControlName="wholesalePrice" required autocomplete="off" min="0" />
             <mat-error>
                 <error-message [errors]="formGroup.get('wholesalePrice')?.errors" [target]="'Wholesale Price'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Collaborator Price</mat-label>
-            <input matInput type="number" placeholder="Collaborator Price" formControlName="collaboratorPrice" required
-                autocomplete="off" min="0" />
+            <input matInput type="number" formControlName="collaboratorPrice" required autocomplete="off" min="0" />
             <mat-error>
                 <error-message [errors]="formGroup.get('collaboratorPrice')?.errors" [target]="'Collaborator Price'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Created At</mat-label>
             <input matInput [matDatepicker]="createdAtPicker" formControlName="createdAt" required autocomplete="off" />
@@ -85,6 +90,7 @@
                 <error-message [errors]="formGroup.get('createdAt')?.errors" [target]="'Created At'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Expire At</mat-label>
             <input matInput [matDatepicker]="expireAtPicker" formControlName="expireAt" required autocomplete="off" />
@@ -95,8 +101,10 @@
             </mat-error>
         </mat-form-field>
     </div>
+
     <div class="base-details-actions">
         <button mat-flat-button (click)="cancelHandler()">Cancel</button>
+
         <button mat-flat-button color="primary" (click)="updateHandler()"
             [disabled]="isLoading || formGroup.invalid || !formHasChanged">
             <mat-spinner strokeWidth="4" diameter="24" class="--button --submit" *ngIf="isLoading" />

@@ -3,21 +3,23 @@
     <div class="base-details-body" [formGroup]="formGroup">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name" required autocomplete="off" />
+            <input matInput formControlName="name" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('name')?.errors" [target]="'Name'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Address</mat-label>
-            <input matInput placeholder="Address" formControlName="address" required autocomplete="off" />
+            <input matInput formControlName="address" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('name')?.errors" [target]="'Address'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Phone Number</mat-label>
-            <input matInput placeholder="Phone Number" formControlName="phoneNumber" required autocomplete="off" />
+            <input matInput formControlName="phoneNumber" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('phoneNumber')?.errors" [target]="'Phone Number'" />
             </mat-error>
@@ -25,6 +27,7 @@
     </div>
     <div class="base-details-actions">
         <button mat-flat-button (click)="cancelHandler()">Cancel</button>
+
         <button mat-flat-button color="primary" (click)="updateHandler()"
             [disabled]="isLoading || formGroup.invalid || !formHasChanged">
             <mat-spinner strokeWidth="4" diameter="24" class="--button --submit" *ngIf="isLoading" />

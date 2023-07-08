@@ -3,32 +3,36 @@
     <div class="base-details-body" [formGroup]="formGroup">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput placeholder="Name" formControlName="name" required autocomplete="off" />
+            <input matInput formControlName="name" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('name')?.errors" [target]="'Name'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Address</mat-label>
-            <input matInput placeholder="Address" formControlName="address" required autocomplete="off" />
+            <input matInput formControlName="address" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('name')?.errors" [target]="'Address'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Phone Number</mat-label>
-            <input matInput placeholder="Phone Number" formControlName="phoneNumber" required autocomplete="off" />
+            <input matInput formControlName="phoneNumber" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('phoneNumber')?.errors" [target]="'Phone Number'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" formControlName="email" required autocomplete="off" />
+            <input matInput formControlName="email" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('email')?.errors" [target]="'Email'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Role</mat-label>
             <mat-select required formControlName="role">
@@ -40,6 +44,7 @@
                 <error-message [errors]="formGroup.get('role')?.errors" [target]="'Role'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Group</mat-label>
             <mat-select formControlName="_groupId">
@@ -52,8 +57,10 @@
             </mat-error>
         </mat-form-field>
     </div>
+
     <div class="base-details-actions">
         <button mat-flat-button (click)="cancelHandler()">Cancel</button>
+
         <button mat-flat-button color="primary" (click)="submitHandler()" [disabled]="isLoading || formGroup.invalid">
             <mat-spinner strokeWidth="4" diameter="24" class="--button --submit" *ngIf="isLoading" />
             <span>Submit</span>

@@ -3,19 +3,21 @@
     <div class="base-details-body" [formGroup]="formGroup">
         <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
-            <input matInput type="text" placeholder="Title" formControlName="title" required autocomplete="off" />
+            <input matInput type="text" formControlName="title" required autocomplete="off" />
             <mat-error>
                 <error-message [errors]="formGroup.get('title')?.errors" [target]="'Title'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
             <textarea cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="5" cdkAutosizeMaxRows="10"
-                matInput placeholder="Description" formControlName="description" autocomplete="off"></textarea>
+                matInput formControlName="description" autocomplete="off"></textarea>
             <mat-error>
                 <error-message [errors]="formGroup.get('description')?.errors" [target]="'Description'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Start</mat-label>
             <input matInput [matDatepicker]="startPicker" formControlName="start" required autocomplete="off" />
@@ -25,28 +27,33 @@
                 <error-message [errors]="formGroup.get('start')?.errors" [target]="'Start'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>End</mat-label>
-            <input matInput [matDatepicker]="endPicker" formControlName="end" required autocomplete="off" />
+            <input matInput placeholder="MM/DD/YYYY" [matDatepicker]="endPicker" formControlName="end" required
+                autocomplete="off" />
             <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
             <mat-datepicker #endPicker></mat-datepicker>
             <mat-error>
                 <error-message [errors]="formGroup.get('start')?.errors" [target]="'End'" />
             </mat-error>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Background Color</mat-label>
-            <input matInput type="color" placeholder="Background Color" formControlName="backgroundColor"
-                autocomplete="off" />
+            <input matInput type="color" formControlName="backgroundColor" autocomplete="off" />
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Border Color</mat-label>
-            <input matInput type="color" placeholder="Border Color" formControlName="borderColor" autocomplete="off" />
+            <input matInput type="color" formControlName="borderColor" autocomplete="off" />
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Text Color</mat-label>
-            <input matInput type="color" placeholder="Text Color" formControlName="textColor" autocomplete="off" />
+            <input matInput type="color" formControlName="textColor" autocomplete="off" />
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Group</mat-label>
             <mat-select formControlName="_groupId">
@@ -55,10 +62,12 @@
                     {{group.name}}</mat-option>
             </mat-select>
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Priority</mat-label>
-            <input matInput type="number" placeholder="Priority" formControlName="priority" autocomplete="off" />
+            <input matInput type="number" formControlName="priority" autocomplete="off" />
         </mat-form-field>
+
         <mat-form-field appearance="outline">
             <mat-label>Tag(s)</mat-label>
             <mat-select formControlName="_tagIds" multiple>
@@ -66,8 +75,10 @@
             </mat-select>
         </mat-form-field>
     </div>
+
     <div class="base-details-actions">
         <button mat-flat-button (click)="cancelHandler()">Cancel</button>
+
         <button mat-flat-button color="primary" (click)="updateHandler()"
             [disabled]="isLoading || formGroup.invalid || !formHasChanged">
             <mat-spinner strokeWidth="4" diameter="24" class="--button --submit" *ngIf="isLoading" />
