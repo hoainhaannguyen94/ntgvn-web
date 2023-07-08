@@ -3,7 +3,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged, takeUntil, tap, timer } from 'rxjs';
 import { BaseMatGridComponent } from '@utils/base/mat-grid';
-import { IEvent, IEventStatus } from '@utils/schema';
+import { IEvent, IEventFilter, IEventStatus } from '@utils/schema';
 import { EventFacadeService } from '../../facade/event-facade.service';
 import { OdataParams } from '@utils/http';
 import { Router } from '@angular/router';
@@ -330,5 +330,9 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 this.reloadGrid();
             }
         });
+    }
+
+    onFilterChangesHandler(filter: IEventFilter) {
+        console.log(filter);
     }
 }

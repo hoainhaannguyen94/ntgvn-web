@@ -12,6 +12,7 @@ import { LogService } from '@utils/service';
 import { EventFacadeService } from '../../facade/event-facade.service';
 import { BLANK_EVENT_FILTER, IEventFilter, IEventStatus, IGroup, ITag } from '@utils/schema';
 import { takeUntil } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'event-filter',
@@ -25,13 +26,15 @@ import { takeUntil } from 'rxjs';
         MatInputModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        MatSelectModule
+        MatSelectModule,
+        MatButtonModule
     ],
     templateUrl: './event-filter.component.html',
     styleUrls: ['./event-filter.component.scss']
 })
 export class EventFilterComponent extends BaseComponent implements OnInit {
     @Output() filterChanges = new EventEmitter<IEventFilter>();
+    @Output() filterCancel = new EventEmitter<void>();
 
     log = inject(LogService);
     eventFacade = inject(EventFacadeService);
@@ -97,5 +100,14 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
         this.eventFacade.loadTagList({
             $orderby: 'name asc'
         });
+    }
+
+    cancelHandler() {
+        this.filterCancel.emit();
+    }
+
+    applyFilterHandler() {
+        const filter = this.formGroup.value as IEventFilter;
+        this.filterChanges.emit(filter);
     }
 }

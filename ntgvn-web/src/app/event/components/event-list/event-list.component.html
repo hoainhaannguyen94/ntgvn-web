@@ -118,5 +118,5 @@
 </ng-template>
 
 <ng-template #BaseGridPlusFilterTemplate>
-    <event-filter />
+    <event-filter (filterCancel)="BaseGridPlusFilter.toggle()" (filterChanges)="onFilterChangesHandler($event)" />
 </ng-template>

@@ -1,47 +1,66 @@
 <div class="event-filter-container">
-    <mat-form-field appearance="outline">
-        <mat-label>Start</mat-label>
-        <input matInput [matDatepicker]="startPicker" placeholder="MM/DD/YYYY" formControlName="start" required
-            autocomplete="off" />
-        <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
-        <mat-datepicker #startPicker></mat-datepicker>
-    </mat-form-field>
+    <div class="event-filter-content">
+        <ng-template [ngTemplateOutlet]="FilterContentTemplate"></ng-template>
+    </div>
 
-    <mat-form-field appearance="outline">
-        <mat-label>End</mat-label>
-        <input matInput [matDatepicker]="endPicker" placeholder="MM/DD/YYYY" formControlName="end" required
-            autocomplete="off" />
-        <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
-        <mat-datepicker #endPicker></mat-datepicker>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Status</mat-label>
-        <mat-select formControlName="_statusIds" multiple>
-            <mat-option [value]="-1">All</mat-option>
-            <mat-option *ngFor="let status of eventStatusList; trackBy:trackByFn;" [value]="status._id">
-                {{status.displayName}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Groups</mat-label>
-        <mat-select formControlName="_groupIds" multiple>
-            <mat-option [value]="''">None</mat-option>
-            <mat-option *ngFor="let group of groupList; trackBy:trackByFn;" [value]="group._id">
-                {{group.name}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Priorities</mat-label>
-        <input matInput type="text" placeholder="0, 1, 2, ..." formControlName="priority" autocomplete="off" />
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-        <mat-label>Tags</mat-label>
-        <mat-select formControlName="_tagIds" multiple>
-            <mat-option *ngFor="let tag of tagList; trackBy:trackByFn;" [value]="tag._id">{{tag.name}}</mat-option>
-        </mat-select>
-    </mat-form-field>
+    <div class="event-filter-actions">
+        <ng-template [ngTemplateOutlet]="FilterActionsTemplate"></ng-template>
+    </div>
 </div>
+
+<ng-template #FilterContentTemplate>
+    <form [formGroup]="formGroup">
+        <mat-form-field appearance="outline">
+            <mat-label>Start</mat-label>
+            <input matInput [matDatepicker]="startPicker" placeholder="MM/DD/YYYY" formControlName="start"
+                autocomplete="off" />
+            <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>End</mat-label>
+            <input matInput [matDatepicker]="endPicker" placeholder="MM/DD/YYYY" formControlName="end"
+                autocomplete="off" />
+            <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="_statusIds" multiple>
+                <mat-option [value]="''">All</mat-option>
+                <mat-option *ngFor="let status of eventStatusList; trackBy:trackByFn;" [value]="status._id">
+                    {{status.displayName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Groups</mat-label>
+            <mat-select formControlName="_groupIds" multiple>
+                <mat-option [value]="''">All</mat-option>
+                <mat-option *ngFor="let group of groupList; trackBy:trackByFn;" [value]="group._id">
+                    {{group.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Priorities</mat-label>
+            <input matInput type="text" placeholder="0, 1, 2, ..." formControlName="priority" autocomplete="off" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Tags</mat-label>
+            <mat-select formControlName="_tagIds" multiple>
+                <mat-option [value]="''">All</mat-option>
+                <mat-option *ngFor="let tag of tagList; trackBy:trackByFn;" [value]="tag._id">{{tag.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</ng-template>
+
+<ng-template #FilterActionsTemplate>
+    <button mat-flat-button (click)="cancelHandler()">Cancel</button>
+
+    <button mat-flat-button color="primary" (click)="applyFilterHandler()">Apply</button>
+</ng-template>
