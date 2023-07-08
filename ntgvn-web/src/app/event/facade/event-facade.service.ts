@@ -183,4 +183,8 @@ export class EventFacadeService {
     getTagList$() {
         return this.eventState.getTagList$();
     }
+
+    exportEventListExcel$() {
+        return this.eventAPI.exportEventListExcel$();
+    }
 }

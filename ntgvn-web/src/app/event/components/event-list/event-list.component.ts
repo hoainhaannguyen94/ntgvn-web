@@ -25,6 +25,7 @@ import { io } from 'socket.io-client';
 import { TagsDetailsPipe } from 'src/app/utils/pipe/tags-details.pipe';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { EventFilterComponent } from '../event-filter/event-filter.component';
+import { saveBlob } from '@utils/function';
 
 @Component({
     selector: 'event-list',
@@ -269,7 +270,12 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
     }
 
     exportEventHandler() {
-        // TODO
+        this.eventFacade.exportEventListExcel$().subscribe({
+            next: res => {
+                console.log(res);
+                saveBlob(res, 'Tasks.xlsx');
+            }
+        });
     }
 
     newEventHandler() {

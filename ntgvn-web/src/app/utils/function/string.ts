@@ -7,5 +7,5 @@ export function countCharacter(str = '', char = '') {
     } catch (_) {
         error = true;
     }
-    return ({ error, count })
+    return ({ error, count });
 }

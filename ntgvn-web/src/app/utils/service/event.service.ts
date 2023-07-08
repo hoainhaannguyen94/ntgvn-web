@@ -44,4 +44,12 @@ export class EventService extends OdataService {
     getEventStatus$(eventStatusId: string, params?: OdataParams) {
         return this.getItem<IEventStatus>(`${this.API_URL}/status/${eventStatusId}`, null, params);
     }
+
+    exportEventListExcel$() {
+        return this.http.get(`${this.API_URL}/export/excel`, { responseType: 'blob' });
+    }
+
+    exportEventListPdf$() {
+        return this.http.get(`${this.API_URL}/export/pdf`, { responseType: 'blob' });
+    }
 }
