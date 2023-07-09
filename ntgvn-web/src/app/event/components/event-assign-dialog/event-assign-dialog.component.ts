@@ -66,7 +66,7 @@ export class EventAssignDialogComponent extends BaseComponent implements OnInit 
         });
     }
 
-    saveHandler() {
+    assignHandler() {
         this.dialogRef.close(this._groupIdFormControl.value);
     }
 }

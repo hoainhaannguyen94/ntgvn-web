@@ -11,7 +11,7 @@
         align-items: flex-end;
 
         .base-dialog-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: var(--font-weight-bold);
         }
     }
@@ -19,7 +19,7 @@
     .base-dialog-content {
         display: flex;
         flex-direction: column;
-        gap: 0.8rem;
+        gap: 1rem;
     }
 
     .base-dialog-actions {

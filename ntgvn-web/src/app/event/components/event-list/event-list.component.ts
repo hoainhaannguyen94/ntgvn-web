@@ -315,8 +315,8 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                         }
                     },
                     {
-                        key: 'save',
-                        text: 'Save',
+                        key: 'assign',
+                        text: 'Assign',
                         backgroundColor: 'primary',
                         execute: () => { }
                     }

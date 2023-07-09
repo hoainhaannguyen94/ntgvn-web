@@ -8,12 +8,14 @@
 
 <ng-template #BaseDialogHeaderTemplate>
     <div class="base-dialog-header">
-        <div class="base-dialog-title">{{dialogData.title}}</div>
+        <div class="base-dialog-title">{{dialogData.title}} - {{item.title}}</div>
     </div>
 </ng-template>
 
 <ng-template #BaseDialogContentTemplate>
     <div class="base-dialog-content">
+        <div class="event-description">{{item.description}}</div>
+
         <mat-form-field appearance="outline">
             <mat-label>Group</mat-label>
             <mat-select [formControl]="_groupIdFormControl">
@@ -29,9 +31,9 @@
     <div class="base-dialog-actions">
         <ng-container *ngFor="let action of dialogData.actions; trackBy: trackByFn;">
             <ng-container [ngSwitch]="action.key">
-                <ng-container *ngSwitchCase="'save'">
+                <ng-container *ngSwitchCase="'assign'">
                     <button mat-flat-button [color]="action.backgroundColor"
-                        (click)="saveHandler()">{{action.text}}</button>
+                        (click)="assignHandler()">{{action.text}}</button>
                 </ng-container>
 
                 <ng-container *ngSwitchDefault>
