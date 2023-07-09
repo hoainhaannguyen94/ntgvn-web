@@ -1,6 +1,17 @@
 <div class="base-container base-details-container">
-    <mat-icon class="base-details-avatar">event</mat-icon>
-    <div class="base-details-body" [formGroup]="formGroup">
+    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate"></ng-template>
+
+    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate"></ng-template>
+
+    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate"></ng-template>
+</div>
+
+<ng-template #BaseDetailsHeaderTemplate>
+    <div class="base-details-header">New Task</div>
+</ng-template>
+
+<ng-template #BaseDetailsContentTemplate>
+    <div class="base-details-content" [formGroup]="formGroup">
         <mat-form-field appearance="outline">
             <mat-label>Title</mat-label>
             <input matInput type="text" formControlName="title" required autocomplete="off" />
@@ -76,6 +87,9 @@
             </mat-select>
         </mat-form-field>
     </div>
+</ng-template>
+
+<ng-template #BaseDetailsActionsTemplate>
     <div class="base-details-actions">
         <button mat-flat-button (click)="cancelHandler()">Cancel</button>
 
@@ -84,4 +98,4 @@
             <span>Submit</span>
         </button>
     </div>
-</div>
+</ng-template>

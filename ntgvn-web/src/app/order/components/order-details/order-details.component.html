@@ -1,6 +1,17 @@
 <div class="base-container base-details-container">
-    <mat-icon class="base-details-avatar">receipt</mat-icon>
-    <div class="base-details-body" [formGroup]="formGroup">
+    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate"></ng-template>
+
+    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate"></ng-template>
+
+    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate"></ng-template>
+</div>
+
+<ng-template #BaseDetailsHeaderTemplate>
+    <div class="base-details-header">Order Details</div>
+</ng-template>
+
+<ng-template #BaseDetailsContentTemplate>
+    <div class="base-details-content" [formGroup]="formGroup">
         <div class="base-details-block" *ngFor="let product of products.controls; index as i">
             <ng-container [formGroup]="product">
                 <mat-form-field appearance="outline">
@@ -135,7 +146,9 @@
             </mat-form-field>
         </ng-container>
     </div>
+</ng-template>
 
+<ng-template #BaseDetailsActionsTemplate>
     <div class="base-details-actions">
         <button mat-flat-button (click)="cancelHandler()">Cancel</button>
 
@@ -145,4 +158,4 @@
             <span>Update</span>
         </button>
     </div>
-</div>
+</ng-template>

@@ -333,8 +333,6 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
     }
 
     onFilterChangesHandler(filter: IEventFilter) {
-        console.log(filter);
-
         const filters = [];
 
         let filterStart = '';
@@ -371,9 +369,9 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 filterPriorities = priorities.reduce((acc, cur) => {
                     if (cur) {
                         if (acc)
-                            acc += ` or extendedProps/priority eq ${cur}`;
+                            acc += ` or extendedProps/priority eq ${Number(cur)}`;
                         else
-                            acc = `extendedProps/priority eq ${cur}`;
+                            acc = `extendedProps/priority eq ${Number(cur)}`;
                     }
                     return acc;
                 }, '');

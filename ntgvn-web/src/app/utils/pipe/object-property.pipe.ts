@@ -7,9 +7,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ObjectPropertyPipe implements PipeTransform {
     transform(object: any, property: string): any {
-        if (object && property in object) {
+        if (object && property in object)
             return object[property];
-        }
         return null;
     }
 }

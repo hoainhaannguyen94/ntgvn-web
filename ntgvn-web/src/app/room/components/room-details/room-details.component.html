@@ -1,6 +1,17 @@
 <div class="base-container base-details-container">
-    <mat-icon class="base-details-avatar">home</mat-icon>
-    <div class="base-details-body" [formGroup]="formGroup">
+    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate"></ng-template>
+
+    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate"></ng-template>
+
+    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate"></ng-template>
+</div>
+
+<ng-template #BaseDetailsHeaderTemplate>
+    <div class="base-details-header">Room Details</div>
+</ng-template>
+
+<ng-template #BaseDetailsContentTemplate>
+    <div class="base-details-content" [formGroup]="formGroup">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
             <input matInput formControlName="name" required autocomplete="off" />
@@ -40,8 +51,8 @@
             <mat-error>
                 <error-message [errors]="formGroup.get('lng')?.errors" [target]="'Longtitude'" />
             </mat-error>
-        </mat-form-field>
- -->
+        </mat-form-field> -->
+
         <mat-form-field appearance="outline">
             <mat-label>Manager</mat-label>
             <mat-select required formControlName="_managerId">
@@ -53,7 +64,9 @@
             </mat-error>
         </mat-form-field>
     </div>
+</ng-template>
 
+<ng-template #BaseDetailsActionsTemplate>
     <div class="base-details-actions">
         <button mat-flat-button (click)="cancelHandler()">Cancel</button>
 
@@ -63,4 +76,4 @@
             <span>Update</span>
         </button>
     </div>
-</div>
+</ng-template>

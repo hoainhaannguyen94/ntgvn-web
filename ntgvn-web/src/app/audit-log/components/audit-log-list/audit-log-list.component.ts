@@ -161,7 +161,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
     initColumns() {
         this.headers = {
             'event': 'Event',
-            'user': 'User',
+            '_userId': 'User',
             'action': 'Action',
             'details': 'Details',
             'date': 'Date'
@@ -169,7 +169,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
     }
 
     initDisplayColumns() {
-        this.columns = ['event', 'user', 'action', 'details', 'date', 'actions'];
+        this.columns = ['event', '_userId', 'action', 'details', 'date', 'actions'];
     }
 
     initActions() {

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
-import { map } from 'rxjs';
+import { map, of } from 'rxjs';
 import { EventService } from '../service/event.service';
 
 @Pipe({
@@ -11,6 +11,8 @@ export class EventStatusDetailsPipe implements PipeTransform {
     eventService = inject(EventService);
 
     transform(eventStatusId: string) {
-        return this.eventService.getEventStatus$(eventStatusId).pipe(map(res => res.value));
+        if (eventStatusId)
+            return this.eventService.getEventStatus$(eventStatusId).pipe(map(res => res.value));
+        return of(null);
     }
 }

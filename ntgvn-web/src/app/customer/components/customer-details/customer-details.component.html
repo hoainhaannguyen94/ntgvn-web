@@ -1,6 +1,17 @@
 <div class="base-container base-details-container">
-    <mat-icon class="base-details-avatar">groups</mat-icon>
-    <div class="base-details-body" [formGroup]="formGroup">
+    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate"></ng-template>
+
+    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate"></ng-template>
+
+    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate"></ng-template>
+</div>
+
+<ng-template #BaseDetailsHeaderTemplate>
+    <div class="base-details-header">Customer Details</div>
+</ng-template>
+
+<ng-template #BaseDetailsContentTemplate>
+    <div class="base-details-content" [formGroup]="formGroup">
         <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
             <input matInput formControlName="name" required autocomplete="off" />
@@ -25,6 +36,9 @@
             </mat-error>
         </mat-form-field>
     </div>
+</ng-template>
+
+<ng-template #BaseDetailsActionsTemplate>
     <div class="base-details-actions">
         <button mat-flat-button (click)="cancelHandler()">Cancel</button>
 
@@ -34,4 +48,4 @@
             <span>Update</span>
         </button>
     </div>
-</div>
+</ng-template>

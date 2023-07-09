@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
 import { ProductService } from '@utils/service';
-import { map } from 'rxjs';
+import { map, of } from 'rxjs';
 
 @Pipe({
     name: 'productCategoryDetails',
@@ -11,6 +11,8 @@ export class ProductCategoryDetailsPipe implements PipeTransform {
     productService = inject(ProductService);
 
     transform(categoryId: string) {
-        return this.productService.getProductCategory$(categoryId).pipe(map(res => res.value));
+        if (categoryId)
+            return this.productService.getProductCategory$(categoryId).pipe(map(res => res.value));
+        return of(null);
     }
 }

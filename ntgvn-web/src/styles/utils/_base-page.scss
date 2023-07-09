@@ -25,18 +25,12 @@
     align-items: center;
     gap: 1rem;
 
-    .base-details-avatar,
-    .base-details-avatar mat-icon {
-        font-size: 56px;
-        width: 56px;
-        height: 56px;
-
-        &:hover {
-            cursor: default;
-        }
+    .base-details-header {
+        font-size: 2rem;
+        font-weight: var(--font-weight-bold);
     }
 
-    .base-details-body {
+    .base-details-content {
         display: flex;
         flex-direction: column;
         align-items: center;

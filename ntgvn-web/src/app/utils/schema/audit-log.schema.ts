@@ -1,7 +1,7 @@
 export interface IAuditLog {
     [key: string]: any;
     _id: string;
-    user: string;
+    _userId: string;
     event: string;
     action: string;
     details: string;
@@ -14,7 +14,7 @@ export interface ICountAuditLog {
 
 export const BLANK_AUDIT_LOG: IAuditLog = {
     _id: '',
-    user: '',
+    _userId: '',
     event: '',
     action: '',
     details: '',

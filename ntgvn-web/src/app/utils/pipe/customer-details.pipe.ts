@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
 import { CustomerService } from '@utils/service';
-import { map } from 'rxjs';
+import { map, of } from 'rxjs';
 
 @Pipe({
     name: 'customerDetails',
@@ -11,6 +11,8 @@ export class CustomerDetailsPipe implements PipeTransform {
     customerService = inject(CustomerService);
 
     transform(customerId: string) {
-        return this.customerService.getCustomer$(customerId).pipe(map(res => res.value));
+        if (customerId)
+            return this.customerService.getCustomer$(customerId).pipe(map(res => res.value));
+        return of(null);
     }
 }
