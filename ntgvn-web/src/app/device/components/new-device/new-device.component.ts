@@ -36,7 +36,7 @@ import { LogService } from '@utils/service';
     styleUrls: ['./new-device.component.scss']
 })
 export class NewDeviceComponent extends BaseFormSingleComponent implements OnInit {
-    log = inject(LogService);
+    logService = inject(LogService);
     deviceFacade = inject(DeviceFacadeService);
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
@@ -53,7 +53,7 @@ export class NewDeviceComponent extends BaseFormSingleComponent implements OnIni
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
             next: value => {
-                this.log.info('NewDeviceComponent', 'valueChanges', value);
+                this.logService.info('NewDeviceComponent', 'valueChanges', value);
             }
         });
     }
@@ -64,7 +64,7 @@ export class NewDeviceComponent extends BaseFormSingleComponent implements OnIni
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewDeviceComponent', err);
             }
         });
     }
@@ -85,7 +85,7 @@ export class NewDeviceComponent extends BaseFormSingleComponent implements OnIni
                 this.router.navigate(['/device/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewDeviceComponent', err);
             }
         });
     }

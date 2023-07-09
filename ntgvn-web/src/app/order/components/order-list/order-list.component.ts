@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ObjectPropertyPipe, CustomerDetailsPipe, OrderStatusDetailsPipe, OrderStatusUppercasePipe, UserDetailsPipe } from '@utils/pipe';
 import { io } from 'socket.io-client';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'order-list',
@@ -56,6 +57,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
     @ViewChild(MatSort) matSort: MatSort;
     @ViewChild(MatPaginator) override paginator: MatPaginator;
 
+    logService = inject(LogService);
     orderFacade = inject(OrderFacadeService);
     router = inject(Router);
     dialog = inject(MatDialog);
@@ -106,7 +108,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderListComponent', err);
             }
         });
         this.orderFacade.getCountOrders$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -114,7 +116,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderListComponent', err);
             }
         });
         this.orderFacade.getOrderList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -123,7 +125,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                 this.updateDataSource();
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderListComponent', err);
             }
         });
         this.orderFacade.loadCountOrders();
@@ -209,6 +211,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                 label: 'Edit',
                 icon: 'edit',
                 enable: true,
+                display: true,
                 execute: (item: IOrder) => {
                     this.detailsOrderHandler(item);
                 }
@@ -217,6 +220,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                 label: 'Delete',
                 icon: 'delete_forever',
                 enable: true,
+                display: true,
                 execute: (item: IOrder) => {
                     this.deleteOrderHandler(item);
                 }
@@ -258,14 +262,14 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Delete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.orderFacade.deleteOrder$(item._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`Order ${item._id} have been deleted.`, 'DELETE', {
@@ -276,7 +280,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('OrderListComponent', err);
                                 }
                             });
                         }

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { BaseComponent } from '@utils/base/base.component';
 import { GroupDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
@@ -23,10 +23,10 @@ import { Router } from '@angular/router';
     styleUrls: ['./event-details-dialog.component.scss']
 })
 export class EventDetailsDialogComponent extends BaseComponent implements OnInit {
+    dialogRef = inject(MatDialogRef);
     dialogData = inject(MAT_DIALOG_DATA);
     schedulerFacade = inject(SchedulerFacadeService);
     router = inject(Router);
-    dialog = inject(MatDialog);
 
     event: IEvent;
     eventStatus: IEventStatus;
@@ -59,11 +59,11 @@ export class EventDetailsDialogComponent extends BaseComponent implements OnInit
     }
 
     cancelHandler() {
-        this.dialog.closeAll();
+        this.dialogRef.close();
     }
 
     navigateToEventDetails() {
-        this.dialog.closeAll();
+        this.dialogRef.close();
         this.router.navigate([`/event/${this.event.extendedProps._id}/details`]);
     }
 }

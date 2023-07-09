@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { LowtechApiService } from '../core/lowtech-api.service';
 import { LowtechStateService } from '../core/lowtech-state.service';
-import { GroupService, TagService } from '@utils/service';
+import { GroupService, LogService, TagService } from '@utils/service';
 import { OdataParams } from '@utils/http';
 import { Observable, finalize } from 'rxjs';
 import { IEvent } from '@utils/schema';
@@ -10,6 +10,7 @@ import { IEvent } from '@utils/schema';
     providedIn: 'root'
 })
 export class LowtechFacadeService {
+    logService = inject(LogService);
     lowtechAPI = inject(LowtechApiService);
     lowtechState = inject(LowtechStateService);
     groupService = inject(GroupService);
@@ -34,7 +35,7 @@ export class LowtechFacadeService {
                 this.lowtechState.setCountEvents(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('LowtechFacadeService', err);
             }
         });
     }
@@ -50,7 +51,7 @@ export class LowtechFacadeService {
                 this.lowtechState.setEventList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('LowtechFacadeService', err);
             }
         });
     }
@@ -146,7 +147,7 @@ export class LowtechFacadeService {
                 this.lowtechState.setEventStatusList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('LowtechFacadeService', err);
             }
         });
     }
@@ -166,7 +167,7 @@ export class LowtechFacadeService {
                 this.lowtechState.setGroupList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('LowtechFacadeService', err);
             }
         });
     }
@@ -186,7 +187,7 @@ export class LowtechFacadeService {
                 this.lowtechState.setTagList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('LowtechFacadeService', err);
             }
         });
     }

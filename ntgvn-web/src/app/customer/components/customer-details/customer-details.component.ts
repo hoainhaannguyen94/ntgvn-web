@@ -14,6 +14,7 @@ import { BLANK_CUSTOMER, ICustomer } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { CustomerFacadeService } from '../../facade/customer-facade.service';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'customer-details',
@@ -34,6 +35,7 @@ import { CustomerFacadeService } from '../../facade/customer-facade.service';
     styleUrls: ['./customer-details.component.scss']
 })
 export class CustomerDetailsComponent extends BaseFormSingleDetailsComponent<ICustomer> implements OnInit {
+    logService = inject(LogService);
     activatedRoute = inject(ActivatedRoute);
     customerFacade = inject(CustomerFacadeService);
     router = inject(Router);
@@ -79,7 +81,7 @@ export class CustomerDetailsComponent extends BaseFormSingleDetailsComponent<ICu
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('CustomerDetailsComponent', err);
             }
         });
     }
@@ -100,7 +102,7 @@ export class CustomerDetailsComponent extends BaseFormSingleDetailsComponent<ICu
                 this.router.navigate(['/customer/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('CustomerDetailsComponent', err);
             }
         });
     }

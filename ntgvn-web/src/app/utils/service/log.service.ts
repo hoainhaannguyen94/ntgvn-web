@@ -11,4 +11,11 @@ export class LogService {
             console.log(...agrs);
         }
     }
+
+    error(target = 'LogService', ...agrs: any) {
+        if (!environment.production) {
+            console.error(`********** ${target} **********`);
+            console.error(...agrs);
+        }
+    }
 }

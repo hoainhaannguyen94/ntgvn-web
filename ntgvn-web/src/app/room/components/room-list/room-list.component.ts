@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ObjectPropertyPipe, UserDetailsPipe } from '@utils/pipe';
 import { io } from 'socket.io-client';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'room-list',
@@ -53,6 +54,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
     @ViewChild(MatSort) matSort: MatSort;
     @ViewChild(MatPaginator) override paginator: MatPaginator;
 
+    logService = inject(LogService);
     roomFacade = inject(RoomFacadeService);
     router = inject(Router);
     dialog = inject(MatDialog);
@@ -104,7 +106,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('RoomListComponent', err);
             }
         });
         this.roomFacade.getCountRooms$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -112,7 +114,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('RoomListComponent', err);
             }
         });
         this.roomFacade.getRoomList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -121,7 +123,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                 this.updateDataSource();
             },
             error: err => {
-                throw err;
+                this.logService.error('RoomListComponent', err);
             }
         });
         this.roomFacade.loadCountRooms();
@@ -201,6 +203,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                 label: 'Edit',
                 icon: 'edit',
                 enable: true,
+                display: true,
                 execute: (item: IRoom) => {
                     this.detailsRoomHandler(item);
                 }
@@ -209,6 +212,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                 label: 'Delete',
                 icon: 'delete_forever',
                 enable: true,
+                display: true,
                 execute: (item: IRoom) => {
                     this.deleteRoomHandler(item);
                 }
@@ -250,14 +254,14 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Delete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.roomFacade.deleteRoom$(item._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`Room ${item.name} have been deleted.`, 'DELETE', {
@@ -268,7 +272,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('RoomListComponent', err);
                                 }
                             });
                         }

@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { io } from 'socket.io-client';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'tag-list',
@@ -50,6 +51,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
     @ViewChild(MatSort) matSort: MatSort;
     @ViewChild(MatPaginator) override paginator: MatPaginator;
 
+    logService = inject(LogService);
     tagFacade = inject(TagFacadeService);
     router = inject(Router);
     dialog = inject(MatDialog);
@@ -101,7 +103,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('TagListComponent', err);
             }
         });
         this.tagFacade.getCountTags$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -109,7 +111,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('TagListComponent', err);
             }
         });
         this.tagFacade.getTagList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -118,7 +120,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 this.updateDataSource();
             },
             error: err => {
-                throw err;
+                this.logService.error('TagListComponent', err);
             }
         });
         this.tagFacade.loadCountTags();
@@ -197,6 +199,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 label: 'Edit',
                 icon: 'edit',
                 enable: true,
+                display: true,
                 execute:  (item: ITag) => {
                     this.detailsTagHandler(item);
                 }
@@ -205,6 +208,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 label: 'Delete',
                 icon: 'delete_forever',
                 enable: true,
+                display: true,
                 execute:  (item: ITag) => {
                     this.deleteTagHandler(item);
                 }
@@ -246,14 +250,14 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Delete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.tagFacade.deleteTag$(item._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`Tag ${item.name} have been deleted.`, 'DELETE', {
@@ -264,7 +268,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('TagListComponent', err);
                                 }
                             });
                         }

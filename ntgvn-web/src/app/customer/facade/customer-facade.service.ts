@@ -4,11 +4,13 @@ import { CustomerStateService } from '../core/customer-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { ICustomer } from '@utils/schema';
+import { LogService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CustomerFacadeService {
+    logService = inject(LogService);
     customerAPI = inject(CustomerApiService);
     customerState = inject(CustomerStateService);
 
@@ -31,7 +33,7 @@ export class CustomerFacadeService {
                 this.customerState.setCountCustomers(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('CustomerFacadeService', err);
             }
         });
     }
@@ -47,7 +49,7 @@ export class CustomerFacadeService {
                 this.customerState.setCustomerList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('CustomerFacadeService', err);
             }
         });
     }

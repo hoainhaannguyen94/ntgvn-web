@@ -12,21 +12,21 @@
             <mat-form-field appearance="outline">
                 <mat-label>{{'From Date' | transloco}}</mat-label>
                 <input matInput [matDatepicker]="fromPicker" autocomplete="off" formControlName="from" />
-                <mat-datepicker-toggle matIconSuffix [for]="fromPicker"></mat-datepicker-toggle>
-                <mat-datepicker #fromPicker></mat-datepicker>
+                <mat-datepicker-toggle matIconSuffix [for]="fromPicker" />
+                <mat-datepicker #fromPicker />
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>{{'To Date' | transloco}}</mat-label>
                 <input matInput [matDatepicker]="toPicker" autocomplete="off" formControlName="to" />
-                <mat-datepicker-toggle matIconSuffix [for]="toPicker"></mat-datepicker-toggle>
-                <mat-datepicker #toPicker></mat-datepicker>
+                <mat-datepicker-toggle matIconSuffix [for]="toPicker" />
+                <mat-datepicker #toPicker />
             </mat-form-field>
         </div>
     </div>
 
     <div class="events-container mat-elevation-z4">
-        <ng-container *ngFor="let event of eventList; trackBy:trackByFn; last as isLast;">
+        <ng-container *ngFor="let event of eventList; trackBy: trackByFn; last as isLast;">
             <div class="event-block">
                 <div class="event-mark --{{event.extendedProps._statusName}}"></div>
 

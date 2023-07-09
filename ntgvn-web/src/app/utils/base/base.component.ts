@@ -23,7 +23,15 @@ export abstract class BaseComponent implements OnDestroy {
     subscriptions = new Map<string, Subscription>();
 
     appState: IAppState;
-    isLoading = false;
+
+    __isLoading = false;
+    get isLoading() {
+        return this.__isLoading;
+    }
+    set isLoading(value: boolean) {
+        this.__isLoading = value;
+        this.cdr.detectChanges();
+    }
 
     socket: Socket;
 
@@ -44,7 +52,7 @@ export abstract class BaseComponent implements OnDestroy {
 
     registerSignal() { }
 
-    registerResizeObserver() {}
+    registerResizeObserver() { }
 
     trackByFn(index: number) {
         return index;

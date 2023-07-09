@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ObjectPropertyPipe, ProductCategoryDetailsPipe, WarehouseDetailsPipe } from '@utils/pipe';
 import { io } from 'socket.io-client';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'product-list',
@@ -54,6 +55,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
     @ViewChild(MatSort) matSort: MatSort;
     @ViewChild(MatPaginator) override paginator: MatPaginator;
 
+    logService = inject(LogService);
     productFacade = inject(ProductFacadeService);
     router = inject(Router);
     dialog = inject(MatDialog);
@@ -105,7 +107,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('ProductListComponent', err);
             }
         });
         this.productFacade.getCountProducts$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -113,7 +115,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('ProductListComponent', err);
             }
         });
         this.productFacade.getProductList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -122,7 +124,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                 this.updateDataSource();
             },
             error: err => {
-                throw err;
+                this.logService.error('ProductListComponent', err);
             }
         });
         this.productFacade.loadCountProducts();
@@ -210,6 +212,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                 label: 'Edit',
                 icon: 'edit',
                 enable: true,
+                display: true,
                 execute: (item: IProduct) => {
                     this.detailsProductHandler(item);
                 }
@@ -218,6 +221,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                 label: 'Delete',
                 icon: 'delete_forever',
                 enable: true,
+                display: true,
                 execute: (item: IProduct) => {
                     this.deleteProductHandler(item);
                 }
@@ -259,14 +263,14 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Delete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.productFacade.deleteProduct$(item._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`Product ${item.name} have been deleted.`, 'DELETE', {
@@ -277,7 +281,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('ProductListComponent', err);
                                 }
                             });
                         }

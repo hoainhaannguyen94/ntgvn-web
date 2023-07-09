@@ -13,6 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ConfirmDialogComponent } from '@utils/component/confirm-dialog';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { io } from 'socket.io-client';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'announcement-list',
@@ -34,6 +35,7 @@ import { io } from 'socket.io-client';
     styleUrls: ['./announcement-list.component.scss']
 })
 export class AnnouncementListComponent extends BaseComponent implements OnInit {
+    logService = inject(LogService);
     announcementFacade = inject(AnnouncementFacadeService);
     router = inject(Router);
     dialog = inject(MatDialog);
@@ -53,7 +55,7 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('AnnouncementListComponent', err);
             }
         });
         this.announcementFacade.getCountAnnouncements$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -61,7 +63,7 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('AnnouncementListComponent', err);
             }
         });
         this.announcementFacade.getAnnouncementList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -69,7 +71,7 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
                 this.items = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('AnnouncementListComponent', err);
             }
         });
         this.announcementFacade.loadCountAnnouncements();
@@ -125,14 +127,14 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Delete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.announcementFacade.deleteAnnouncement$(item._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`Room ${item.title} have been deleted.`, 'DELETE', {
@@ -143,7 +145,7 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('AnnouncementListComponent', err);
                                 }
                             });
                         }

@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { DateTime } from 'luxon';
 import { MatSelectModule } from '@angular/material/select';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'event-details',
@@ -42,6 +43,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
     styleUrls: ['./event-details.component.scss']
 })
 export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent> implements OnInit {
+    logService = inject(LogService);
     activatedRoute = inject(ActivatedRoute);
     eventFacade = inject(EventFacadeService);
     router = inject(Router);
@@ -124,7 +126,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('EventDetailsComponent', err);
             }
         });
         this.eventFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -132,7 +134,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 this.groupList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('EventDetailsComponent', err);
             }
         });
         this.eventFacade.getTagList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -140,7 +142,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 this.tagList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('EventDetailsComponent', err);
             }
         });
         this.eventFacade.loadGroupList({
@@ -191,7 +193,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 this.router.navigate(['/event/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('EventDetailsComponent', err);
             }
         });
     }

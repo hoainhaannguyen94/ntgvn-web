@@ -19,6 +19,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'order-details',
@@ -45,6 +46,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder> implements OnInit, AfterContentChecked, OnDestroy {
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
+    logService = inject(LogService);
     activatedRoute = inject(ActivatedRoute);
     orderFacade = inject(OrderFacadeService);
     router = inject(Router);
@@ -164,7 +166,7 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderDetailsComponent', err);
             }
         });
         this.orderFacade.getOrderStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -172,7 +174,7 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
                 this.orderStatusList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderDetailsComponent', err);
             }
         });
         this.orderFacade.getProductList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -181,7 +183,7 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
                 this.updateProductAvailableQuantily();
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderDetailsComponent', err);
             }
         });
         this.orderFacade.getCustomerList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -189,7 +191,7 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
                 this.customerList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderDetailsComponent', err);
             }
         });
         this.orderFacade.loadOrderStatusList({
@@ -229,7 +231,7 @@ export class OrderDetailsComponent extends BaseFormSingleDetailsComponent<IOrder
                 this.router.navigate(['/order/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderDetailsComponent', err);
             }
         });
     }

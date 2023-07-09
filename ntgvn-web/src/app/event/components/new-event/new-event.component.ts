@@ -43,7 +43,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
     styleUrls: ['./new-event.component.scss']
 })
 export class NewEventComponent extends BaseFormSingleComponent implements OnInit {
-    log = inject(LogService);
+    logService = inject(LogService);
     eventFacade = inject(EventFacadeService);
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
@@ -81,7 +81,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
             next: value => {
-                this.log.info('NewEventComponent', 'valueChanges', value);
+                this.logService.info('NewEventComponent', 'valueChanges', value);
             }
         });
     }
@@ -92,7 +92,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewEventComponent', err);
             }
         });
         this.eventFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -100,7 +100,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 this.eventStatusList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewEventComponent', err);
             }
         });
         this.eventFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -108,7 +108,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 this.groupList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewEventComponent', err);
             }
         });
         this.eventFacade.getTagList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -116,7 +116,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 this.tagList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewEventComponent', err);
             }
         });
         this.eventFacade.loadEventStatusList({
@@ -170,7 +170,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 this.router.navigate(['/event/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewEventComponent', err);
             }
         });
     }

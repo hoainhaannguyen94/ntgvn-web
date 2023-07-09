@@ -45,7 +45,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 export class NewOrderComponent extends BaseFormSingleComponent implements OnInit, AfterContentChecked, OnDestroy {
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
-    log = inject(LogService);
+    logService = inject(LogService);
     orderFacade = inject(OrderFacadeService);
     router = inject(Router);
     ngZone = inject(NgZone);
@@ -87,12 +87,12 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
         this.formGroup.get('_createdBy').setValue(this.appState.me._id, { onlySelf: true });
         this.products.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
             next: value => {
-                this.log.info('NewOrderComponent', 'products', value);
+                this.logService.info('NewOrderComponent', 'products', value);
             }
         });
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
             next: value => {
-                this.log.info('NewOrderComponent', 'details', value);
+                this.logService.info('NewOrderComponent', 'details', value);
             }
         });
         timer(0, 500).pipe(takeUntil(this.destroy$)).subscribe({
@@ -150,7 +150,7 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewOrderComponent', err);
             }
         });
         this.orderFacade.getOrderStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -158,7 +158,7 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
                 this.orderStatusList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewOrderComponent', err);
             }
         });
         this.orderFacade.getProductList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -167,7 +167,7 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
                 this.updateProductAvailableQuantily();
             },
             error: err => {
-                throw err;
+                this.logService.error('NewOrderComponent', err);
             }
         });
         this.orderFacade.getCustomerList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -175,7 +175,7 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
                 this.customerList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewOrderComponent', err);
             }
         });
         this.orderFacade.loadOrderStatusList({
@@ -216,7 +216,7 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
                 this.router.navigate(['/order/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewOrderComponent', err);
             }
         });
     }

@@ -36,7 +36,7 @@ import { LogService } from '@utils/service';
     styleUrls: ['./new-user.component.scss']
 })
 export class NewUserComponent extends BaseFormSingleComponent implements OnInit {
-    log = inject(LogService);
+    logService = inject(LogService);
     userFacade = inject(UserFacadeService);
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
@@ -59,7 +59,7 @@ export class NewUserComponent extends BaseFormSingleComponent implements OnInit 
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
             next: value => {
-                this.log.info('NewUserComponent', 'valueChanges', value);
+                this.logService.info('NewUserComponent', 'valueChanges', value);
             }
         });
     }
@@ -70,7 +70,7 @@ export class NewUserComponent extends BaseFormSingleComponent implements OnInit 
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewUserComponent', err);
             }
         });
         this.userFacade.getUserRoleList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -108,7 +108,7 @@ export class NewUserComponent extends BaseFormSingleComponent implements OnInit 
                 this.router.navigate(['/user/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewUserComponent', err);
             }
         });
     }

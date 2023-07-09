@@ -37,7 +37,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
     styleUrls: ['./new-group.component.scss']
 })
 export class NewGroupComponent extends BaseFormSingleComponent implements OnInit {
-    log = inject(LogService);
+    logService = inject(LogService);
     groupFacade = inject(GroupFacadeService);
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
@@ -63,7 +63,7 @@ export class NewGroupComponent extends BaseFormSingleComponent implements OnInit
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
             next: value => {
-                this.log.info('NewGroupComponent', 'valueChanges', value);
+                this.logService.info('NewGroupComponent', 'valueChanges', value);
             }
         });
     }
@@ -74,7 +74,7 @@ export class NewGroupComponent extends BaseFormSingleComponent implements OnInit
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewGroupComponent', err);
             }
         });
     }
@@ -95,7 +95,7 @@ export class NewGroupComponent extends BaseFormSingleComponent implements OnInit
                 this.router.navigate(['/group/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewGroupComponent', err);
             }
         });
     }

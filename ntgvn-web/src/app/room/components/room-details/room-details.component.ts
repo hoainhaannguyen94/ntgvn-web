@@ -16,6 +16,7 @@ import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { RoomFacadeService } from '../../facade/room-facade.service';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'room-details',
@@ -37,6 +38,7 @@ import { RoomFacadeService } from '../../facade/room-facade.service';
     styleUrls: ['./room-details.component.scss']
 })
 export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> implements OnInit {
+    logService = inject(LogService);
     roomFacade = inject(RoomFacadeService);
     activatedRoute = inject(ActivatedRoute);
     router = inject(Router);
@@ -96,7 +98,7 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('RoomDetailsComponent', err);
             }
         });
         this.roomFacade.getManagerList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -104,7 +106,7 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
                 this.managerList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('RoomDetailsComponent', err);
             }
         });
         const managerIdsFilter = this.appState.userRoles.reduce((acc, cur) => {
@@ -132,7 +134,7 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
                 this.router.navigate(['/room/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('RoomDetailsComponent', err);
             }
         });
     }

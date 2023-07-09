@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ObjectPropertyPipe, GroupDetailsPipe, UserRoleDetailsPipe } from '@utils/pipe';
 import { io } from 'socket.io-client';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'user-list',
@@ -54,6 +55,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
     @ViewChild(MatSort) matSort: MatSort;
     @ViewChild(MatPaginator) override paginator: MatPaginator;
 
+    logService = inject(LogService);
     userFacade = inject(UserFacadeService);
     router = inject(Router);
     dialog = inject(MatDialog);
@@ -105,7 +107,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('UserListComponent', err);
             }
         });
         this.userFacade.getCountUsers$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -113,7 +115,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('UserListComponent', err);
             }
         });
         this.userFacade.getUserList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -122,7 +124,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                 this.updateDataSource();
             },
             error: err => {
-                throw err;
+                this.logService.error('UserListComponent', err);
             }
         });
         this.userFacade.loadCountUsers();
@@ -205,6 +207,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                 label: 'Edit',
                 icon: 'edit',
                 enable: true,
+                display: true,
                 execute: (item: IUser) => {
                     this.detailsUserHandler(item);
                 }
@@ -213,6 +216,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                 label: 'Delete',
                 icon: 'delete_forever',
                 enable: true,
+                display: true,
                 execute: (item: IUser) => {
                     this.deleteUserHandler(item);
                 }
@@ -254,14 +258,14 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Delete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.userFacade.deleteUser$(item._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`User ${item.name} have been deleted.`, 'DELETE', {
@@ -272,7 +276,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('UserListComponent', err);
                                 }
                             });
                         }

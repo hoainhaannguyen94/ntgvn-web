@@ -38,7 +38,7 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
     @Output() filterChanges = new EventEmitter<IEventFilter>();
     @Output() filterCancel = new EventEmitter<void>();
 
-    log = inject(LogService);
+    logService = inject(LogService);
     eventFacade = inject(EventFacadeService);
     formBuilder = inject(FormBuilder);
 
@@ -82,7 +82,7 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('EventFilterComponent', err);
             }
         });
         this.eventFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -90,7 +90,7 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
                 this.eventStatusList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('EventFilterComponent', err);
             }
         });
         this.eventFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -98,7 +98,7 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
                 this.groupList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('EventFilterComponent', err);
             }
         });
         this.eventFacade.getTagList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -106,7 +106,7 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
                 this.tagList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('EventFilterComponent', err);
             }
         });
         this.eventFacade.loadEventStatusList({

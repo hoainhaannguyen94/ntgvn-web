@@ -22,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ObjectPropertyPipe, UserDetailsPipe } from '@utils/pipe';
 import { io } from 'socket.io-client';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'warehouse-list',
@@ -53,6 +54,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
     @ViewChild(MatSort) matSort: MatSort;
     @ViewChild(MatPaginator) override paginator: MatPaginator;
 
+    logService = inject(LogService);
     warehouseFacade = inject(WarehouseFacadeService);
     router = inject(Router);
     dialog = inject(MatDialog);
@@ -104,7 +106,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('WarehouseListComponent', err);
             }
         });
         this.warehouseFacade.getCountWarehouses$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -112,7 +114,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('WarehouseListComponent', err);
             }
         });
         this.warehouseFacade.getWarehouseList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -121,7 +123,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 this.updateDataSource();
             },
             error: err => {
-                throw err;
+                this.logService.error('WarehouseListComponent', err);
             }
         });
         this.warehouseFacade.loadCountWarehouses();
@@ -201,6 +203,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 label: 'Edit',
                 icon: 'edit',
                 enable: true,
+                display: true,
                 execute:  (item: IWarehouse) => {
                     this.detailsWarehouseHandler(item);
                 }
@@ -209,6 +212,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 label: 'Delete',
                 icon: 'delete_forever',
                 enable: true,
+                display: true,
                 execute:  (item: IWarehouse) => {
                     this.deleteWarehouseHandler(item);
                 }
@@ -250,14 +254,14 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Delete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.warehouseFacade.deleteWarehouse$(item._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`Warehouse ${item.name} have been deleted.`, 'DELETE', {
@@ -268,7 +272,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('WarehouseListComponent', err);
                                 }
                             });
                         }

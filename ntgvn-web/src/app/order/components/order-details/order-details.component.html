@@ -1,9 +1,9 @@
 <div class="base-container base-details-container">
-    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate" />
 
-    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate" />
 
-    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate" />
 </div>
 
 <ng-template #BaseDetailsHeaderTemplate>
@@ -18,7 +18,7 @@
                     <mat-label>Product</mat-label>
                     <mat-select required formControlName="_productId"
                         (selectionChange)="onProductSelectionChange($event, i)">
-                        <mat-option *ngFor="let product of productList; trackBy:trackByFn;" [value]="product._id">
+                        <mat-option *ngFor="let product of productList; trackBy: trackByFn;" [value]="product._id">
                             {{product.name}}
                         </mat-option>
                     </mat-select>
@@ -82,8 +82,8 @@
                 <mat-label>Created At</mat-label>
                 <input matInput [matDatepicker]="createdAtPicker" formControlName="createdAt" required
                     autocomplete="off" />
-                <mat-datepicker-toggle matIconSuffix [for]="createdAtPicker"></mat-datepicker-toggle>
-                <mat-datepicker #createdAtPicker></mat-datepicker>
+                <mat-datepicker-toggle matIconSuffix [for]="createdAtPicker" />
+                <mat-datepicker #createdAtPicker />
                 <mat-error>
                     <error-message [errors]="formGroup.get('createdAt')?.errors" [target]="'Created At'" />
                 </mat-error>
@@ -93,8 +93,8 @@
                 <mat-label>Delivery At</mat-label>
                 <input matInput [matDatepicker]="deliveryAtPicker" formControlName="deliveryAt" required
                     autocomplete="off" />
-                <mat-datepicker-toggle matIconSuffix [for]="deliveryAtPicker"></mat-datepicker-toggle>
-                <mat-datepicker #deliveryAtPicker></mat-datepicker>
+                <mat-datepicker-toggle matIconSuffix [for]="deliveryAtPicker" />
+                <mat-datepicker #deliveryAtPicker />
                 <mat-error>
                     <error-message [errors]="formGroup.get('deliveryAt')?.errors" [target]="'Delivery At'" />
                 </mat-error>
@@ -111,7 +111,7 @@
             <mat-form-field appearance="outline">
                 <mat-label>Status</mat-label>
                 <mat-select required formControlName="status">
-                    <mat-option *ngFor="let status of orderStatusList; trackBy:trackByFn;" [value]="status._id">
+                    <mat-option *ngFor="let status of orderStatusList; trackBy: trackByFn;" [value]="status._id">
                         {{status.displayName}}
                     </mat-option>
                 </mat-select>

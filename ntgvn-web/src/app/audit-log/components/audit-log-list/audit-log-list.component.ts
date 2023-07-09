@@ -20,6 +20,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ObjectPropertyPipe, UserDetailsPipe } from '@utils/pipe';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'audit-log-list',
@@ -50,6 +51,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
     @ViewChild(MatSort) matSort: MatSort;
     @ViewChild(MatPaginator) override paginator: MatPaginator;
 
+    logService = inject(LogService);
     auditLogFacade = inject(AuditLogFacadeService);
     router = inject(Router);
 
@@ -98,7 +100,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('AuditLogListComponent', err);
             }
         });
         this.auditLogFacade.getCountAuditLogs$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -106,7 +108,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('AuditLogListComponent', err);
             }
         });
         this.auditLogFacade.getAuditLogList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -115,7 +117,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
                 this.updateDataSource();
             },
             error: err => {
-                throw err;
+                this.logService.error('AuditLogListComponent', err);
             }
         });
         this.auditLogFacade.loadCountAuditLogs();
@@ -178,6 +180,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
                 label: 'Details',
                 icon: 'visibility',
                 enable: true,
+                display: true,
                 execute: (item: IAuditLog) => {
                     this.detailsAuditLogHandler(item);
                 }

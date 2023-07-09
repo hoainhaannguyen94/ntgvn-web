@@ -15,6 +15,7 @@ import { BLANK_WAREHOUSE, IUser, IWarehouse } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { WarehouseFacadeService } from '../../facade/warehouse-facade.service';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'warehouse-details',
@@ -36,6 +37,7 @@ import { WarehouseFacadeService } from '../../facade/warehouse-facade.service';
     styleUrls: ['./warehouse-details.component.scss']
 })
 export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IWarehouse> implements OnInit {
+    logService = inject(LogService);
     warehouseFacade = inject(WarehouseFacadeService);
     activatedRoute = inject(ActivatedRoute);
     router = inject(Router);
@@ -79,7 +81,7 @@ export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IW
                 this.managerList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('WarehouseDetailsComponent', err);
             }
         });
 
@@ -98,7 +100,7 @@ export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IW
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('WarehouseDetailsComponent', err);
             }
         });
     }
@@ -119,7 +121,7 @@ export class WarehouseDetailsComponent extends BaseFormSingleDetailsComponent<IW
                 this.router.navigate(['/warehouse/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('WarehouseDetailsComponent', err);
             }
         });
     }

@@ -4,11 +4,13 @@ import { GroupStateService } from '../core/group-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IGroup } from '@utils/schema';
+import { LogService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class GroupFacadeService {
+    logService = inject(LogService);
     groupAPI = inject(GroupApiService);
     groupState = inject(GroupStateService);
 
@@ -31,7 +33,7 @@ export class GroupFacadeService {
                 this.groupState.setCountGroups(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('GroupFacadeService', err);
             }
         });
     }
@@ -47,7 +49,7 @@ export class GroupFacadeService {
                 this.groupState.setGroupList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('GroupFacadeService', err);
             }
         });
     }

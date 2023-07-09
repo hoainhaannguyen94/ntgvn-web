@@ -4,12 +4,13 @@ import { SchedulerStateService } from '../core/scheduler-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IEvent } from '@utils/schema';
-import { EventService, TagService } from '@utils/service';
+import { EventService, LogService, TagService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SchedulerFacadeService {
+    logService = inject(LogService);
     schedulerAPI = inject(SchedulerApiService);
     schedulerState = inject(SchedulerStateService);
     eventService = inject(EventService);
@@ -34,7 +35,7 @@ export class SchedulerFacadeService {
                 this.schedulerState.setCountEvents(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('SchedulerFacadeService', err);
             }
         });
     }
@@ -50,7 +51,7 @@ export class SchedulerFacadeService {
                 this.schedulerState.setEventList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('SchedulerFacadeService', err);
             }
         });
     }

@@ -1,13 +1,27 @@
 <div class="base-dialog-container">
+    <ng-template [ngTemplateOutlet]="BaseDialogHeaderTemplate" />
+
+    <ng-template [ngTemplateOutlet]="BaseDialogContentTemplate" />
+
+    <ng-template [ngTemplateOutlet]="BaseDialogActionsTemplate" />
+</div>
+
+<ng-template #BaseDialogHeaderTemplate>
     <div class="base-dialog-header">
         <div class="base-dialog-title">{{dialogData.title}}</div>
     </div>
+</ng-template>
+
+<ng-template #BaseDialogContentTemplate>
     <div class="base-dialog-content">
         <div [innerHTML]="dialogData.content"></div>
     </div>
+</ng-template>
+
+<ng-template #BaseDialogActionsTemplate>
     <div class="base-dialog-actions">
-        <ng-container *ngFor="let action of dialogData.actions; trackBy:trackByFn;">
-            <button mat-flat-button [color]="action.backgroundColor" (click)="action.action()">{{action.text}}</button>
+        <ng-container *ngFor="let action of dialogData.actions; trackBy: trackByFn;">
+            <button mat-flat-button [color]="action.backgroundColor" (click)="action.execute()">{{action.text}}</button>
         </ng-container>
     </div>
-</div>
+</ng-template>

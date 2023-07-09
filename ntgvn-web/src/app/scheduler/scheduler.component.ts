@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
 import { takeUntil, timer } from 'rxjs';
 import { BaseComponent } from '@utils/base/base.component';
-import { CommonService } from '@utils/service';
+import { CommonService, LogService } from '@utils/service';
 import { SchedulerFacadeService } from './facade/scheduler-facade.service';
 import { IEvent } from '@utils/schema';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
@@ -25,6 +25,7 @@ import { EventDetailsDialogComponent } from './components/event-details-dialog/e
     styleUrls: ['./scheduler.component.scss']
 })
 export class SchedulerComponent extends BaseComponent implements OnInit {
+    logService = inject(LogService);
     commonService = inject(CommonService);
     schedulerFacade = inject(SchedulerFacadeService);
     dialog = inject(MatDialog);
@@ -72,7 +73,7 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('SchedulerComponent', err);
             }
         });
         this.schedulerFacade.getCountEvents$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -80,7 +81,7 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
                 this.totalEvents = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('SchedulerComponent', err);
             }
         });
         this.schedulerFacade.getEventList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -91,7 +92,7 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
                 });
             },
             error: err => {
-                throw err;
+                this.logService.error('SchedulerComponent', err);
             }
         });
         this.schedulerFacade.loadCountEvents();

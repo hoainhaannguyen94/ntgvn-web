@@ -16,6 +16,7 @@ import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { GroupFacadeService } from '../../facade/group-facade.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'group-details',
@@ -37,6 +38,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
     styleUrls: ['./group-details.component.scss']
 })
 export class GroupDetailsComponent extends BaseFormSingleDetailsComponent<IGroup> implements OnInit {
+    logService = inject(LogService);
     activatedRoute = inject(ActivatedRoute);
     groupFacade = inject(GroupFacadeService);
     router = inject(Router);
@@ -90,7 +92,7 @@ export class GroupDetailsComponent extends BaseFormSingleDetailsComponent<IGroup
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('GroupDetailsComponent', err);
             }
         });
     }
@@ -111,7 +113,7 @@ export class GroupDetailsComponent extends BaseFormSingleDetailsComponent<IGroup
                 this.router.navigate(['/group/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('GroupDetailsComponent', err);
             }
         });
     }

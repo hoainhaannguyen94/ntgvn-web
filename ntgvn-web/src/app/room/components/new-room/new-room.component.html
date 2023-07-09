@@ -1,14 +1,15 @@
 <div class="base-container base-details-container">
-    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate" />
 
-    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate" />
 
-    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate" />
 </div>
 
 <ng-template #BaseDetailsHeaderTemplate>
     <div class="base-details-header">New Room</div>
 </ng-template>
+
 <ng-template #BaseDetailsContentTemplate>
     <div class="base-details-content" [formGroup]="formGroup">
         <mat-form-field appearance="outline">
@@ -55,7 +56,7 @@
         <mat-form-field appearance="outline">
             <mat-label>Manager</mat-label>
             <mat-select required formControlName="_managerId">
-                <mat-option *ngFor="let manager of managerList; trackBy:trackByFn;" [value]="manager._id">
+                <mat-option *ngFor="let manager of managerList; trackBy: trackByFn;" [value]="manager._id">
                     {{manager.name}}</mat-option>
             </mat-select>
             <mat-error>

@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { map, tap, catchError } from 'rxjs';
 import { AnonymousUser, IAppState } from '@app-state';
 import { OdataResponse } from '@utils/http';
-import { AuthService, UserService } from '@utils/service';
+import { AuthService, LogService, UserService } from '@utils/service';
 import { StateService } from '@utils/state';
 
 export const authCanActiveGuard = () => {
+    const logService = inject(LogService);
     const router = inject(Router);
     const state = inject(StateService<IAppState>);
     const authService = inject(AuthService);
@@ -45,6 +46,7 @@ export const authCanActiveGuard = () => {
         map(res => res.value.valid),
         catchError(err => {
             verifyAccessTokenHanlder({ value: { valid: false } });
+            logService.error('authCanActiveGuard', err);
             throw err;
         })
     );

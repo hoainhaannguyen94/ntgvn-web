@@ -2,6 +2,7 @@ export interface IMatGridAction {
     label: string;
     icon: string;
     enable: boolean;
+    display: boolean;
     execute: Function;
 }
 

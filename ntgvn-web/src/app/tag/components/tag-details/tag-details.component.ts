@@ -16,6 +16,7 @@ import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { TagFacadeService } from '../../facade/tag-facade.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'tag-details',
@@ -37,6 +38,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
     styleUrls: ['./tag-details.component.scss']
 })
 export class TagDetailsComponent extends BaseFormSingleDetailsComponent<ITag> implements OnInit {
+    logService = inject(LogService);
     activatedRoute = inject(ActivatedRoute);
     tagFacade = inject(TagFacadeService);
     router = inject(Router);
@@ -90,7 +92,7 @@ export class TagDetailsComponent extends BaseFormSingleDetailsComponent<ITag> im
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('TagDetailsComponent', err);
             }
         });
     }
@@ -111,7 +113,7 @@ export class TagDetailsComponent extends BaseFormSingleDetailsComponent<ITag> im
                 this.router.navigate(['/tag/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('TagDetailsComponent', err);
             }
         });
     }

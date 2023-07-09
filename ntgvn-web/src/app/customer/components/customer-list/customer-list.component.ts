@@ -21,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CommonModule } from '@angular/common';
 import { io } from 'socket.io-client';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'customer-list',
@@ -50,6 +51,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
     @ViewChild(MatSort) matSort: MatSort;
     @ViewChild(MatPaginator) override paginator: MatPaginator;
 
+    logService = inject(LogService);
     customerFacade = inject(CustomerFacadeService);
     router = inject(Router);
     dialog = inject(MatDialog);
@@ -101,7 +103,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('CustomerListComponent', err);
             }
         });
         this.customerFacade.getCountCustomers$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -109,7 +111,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('CustomerListComponent', err);
             }
         });
         this.customerFacade.getCustomerList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -118,7 +120,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                 this.updateDataSource();
             },
             error: err => {
-                throw err;
+                this.logService.error('CustomerListComponent', err);
             }
         });
         this.customerFacade.loadCountCustomers();
@@ -198,6 +200,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                 label: 'Edit',
                 icon: 'edit',
                 enable: true,
+                display: true,
                 execute: (item: ICustomer) => {
                     this.detailsCustomerHandler(item);
                 }
@@ -206,6 +209,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                 label: 'Delete',
                 icon: 'delete_forever',
                 enable: true,
+                display: true,
                 execute: (item: ICustomer) => {
                     this.deleteCustomerHandler(item);
                 }
@@ -247,14 +251,14 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Delete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.customerFacade.deleteCustomer$(item._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`Customer ${item.name} have been deleted.`, 'DELETE', {
@@ -265,7 +269,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('CustomerListComponent', err);
                                 }
                             });
                         }

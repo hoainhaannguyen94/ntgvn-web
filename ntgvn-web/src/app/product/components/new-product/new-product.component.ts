@@ -40,7 +40,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     styleUrls: ['./new-product.component.scss']
 })
 export class NewProductComponent extends BaseFormSingleComponent implements OnInit {
-    log = inject(LogService);
+    logService = inject(LogService);
     productFacade = inject(ProductFacadeService);
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
@@ -67,7 +67,7 @@ export class NewProductComponent extends BaseFormSingleComponent implements OnIn
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
             next: value => {
-                this.log.info('NewProductComponent', 'valueChanges', value);
+                this.logService.info('NewProductComponent', 'valueChanges', value);
             }
         });
     }
@@ -78,7 +78,7 @@ export class NewProductComponent extends BaseFormSingleComponent implements OnIn
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewProductComponent', err);
             }
         });
         this.productFacade.getProductCategoryList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -117,7 +117,7 @@ export class NewProductComponent extends BaseFormSingleComponent implements OnIn
                 this.router.navigate(['/product/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewProductComponent', err);
             }
         });
     }

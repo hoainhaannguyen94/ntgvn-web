@@ -4,12 +4,13 @@ import { WarehouseStateService } from '../core/warehouse-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IWarehouse } from '@utils/schema';
-import { UserService } from '@utils/service';
+import { LogService, UserService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class WarehouseFacadeService {
+    logService = inject(LogService);
     warehouseAPI = inject(WarehouseApiService);
     warehouseState = inject(WarehouseStateService);
     userService = inject(UserService);
@@ -33,7 +34,7 @@ export class WarehouseFacadeService {
                 this.warehouseState.setCountWarehouses(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('WarehouseFacadeService', err);
             }
         });
     }
@@ -49,7 +50,7 @@ export class WarehouseFacadeService {
                 this.warehouseState.setWarehouseList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('WarehouseFacadeService', err);
             }
         });
     }
@@ -130,7 +131,7 @@ export class WarehouseFacadeService {
                 this.warehouseState.setManagerList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('WarehouseFacadeService', err);
             }
         });
     }

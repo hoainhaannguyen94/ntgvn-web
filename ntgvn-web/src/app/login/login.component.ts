@@ -14,6 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ErrorMessageComponent } from '@utils/component/error-message';
+import { LogService } from '../utils/service/log.service';
 
 @Component({
     selector: 'login',
@@ -38,6 +39,7 @@ import { ErrorMessageComponent } from '@utils/component/error-message';
 export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
     @ViewChild('inputPassword') inputPassword: ElementRef<HTMLInputElement>;
 
+    logService = inject(LogService);
     loginFacade = inject(LoginFacadeService);
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
@@ -63,7 +65,7 @@ export class LoginComponent extends BaseComponent implements OnInit, OnDestroy {
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('LoginComponent', err);
             }
         });
     }

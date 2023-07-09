@@ -1,8 +1,9 @@
 export interface IConfirmDialogAction {
+    key?: string;
     text: string;
     color?: string;
     backgroundColor?: string;
-    action: any;
+    execute: Function;
 }
 
 export interface IConfirmDialogData {

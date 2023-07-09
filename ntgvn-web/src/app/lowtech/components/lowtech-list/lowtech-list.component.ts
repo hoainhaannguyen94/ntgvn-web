@@ -21,6 +21,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 import { OdataParams } from '@utils/http';
 import { groupBy } from 'lodash';
 import { ConfirmDialogComponent } from '@utils/component/confirm-dialog';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'lowtech-list',
@@ -47,6 +48,7 @@ import { ConfirmDialogComponent } from '@utils/component/confirm-dialog';
     styleUrls: ['./lowtech-list.component.scss']
 })
 export class LowtechListComponent extends BaseComponent implements OnInit {
+    logService = inject(LogService);
     lowtechFacade = inject(LowtechFacadeService);
     dialog = inject(MatDialog);
     matSnackbar = inject(MatSnackBar);
@@ -77,7 +79,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('LowtechListComponent', err);
             }
         });
         this.lowtechFacade.getCountEvents$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -85,7 +87,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 this.totalEvent = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('LowtechListComponent', err);
             }
         });
         this.lowtechFacade.getEventList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -105,7 +107,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                     }, []);
             },
             error: err => {
-                throw err;
+                this.logService.error('LowtechListComponent', err);
             }
         });
         this.lowtechFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -121,7 +123,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 });
             },
             error: err => {
-                throw err;
+                this.logService.error('LowtechListComponent', err);
             }
         });
         this.lowtechFacade.loadCountEvents();
@@ -205,14 +207,14 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Complete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.lowtechFacade.completeEvent$(event._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`Task ${event.title} have been completed.`, 'TASK', {
@@ -223,7 +225,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('LowtechListComponent', err);
                                 }
                             });
                         }

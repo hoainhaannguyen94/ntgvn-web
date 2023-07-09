@@ -15,6 +15,7 @@ import { BLANK_USER, IGroup, IUser, IUserRole } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { UserFacadeService } from '../../facade/user-facade.service';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'user-details',
@@ -36,6 +37,7 @@ import { UserFacadeService } from '../../facade/user-facade.service';
     styleUrls: ['./user-details.component.scss']
 })
 export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> implements OnInit {
+    logService = inject(LogService);
     activatedRoute = inject(ActivatedRoute);
     userFacade = inject(UserFacadeService);
     router = inject(Router);
@@ -87,7 +89,7 @@ export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> 
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('UserDetailsComponent', err);
             }
         });
         this.userFacade.getUserRoleList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -125,7 +127,7 @@ export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> 
                 this.router.navigate(['/user/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('UserDetailsComponent', err);
             }
         });
     }

@@ -21,6 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { io } from 'socket.io-client';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'device-list',
@@ -50,6 +51,7 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
     @ViewChild(MatSort) matSort: MatSort;
     @ViewChild(MatPaginator) override paginator: MatPaginator;
 
+    logService = inject(LogService);
     deviceFacade = inject(DeviceFacadeService);
     router = inject(Router);
     dialog = inject(MatDialog);
@@ -101,7 +103,7 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('DeviceListComponent', err);
             }
         });
         this.deviceFacade.getCountDevices$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -109,7 +111,7 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('DeviceListComponent', err);
             }
         });
         this.deviceFacade.getDeviceList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -118,7 +120,7 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                 this.updateDataSource();
             },
             error: err => {
-                throw err;
+                this.logService.error('DeviceListComponent', err);
             }
         });
         this.deviceFacade.loadCountDevices();
@@ -199,7 +201,8 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                 label: 'Edit',
                 icon: 'edit',
                 enable: true,
-                execute:  (item: IDevice) => {
+                display: true,
+                execute: (item: IDevice) => {
                     this.detailsDeviceHandler(item);
                 }
             },
@@ -207,7 +210,8 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                 label: 'Delete',
                 icon: 'delete_forever',
                 enable: true,
-                execute:  (item: IDevice) => {
+                display: true,
+                execute: (item: IDevice) => {
                     this.deleteDeviceHandler(item);
                 }
             }
@@ -248,14 +252,14 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Delete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.deviceFacade.deleteDevice$(item._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`Device ${item.name} have been deleted.`, 'DELETE', {
@@ -266,7 +270,7 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('DeviceListComponent', err);
                                 }
                             });
                         }

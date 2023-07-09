@@ -14,6 +14,7 @@ import { ErrorMessageComponent } from '@utils/component/error-message';
 import { BLANK_WAREHOUSE, IUser } from '@utils/schema';
 import { takeUntil, debounceTime } from 'rxjs';
 import { WarehouseFacadeService } from '../../facade/warehouse-facade.service';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'new-warehouse',
@@ -35,6 +36,7 @@ import { WarehouseFacadeService } from '../../facade/warehouse-facade.service';
     styleUrls: ['./new-warehouse.component.scss']
 })
 export class NewWarehouseComponent extends BaseFormSingleComponent implements OnInit {
+    logService = inject(LogService);
     warehouseFacade = inject(WarehouseFacadeService);
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
@@ -64,7 +66,7 @@ export class NewWarehouseComponent extends BaseFormSingleComponent implements On
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewWarehouseComponent', err);
             }
         });
         this.warehouseFacade.getManagerList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -72,7 +74,7 @@ export class NewWarehouseComponent extends BaseFormSingleComponent implements On
                 this.managerList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewWarehouseComponent', err);
             }
         });
         const managerIdsFilter = this.appState.userRoles.reduce((acc, cur) => {
@@ -100,7 +102,7 @@ export class NewWarehouseComponent extends BaseFormSingleComponent implements On
                 this.router.navigate(['/warehouse/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewWarehouseComponent', err);
             }
         });
     }

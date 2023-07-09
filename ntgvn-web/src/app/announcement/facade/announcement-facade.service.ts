@@ -4,11 +4,13 @@ import { AnnouncementStateService } from '../core/announcement-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IAnnouncement } from '@utils/schema';
+import { LogService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AnnouncementFacadeService {
+    logService = inject(LogService);
     announcementAPI = inject(AnnouncementApiService);
     announcementState = inject(AnnouncementStateService);
 
@@ -31,7 +33,7 @@ export class AnnouncementFacadeService {
                 this.announcementState.setCountAnnouncements(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('AnnouncementFacadeService', err);
             }
         });
     }
@@ -47,7 +49,7 @@ export class AnnouncementFacadeService {
                 this.announcementState.setAnnouncementList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('AnnouncementFacadeService', err);
             }
         });
     }

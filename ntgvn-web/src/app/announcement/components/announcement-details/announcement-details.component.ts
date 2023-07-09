@@ -12,6 +12,7 @@ import { BaseComponent } from '@utils/base/base.component';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { take, takeUntil, timer } from 'rxjs'
 import { IAnnouncement } from '@utils/schema';
+import { LogService } from '@utils/service';
 declare const CKEDITOR;
 
 @Component({
@@ -33,6 +34,7 @@ declare const CKEDITOR;
     styleUrls: ['./announcement-details.component.scss']
 })
 export class AnnouncementDetailsComponent extends BaseComponent implements OnInit {
+    logService = inject(LogService);
     activatedRoute = inject(ActivatedRoute);
     matSnackbar = inject(MatSnackBar);
     router = inject(Router);
@@ -231,7 +233,7 @@ export class AnnouncementDetailsComponent extends BaseComponent implements OnIni
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('AnnouncementDetailsComponent', err);
             }
         });
     }
@@ -258,7 +260,7 @@ export class AnnouncementDetailsComponent extends BaseComponent implements OnIni
                 this.router.navigate(['/announcement/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('AnnouncementDetailsComponent', err);
             }
         });
     }

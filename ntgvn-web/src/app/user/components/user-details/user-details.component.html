@@ -1,9 +1,9 @@
 <div class="base-container base-details-container">
-    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate" />
 
-    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate" />
 
-    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate" />
 </div>
 
 <ng-template #BaseDetailsHeaderTemplate>
@@ -47,7 +47,7 @@
         <mat-form-field appearance="outline">
             <mat-label>Role</mat-label>
             <mat-select required formControlName="role">
-                <mat-option *ngFor="let role of userRoleList; trackBy:trackByFn;" [value]="role._id">
+                <mat-option *ngFor="let role of userRoleList; trackBy: trackByFn;" [value]="role._id">
                     {{role.displayName}}
                 </mat-option>
             </mat-select>
@@ -59,7 +59,7 @@
         <mat-form-field appearance="outline">
             <mat-label>Group</mat-label>
             <mat-select formControlName="_groupId">
-                <mat-option *ngFor="let group of groupList; trackBy:trackByFn;" [value]="group._id">
+                <mat-option *ngFor="let group of groupList; trackBy: trackByFn;" [value]="group._id">
                     {{group.name}}
                 </mat-option>
             </mat-select>

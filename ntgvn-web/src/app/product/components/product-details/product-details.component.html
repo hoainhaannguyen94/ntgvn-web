@@ -1,9 +1,9 @@
 <div class="base-container base-details-container">
-    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate" />
 
-    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate" />
 
-    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate" />
 </div>
 
 <ng-template #BaseDetailsHeaderTemplate>
@@ -23,7 +23,7 @@
         <mat-form-field appearance="outline">
             <mat-label>Category</mat-label>
             <mat-select required formControlName="_categoryId">
-                <mat-option *ngFor="let category of productCategoryList; trackBy:trackByFn;" [value]="category._id">
+                <mat-option *ngFor="let category of productCategoryList; trackBy: trackByFn;" [value]="category._id">
                     {{category.displayName}}
                 </mat-option>
             </mat-select>
@@ -35,7 +35,7 @@
         <mat-form-field appearance="outline">
             <mat-label>Warehouse</mat-label>
             <mat-select required formControlName="_warehouseId">
-                <mat-option *ngFor="let warehouse of warehouseList; trackBy:trackByFn;" [value]="warehouse._id">
+                <mat-option *ngFor="let warehouse of warehouseList; trackBy: trackByFn;" [value]="warehouse._id">
                     {{warehouse.name}}
                 </mat-option>
             </mat-select>
@@ -95,8 +95,8 @@
         <mat-form-field appearance="outline">
             <mat-label>Created At</mat-label>
             <input matInput [matDatepicker]="createdAtPicker" formControlName="createdAt" required autocomplete="off" />
-            <mat-datepicker-toggle matIconSuffix [for]="createdAtPicker"></mat-datepicker-toggle>
-            <mat-datepicker #createdAtPicker></mat-datepicker>
+            <mat-datepicker-toggle matIconSuffix [for]="createdAtPicker" />
+            <mat-datepicker #createdAtPicker />
             <mat-error>
                 <error-message [errors]="formGroup.get('createdAt')?.errors" [target]="'Created At'" />
             </mat-error>
@@ -105,8 +105,8 @@
         <mat-form-field appearance="outline">
             <mat-label>Expire At</mat-label>
             <input matInput [matDatepicker]="expireAtPicker" formControlName="expireAt" required autocomplete="off" />
-            <mat-datepicker-toggle matIconSuffix [for]="expireAtPicker"></mat-datepicker-toggle>
-            <mat-datepicker #expireAtPicker></mat-datepicker>
+            <mat-datepicker-toggle matIconSuffix [for]="expireAtPicker" />
+            <mat-datepicker #expireAtPicker />
             <mat-error>
                 <error-message [errors]="formGroup.get('expireAt')?.errors" [target]="'Expire At'" />
             </mat-error>

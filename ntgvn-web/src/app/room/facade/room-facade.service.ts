@@ -4,12 +4,13 @@ import { RoomStateService } from '../core/room-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IRoom } from '@utils/schema';
-import { UserService } from '@utils/service';
+import { LogService, UserService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class RoomFacadeService {
+    logService = inject(LogService);
     roomAPI = inject(RoomApiService);
     roomState = inject(RoomStateService);
     userService = inject(UserService);
@@ -33,7 +34,7 @@ export class RoomFacadeService {
                 this.roomState.setCountRooms(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('RoomFacadeService', err);
             }
         });
     }
@@ -49,7 +50,7 @@ export class RoomFacadeService {
                 this.roomState.setRoomList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('RoomFacadeService', err);
             }
         });
     }
@@ -130,7 +131,7 @@ export class RoomFacadeService {
                 this.roomState.setManagerList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('RoomFacadeService', err);
             }
         });
     }

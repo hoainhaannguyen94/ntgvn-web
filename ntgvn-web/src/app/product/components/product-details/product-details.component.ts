@@ -17,6 +17,7 @@ import { take, takeUntil, debounceTime } from 'rxjs'
 import { ProductFacadeService } from '../../facade/product-facade.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'product-details',
@@ -40,6 +41,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IProduct> implements OnInit {
+    logService = inject(LogService);
     activatedRoute = inject(ActivatedRoute);
     productFacade = inject(ProductFacadeService);
     router = inject(Router);
@@ -95,7 +97,7 @@ export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IPro
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('ProductDetailsComponent', err);
             }
         });
         this.productFacade.getProductCategoryList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -132,7 +134,7 @@ export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IPro
                 this.router.navigate(['/product/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('ProductDetailsComponent', err);
             }
         });
     }

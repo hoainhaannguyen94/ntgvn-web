@@ -15,6 +15,7 @@ import { BLANK_DEVICE, IDevice } from '@utils/schema';
 import { cloneDeep } from 'lodash';
 import { take, takeUntil, debounceTime } from 'rxjs'
 import { DeviceFacadeService } from '../../facade/device-facade.service';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'device-details',
@@ -36,6 +37,7 @@ import { DeviceFacadeService } from '../../facade/device-facade.service';
     styleUrls: ['./device-details.component.scss']
 })
 export class DeviceDetailsComponent extends BaseFormSingleDetailsComponent<IDevice> implements OnInit {
+    logService = inject(LogService);
     activatedRoute = inject(ActivatedRoute);
     deviceFacade = inject(DeviceFacadeService);
     router = inject(Router);
@@ -82,7 +84,7 @@ export class DeviceDetailsComponent extends BaseFormSingleDetailsComponent<IDevi
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('DeviceDetailsComponent', err);
             }
         });
     }
@@ -104,7 +106,7 @@ export class DeviceDetailsComponent extends BaseFormSingleDetailsComponent<IDevi
                 this.router.navigate(['/device/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('DeviceDetailsComponent', err);
             }
         });
     }

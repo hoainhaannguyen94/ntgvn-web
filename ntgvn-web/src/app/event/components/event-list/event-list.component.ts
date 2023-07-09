@@ -26,6 +26,8 @@ import { TagsDetailsPipe } from 'src/app/utils/pipe/tags-details.pipe';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { EventFilterComponent } from '../event-filter/event-filter.component';
 import { saveBlob } from '@utils/function';
+import { EventAssignDialogComponent } from '../event-assign-dialog/event-assign-dialog.component';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'event-list',
@@ -61,6 +63,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
     @ViewChild(MatSort) matSort: MatSort;
     @ViewChild(MatPaginator) override paginator: MatPaginator;
 
+    logService = inject(LogService);
     eventFacade = inject(EventFacadeService);
     router = inject(Router);
     dialog = inject(MatDialog);
@@ -113,7 +116,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('EventListComponent', err);
             }
         });
         this.eventFacade.getCountEvents$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -121,7 +124,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 this.totalItems = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('EventListComponent', err);
             }
         });
         this.eventFacade.getEventList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -144,7 +147,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 this.updateDataSource();
             },
             error: err => {
-                throw err;
+                this.logService.error('EventListComponent', err);
             }
         });
         this.eventFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -161,7 +164,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 });
             },
             error: err => {
-                throw err;
+                this.logService.error('EventListComponent', err);
             }
         });
         this.eventFacade.loadCountEvents();
@@ -243,6 +246,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 label: 'Edit',
                 icon: 'edit',
                 enable: true,
+                display: true,
                 execute: (item: IEvent) => {
                     this.detailsEventHandler(item);
                 }
@@ -251,8 +255,18 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 label: 'Delete',
                 icon: 'delete_forever',
                 enable: true,
+                display: true,
                 execute: (item: IEvent) => {
                     this.deleteEventHandler(item);
+                }
+            },
+            {
+                label: 'Assign',
+                icon: 'assignment_ind',
+                enable: true,
+                display: true,
+                execute: (item: IEvent) => {
+                    this.assignEventToGroupHandler(item);
                 }
             }
         ];
@@ -282,6 +296,56 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
         this.router.navigate(['/event/new']);
     }
 
+    assignEventToGroupHandler(item) {
+        const confirmDialogRef = this.dialog.open(EventAssignDialogComponent, {
+            minWidth: '350px',
+            maxWidth: '80vw',
+            disableClose: true,
+            autoFocus: false,
+            data: {
+                item: item,
+                title: `Assign Task`,
+                content: '',
+                actions: [
+                    {
+                        text: 'Cancel',
+                        backgroundColor: '',
+                        execute: () => {
+                            confirmDialogRef.close();
+                        }
+                    },
+                    {
+                        key: 'save',
+                        text: 'Save',
+                        backgroundColor: 'primary',
+                        execute: () => { }
+                    }
+                ]
+            }
+        });
+        confirmDialogRef.afterClosed().pipe(takeUntil(this.destroy$)).subscribe({
+            next: res => {
+                if (res) {
+                    this.eventFacade.assignEventToGroup$(item._id, res).subscribe({
+                        next: () => {
+                            this.reloadGrid();
+                            this.matSnackbar.open(`Task ${item.title} have been updated.`, 'ASSIGN', {
+                                duration: 3000,
+                                verticalPosition: 'bottom',
+                                horizontalPosition: 'center'
+                            });
+                        },
+                        error: err => {
+                            this.logService.error('EventListComponent', err);
+                        }
+                    });
+                    return;
+                }
+                this.reloadGrid();
+            }
+        });
+    }
+
     detailsEventHandler(item: IEvent) {
         this.router.navigate([`/event/${item._id}/details`]);
     }
@@ -299,14 +363,14 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                     {
                         text: 'Cancel',
                         backgroundColor: '',
-                        action: () => {
+                        execute: () => {
                             confirmDialogRef.close()
                         }
                     },
                     {
                         text: 'Delete',
                         backgroundColor: 'primary',
-                        action: () => {
+                        execute: () => {
                             this.eventFacade.deleteEvent$(item._id).subscribe({
                                 next: () => {
                                     this.matSnackbar.open(`Event ${item.title} have been deleted.`, 'DELETE', {
@@ -317,7 +381,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                                     confirmDialogRef.close(true);
                                 },
                                 error: err => {
-                                    throw err;
+                                    this.logService.error('EventListComponent', err);
                                 }
                             });
                         }

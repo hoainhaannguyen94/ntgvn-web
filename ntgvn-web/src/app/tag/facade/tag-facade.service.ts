@@ -4,11 +4,13 @@ import { TagStateService } from '../core/tag-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { ITag } from '@utils/schema';
+import { LogService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TagFacadeService {
+    logService = inject(LogService);
     tagAPI = inject(TagApiService);
     tagState = inject(TagStateService);
 
@@ -31,7 +33,7 @@ export class TagFacadeService {
                 this.tagState.setCountTags(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('TagFacadeService', err);
             }
         });
     }
@@ -47,7 +49,7 @@ export class TagFacadeService {
                 this.tagState.setTagList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('TagFacadeService', err);
             }
         });
     }

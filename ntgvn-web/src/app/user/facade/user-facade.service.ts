@@ -4,12 +4,13 @@ import { UserStateService } from '../core/user-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IUser } from '@utils/schema';
-import { GroupService } from '@utils/service';
+import { GroupService, LogService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserFacadeService {
+    logService = inject(LogService);
     userAPI = inject(UserApiService);
     userState = inject(UserStateService);
     groupService = inject(GroupService);
@@ -33,7 +34,7 @@ export class UserFacadeService {
                 this.userState.setCountUsers(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('UserFacadeService', err);
             }
         });
     }
@@ -49,7 +50,7 @@ export class UserFacadeService {
                 this.userState.setUserList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('UserFacadeService', err);
             }
         });
     }
@@ -130,7 +131,7 @@ export class UserFacadeService {
                 this.userState.setUserRoleList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('UserFacadeService', err);
             }
         });
     }
@@ -150,7 +151,7 @@ export class UserFacadeService {
                 this.userState.setGroupList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('UserFacadeService', err);
             }
         });
     }

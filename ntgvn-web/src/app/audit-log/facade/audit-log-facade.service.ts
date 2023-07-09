@@ -4,11 +4,13 @@ import { AuditLogStateService } from '../core/audit-log-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IAuditLog } from '@utils/schema';
+import { LogService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuditLogFacadeService {
+    logService = inject(LogService);
     auditLogAPI = inject(AuditLogApiService);
     auditLogState = inject(AuditLogStateService);
 
@@ -31,7 +33,7 @@ export class AuditLogFacadeService {
                 this.auditLogState.setCountAuditLogs(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('AuditLogFacadeService', err);
             }
         });
     }
@@ -47,7 +49,7 @@ export class AuditLogFacadeService {
                 this.auditLogState.setAuditLogList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('AuditLogFacadeService', err);
             }
         });
     }
@@ -67,7 +69,7 @@ export class AuditLogFacadeService {
                 this.auditLogState.setAuditLog(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('AuditLogFacadeService', err);
             }
         });
     }

@@ -11,6 +11,7 @@ import { BaseComponent } from '@utils/base/base.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router, RouterModule } from '@angular/router';
 import { timer } from 'rxjs';
+import { LogService } from '@utils/service';
 declare const CKEDITOR;
 
 @Component({
@@ -32,6 +33,7 @@ declare const CKEDITOR;
     styleUrls: ['./new-announcement.component.scss']
 })
 export class NewAnnouncementComponent extends BaseComponent implements OnInit {
+    logService = inject(LogService);
     matSnackbar = inject(MatSnackBar);
     router = inject(Router);
     announcementFacade = inject(AnnouncementFacadeService);
@@ -227,7 +229,7 @@ export class NewAnnouncementComponent extends BaseComponent implements OnInit {
                 this.router.navigate(['/announcement/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewAnnouncementComponent', err);
             }
         });
     }

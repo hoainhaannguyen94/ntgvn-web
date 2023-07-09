@@ -4,11 +4,13 @@ import { OrderStateService } from '../core/order-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IOrder } from '@utils/schema';
+import { LogService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class OrderFacadeService {
+    logService = inject(LogService);
     orderAPI = inject(OrderApiService);
     orderState = inject(OrderStateService);
 
@@ -29,7 +31,7 @@ export class OrderFacadeService {
                 this.orderState.setCountOrders(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderFacadeService', err);
             }
         });
     }
@@ -45,7 +47,7 @@ export class OrderFacadeService {
                 this.orderState.setOrderList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderFacadeService', err);
             }
         });
     }
@@ -65,7 +67,7 @@ export class OrderFacadeService {
                 this.orderState.setOrderStatusList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderFacadeService', err);
             }
         });
     }
@@ -146,7 +148,7 @@ export class OrderFacadeService {
                 this.orderState.setProductList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderFacadeService', err);
             }
         });
     }
@@ -170,7 +172,7 @@ export class OrderFacadeService {
                 this.orderState.setCustomerList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('OrderFacadeService', err);
             }
         });
     }

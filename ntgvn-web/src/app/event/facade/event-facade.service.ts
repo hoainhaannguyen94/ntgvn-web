@@ -4,12 +4,13 @@ import { EventStateService } from '../core/event-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IEvent } from '@utils/schema';
-import { GroupService, TagService } from '@utils/service';
+import { GroupService, LogService, TagService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class EventFacadeService {
+    logService = inject(LogService);
     eventAPI = inject(EventApiService);
     eventState = inject(EventStateService);
     groupService = inject(GroupService);
@@ -34,7 +35,7 @@ export class EventFacadeService {
                 this.eventState.setCountEvents(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('EventFacadeService', err);
             }
         });
     }
@@ -50,7 +51,7 @@ export class EventFacadeService {
                 this.eventState.setEventList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('EventFacadeService', err);
             }
         });
     }
@@ -131,7 +132,7 @@ export class EventFacadeService {
                 this.eventState.setEventStatusList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('EventFacadeService', err);
             }
         });
     }
@@ -155,7 +156,7 @@ export class EventFacadeService {
                 this.eventState.setGroupList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('EventFacadeService', err);
             }
         });
     }
@@ -175,13 +176,17 @@ export class EventFacadeService {
                 this.eventState.setTagList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('EventFacadeService', err);
             }
         });
     }
 
     getTagList$() {
         return this.eventState.getTagList$();
+    }
+
+    assignEventToGroup$(eventId: string, _groupId: string) {
+        return this.eventAPI.assignEventToGroup$(eventId, _groupId);
     }
 
     exportEventListExcel$() {

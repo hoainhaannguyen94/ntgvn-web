@@ -4,11 +4,13 @@ import { DeviceStateService } from '../core/device-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IDevice } from '@utils/schema';
+import { LogService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DeviceFacadeService {
+    logService = inject(LogService);
     deviceAPI = inject(DeviceApiService);
     deviceState = inject(DeviceStateService);
 
@@ -31,7 +33,7 @@ export class DeviceFacadeService {
                 this.deviceState.setCountDevices(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('DeviceFacadeService', err);
             }
         });
     }
@@ -47,7 +49,7 @@ export class DeviceFacadeService {
                 this.deviceState.setDeviceList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('DeviceFacadeService', err);
             }
         });
     }

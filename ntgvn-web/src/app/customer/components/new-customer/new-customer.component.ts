@@ -36,7 +36,7 @@ import { LogService } from '@utils/service';
     styleUrls: ['./new-customer.component.scss']
 })
 export class NewCustomerComponent extends BaseFormSingleComponent implements OnInit {
-    log = inject(LogService);
+    logService = inject(LogService);
     customerFacade = inject(CustomerFacadeService);
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
@@ -52,7 +52,7 @@ export class NewCustomerComponent extends BaseFormSingleComponent implements OnI
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
             next: value => {
-                this.log.info('NewCustomerComponent', 'valueChanges', value);
+                this.logService.info('NewCustomerComponent', 'valueChanges', value);
             }
         });
     }
@@ -63,7 +63,7 @@ export class NewCustomerComponent extends BaseFormSingleComponent implements OnI
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewCustomerComponent', err);
             }
         });
     }
@@ -84,7 +84,7 @@ export class NewCustomerComponent extends BaseFormSingleComponent implements OnI
                 this.router.navigate(['/customer/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewCustomerComponent', err);
             }
         });
     }

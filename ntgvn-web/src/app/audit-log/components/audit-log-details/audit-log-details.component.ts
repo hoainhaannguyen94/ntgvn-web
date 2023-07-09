@@ -8,6 +8,7 @@ import { take, takeUntil } from 'rxjs'
 import { AuditLogFacadeService } from '../../facade/audit-log-facade.service';
 import { BaseComponent } from '@utils/base/base.component';
 import { UserDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'audit-log-details',
@@ -23,6 +24,7 @@ import { UserDetailsPipe, ObjectPropertyPipe } from '@utils/pipe';
     styleUrls: ['./audit-log-details.component.scss']
 })
 export class AuditLogDetailsComponent extends BaseComponent implements OnInit {
+    logService = inject(LogService);
     activatedRoute = inject(ActivatedRoute);
     auditLogFacade = inject(AuditLogFacadeService);
     router = inject(Router);
@@ -46,7 +48,7 @@ export class AuditLogDetailsComponent extends BaseComponent implements OnInit {
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('AuditLogDetailsComponent', err);
             }
         });
         this.auditLogFacade.getAuditLog$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -54,7 +56,7 @@ export class AuditLogDetailsComponent extends BaseComponent implements OnInit {
                 this.auditLog = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('AuditLogDetailsComponent', err);
             }
         });
     }

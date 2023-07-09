@@ -37,7 +37,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
     styleUrls: ['./new-tag.component.scss']
 })
 export class NewTagComponent extends BaseFormSingleComponent implements OnInit {
-    log = inject(LogService);
+    logService = inject(LogService);
     tagFacade = inject(TagFacadeService);
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
@@ -62,7 +62,7 @@ export class NewTagComponent extends BaseFormSingleComponent implements OnInit {
         this.registerCoreLayer();
         this.formGroup.valueChanges.pipe(takeUntil(this.destroy$), debounceTime(this.DEBOUNCE_TIME)).subscribe({
             next: value => {
-                this.log.info('NewTagComponent', 'valueChanges', value);
+                this.logService.info('NewTagComponent', 'valueChanges', value);
             }
         });
     }
@@ -73,7 +73,7 @@ export class NewTagComponent extends BaseFormSingleComponent implements OnInit {
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewTagComponent', err);
             }
         });
     }
@@ -94,7 +94,7 @@ export class NewTagComponent extends BaseFormSingleComponent implements OnInit {
                 this.router.navigate(['/tag/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewTagComponent', err);
             }
         });
     }

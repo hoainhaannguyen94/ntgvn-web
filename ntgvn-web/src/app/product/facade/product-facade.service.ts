@@ -4,12 +4,13 @@ import { ProductStateService } from '../core/product-state.service';
 import { OdataParams } from '@utils/http';
 import { finalize, Observable } from 'rxjs';
 import { IProduct } from '@utils/schema';
-import { WarehouseService } from '@utils/service';
+import { LogService, WarehouseService } from '@utils/service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProductFacadeService {
+    logService = inject(LogService);
     productAPI = inject(ProductApiService);
     productState = inject(ProductStateService);
     warehouseService = inject(WarehouseService);
@@ -33,7 +34,7 @@ export class ProductFacadeService {
                 this.productState.setCountProducts(res.value.count);
             },
             error: err => {
-                throw err;
+                this.logService.error('ProductFacadeService', err);
             }
         });
     }
@@ -49,7 +50,7 @@ export class ProductFacadeService {
                 this.productState.setProductList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('ProductFacadeService', err);
             }
         });
     }
@@ -130,7 +131,7 @@ export class ProductFacadeService {
                 this.productState.setProductCategoryList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('ProductFacadeService', err);
             }
         });
     }
@@ -150,7 +151,7 @@ export class ProductFacadeService {
                 this.productState.setWarehouseList(res.value);
             },
             error: err => {
-                throw err;
+                this.logService.error('ProductFacadeService', err);
             }
         });
     }

@@ -15,6 +15,7 @@ import { BLANK_ROOM, IUser } from '@utils/schema';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take, takeUntil, debounceTime } from 'rxjs';
 import { RoomFacadeService } from '../../facade/room-facade.service';
+import { LogService } from '@utils/service';
 
 @Component({
     selector: 'new-room',
@@ -36,6 +37,7 @@ import { RoomFacadeService } from '../../facade/room-facade.service';
     styleUrls: ['./new-room.component.scss']
 })
 export class NewRoomComponent extends BaseFormSingleComponent implements OnInit {
+    logService = inject(LogService);
     roomFacade = inject(RoomFacadeService);
     router = inject(Router);
     matSnackbar = inject(MatSnackBar);
@@ -78,7 +80,7 @@ export class NewRoomComponent extends BaseFormSingleComponent implements OnInit 
                 this.isLoading = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewRoomComponent', err);
             }
         });
         this.roomFacade.getManagerList$().pipe(takeUntil(this.destroy$)).subscribe({
@@ -86,7 +88,7 @@ export class NewRoomComponent extends BaseFormSingleComponent implements OnInit 
                 this.managerList = value;
             },
             error: err => {
-                throw err;
+                this.logService.error('NewRoomComponent', err);
             }
         });
         const managerIdsFilter = this.appState.userRoles.reduce((acc, cur) => {
@@ -114,7 +116,7 @@ export class NewRoomComponent extends BaseFormSingleComponent implements OnInit 
                 this.router.navigate(['/room/list']);
             },
             error: err => {
-                throw err;
+                this.logService.error('NewRoomComponent', err);
             }
         });
     }
