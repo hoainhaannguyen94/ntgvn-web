@@ -77,6 +77,6 @@ export const BLANK_EVENT_FILTER = {
     end: null,
     _statusIds: [],
     _groupIds: [],
-    priorities: '',
+    priorities: null,
     _tagIds: []
 }

@@ -15,6 +15,7 @@ import { debounceTime, takeUntil } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { DateTime } from 'luxon';
 import { isEqual } from 'lodash';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
     selector: 'event-filter',
@@ -29,7 +30,8 @@ import { isEqual } from 'lodash';
         MatDatepickerModule,
         MatNativeDateModule,
         MatSelectModule,
-        MatButtonModule
+        MatButtonModule,
+        MatTooltipModule
     ],
     templateUrl: './event-filter.component.html',
     styleUrls: ['./event-filter.component.scss']
@@ -118,6 +120,11 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
         this.eventFacade.loadTagList({
             $orderby: 'name asc'
         });
+    }
+
+    clearFilterHandler() {
+        this.formGroup.reset();
+        this.applyFilterHandler();
     }
 
     cancelHandler() {

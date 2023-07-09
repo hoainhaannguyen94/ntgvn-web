@@ -1,4 +1,8 @@
 <div class="event-filter-container">
+    <div class="event-filter-header">
+        <ng-template [ngTemplateOutlet]="FilterHeaderTemplate" />
+    </div>
+
     <div class="event-filter-content">
         <ng-template [ngTemplateOutlet]="FilterContentTemplate" />
     </div>
@@ -7,6 +11,11 @@
         <ng-template [ngTemplateOutlet]="FilterActionsTemplate" />
     </div>
 </div>
+
+<ng-template #FilterHeaderTemplate>
+    <div class="event-filter-title">Event Filter</div>
+    <mat-icon matTooltip="Clear" (click)="clearFilterHandler()">filter_alt_off</mat-icon>
+</ng-template>
 
 <ng-template #FilterContentTemplate>
     <form [formGroup]="formGroup">
@@ -62,5 +71,6 @@
 <ng-template #FilterActionsTemplate>
     <button mat-flat-button (click)="cancelHandler()">Cancel</button>
 
-    <button mat-flat-button color="primary" (click)="applyFilterHandler()" [disabled]="!formHasChanged || !formGroup.dirty">Apply</button>
+    <button mat-flat-button color="primary" (click)="applyFilterHandler()"
+        [disabled]="!formHasChanged || !formGroup.dirty">Apply</button>
 </ng-template>

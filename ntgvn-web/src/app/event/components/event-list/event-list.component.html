@@ -14,13 +14,13 @@
     <div class="base-grid-plus-toolbar">
         <div class="base-grid-plus-toolbar-search">
             <mat-icon>search</mat-icon>
-            <input type="text" autocomplete="off" placeholder="Search event(s) by Title" [formControl]="searchControl">
+            <input type="text" autocomplete="off" placeholder="Search task(s) by Title" [formControl]="searchControl">
             <mat-icon matTooltip="Clear" (click)="searchControl.setValue('')" *ngIf="isSearching">clear</mat-icon>
         </div>
 
         <div class="base-grid-plus-toolbar-actions">
             <mat-icon matTooltip="Export to Excel" (click)="exportEventHandler()">file_download</mat-icon>
-            <mat-icon matTooltip="New Event" (click)="newEventHandler()">add</mat-icon>
+            <mat-icon matTooltip="New Task" (click)="newEventHandler()">add</mat-icon>
             <mat-icon matTooltip="Filter" (click)="BaseGridPlusFilter.toggle()">filter_list</mat-icon>
         </div>
     </div>
