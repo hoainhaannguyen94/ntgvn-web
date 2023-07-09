@@ -8,7 +8,6 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { A11yModule } from '@angular/cdk/a11y';
 import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -25,7 +24,6 @@ import { ErrorMessageComponent } from '@utils/component/error-message';
         ReactiveFormsModule,
         A11yModule,
         MatIconModule,
-        MatCardModule,
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,

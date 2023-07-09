@@ -1,51 +1,59 @@
-.login-container {
+:host {
     height: 100vh;
     width: 100vw;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.login-container {
+    min-width: 350px;
+    max-width: 450px;
+    width: 30vw;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .login-progress-bar {
+        position: relative;
+        top: 0;
+        left: 0;
+        border-top-left-radius: var(--border-radius);
+        border-top-right-radius: var(--border-radius);
+    }
+
+    .login-header {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: var(--font-weight-bold);
+        color: #424242;
+    }
 
     .login-content {
-        width: 350px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 
-        .login-progress-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+    .login-actions {
+        width: 100%;
 
-        mat-card-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-
-            .login-header {
-                text-align: center;
-                font-size: 1.8em;
-                font-weight: var(--font-weight-bold);
-                color: #424242;
-            }
-
-            .login-form {
-                mat-icon {
-                    color: var(--primary);
-                }
-            }
-
-            .login-actions {
-                button {
-                    width: 100%;
-                }
-            }
+        button {
+            width: 100%;
         }
     }
 }
 
 .copyright {
     position: fixed;
-    bottom: 1em;
-    right: 1em;
+    bottom: 1rem;
+    right: 1rem;
     color: #424242;
-    font-size: 1em;
+    font-size: 1rem;
     font-weight: var(--font-weight-bold);
 }
