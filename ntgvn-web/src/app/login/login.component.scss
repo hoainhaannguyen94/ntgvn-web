@@ -8,15 +8,12 @@
 }
 
 .login-container {
-    min-width: 350px;
-    max-width: 450px;
-    width: 30vw;
+    width: 350px;
     padding: 1rem;
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    justify-content: space-between;
     gap: 1rem;
 
     .login-progress-bar {
