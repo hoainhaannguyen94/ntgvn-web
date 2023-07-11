@@ -1,12 +1,4 @@
-.mat-menu-panel {
-    .mat-menu-item {
-        span {
-            font-size: var(--font-size) !important;
-        }
-    }
-
-    .mat-icon-no-color,
-    .mat-menu-submenu-icon {
-        color: var(--light-grey);
-    }
+.mat-mdc-menu-item .mat-icon-no-color,
+.mat-mdc-menu-item .mat-mdc-menu-submenu-icon {
+    color: var(--light-grey) !important;
 }
