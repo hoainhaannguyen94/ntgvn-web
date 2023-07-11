@@ -257,8 +257,8 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Order`,
-                content: `<span>Are you sure to delete product: <b>${item.name}</b></span>`,
+                title: `Product - ${item.name}`,
+                content: `<span>Are you sure to delete this product</span>`,
                 actions: [
                     {
                         text: 'Cancel',

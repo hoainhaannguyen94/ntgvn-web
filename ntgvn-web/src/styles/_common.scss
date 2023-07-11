@@ -18,7 +18,7 @@
     pointer-events: none;
 }
 
-.box-highlight {
+.box-border {
     padding: 1rem;
     line-height: 2rem;
     border: var(--border);
@@ -28,6 +28,6 @@
     word-break: break-all;
 }
 
-.text-highlight {
+.text-bold {
     font-weight: var(--font-weight-bold);
 }

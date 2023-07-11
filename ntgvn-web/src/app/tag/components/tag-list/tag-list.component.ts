@@ -244,8 +244,8 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Customer`,
-                content: `<span>Are you sure to delete tag: <b>${item.name}</b></span>`,
+                title: `Tag - ${item.name}`,
+                content: `<span>Are you sure to delete this tag</span>`,
                 actions: [
                     {
                         text: 'Cancel',

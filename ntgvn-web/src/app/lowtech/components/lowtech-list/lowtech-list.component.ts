@@ -22,6 +22,7 @@ import { OdataParams } from '@utils/http';
 import { groupBy } from 'lodash';
 import { ConfirmDialogComponent } from '@utils/component/confirm-dialog';
 import { LogService } from '@utils/service';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
     selector: 'lowtech-list',
@@ -41,6 +42,7 @@ import { LogService } from '@utils/service';
         MatDialogModule,
         MatDividerModule,
         MatSelectModule,
+        MatTooltipModule,
         TranslocoModule,
         ConfirmDialogComponent
     ],
@@ -201,8 +203,8 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Task`,
-                content: `<span>Are you sure to complete this task: <b>${event.title}</b></span>`,
+                title: `Task - ${event.title}`,
+                content: `<span>Are you sure to complete this task</span>`,
                 actions: [
                     {
                         text: 'Cancel',

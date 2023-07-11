@@ -246,8 +246,8 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Customer`,
-                content: `<span>Are you sure to delete device: <b>${item.name}</b></span>`,
+                title: `Customer - ${item.name}`,
+                content: `<span>Are you sure to delete this device</span>`,
                 actions: [
                     {
                         text: 'Cancel',

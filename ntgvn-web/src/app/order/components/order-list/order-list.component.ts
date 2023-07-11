@@ -256,8 +256,8 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Order`,
-                content: `<span>Are you sure to delete order: <b>${item._id}</b></span>`,
+                title: `Order - ${item._id}`,
+                content: `<span>Are you sure to delete order</span>`,
                 actions: [
                     {
                         text: 'Cancel',

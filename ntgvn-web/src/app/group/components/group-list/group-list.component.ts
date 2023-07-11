@@ -244,8 +244,8 @@ export class GroupListComponent extends BaseMatGridComponent<IGroup> implements 
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Customer`,
-                content: `<span>Are you sure to delete group: <b>${item.name}</b></span>`,
+                title: `Group - ${item.name}`,
+                content: `<span>Are you sure to delete this group</span>`,
                 actions: [
                     {
                         text: 'Cancel',

@@ -121,8 +121,8 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Announcement`,
-                content: `<span>Are you sure to delete Announcement: <b>${item.title}</b></span>`,
+                title: `Announcement - ${item.title}`,
+                content: `<span>Are you sure to delete this announcement</span>`,
                 actions: [
                     {
                         text: 'Cancel',

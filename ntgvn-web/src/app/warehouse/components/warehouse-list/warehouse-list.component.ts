@@ -204,7 +204,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 icon: 'edit',
                 enable: true,
                 display: true,
-                execute:  (item: IWarehouse) => {
+                execute: (item: IWarehouse) => {
                     this.detailsWarehouseHandler(item);
                 }
             },
@@ -213,7 +213,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 icon: 'delete_forever',
                 enable: true,
                 display: true,
-                execute:  (item: IWarehouse) => {
+                execute: (item: IWarehouse) => {
                     this.deleteWarehouseHandler(item);
                 }
             }
@@ -248,8 +248,8 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Customer`,
-                content: `<span>Are you sure to delete warehouse: <b>${item.name}</b></span>`,
+                title: `Warehouse - ${item.name}`,
+                content: `<span>Are you sure to delete this warehouse</span>`,
                 actions: [
                     {
                         text: 'Cancel',

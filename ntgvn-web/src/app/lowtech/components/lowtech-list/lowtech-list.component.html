@@ -3,7 +3,8 @@
         <mat-form-field appearance="outline">
             <mat-label>{{'Search Task(s) by Title' | transloco}}</mat-label>
             <input matInput type="text" autocomplete="off" formControlName="search">
-            <button *ngIf="formGroup.get('search').value" matSuffix mat-icon-button (click)="clearSeach()">
+            <button *ngIf="formGroup.get('search').value" matSuffix mat-icon-button matTooltip="Clear"
+                (click)="clearSeach()">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
@@ -12,7 +13,7 @@
             <mat-form-field appearance="outline">
                 <mat-label>{{'From Date' | transloco}}</mat-label>
                 <input matInput [matDatepicker]="fromPicker" autocomplete="off" formControlName="from" />
-                <mat-datepicker-toggle matIconSuffix [for]="fromPicker" />
+                <mat-datepicker-toggle matIconSuffix [for]="fromPicker"/>
                 <mat-datepicker #fromPicker />
             </mat-form-field>
 
@@ -36,13 +37,13 @@
 
                         <div class="event-date-range">
                             <span>{{event.start | date: 'MMM d, y'}}</span>
-                            <mat-icon>arrow_forward</mat-icon>
+                            <mat-icon color="primary">arrow_forward</mat-icon>
                             <span>{{event.end | date:'MMM d, y'}}</span>
                         </div>
                     </div>
 
                     <div class="event-details">
-                        <div class="box-highlight">{{event.extendedProps.description}}</div>
+                        <div class="box-border">{{event.extendedProps.description}}</div>
                     </div>
 
                     <div class="event-actions">

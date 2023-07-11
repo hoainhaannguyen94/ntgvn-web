@@ -245,8 +245,8 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Customer`,
-                content: `<span>Are you sure to delete customer: <b>${item.name}</b></span>`,
+                title: `Customer - ${item.name}`,
+                content: `<span>Are you sure to delete this customer</span>`,
                 actions: [
                     {
                         text: 'Cancel',

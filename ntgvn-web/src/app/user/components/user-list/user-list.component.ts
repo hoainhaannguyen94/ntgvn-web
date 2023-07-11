@@ -252,8 +252,8 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Customer`,
-                content: `<span>Are you sure to delete user: <b>${item.name}</b></span>`,
+                title: `User ${item.name}`,
+                content: `<span>Are you sure to delete this user</span>`,
                 actions: [
                     {
                         text: 'Cancel',

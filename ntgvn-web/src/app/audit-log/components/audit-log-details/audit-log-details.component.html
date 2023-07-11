@@ -14,13 +14,13 @@
 
 <ng-template #BaseDetailsContentTemplate>
     <div class="base-details-content">
-        <div><span class="text-highlight">From: </span>{{auditLog._userId | userDetails | async | objectProperty:
+        <div><span class="text-bold">From: </span>{{auditLog._userId | userDetails | async | objectProperty:
             'name'}}</div>
-        <div><span class="text-highlight">Event: </span>{{auditLog.event}}</div>
-        <div><span class="text-highlight">Action: </span>{{auditLog.action}}</div>
+        <div><span class="text-bold">Event: </span>{{auditLog.event}}</div>
+        <div><span class="text-bold">Action: </span>{{auditLog.action}}</div>
         <div>
-            <div class="text-highlight">Details: </div>
-            <div class="box-highlight">{{auditLog.details}}</div>
+            <div class="text-bold">Details: </div>
+            <div class="box-border">{{auditLog.details}}</div>
         </div>
         <div><span>Date: </span>{{auditLog.date | date: 'medium'}}</div>
     </div>

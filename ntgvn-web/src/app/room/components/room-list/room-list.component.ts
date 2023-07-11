@@ -248,8 +248,8 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Customer`,
-                content: `<span>Are you sure to delete room: <b>${item.name}</b></span>`,
+                title: `Room - ${item.name}`,
+                content: `<span>Are you sure to delete this room</span>`,
                 actions: [
                     {
                         text: 'Cancel',

@@ -304,7 +304,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
             autoFocus: false,
             data: {
                 item: item,
-                title: `Assign Task`,
+                title: `Task`,
                 content: '',
                 actions: [
                     {
@@ -357,8 +357,8 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Delete Customer`,
-                content: `<span>Are you sure to delete event: <b>${item.title}</b></span>`,
+                title: `Task - ${item.title}`,
+                content: `<span>Are you sure to delete this task</span>`,
                 actions: [
                     {
                         text: 'Cancel',
@@ -373,7 +373,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                         execute: () => {
                             this.eventFacade.deleteEvent$(item._id).subscribe({
                                 next: () => {
-                                    this.matSnackbar.open(`Event ${item.title} have been deleted.`, 'DELETE', {
+                                    this.matSnackbar.open(`Task ${item.title} have been deleted.`, 'DELETE', {
                                         duration: 3000,
                                         verticalPosition: 'bottom',
                                         horizontalPosition: 'center'
