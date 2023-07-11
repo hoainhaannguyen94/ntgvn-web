@@ -1,4 +1,4 @@
-<div class="base-container">
+<div class="base-container fixed-size">
     <mat-sidenav-container hasBackdrop="false" autosize class="base-grid-plus-container">
         <mat-sidenav #BaseGridPlusFilter position="end" mode="side" class="base-grid-plus-filter">
             <ng-template [ngTemplateOutlet]="BaseGridPlusFilterTemplate" />
@@ -14,7 +14,7 @@
     <div class="base-grid-plus-toolbar">
         <div class="base-grid-plus-toolbar-search">
             <mat-icon>search</mat-icon>
-            <input type="text" autocomplete="off" placeholder="Search task(s) by Title" [formControl]="searchControl">
+            <input type="text" autocomplete="off" placeholder="Search Task(s) by Title" [formControl]="searchControl">
             <mat-icon matTooltip="Clear" (click)="searchControl.setValue('')" *ngIf="isSearching">clear</mat-icon>
         </div>
 

@@ -1,9 +1,11 @@
-<div class="base-container base-details-container">
-    <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate" />
+<div class="base-container fixed-size">
+    <div class="base-details-container">
+        <ng-template [ngTemplateOutlet]="BaseDetailsHeaderTemplate" />
 
-    <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate" />
+        <ng-template [ngTemplateOutlet]="BaseDetailsContentTemplate" />
 
-    <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate" />
+        <ng-template [ngTemplateOutlet]="BaseDetailsActionsTemplate" />
+    </div>
 </div>
 
 <ng-template #BaseDetailsHeaderTemplate>
@@ -12,10 +14,14 @@
 
 <ng-template #BaseDetailsContentTemplate>
     <div class="base-details-content">
-        <div><span>From: </span>{{auditLog._userId | userDetails | async | objectProperty: 'name'}}</div>
-        <div><span>Event: </span>{{auditLog.event}}</div>
-        <div><span>Action: </span>{{auditLog.action}}</div>
-        <div><span>Details: </span>{{auditLog.details}}</div>
+        <div><span class="text-highlight">From: </span>{{auditLog._userId | userDetails | async | objectProperty:
+            'name'}}</div>
+        <div><span class="text-highlight">Event: </span>{{auditLog.event}}</div>
+        <div><span class="text-highlight">Action: </span>{{auditLog.action}}</div>
+        <div>
+            <div class="text-highlight">Details: </div>
+            <div class="box-highlight">{{auditLog.details}}</div>
+        </div>
         <div><span>Date: </span>{{auditLog.date | date: 'medium'}}</div>
     </div>
 </ng-template>

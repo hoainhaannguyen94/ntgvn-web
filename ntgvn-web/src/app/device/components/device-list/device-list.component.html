@@ -1,4 +1,4 @@
-<div class="base-container">
+<div class="base-container fixed-size">
     <div class="base-grid-container">
         <ng-template [ngTemplateOutlet]="BaseGridContentTemplate" />
     </div>
@@ -8,7 +8,7 @@
     <div class="base-grid-toolbar">
         <div class="base-grid-toolbar-search">
             <mat-icon>search</mat-icon>
-            <input type="text" autocomplete="off" placeholder="Search device(s) by Name" [formControl]="searchControl">
+            <input type="text" autocomplete="off" placeholder="Search Device(s) by Name" [formControl]="searchControl">
             <mat-icon matTooltip="Clear" (click)="searchControl.setValue('')" *ngIf="isSearching">clear</mat-icon>
         </div>
 
