@@ -68,7 +68,7 @@
                         <ng-container [matColumnDef]="column">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
                             <td mat-cell *matCellDef="let element">
-                                <div class="event-mark --{{element[column]}}">{{element[column] |
+                                <div class="event-mark --{{element[column]}} tag-element">{{element[column] |
                                     uppercase}}</div>
                             </td>
                         </ng-container>
@@ -87,7 +87,13 @@
                         <ng-container [matColumnDef]="column">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{headers[column]}}</th>
                             <td mat-cell *matCellDef="let element">
-                                <b>{{element[column] | tagsDetails | async}}</b>
+                                <ng-container *ngIf="element[column] | tagsDetails | async as tags">
+                                    <div>
+                                        <ng-container *ngFor="let tag of tags; trackBy:trackByFn;">
+                                            <div class="tag-element bg-primary">{{tag.name}}</div>
+                                        </ng-container>
+                                    </div>
+                                </ng-container>
                             </td>
                         </ng-container>
                     </ng-container>

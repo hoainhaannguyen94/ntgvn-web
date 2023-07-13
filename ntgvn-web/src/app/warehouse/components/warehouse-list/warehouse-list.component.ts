@@ -109,6 +109,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 this.logService.error('WarehouseListComponent', err);
             }
         });
+
         this.warehouseFacade.getCountWarehouses$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -117,6 +118,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 this.logService.error('WarehouseListComponent', err);
             }
         });
+
         this.warehouseFacade.getWarehouseList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -126,7 +128,9 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
                 this.logService.error('WarehouseListComponent', err);
             }
         });
+
         this.warehouseFacade.loadCountWarehouses();
+
         this.warehouseFacade.loadWarehouseList({
             $skip: 0,
             $top: this.pageSize,
@@ -248,7 +252,7 @@ export class WarehouseListComponent extends BaseMatGridComponent<IWarehouse> imp
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Warehouse - ${item.name}`,
+                title: `${item.name}`,
                 content: `<span>Are you sure to delete this warehouse</span>`,
                 actions: [
                     {

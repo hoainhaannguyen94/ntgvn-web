@@ -34,8 +34,6 @@ export class LeftSidebarComponent extends BaseComponent implements OnInit {
         this.registerNavigationEnd();
     }
 
-    override registerCoreLayer() { }
-
     getNavLinks() {
         this.navLinks = this.leftSidebarFacade.getNavLinks();
     }

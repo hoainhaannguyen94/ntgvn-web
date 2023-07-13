@@ -59,8 +59,8 @@ export const BLANK_EVENT: IEvent = {
     title: '',
     start: '',
     end: '',
-    backgroundColor: '#3788d8',
-    borderColor: '#3788d8',
+    backgroundColor: '#9c27b0',
+    borderColor: '#9c27b0',
     textColor: '#ffffff',
     extendedProps: {
         _groupId: '',

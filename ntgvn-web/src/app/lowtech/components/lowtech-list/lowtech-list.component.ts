@@ -23,6 +23,7 @@ import { groupBy } from 'lodash';
 import { ConfirmDialogComponent } from '@utils/component/confirm-dialog';
 import { LogService } from '@utils/service';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { setDomProperty } from '@utils/function';
 
 @Component({
     selector: 'lowtech-list',
@@ -84,6 +85,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 this.logService.error('LowtechListComponent', err);
             }
         });
+        
         this.lowtechFacade.getCountEvents$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalEvent = value;
@@ -92,6 +94,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 this.logService.error('LowtechListComponent', err);
             }
         });
+        
         this.lowtechFacade.getEventList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 const eventGroups = groupBy(value, event => event.extendedProps._statusId);
@@ -112,12 +115,13 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 this.logService.error('LowtechListComponent', err);
             }
         });
+        
         this.lowtechFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.eventStatusList = value;
                 value.forEach(eventStatus => {
-                    document.documentElement.style.setProperty(`--${eventStatus.name}-background-color`, eventStatus.backgroundColor);
-                    document.documentElement.style.setProperty(`--${eventStatus.name}-text-color`, eventStatus.textColor);
+                   setDomProperty(`--${eventStatus.name}-background-color`, eventStatus.backgroundColor);
+                   setDomProperty(`--${eventStatus.name}-text-color`, eventStatus.textColor);
                 });
                 this.lowtechFacade.loadEventList({
                     $filter: `extendedProps/_groupId eq '${this.appState.me._groupId}'`,
@@ -128,10 +132,10 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
                 this.logService.error('LowtechListComponent', err);
             }
         });
+
         this.lowtechFacade.loadCountEvents();
-        this.lowtechFacade.loadEventStatusList({
-            $orderby: 'index asc'
-        });
+        
+        this.lowtechFacade.loadEventStatusList({ $orderby: 'index asc' });
     }
 
     override registerSignal() {
@@ -203,7 +207,7 @@ export class LowtechListComponent extends BaseComponent implements OnInit {
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Task - ${event.title}`,
+                title: `${event.title}`,
                 content: `<span>Are you sure to complete this task</span>`,
                 actions: [
                     {

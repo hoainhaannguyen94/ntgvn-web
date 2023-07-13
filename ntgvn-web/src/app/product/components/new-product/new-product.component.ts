@@ -81,22 +81,22 @@ export class NewProductComponent extends BaseFormSingleComponent implements OnIn
                 this.logService.error('NewProductComponent', err);
             }
         });
+
         this.productFacade.getProductCategoryList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.productCategoryList = value;
             }
         });
+
         this.productFacade.getWarehouseList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.warehouseList = value;
             }
         });
-        this.productFacade.loadProductCategoryList({
-            $orderby: 'name asc'
-        });
-        this.productFacade.loadWarehouseList({
-            $orderby: 'name asc'
-        });
+
+        this.productFacade.loadProductCategoryList({ $orderby: 'name asc' });
+
+        this.productFacade.loadWarehouseList({ $orderby: 'name asc' });
     }
 
     cancelHandler() {

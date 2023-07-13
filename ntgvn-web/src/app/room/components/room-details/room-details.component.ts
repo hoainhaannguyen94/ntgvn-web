@@ -101,6 +101,7 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
                 this.logService.error('RoomDetailsComponent', err);
             }
         });
+
         this.roomFacade.getManagerList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.managerList = value;
@@ -109,6 +110,7 @@ export class RoomDetailsComponent extends BaseFormSingleDetailsComponent<IRoom> 
                 this.logService.error('RoomDetailsComponent', err);
             }
         });
+
         const managerIdsFilter = this.appState.userRoles.reduce((acc, cur) => {
             if (['manager', 'owner'].includes(cur.name)) {
                 acc.push(`role eq '${cur._id}'`);

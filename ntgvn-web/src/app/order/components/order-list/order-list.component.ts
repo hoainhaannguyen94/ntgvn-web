@@ -111,6 +111,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                 this.logService.error('OrderListComponent', err);
             }
         });
+
         this.orderFacade.getCountOrders$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -119,6 +120,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                 this.logService.error('OrderListComponent', err);
             }
         });
+
         this.orderFacade.getOrderList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -128,7 +130,9 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
                 this.logService.error('OrderListComponent', err);
             }
         });
+
         this.orderFacade.loadCountOrders();
+
         this.orderFacade.loadOrderList({
             $skip: 0,
             $top: this.pageSize,
@@ -256,7 +260,7 @@ export class OrderListComponent extends BaseMatGridComponent<IOrder> implements 
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Order - ${item._id}`,
+                title: `${item._id}`,
                 content: `<span>Are you sure to delete order</span>`,
                 actions: [
                     {

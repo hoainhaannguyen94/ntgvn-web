@@ -19,10 +19,8 @@ export class TagsDetailsPipe implements PipeTransform {
             return acc;
         }, '');
         return this.tagService.getTagList$({
-            $filter: filter
-        }).pipe(map(res => res.value.reduce((acc, cur) => {
-            acc.push(cur.name);
-            return acc;
-        }, []).join(', ')));
+            $filter: filter,
+            $orderby: `name asc`
+        }).pipe(map(res => res.value));
     }
 }

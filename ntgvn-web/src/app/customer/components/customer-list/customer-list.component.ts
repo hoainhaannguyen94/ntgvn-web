@@ -106,6 +106,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                 this.logService.error('CustomerListComponent', err);
             }
         });
+
         this.customerFacade.getCountCustomers$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -114,6 +115,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                 this.logService.error('CustomerListComponent', err);
             }
         });
+
         this.customerFacade.getCustomerList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -123,7 +125,9 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
                 this.logService.error('CustomerListComponent', err);
             }
         });
+
         this.customerFacade.loadCountCustomers();
+
         this.customerFacade.loadCustomerList({
             $skip: 0,
             $top: this.pageSize,
@@ -245,7 +249,7 @@ export class CustomerListComponent extends BaseMatGridComponent<ICustomer> imple
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Customer - ${item.name}`,
+                title: `${item.name}`,
                 content: `<span>Are you sure to delete this customer</span>`,
                 actions: [
                     {

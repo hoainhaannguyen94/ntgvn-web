@@ -53,6 +53,7 @@ export class EventAssignDialogComponent extends BaseComponent implements OnInit 
                 this.logService.error('EventAssignDialogComponent', err);
             }
         });
+
         this.eventFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.groupList = value;
@@ -61,9 +62,8 @@ export class EventAssignDialogComponent extends BaseComponent implements OnInit 
                 this.logService.error('EventAssignDialogComponent', err);
             }
         });
-        this.eventFacade.loadGroupList({
-            $orderby: 'name asc'
-        });
+
+        this.eventFacade.loadGroupList({ $orderby: 'name asc' });
     }
 
     assignHandler() {

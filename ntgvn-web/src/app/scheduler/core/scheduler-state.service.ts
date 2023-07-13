@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IEvent } from '@utils/schema';
+import { IEvent, IEventStatus } from '@utils/schema';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -9,6 +9,7 @@ export class SchedulerStateService {
     loading$ = new Subject<boolean>();
     eventList$ = new Subject<IEvent[]>();
     countEvents$ = new Subject<number>();
+    eventStatusList$ = new Subject<IEventStatus[]>();
 
     isLoading$() {
         return this.loading$.asObservable();
@@ -32,5 +33,13 @@ export class SchedulerStateService {
 
     setEventList(events: IEvent[]) {
         this.eventList$.next(events);
+    }
+
+    getEventStatusList$() {
+        return this.eventStatusList$.asObservable();
+    }
+
+    setEventStatusList(eventStatus: IEventStatus[]) {
+        this.eventStatusList$.next(eventStatus);
     }
 }

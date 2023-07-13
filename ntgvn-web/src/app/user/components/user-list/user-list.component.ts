@@ -110,6 +110,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                 this.logService.error('UserListComponent', err);
             }
         });
+
         this.userFacade.getCountUsers$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -118,6 +119,7 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                 this.logService.error('UserListComponent', err);
             }
         });
+
         this.userFacade.getUserList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -127,7 +129,9 @@ export class UserListComponent extends BaseMatGridComponent<IUser> implements On
                 this.logService.error('UserListComponent', err);
             }
         });
+
         this.userFacade.loadCountUsers();
+
         this.userFacade.loadUserList({
             $skip: 0,
             $top: this.pageSize,

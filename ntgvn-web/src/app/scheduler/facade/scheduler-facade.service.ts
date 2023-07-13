@@ -40,6 +40,10 @@ export class SchedulerFacadeService {
         });
     }
 
+    getEventList$() {
+        return this.schedulerState.getEventList$();
+    }
+
     loadEventList(params?: OdataParams) {
         this.schedulerState.setLoading(true);
         this.schedulerAPI.getEventList$(params).pipe(
@@ -54,10 +58,6 @@ export class SchedulerFacadeService {
                 this.logService.error('SchedulerFacadeService', err);
             }
         });
-    }
-
-    getEventList$() {
-        return this.schedulerState.getEventList$();
     }
 
     submitEvent$(event: Omit<IEvent, '_id'>) {
@@ -114,6 +114,26 @@ export class SchedulerFacadeService {
                     observer.error(err);
                 }
             });
+        });
+    }
+
+    getEventStatusList$() {
+        return this.schedulerState.getEventStatusList$();
+    }
+
+    loadEventStatusList(params?: OdataParams) {
+        this.schedulerState.setLoading(true);
+        this.schedulerAPI.getEventStatusList$(params).pipe(
+            finalize(() => {
+                this.schedulerState.setLoading(false);
+            })
+        ).subscribe({
+            next: res => {
+                this.schedulerState.setEventStatusList(res.value);
+            },
+            error: err => {
+                this.logService.error('SchedulerFacadeService', err);
+            }
         });
     }
 

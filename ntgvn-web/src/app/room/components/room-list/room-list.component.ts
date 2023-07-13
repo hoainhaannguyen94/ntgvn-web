@@ -109,6 +109,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                 this.logService.error('RoomListComponent', err);
             }
         });
+
         this.roomFacade.getCountRooms$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -117,6 +118,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                 this.logService.error('RoomListComponent', err);
             }
         });
+
         this.roomFacade.getRoomList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -126,7 +128,9 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
                 this.logService.error('RoomListComponent', err);
             }
         });
+
         this.roomFacade.loadCountRooms();
+
         this.roomFacade.loadRoomList({
             $skip: 0,
             $top: this.pageSize,
@@ -248,7 +252,7 @@ export class RoomListComponent extends BaseMatGridComponent<IRoom> implements On
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Room - ${item.name}`,
+                title: `${item.name}`,
                 content: `<span>Are you sure to delete this room</span>`,
                 actions: [
                     {

@@ -1,18 +1,16 @@
 .event-mark {
-    padding: 0.5rem;
-    border-radius: var(--border-radius);
-    color: #ffffff;
-    font-weight: var(--font-weight-bold);
-
     &.--new {
         background-color: var(--new-background-color);
+        color: var(--new-textc-color);
     }
 
     &.--active {
         background-color: var(--active-background-color);
+        color: var(--active-text-color);
     }
 
     &.--completed {
         background-color: var(--completed-background-color);
+        color: var(--completed-text-color);
     }
 }

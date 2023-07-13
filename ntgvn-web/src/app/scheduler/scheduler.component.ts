@@ -4,7 +4,7 @@ import { takeUntil, timer } from 'rxjs';
 import { BaseComponent } from '@utils/base/base.component';
 import { CommonService, LogService } from '@utils/service';
 import { SchedulerFacadeService } from './facade/scheduler-facade.service';
-import { IEvent } from '@utils/schema';
+import { IEvent, IEventStatus } from '@utils/schema';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import multiMonthPlugin from '@fullcalendar/multimonth';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -34,6 +34,8 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
 
     totalEvents = 0;
     eventList: IEvent[] = [];
+
+    eventStatusList: Map<string, IEventStatus>;
 
     initialLocale = 'en';
 
@@ -76,6 +78,7 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
                 this.logService.error('SchedulerComponent', err);
             }
         });
+
         this.schedulerFacade.getCountEvents$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalEvents = value;
@@ -84,10 +87,15 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
                 this.logService.error('SchedulerComponent', err);
             }
         });
+
         this.schedulerFacade.getEventList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.eventList = value;
                 this.eventList.forEach(event => {
+                    const eventStatus = this.eventStatusList.get(event.extendedProps._statusId);
+                    event.backgroundColor = eventStatus.backgroundColor;
+                    event.borderColor = eventStatus.backgroundColor;
+                    event.textColor = eventStatus.textColor;
                     this.calendar.addEvent(event);
                 });
             },
@@ -95,8 +103,23 @@ export class SchedulerComponent extends BaseComponent implements OnInit {
                 this.logService.error('SchedulerComponent', err);
             }
         });
+
+        this.schedulerFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
+            next: value => {
+                this.eventStatusList = value.reduce((acc, cur) => {
+                    acc.set(cur._id, cur);
+                    return acc;
+                }, new Map());
+                this.schedulerFacade.loadEventList({ $orderby: '_id desc' });
+            },
+            error: err => {
+                this.logService.error('SchedulerComponent', err);
+            }
+        });
+
         this.schedulerFacade.loadCountEvents();
-        this.schedulerFacade.loadEventList({ $orderby: '_id desc' });
+
+        this.schedulerFacade.loadEventStatusList();
     }
 
     renderCalendar() {

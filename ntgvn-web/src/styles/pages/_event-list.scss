@@ -5,3 +5,10 @@
 .mat-column-description {
     max-width: 500px;
 }
+
+.mat-column-_tagIds {
+    >div {
+        display: flex;
+        gap: var(--tag-padding);
+    }
+}

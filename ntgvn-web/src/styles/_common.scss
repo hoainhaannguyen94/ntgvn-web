@@ -18,7 +18,7 @@
     pointer-events: none;
 }
 
-.box-border {
+.box-element {
     padding: 1rem;
     line-height: 2rem;
     border: var(--border);
@@ -30,4 +30,17 @@
 
 .text-bold {
     font-weight: var(--font-weight-bold);
+}
+
+.tag-element {
+    font-size: var(--tag-font-size);
+    padding: var(--tag-padding);
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-bold);
+}
+
+
+.bg-primary {
+    background-color: var(--primary);
+    color: var(--text-primary);
 }

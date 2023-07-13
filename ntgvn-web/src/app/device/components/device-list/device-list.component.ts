@@ -106,6 +106,7 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                 this.logService.error('DeviceListComponent', err);
             }
         });
+
         this.deviceFacade.getCountDevices$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -114,6 +115,7 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                 this.logService.error('DeviceListComponent', err);
             }
         });
+
         this.deviceFacade.getDeviceList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -123,7 +125,9 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
                 this.logService.error('DeviceListComponent', err);
             }
         });
+
         this.deviceFacade.loadCountDevices();
+
         this.deviceFacade.loadDeviceList({
             $skip: 0,
             $top: this.pageSize,
@@ -246,7 +250,7 @@ export class DeviceListComponent extends BaseMatGridComponent<IDevice> implement
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Customer - ${item.name}`,
+                title: `${item.name}`,
                 content: `<span>Are you sure to delete this device</span>`,
                 actions: [
                     {

@@ -92,22 +92,22 @@ export class UserDetailsComponent extends BaseFormSingleDetailsComponent<IUser> 
                 this.logService.error('UserDetailsComponent', err);
             }
         });
+
         this.userFacade.getUserRoleList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.userRoleList = value;
             }
         });
+
         this.userFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.groupList = value;
             }
         });
-        this.userFacade.loadUserRoleList({
-            $orderby: 'name asc'
-        });
-        this.userFacade.loadGroupList({
-            $orderby: '_id desc'
-        });
+
+        this.userFacade.loadUserRoleList({ $orderby: 'name asc' });
+
+        this.userFacade.loadGroupList({ $orderby: '_id desc' });
 
     }
 

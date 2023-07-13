@@ -153,6 +153,7 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
                 this.logService.error('NewOrderComponent', err);
             }
         });
+
         this.orderFacade.getOrderStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.orderStatusList = value;
@@ -161,6 +162,7 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
                 this.logService.error('NewOrderComponent', err);
             }
         });
+
         this.orderFacade.getProductList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.productList = value;
@@ -170,6 +172,7 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
                 this.logService.error('NewOrderComponent', err);
             }
         });
+
         this.orderFacade.getCustomerList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.customerList = value;
@@ -178,16 +181,15 @@ export class NewOrderComponent extends BaseFormSingleComponent implements OnInit
                 this.logService.error('NewOrderComponent', err);
             }
         });
+
         this.orderFacade.loadOrderStatusList({
             $skip: 0,
             $top: 20
         });
-        this.orderFacade.loadProductList({
-            $orderby: 'name asc'
-        });
-        this.orderFacade.loadCustomerList({
-            $orderby: 'name asc'
-        });
+
+        this.orderFacade.loadProductList({ $orderby: 'name asc' });
+
+        this.orderFacade.loadCustomerList({ $orderby: 'name asc' });
     }
 
     updateProductAvailableQuantily() {

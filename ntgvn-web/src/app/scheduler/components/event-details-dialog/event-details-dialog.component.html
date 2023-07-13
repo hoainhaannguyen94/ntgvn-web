@@ -1,7 +1,7 @@
 <div class="base-dialog-container">
     <div class="base-dialog-header">
         <div class="base-dialog-title">{{event.title}}</div>
-        <div class="event-status" [style.backgroundColor]="eventStatus.backgroundColor"
+        <div class="event-status tag-element" [style.backgroundColor]="eventStatus.backgroundColor"
             [style.color]="eventStatus.textColor" *ngIf="eventStatus">
             {{eventStatus.name | uppercase}}
         </div>
@@ -15,7 +15,7 @@
 
         <div class="event-date-range">
             <div><b>Start Date: </b>{{event.start | date: 'MMM d, y'}}</div>
-            <mat-icon>arrow_forward</mat-icon>
+            <mat-icon color="primary">arrow_forward</mat-icon>
             <div><b>End Date: </b>{{event.end | date:'MMM d, y'}}</div>
         </div>
 
@@ -27,12 +27,12 @@
             <b>Tags: </b>
             <span class="event-tags">
                 <ng-container *ngFor="let tag of tags; trackBy: trackByFn">
-                    <span class="event-tag">{{tag.name}}</span>
+                    <span class="tag-element bg-primary">{{tag.name}}</span>
                 </ng-container>
             </span>
         </div>
 
-        <div class="box-border">{{event.extendedProps.description}}</div>
+        <div class="box-element">{{event.extendedProps.description}}</div>
     </div>
 
     <div class="base-dialog-actions">

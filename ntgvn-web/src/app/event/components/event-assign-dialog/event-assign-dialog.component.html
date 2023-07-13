@@ -8,14 +8,12 @@
 
 <ng-template #BaseDialogHeaderTemplate>
     <div class="base-dialog-header">
-        <div class="base-dialog-title">{{dialogData.title}} - {{item.title}}</div>
+        <div class="base-dialog-title">{{item.title}}</div>
     </div>
 </ng-template>
 
 <ng-template #BaseDialogContentTemplate>
     <div class="base-dialog-content">
-        <div class="box-border">{{item.description}}</div>
-
         <mat-form-field appearance="outline">
             <mat-label>Group</mat-label>
             <mat-select [formControl]="_groupIdFormControl">

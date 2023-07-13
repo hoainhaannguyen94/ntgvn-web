@@ -51,6 +51,7 @@ export class AuditLogDetailsComponent extends BaseComponent implements OnInit {
                 this.logService.error('AuditLogDetailsComponent', err);
             }
         });
+
         this.auditLogFacade.getAuditLog$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.auditLog = value;

@@ -62,9 +62,6 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
         description: [BLANK_EVENT.extendedProps.description],
         start: [BLANK_EVENT.start, [Validators.required]],
         end: [BLANK_EVENT.end, [Validators.required]],
-        backgroundColor: [BLANK_EVENT.backgroundColor],
-        borderColor: [BLANK_EVENT.borderColor],
-        textColor: [BLANK_EVENT.textColor],
         _groupId: [BLANK_EVENT.extendedProps._groupId],
         priority: [BLANK_EVENT.extendedProps.priority],
         _tagIds: [BLANK_EVENT.extendedProps._tagIds]
@@ -94,9 +91,6 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                             description: event.extendedProps.description,
                             start: event.start,
                             end: event.end,
-                            backgroundColor: event.backgroundColor,
-                            borderColor: event.borderColor,
-                            textColor: event.textColor,
                             _groupId: event.extendedProps._groupId,
                             priority: event.extendedProps.priority,
                             _tagIds: event.extendedProps._tagIds
@@ -129,6 +123,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 this.logService.error('EventDetailsComponent', err);
             }
         });
+
         this.eventFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.groupList = value;
@@ -137,6 +132,7 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 this.logService.error('EventDetailsComponent', err);
             }
         });
+
         this.eventFacade.getTagList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.tagList = value;
@@ -145,12 +141,10 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
                 this.logService.error('EventDetailsComponent', err);
             }
         });
-        this.eventFacade.loadGroupList({
-            $orderby: 'name asc'
-        });
-        this.eventFacade.loadTagList({
-            $orderby: 'name asc'
-        });
+
+        this.eventFacade.loadGroupList({ $orderby: 'name asc' });
+
+        this.eventFacade.loadTagList({ $orderby: 'name asc' });
     }
 
     cancelHandler() {
@@ -171,9 +165,6 @@ export class EventDetailsComponent extends BaseFormSingleDetailsComponent<IEvent
             title: formData.title,
             start: formData.start,
             end: formData.end,
-            backgroundColor: formData.backgroundColor,
-            borderColor: formData.borderColor,
-            textColor: formData.textColor,
             extendedProps: {
                 _groupId: formData._groupId,
                 priority: formData.priority,

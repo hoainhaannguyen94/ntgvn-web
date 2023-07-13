@@ -41,8 +41,8 @@ export class LowtechStateService {
         return this.eventStatusList$.asObservable();
     }
 
-    setEventStatusList(roles: IEventStatus[]) {
-        this.eventStatusList$.next(roles);
+    setEventStatusList(eventStatus: IEventStatus[]) {
+        this.eventStatusList$.next(eventStatus);
     }
 
     getGroupList$() {

@@ -100,22 +100,22 @@ export class ProductDetailsComponent extends BaseFormSingleDetailsComponent<IPro
                 this.logService.error('ProductDetailsComponent', err);
             }
         });
+
         this.productFacade.getProductCategoryList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.productCategoryList = value;
             }
         });
+
         this.productFacade.getWarehouseList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.warehouseList = value;
             }
         });
-        this.productFacade.loadProductCategoryList({
-            $orderby: 'name asc'
-        });
-        this.productFacade.loadWarehouseList({
-            $orderby: 'name asc'
-        });
+
+        this.productFacade.loadProductCategoryList({ $orderby: 'name asc' });
+
+        this.productFacade.loadWarehouseList({ $orderby: 'name asc' });
     }
 
     cancelHandler() {

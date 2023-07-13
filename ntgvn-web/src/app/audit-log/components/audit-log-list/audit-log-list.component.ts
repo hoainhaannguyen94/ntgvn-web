@@ -103,6 +103,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
                 this.logService.error('AuditLogListComponent', err);
             }
         });
+
         this.auditLogFacade.getCountAuditLogs$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -111,6 +112,7 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
                 this.logService.error('AuditLogListComponent', err);
             }
         });
+
         this.auditLogFacade.getAuditLogList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -120,7 +122,10 @@ export class AuditLogListComponent extends BaseMatGridComponent<IAuditLog> imple
                 this.logService.error('AuditLogListComponent', err);
             }
         });
+
+
         this.auditLogFacade.loadCountAuditLogs();
+
         this.auditLogFacade.loadAuditLogList({
             $skip: 0,
             $top: this.pageSize,

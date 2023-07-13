@@ -57,9 +57,6 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
         description: [BLANK_EVENT.extendedProps.description],
         start: [BLANK_EVENT.start, [Validators.required]],
         end: [BLANK_EVENT.end, [Validators.required]],
-        backgroundColor: [BLANK_EVENT.backgroundColor],
-        borderColor: [BLANK_EVENT.borderColor],
-        textColor: [BLANK_EVENT.textColor],
         _groupId: [BLANK_EVENT.extendedProps._groupId],
         priority: [BLANK_EVENT.extendedProps.priority],
         _tagIds: [BLANK_EVENT.extendedProps._tagIds]
@@ -95,6 +92,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 this.logService.error('NewEventComponent', err);
             }
         });
+
         this.eventFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.eventStatusList = value;
@@ -103,6 +101,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 this.logService.error('NewEventComponent', err);
             }
         });
+
         this.eventFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.groupList = value;
@@ -111,6 +110,7 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 this.logService.error('NewEventComponent', err);
             }
         });
+
         this.eventFacade.getTagList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.tagList = value;
@@ -119,15 +119,12 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
                 this.logService.error('NewEventComponent', err);
             }
         });
-        this.eventFacade.loadEventStatusList({
-            $orderby: 'index asc'
-        });
-        this.eventFacade.loadGroupList({
-            $orderby: 'name asc'
-        });
-        this.eventFacade.loadTagList({
-            $orderby: 'name asc'
-        });
+
+        this.eventFacade.loadEventStatusList({ $orderby: 'index asc' });
+
+        this.eventFacade.loadGroupList({ $orderby: 'name asc' });
+
+        this.eventFacade.loadTagList({ $orderby: 'name asc' });
     }
 
     cancelHandler() {
@@ -148,9 +145,6 @@ export class NewEventComponent extends BaseFormSingleComponent implements OnInit
             title: formData.title,
             start: formData.start,
             end: formData.end,
-            backgroundColor: formData.backgroundColor,
-            borderColor: formData.borderColor,
-            textColor: formData.textColor,
             extendedProps: {
                 _groupId: formData._groupId,
                 priority: formData.priority,

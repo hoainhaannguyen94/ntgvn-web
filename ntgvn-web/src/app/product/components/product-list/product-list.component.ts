@@ -110,6 +110,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                 this.logService.error('ProductListComponent', err);
             }
         });
+
         this.productFacade.getCountProducts$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -118,6 +119,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                 this.logService.error('ProductListComponent', err);
             }
         });
+
         this.productFacade.getProductList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -127,7 +129,9 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
                 this.logService.error('ProductListComponent', err);
             }
         });
+
         this.productFacade.loadCountProducts();
+
         this.productFacade.loadProductList({
             $skip: 0,
             $top: this.pageSize,
@@ -257,7 +261,7 @@ export class ProductListComponent extends BaseMatGridComponent<IProduct> impleme
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Product - ${item.name}`,
+                title: `${item.name}`,
                 content: `<span>Are you sure to delete this product</span>`,
                 actions: [
                     {

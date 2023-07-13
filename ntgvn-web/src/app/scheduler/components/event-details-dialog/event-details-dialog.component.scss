@@ -1,22 +1,7 @@
-.event-status {
-    padding: 0.3rem;
-    border-radius: var(--border-radius);
-    font-size: 0.9rem;
-}
-
 .event-date-range {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-}
-
-.event-group,
-.event-tag {
-    font-size: 0.9rem;
-    padding: 0.2rem 0.5rem;
-    background: var(--light-grey);
-    border-radius: var(--border-radius);
-    color: #ffffff;
 }
 
 .event-tags {

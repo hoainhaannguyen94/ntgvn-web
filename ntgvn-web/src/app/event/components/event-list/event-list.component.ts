@@ -25,7 +25,7 @@ import { io } from 'socket.io-client';
 import { TagsDetailsPipe } from 'src/app/utils/pipe/tags-details.pipe';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { EventFilterComponent } from '../event-filter/event-filter.component';
-import { saveBlob } from '@utils/function';
+import { saveBlob, setDomProperty } from '@utils/function';
 import { EventAssignDialogComponent } from '../event-assign-dialog/event-assign-dialog.component';
 import { LogService } from '@utils/service';
 
@@ -119,6 +119,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 this.logService.error('EventListComponent', err);
             }
         });
+
         this.eventFacade.getCountEvents$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -127,6 +128,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 this.logService.error('EventListComponent', err);
             }
         });
+
         this.eventFacade.getEventList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value.reduce((acc, cur) => {
@@ -150,12 +152,13 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 this.logService.error('EventListComponent', err);
             }
         });
+
         this.eventFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.eventStatusList = value;
                 value.forEach(eventStatus => {
-                    document.documentElement.style.setProperty(`--${eventStatus.name}-background-color`, eventStatus.backgroundColor);
-                    document.documentElement.style.setProperty(`--${eventStatus.name}-text-color`, eventStatus.textColor);
+                    setDomProperty(`--${eventStatus.name}-background-color`, eventStatus.backgroundColor);
+                    setDomProperty(`--${eventStatus.name}-text-color`, eventStatus.textColor);
                 });
                 this.eventFacade.loadEventList({
                     $skip: 0,
@@ -167,10 +170,10 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
                 this.logService.error('EventListComponent', err);
             }
         });
+
         this.eventFacade.loadCountEvents();
-        this.eventFacade.loadEventStatusList({
-            $orderby: 'index asc'
-        });
+
+        this.eventFacade.loadEventStatusList({ $orderby: 'index asc' });
     }
 
     override registerSignal() {
@@ -304,7 +307,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
             autoFocus: false,
             data: {
                 item: item,
-                title: `Task`,
+                title: ``,
                 content: '',
                 actions: [
                     {
@@ -357,7 +360,7 @@ export class EventListComponent extends BaseMatGridComponent<IEvent> implements 
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Task - ${item.title}`,
+                title: `${item.title}`,
                 content: `<span>Are you sure to delete this task</span>`,
                 actions: [
                     {

@@ -87,6 +87,7 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
                 this.logService.error('EventFilterComponent', err);
             }
         });
+
         this.eventFacade.getEventStatusList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.eventStatusList = value;
@@ -95,6 +96,7 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
                 this.logService.error('EventFilterComponent', err);
             }
         });
+
         this.eventFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.groupList = value;
@@ -103,6 +105,7 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
                 this.logService.error('EventFilterComponent', err);
             }
         });
+
         this.eventFacade.getTagList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.tagList = value;
@@ -111,15 +114,12 @@ export class EventFilterComponent extends BaseComponent implements OnInit {
                 this.logService.error('EventFilterComponent', err);
             }
         });
-        this.eventFacade.loadEventStatusList({
-            $orderby: 'index asc'
-        });
-        this.eventFacade.loadGroupList({
-            $orderby: 'name asc'
-        });
-        this.eventFacade.loadTagList({
-            $orderby: 'name asc'
-        });
+
+        this.eventFacade.loadEventStatusList({ $orderby: 'index asc' });
+
+        this.eventFacade.loadGroupList({ $orderby: 'name asc' });
+
+        this.eventFacade.loadTagList({ $orderby: 'name asc' });
     }
 
     clearFilterHandler() {

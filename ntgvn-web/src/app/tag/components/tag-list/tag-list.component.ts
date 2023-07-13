@@ -106,6 +106,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 this.logService.error('TagListComponent', err);
             }
         });
+
         this.tagFacade.getCountTags$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -114,6 +115,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 this.logService.error('TagListComponent', err);
             }
         });
+
         this.tagFacade.getTagList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -123,7 +125,9 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 this.logService.error('TagListComponent', err);
             }
         });
+
         this.tagFacade.loadCountTags();
+
         this.tagFacade.loadTagList({
             $skip: 0,
             $top: this.pageSize,
@@ -200,7 +204,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 icon: 'edit',
                 enable: true,
                 display: true,
-                execute:  (item: ITag) => {
+                execute: (item: ITag) => {
                     this.detailsTagHandler(item);
                 }
             },
@@ -209,7 +213,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
                 icon: 'delete_forever',
                 enable: true,
                 display: true,
-                execute:  (item: ITag) => {
+                execute: (item: ITag) => {
                     this.deleteTagHandler(item);
                 }
             }
@@ -244,7 +248,7 @@ export class TagListComponent extends BaseMatGridComponent<ITag> implements OnIn
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Tag - ${item.name}`,
+                title: `${item.name}`,
                 content: `<span>Are you sure to delete this tag</span>`,
                 actions: [
                     {

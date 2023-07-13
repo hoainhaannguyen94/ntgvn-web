@@ -106,6 +106,7 @@ export class GroupListComponent extends BaseMatGridComponent<IGroup> implements 
                 this.logService.error('GroupListComponent', err);
             }
         });
+
         this.groupFacade.getCountGroups$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -114,6 +115,7 @@ export class GroupListComponent extends BaseMatGridComponent<IGroup> implements 
                 this.logService.error('GroupListComponent', err);
             }
         });
+
         this.groupFacade.getGroupList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -123,7 +125,9 @@ export class GroupListComponent extends BaseMatGridComponent<IGroup> implements 
                 this.logService.error('GroupListComponent', err);
             }
         });
+
         this.groupFacade.loadCountGroups();
+
         this.groupFacade.loadGroupList({
             $skip: 0,
             $top: this.pageSize,
@@ -200,7 +204,7 @@ export class GroupListComponent extends BaseMatGridComponent<IGroup> implements 
                 icon: 'edit',
                 enable: true,
                 display: true,
-                execute:  (item: IGroup) => {
+                execute: (item: IGroup) => {
                     this.detailsGroupHandler(item);
                 }
             },
@@ -209,7 +213,7 @@ export class GroupListComponent extends BaseMatGridComponent<IGroup> implements 
                 icon: 'delete_forever',
                 enable: true,
                 display: true,
-                execute:  (item: IGroup) => {
+                execute: (item: IGroup) => {
                     this.deleteGroupHandler(item);
                 }
             }
@@ -244,7 +248,7 @@ export class GroupListComponent extends BaseMatGridComponent<IGroup> implements 
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Group - ${item.name}`,
+                title: `${item.name}`,
                 content: `<span>Are you sure to delete this group</span>`,
                 actions: [
                     {

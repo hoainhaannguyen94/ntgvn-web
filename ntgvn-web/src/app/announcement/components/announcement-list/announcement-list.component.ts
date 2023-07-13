@@ -58,6 +58,7 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
                 this.logService.error('AnnouncementListComponent', err);
             }
         });
+
         this.announcementFacade.getCountAnnouncements$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.totalItems = value;
@@ -66,6 +67,7 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
                 this.logService.error('AnnouncementListComponent', err);
             }
         });
+
         this.announcementFacade.getAnnouncementList$().pipe(takeUntil(this.destroy$)).subscribe({
             next: value => {
                 this.items = value;
@@ -74,10 +76,11 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
                 this.logService.error('AnnouncementListComponent', err);
             }
         });
+
+
         this.announcementFacade.loadCountAnnouncements();
-        this.announcementFacade.loadAnnouncementList({
-            $orderby: '_id desc'
-        });
+
+        this.announcementFacade.loadAnnouncementList({ $orderby: '_id desc' });
     }
 
     override registerSignal() {
@@ -121,7 +124,7 @@ export class AnnouncementListComponent extends BaseComponent implements OnInit {
             disableClose: true,
             autoFocus: false,
             data: {
-                title: `Announcement - ${item.title}`,
+                title: `${item.title}`,
                 content: `<span>Are you sure to delete this announcement</span>`,
                 actions: [
                     {
