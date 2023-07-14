@@ -1,3 +1,3 @@
 import { userReducer } from './reducer/user.reducer';
 
-export const appStore = { user: userReducer }
+export const APP_STORE = { user: userReducer }

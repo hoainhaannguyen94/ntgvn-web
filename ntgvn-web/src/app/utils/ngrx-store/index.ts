@@ -6,3 +6,5 @@ export * from './reducer/user.reducer';
 export * from './schema/store.schema';
 
 export * from './app.store';
+
+export * from './app.selector';

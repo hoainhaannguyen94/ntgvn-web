@@ -9,7 +9,7 @@ import { provideStateConfigs } from '@utils/state';
 import { INITIAL_STATE } from '@app-state';
 import { TranslocoRootModule } from './transloco-root.module';
 import { provideStore } from '@ngrx/store';
-import { appStore } from './utils/ngrx-store/app.store';
+import { APP_STORE } from './utils/ngrx-store/app.store';
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -26,6 +26,6 @@ export const appConfig: ApplicationConfig = {
         importProvidersFrom([
             TranslocoRootModule
         ]),
-        provideStore(appStore)
+        provideStore(APP_STORE)
     ]
 }

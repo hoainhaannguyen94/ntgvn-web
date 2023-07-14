@@ -39,6 +39,8 @@ export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
         this.registerServiceWorkerUpgrade();
         this.detectLocalTimezone();
         this.detectLocalLanguage();
+
+        this.appSelector.user.subscribe(res => { console.log(res) })
     }
 
     registerServiceWorkerUpgrade() {

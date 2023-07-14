@@ -15,7 +15,7 @@ export const authCanActiveGuard = () => {
     const state = inject(StateService<IAppState>);
     const authService = inject(AuthService);
     const userService = inject(UserService);
-    const appStore = inject(Store<IAppStore>);
+    const appStore: Store<IAppStore> = inject(Store<IAppStore>);
 
     const appState = state.currentState;
     const token = localStorage.getItem('token') ?? '';

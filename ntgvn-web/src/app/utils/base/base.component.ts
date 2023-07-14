@@ -8,7 +8,7 @@ import { StateService } from '../state/state.service';
 import { Effect } from '../state/state.schema';
 import { ResizeObserverService } from '../service/resize-observer.service';
 import { Store } from '@ngrx/store';
-import { IAppStore } from '@utils/ngrx-store';
+import { APP_SELECTOR, IAppStore } from '../ngrx-store';
 
 @Component({
     selector: 'base',
@@ -20,12 +20,14 @@ export abstract class BaseComponent implements OnDestroy {
     resizeObserver = inject(ResizeObserverService);
     cdr = inject(ChangeDetectorRef);
     location = inject(Location);
-    appStore = inject(Store<IAppStore>);
+    appStore: Store<IAppStore> = inject(Store<IAppStore>);
 
     destroy$ = new Subject<void>();
     subscriptions = new Map<string, Subscription>();
 
     appState: IAppState;
+
+    appSelector = APP_SELECTOR();
 
     __isLoading = false;
     get isLoading() {
