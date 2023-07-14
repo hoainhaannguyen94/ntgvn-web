@@ -14,6 +14,6 @@ export const initialState: IUser = {
 
 export const userReducer = createReducer(
     initialState,
-    on(UserActions.updateUser, (_, payload) => payload.user),
+    on(UserActions.updateUser, (_, action) => action.payload),
     on(UserActions.resetUser, () => initialState)
 );
