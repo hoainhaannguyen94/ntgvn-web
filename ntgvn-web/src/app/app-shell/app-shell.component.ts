@@ -4,8 +4,8 @@ import { BaseComponent } from '@utils/base/base.component';
 import { AnonymousUser } from '@app-state';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { AuthService } from '../utils/service/auth.service';
-import { UserService } from '../utils/service/user.service';
+import { AuthService, UserService } from '@utils/service';
+import * as UserActions from '@utils/ngrx-store';
 
 @Component({
     selector: 'app-shell',
@@ -36,9 +36,11 @@ export class AppShellComponent extends BaseComponent implements OnInit {
                 this.authService.verifyAccessToken$().subscribe({
                     next: res => {
                         if (res.value.valid) {
-                            this.appState.me = res.value.user;
+                            const user = res.value.user;
+                            this.appState.me = user;
                             this.appState.ready = true;
                             this.state.commit(this.appState);
+                            this.appStore.dispatch(UserActions.updateUser(user));
                             this.navToRoot();
                         } else {
                             this.restartApp();
@@ -68,6 +70,7 @@ export class AppShellComponent extends BaseComponent implements OnInit {
         this.appState.ready = false;
         this.appState.token = '';
         this.appState.me = AnonymousUser;
+        this.appStore.dispatch(UserActions.resetUser());
     }
 
     syncAppState() {

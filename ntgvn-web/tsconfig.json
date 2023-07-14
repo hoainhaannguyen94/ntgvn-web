@@ -40,6 +40,9 @@
       "@app-state": [
         "src/app/app.state.ts"
       ],
+      "@utils/ngrx-store": [
+        "src/app/utils/ngrx-store/index.ts"
+      ],
       "@utils/base/*": [
         "src/app/utils/base/*"
       ],
